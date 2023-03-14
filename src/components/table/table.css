@@ -1,0 +1,20 @@
+.container {
+    margin-top: 50px;
+    width: 500px;
+    height: 500px;
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+.table {
+    display: grid;
+    grid-template-columns: repeat(8,  calc(500px/8));
+    grid-template-rows: repeat(8, calc(500px/8));
+}
+.black-player {
+    background-color: rgb(161 86 0 / 55%);
+}
+.white-player {
+    background-color:#e3e3e3;
+}
+.case {
+}
