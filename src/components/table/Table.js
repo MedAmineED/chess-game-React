@@ -13,26 +13,40 @@ import Rook from '../chessPiecesComponents/Rook'
 
 
 function Table ()  {
+    
+    const move = (position, color)=> {
+        const piece = board[position.x][position.y]
+        if (color === "white") {
+            setBoard((br)=> {
+                const upDateBoard = [...br];
+                upDateBoard[position.x][position.y] = " ";
+                upDateBoard[position.x+1][position.y]= piece;
+                return upDateBoard
+            })
+        }else {
+            setBoard((br)=> {
+                const upDateBoard = [...br];
+                upDateBoard[position.x][position.y] = " ";
+                upDateBoard[position.x-1][position.y]= piece;
+                return upDateBoard
+             })
+        
+      }}
     const [board, setBoard] = useState([
                                 [<Rook pColor = {`white`} />, <Knight pColor = {`white`}/>, <Bishop pColor = {`white`}/>, <Queen pColor = {`white`}/>, <King pColor = {`white`}/>, <Bishop pColor = {`white`}/>, <Knight pColor = {`white`}/>, <Rook pColor = {`white`} />],
-                                [<Pawn pColor = {`white`} position = {{x: 1, y: 0}} />, <Pawn pColor = {`white`} position = {{x: 1, y: 1}}/>, <Pawn pColor = {`white`} position = {{x: 1, y: 2}}/>, <Pawn pColor = {`white`} position = {{x: 1, y: 3}} />, <Pawn pColor = {`white`} position = {{x: 1, y: 4}}/>, <Pawn pColor = {`white`} position = {{x: 1, y: 5}}/>, <Pawn pColor = {`white`} position = {{x: 1, y: 6}}/>, <Pawn pColor = {`white`} position = {{x: 1, y: 7}}/>],
+                                [<Pawn move = {move} pColor = {`white`} position = {{x: 1, y: 0}} />, <Pawn move = {move} pColor = {`white`} position = {{x: 1, y: 1}}/>, <Pawn move = {move} pColor = {`white`} position = {{x: 1, y: 2}}/>, <Pawn move = {move} pColor = {`white`} position = {{x: 1, y: 3}} />, <Pawn move = {move} pColor = {`white`} position = {{x: 1, y: 4}}/>, <Pawn move = {move} pColor = {`white`} position = {{x: 1, y: 5}}/>, <Pawn move = {move} pColor = {`white`} position = {{x: 1, y: 6}}/>, <Pawn move = {move} pColor = {`white`} position = {{x: 1, y: 7}}/>],
                                 ["", "", "", "", "", "", "", ""],
                                 ["", "", "", "", "", "", "", ""],
                                 ["", "", "", "", "", "", "", ""],
                                 ["", "", "", "", "", "", "", ""],
-                                [<Pawn pColor = {`black`} />, <Pawn pColor = {`black`} />, <Pawn pColor = {`black`} />, <Pawn pColor = {`black`} />, <Pawn pColor = {`black`} />, <Pawn pColor = {`black`} />, <Pawn pColor = {`black`} />, <Pawn pColor = {`black`} />],
+                                [<Pawn position = {{x: 6, y: 0}} move = {move} pColor = {`black`} />, <Pawn position = {{x: 6, y: 1}} move = {move} pColor = {`black`} />, <Pawn position = {{x: 6, y: 2}} move = {move} pColor = {`black`} />, <Pawn position = {{x: 6, y: 3}} move = {move} pColor = {`black`} />, <Pawn position = {{x: 6, y: 4}} move = {move} pColor = {`black`} />, <Pawn position = {{x: 6, y: 5}} move = {move} pColor = {`black`} />, <Pawn position = {{x: 6, y: 6}} move = {move} pColor = {`black`} />, <Pawn position = {{x: 6, y: 7}} move = {move} pColor = {`black`} />],
                                 [<Rook pColor = {`black`} />, <Knight pColor = {`black`}/>, <Bishop pColor = {`black`}/>, <Queen pColor = {`black`}/>, <King pColor = {`black`}/>, <Bishop pColor = {`black`}/>, <Knight pColor = {`black`}/>, <Rook pColor = {`black`} />],
       ]);
 
 
 
 
-      const move = (position)=> {
-        const piece = board[position.x][position.y]
-        setBoard((br)=> {
-            
-        })
-      }
+      
 
 
 
