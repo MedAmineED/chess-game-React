@@ -1,7 +1,14 @@
 function Rook (props) {
-    return (
-        props.pos.y === 1 && (props.pos.x === 1 || props.pos.x ===  8)? <div><img src="chessPiciesImg/Chess_rlt60.png" /></div>: null
+    if(props.pColor === "white") {
+        return (
+        <div><img src="chessPiciesImg/Chess_rlt60.png" /></div>
     )
+    }else {
+        return (
+            <div><img src="chessPiciesImg/Chess_rdt60.png" /></div>
+        )
+    }
+    
 
     
 }

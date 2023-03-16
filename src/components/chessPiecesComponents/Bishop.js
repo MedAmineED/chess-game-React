@@ -1,7 +1,8 @@
 function Bishop (props) {
-    return (
-        props.pos.y === 1 && (props.pos.x === 3 || props.pos.x ===  6)? <div><img src="chessPiciesImg/Chess_blt60.png" /></div>: null
-    )
+    if(props.pColor === "white"){
+        return <div><img src="chessPiciesImg/Chess_blt60.png" /></div> 
+    }else {
+          return <div><img src="chessPiciesImg/Chess_bdt60.png" /></div>    }
 }
 
 export default Bishop

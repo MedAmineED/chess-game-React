@@ -13,100 +13,55 @@ import Rook from '../chessPiecesComponents/Rook'
 
 
 function Table ()  {
-    const [usePosPawn, setPosPawn] = useState([
-                                                {x:0, y:0},
-                                                {x:0, y:0},
-                                                {x:0, y:0},
-                                                {x:0, y:0},
-                                                {x:0, y:0},
-                                                {x:0, y:0},
-                                                {x:0, y:0},
-                                                {x:0, y:0}
-                                            ]);
-       
-   let arrTable = [["1","2","3","4","5","6","7","8"],["A","B","C","D","E","F","G","H"]];//bord map 
+    const [board, setBoard] = useState([
+                                [<Rook pColor = {`white`} />, <Knight pColor = {`white`}/>, <Bishop pColor = {`white`}/>, <Queen pColor = {`white`}/>, <King pColor = {`white`}/>, <Bishop pColor = {`white`}/>, <Knight pColor = {`white`}/>, <Rook pColor = {`white`} />],
+                                [<Pawn pColor = {`white`} position = {{x: 1, y: 0}} />, <Pawn pColor = {`white`} position = {{x: 1, y: 1}}/>, <Pawn pColor = {`white`} position = {{x: 1, y: 2}}/>, <Pawn pColor = {`white`} position = {{x: 1, y: 3}} />, <Pawn pColor = {`white`} position = {{x: 1, y: 4}}/>, <Pawn pColor = {`white`} position = {{x: 1, y: 5}}/>, <Pawn pColor = {`white`} position = {{x: 1, y: 6}}/>, <Pawn pColor = {`white`} position = {{x: 1, y: 7}}/>],
+                                ["", "", "", "", "", "", "", ""],
+                                ["", "", "", "", "", "", "", ""],
+                                ["", "", "", "", "", "", "", ""],
+                                ["", "", "", "", "", "", "", ""],
+                                [<Pawn pColor = {`black`} />, <Pawn pColor = {`black`} />, <Pawn pColor = {`black`} />, <Pawn pColor = {`black`} />, <Pawn pColor = {`black`} />, <Pawn pColor = {`black`} />, <Pawn pColor = {`black`} />, <Pawn pColor = {`black`} />],
+                                [<Rook pColor = {`black`} />, <Knight pColor = {`black`}/>, <Bishop pColor = {`black`}/>, <Queen pColor = {`black`}/>, <King pColor = {`black`}/>, <Bishop pColor = {`black`}/>, <Knight pColor = {`black`}/>, <Rook pColor = {`black`} />],
+      ]);
 
-   let myFixedArr =  [arrTable[0], arrTable[1].reverse()];
 
-   const move = (n) => {
-        
-            setPosPawn(st => {
-            const updatedState = [...st];
-            updatedState[n] = {y : st[n].y + 1};
-            return updatedState;
-            });
-  };
+
+
+      const move = (position)=> {
+        const piece = board[position.x][position.y]
+        setBoard((br)=> {
+            
+        })
+      }
+
+
+
+
+  
 
 
    const myCases = ()=> {
-        let num = 0;
         let cases = [];
         
         //--set cases and color cases--
-        for (let i = 0; i < 8; i++) {                              //row 
-                for (let j = 0; j < 8; j++) {                      //colomns
-                    
-                    const row = i + 1;
-                    const col = j + 1;
-                    
-                    const position = {                             //refrence of position
-                        y : row,
-                        x : 9 - col
-                    }
-                    
-                    if ((row % 2) === 0 && (col % 2)!==0) {
-                            cases.push(<div key={myFixedArr[1][j]+ myFixedArr[0][i]} className= {`case black-player ${myFixedArr[1][j]}${myFixedArr[0][i]}`} >
-                                            
-                                            <Pawn pos = {position} 
-                                                 newPos = {usePosPawn[j]} 
-                                                 myRef = {`${position.x}${position.y}`} 
-                                                 move = {move}
-                                                 n = {num}
-                                                 onRender={() => { num++; }}
-                                                 />
-                                            <King pos = {position} />
-                                            <Queen pos = {position}/>
-                                            <Bishop pos = {position}/>
-                                            <Knight pos = {position}/>
-                                            <Rook  pos = {position}/>
-                                        </div>
+        for (let i = 0; i < 8; i++) {                              
+                for (let j = 0; j < 8; j++) {  
 
+                    const row = i + 1;
+                    const col = 8 - j ;
+
+                    if ((row % 2) === 0 && (col % 2)!==0) {
+                            cases.push(<div key={`${row}${col}`} className= {`case black-player ${row}${col}`} >
+                                        {board[i][j]}</div>
                     )}
-                    
                     else if ((row % 2) !== 0 && (col % 2)===0) {
-                            cases.push(<div key={myFixedArr[1][j] + myFixedArr[0][i]} className= {`case black-player ${myFixedArr[1][j]}${myFixedArr[0][i]}`} >
-                                            <Pawn move = {move} 
-                                                    pos = {position} 
-                                                    newPos = {usePosPawn[j]} 
-                                                    myRef = {`${position.x}${position.y}`}
-                                                    n = {num}
-                                                    onRender={() => { num++; }}
-                                                    /> 
-                                            <King pos = {position}/>
-                                            <Queen pos = {position}/>
-                                            <Bishop pos = {position}/>
-                                            <Knight pos = {position}/>
-                                            <Rook  pos = {position}/>
-                                       </div>
+                            cases.push(<div key={`${row}${col}`} className= {`case black-player ${row}${col}`} >
+                                       {board[i][j]}</div>
                                             )
                     }
-
-
                     else {
-                        cases.push(<div key={myFixedArr[1][j] + myFixedArr[0][i]} className= {`case white-player ${myFixedArr[1][j]}${myFixedArr[0][i]}`} >
-                                        <Pawn move = {move} 
-                                                pos = {position} 
-                                                newPos = {usePosPawn[j]} 
-                                                myRef = {`${position.x}${position.y}`}
-                                                n = {num}
-                                                onRender={() => { num++; }}
-                                                />
-                                        <King pos = {position} />
-                                        <Queen pos = {position}/>
-                                        <Bishop pos = {position}/>
-                                        <Knight pos = {position}/>
-                                        <Rook  pos = {position}/>
-                                    </div>)
+                        cases.push(<div key={`${row}${col}`} className= {`case white-player ${row}${col}`} >
+                                    {board[i][j]}</div>)
                     }
                 }
             }
