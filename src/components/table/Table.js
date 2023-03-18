@@ -19,7 +19,17 @@ function Table ()  {
 
 
 
-    const [useNewPos, setNewPos] = useState([
+    const [useNewPosWp, setNewPosWp] = useState([
+                                            {x: 0, y: 0},
+                                            {x: 0, y: 0},
+                                            {x: 0, y: 0},
+                                            {x: 0, y: 0},
+                                            {x: 0, y: 0},
+                                            {x: 0, y: 0},
+                                            {x: 0, y: 0},
+                                            {x: 0, y: 0}
+    ])
+    const [useNewPosBp, setNewPosBp] = useState([
                                             {x: 0, y: 0},
                                             {x: 0, y: 0},
                                             {x: 0, y: 0},
@@ -39,38 +49,63 @@ function Table ()  {
 
     const move = (initPos, index, color)=> {
         
-        const piece = board[initPos.y + useNewPos[index].y][initPos.x]  
+          
         
         if (color === "white") {
-            newPos(index)
+            const piece = board[initPos.y + useNewPosWp[index].y][initPos.x]
+            newPos(index, color)
             setBoard((br)=> {
-                console.log("init pos "+ initPos.y);
-                 console.log("step moved "+useNewPos[index].y); 
-                 console.log("new pos "+ (initPos.y + useNewPos[index].y));
                 const upDateBoard = [...br];
-                upDateBoard[initPos.y + useNewPos[index].y - 1][useNewPos[index].x] = "";
-                upDateBoard[initPos.y + useNewPos[index].y][useNewPos[index].x]= piece;
+                upDateBoard[initPos.y + useNewPosWp[index].y - 1][initPos.x] = "";
+                upDateBoard[initPos.y + useNewPosWp[index].y][initPos.x]= piece;
                 return upDateBoard
             })
             
-            console.log("step moved "+useNewPos[index].y); 
-        }}
+            console.log("step moved "+useNewPosWp[index].y); 
+        }else {
+            const piece = board[initPos.y + useNewPosWp[index].y][initPos.x]
+            console.log(initPos);
+            newPos(index, color)
+            setBoard((br)=> {
+                const upDateBoard = [...br];
+                upDateBoard[initPos.y + useNewPosWp[index].y][initPos.x] = "";
+                upDateBoard[initPos.y + useNewPosWp[index].y - 1][initPos.x]= piece;
+                return upDateBoard
+            })
+            
+            console.log("step moved "+useNewPosWp[index].y); 
+        }
+    }
     const [board, setBoard] = useState([
                                 [<Rook pColor = {`white`} />, <Knight pColor = {`white`}/>, <Bishop pColor = {`white`}/>, <Queen pColor = {`white`}/>, <King pColor = {`white`}/>, <Bishop pColor = {`white`}/>, <Knight pColor = {`white`}/>, <Rook pColor = {`white`} />],
-                                [<Pawn position = {useNewPos}  move = {move} data =  {pieces.whitePlayer.pawn1} />, <Pawn position = {useNewPos}  move = {move} data =  {pieces.whitePlayer.pawn2} />, <Pawn position = {useNewPos} move = {move} data =  {pieces.whitePlayer.pawn3}  />, <Pawn position = {useNewPos} move = {move} data =  {pieces.whitePlayer.pawn4} />, <Pawn position = {useNewPos} move = {move} data =  {pieces.whitePlayer.pawn5} />, <Pawn position = {useNewPos} move = {move} data =  {pieces.whitePlayer.pawn6} />, <Pawn position = {useNewPos} move = {move} data =  {pieces.whitePlayer.pawn7} />, <Pawn position = {useNewPos}  move = {move} data =  {pieces.whitePlayer.pawn8} />],
+                                [<Pawn position = {useNewPosWp}  move = {move} data =  {pieces.whitePlayer.pawn1} />, <Pawn position = {useNewPosWp}  move = {move} data =  {pieces.whitePlayer.pawn2} />, <Pawn position = {useNewPosWp} move = {move} data =  {pieces.whitePlayer.pawn3}  />, <Pawn position = {useNewPosWp} move = {move} data =  {pieces.whitePlayer.pawn4} />, <Pawn position = {useNewPosWp} move = {move} data =  {pieces.whitePlayer.pawn5} />, <Pawn position = {useNewPosWp} move = {move} data =  {pieces.whitePlayer.pawn6} />, <Pawn position = {useNewPosWp} move = {move} data =  {pieces.whitePlayer.pawn7} />, <Pawn position = {useNewPosWp}  move = {move} data =  {pieces.whitePlayer.pawn8} />],
                                 ["", "", "", "", "", "", "", ""],
                                 ["", "", "", "", "", "", "", ""],
                                 ["", "", "", "", "", "", "", ""],
                                 ["", "", "", "", "", "", "", ""],
-                                [<Pawn position = {useNewPos} data =  {pieces.blackPlayer.pawn1} move = {move} />, <Pawn position = {useNewPos} data =  {pieces.blackPlayer.pawn2} move = {move} />, <Pawn position = {useNewPos} data =  {pieces.blackPlayer.pawn3} move = {move} />, <Pawn position = {useNewPos} data =  {pieces.blackPlayer.pawn4} move = {move} />, <Pawn position = {useNewPos} data =  {pieces.blackPlayer.pawn5} move = {move} />, <Pawn position = {useNewPos} data =  {pieces.blackPlayer.pawn6} move = {move}/>, <Pawn position = {useNewPos} data =  {pieces.blackPlayer.pawn7} move = {move} />, <Pawn position = {useNewPos} data =  {pieces.blackPlayer.pawn8} move = {move} />],
+                                [<Pawn position = {useNewPosBp} data =  {pieces.blackPlayer.pawn1} move = {move} />, <Pawn position = {useNewPosBp} data =  {pieces.blackPlayer.pawn2} move = {move} />, <Pawn position = {useNewPosBp} data =  {pieces.blackPlayer.pawn3} move = {move} />, <Pawn position = {useNewPosBp} data =  {pieces.blackPlayer.pawn4} move = {move} />, <Pawn position = {useNewPosBp} data =  {pieces.blackPlayer.pawn5} move = {move} />, <Pawn position = {useNewPosBp} data =  {pieces.blackPlayer.pawn6} move = {move}/>, <Pawn position = {useNewPosBp} data =  {pieces.blackPlayer.pawn7} move = {move} />, <Pawn position = {useNewPosBp} data =  {pieces.blackPlayer.pawn8} move = {move} />],
                                 [<Rook pColor = {`black`} />, <Knight pColor = {`black`}/>, <Bishop pColor = {`black`}/>, <Queen pColor = {`black`}/>, <King pColor = {`black`}/>, <Bishop pColor = {`black`}/>, <Knight pColor = {`black`}/>, <Rook pColor = {`black`} />],
       ]);
-       const newPos = (index)=> {
-          setNewPos((arr)=> {
-            const upDateNewPos = [...arr];
-            upDateNewPos[index].y = upDateNewPos[index].y + 1;
-            return upDateNewPos
-          })
+
+       const newPos = (index, color)=> {
+        if(color === "white") {
+            console.log(index + "from newPos");
+            setNewPosWp((arr)=> {
+                const upDateNewPos = [...arr];
+                upDateNewPos[index].y = upDateNewPos[index].y + 1;
+                return upDateNewPos
+            })
+            console.log(useNewPosWp);
+        }else {
+            console.log(index + "from newPos");
+            setNewPosBp((arr)=> {
+                const upDateNewPos = [...arr];
+                upDateNewPos[index].y = upDateNewPos[index].y - 1;
+                return upDateNewPos
+            })
+
+        }
+        
        }
        
        
