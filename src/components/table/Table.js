@@ -59,21 +59,20 @@ function Table ()  {
                 upDateBoard[initPos.y + useNewPosWp[index].y - 1][initPos.x] = "";
                 upDateBoard[initPos.y + useNewPosWp[index].y][initPos.x]= piece;
                 return upDateBoard
-            })
-            
-            console.log("step moved "+useNewPosWp[index].y); 
+            }) 
         }else {
-            const piece = board[initPos.y + useNewPosWp[index].y][initPos.x]
-            console.log(initPos);
+            console.log("initPosX: " + initPos.x + " initPosY: " + initPos.y);
+            const piece = board[initPos.y - useNewPosBp[index].y][initPos.x]
             newPos(index, color)
             setBoard((br)=> {
                 const upDateBoard = [...br];
-                upDateBoard[initPos.y + useNewPosWp[index].y][initPos.x] = "";
-                upDateBoard[initPos.y + useNewPosWp[index].y - 1][initPos.x]= piece;
+                // console.log("bech tefre8 " + upDateBoard[initPos.y - useNewPosBp[index].y + 1][initPos.x]);
+                upDateBoard[initPos.y - useNewPosBp[index].y + 1][initPos.x] = "";
+                upDateBoard[initPos.y - useNewPosBp[index].y][initPos.x]= piece;
                 return upDateBoard
             })
             
-            console.log("step moved "+useNewPosWp[index].y); 
+            console.log("initPosX: " + initPos.x + " initPosY: " + initPos.y); 
         }
     }
     const [board, setBoard] = useState([
@@ -89,18 +88,15 @@ function Table ()  {
 
        const newPos = (index, color)=> {
         if(color === "white") {
-            console.log(index + "from newPos");
             setNewPosWp((arr)=> {
                 const upDateNewPos = [...arr];
                 upDateNewPos[index].y = upDateNewPos[index].y + 1;
                 return upDateNewPos
             })
-            console.log(useNewPosWp);
         }else {
-            console.log(index + "from newPos");
             setNewPosBp((arr)=> {
                 const upDateNewPos = [...arr];
-                upDateNewPos[index].y = upDateNewPos[index].y - 1;
+                upDateNewPos[index].y = upDateNewPos[index].y + 1;
                 return upDateNewPos
             })
 
@@ -151,3 +147,7 @@ function Table ()  {
 
 
 export default Table
+
+
+
+
