@@ -10,10 +10,10 @@
     grid-template-columns: repeat(8,  calc(500px/8));
     grid-template-rows: repeat(8, calc(500px/8));
 }
-.black-player {
+.black-case {
     background-color: rgb(161 86 0 / 55%);
 }
-.white-player {
+.white-case {
     background-color:#e3e3e3;
 }
 .case {

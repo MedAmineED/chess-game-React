@@ -4,7 +4,6 @@ function Pawn (props) {
     
     const index = props.data.id;
     const move = ()=> {
-        console.log(index + " from Pawn");
         props.move(props.data.position, index, props.data.color);
     }
     if(props.data.color === "white"){
