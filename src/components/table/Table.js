@@ -20,32 +20,40 @@ function Table ()  {
 
 
     const [useNewPos, setNewPos] = useState([
-        {x: 0, y: 1},
-        {x: 1, y: 1},
-        {x: 2, y: 1},
-        {x: 3, y: 1},
-        {x: 4, y: 1},
-        {x: 5, y: 1},
-        {x: 6, y: 1},
-        {x: 7, y: 1}
+                                            {x: 0, y: 0},
+                                            {x: 0, y: 0},
+                                            {x: 0, y: 0},
+                                            {x: 0, y: 0},
+                                            {x: 0, y: 0},
+                                            {x: 0, y: 0},
+                                            {x: 0, y: 0},
+                                            {x: 0, y: 0}
     ])
     
-    const move = (index, color)=> {
-        console.log(index);
-        const piece = board[useNewPos[index].y][useNewPos[index].x]  
+
+
+    // useEffect(()=>{
+
+    // })
+
+
+    const move = (initPos, index, color)=> {
+        
+        const piece = board[initPos.y + useNewPos[index].y][initPos.x]  
+        
         if (color === "white") {
+            newPos(index)
             setBoard((br)=> {
+                console.log("init pos "+ initPos.y);
+                 console.log("step moved "+useNewPos[index].y); 
+                 console.log("new pos "+ (initPos.y + useNewPos[index].y));
                 const upDateBoard = [...br];
-                upDateBoard[useNewPos[index].y][useNewPos[index].x] = "";
-                upDateBoard[useNewPos[index]+1][useNewPos[index].x]= piece;
-                
+                upDateBoard[initPos.y + useNewPos[index].y - 1][useNewPos[index].x] = "";
+                upDateBoard[initPos.y + useNewPos[index].y][useNewPos[index].x]= piece;
                 return upDateBoard
             })
-            setNewPos((prevPos)=>{
-                const updatePos = [...prevPos];
-                updatePos[index].y += 1 
-                return updatePos;
-                 })
+            
+            console.log("step moved "+useNewPos[index].y); 
         }}
     const [board, setBoard] = useState([
                                 [<Rook pColor = {`white`} />, <Knight pColor = {`white`}/>, <Bishop pColor = {`white`}/>, <Queen pColor = {`white`}/>, <King pColor = {`white`}/>, <Bishop pColor = {`white`}/>, <Knight pColor = {`white`}/>, <Rook pColor = {`white`} />],
@@ -57,12 +65,10 @@ function Table ()  {
                                 [<Pawn position = {useNewPos} data =  {pieces.blackPlayer.pawn1} move = {move} />, <Pawn position = {useNewPos} data =  {pieces.blackPlayer.pawn2} move = {move} />, <Pawn position = {useNewPos} data =  {pieces.blackPlayer.pawn3} move = {move} />, <Pawn position = {useNewPos} data =  {pieces.blackPlayer.pawn4} move = {move} />, <Pawn position = {useNewPos} data =  {pieces.blackPlayer.pawn5} move = {move} />, <Pawn position = {useNewPos} data =  {pieces.blackPlayer.pawn6} move = {move}/>, <Pawn position = {useNewPos} data =  {pieces.blackPlayer.pawn7} move = {move} />, <Pawn position = {useNewPos} data =  {pieces.blackPlayer.pawn8} move = {move} />],
                                 [<Rook pColor = {`black`} />, <Knight pColor = {`black`}/>, <Bishop pColor = {`black`}/>, <Queen pColor = {`black`}/>, <King pColor = {`black`}/>, <Bishop pColor = {`black`}/>, <Knight pColor = {`black`}/>, <Rook pColor = {`black`} />],
       ]);
-      
-      
        const newPos = (index)=> {
           setNewPos((arr)=> {
             const upDateNewPos = [...arr];
-            upDateNewPos[8-index].x = useNewPos[8-index].x + 1;
+            upDateNewPos[index].y = upDateNewPos[index].y + 1;
             return upDateNewPos
           })
        }
@@ -74,8 +80,7 @@ function Table ()  {
         let k = 0
         //--set cases and color cases--
         for (let i = 0; i < 8; i++) {                              
-                for (let j = 0; j < 8; j++) {  
-                    console.log(i, j);
+                for (let j = 0; j < 8; j++) {
                     const row = i + 1;
                     const col = 8 - j ;
                     k++

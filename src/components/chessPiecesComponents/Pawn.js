@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 
 function Pawn (props) {
-    
+    console.log(props.data.id);
+    const index = props.data.id;
     const move = ()=> {
-        props.move(props.data.id, props.data.color);
+        props.move(props.data.position, index, props.data.color);
     }
     if(props.data.color === "white"){
         return <div style={props.style} onClick = {move}><img src="chessPiciesImg/Chess_plt60.png" /></div>
