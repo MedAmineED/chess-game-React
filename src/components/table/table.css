@@ -16,5 +16,6 @@
 .white-case {
     background-color:#e3e3e3;
 }
-.case {
+.tomove {
+    border: 2px solid blue;
 }

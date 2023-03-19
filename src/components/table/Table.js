@@ -51,6 +51,7 @@ function Table ()  {
                                     upDateBoard[initPos.y + useNewPosWp[index].y][initPos.x]= piece;
                                     return upDateBoard
                                 }) 
+                                console.log(allCases);
                     }else {
                                 const piece = board[initPos.y - useNewPosBp[index].y][initPos.x]
                                 newPos(index, color)
@@ -74,6 +75,32 @@ function Table ()  {
                                 [<Rook pColor = {`black`} />, <Knight pColor = {`black`}/>, <Bishop pColor = {`black`}/>, <Queen pColor = {`black`}/>, <King pColor = {`black`}/>, <Bishop pColor = {`black`}/>, <Knight pColor = {`black`}/>, <Rook pColor = {`black`} />],
       ]);
 
+
+      
+
+      const caseState = ()=> {
+                let allCasesStates = []
+                
+                for (let i = 0; i < 8; i++) {
+                    let lineCasesStates = []
+                    for (let j = 0; j < 8; j++) {
+                        if (board[i][j] !== "") {
+                            lineCasesStates.push({empty : true, selected : false})
+                        }else {
+                            lineCasesStates.push({empty : false, selected : false})
+                        }
+                    }
+                    allCasesStates.push(lineCasesStates)
+                }
+                console.log(allCasesStates);
+                return allCasesStates
+      }
+      const [allCases, setCase] = useState(caseState());
+
+      
+
+
+
        const newPos = (index, color)=> {
         if(color === "white") {
             setNewPosWp((arr)=> {
@@ -95,28 +122,28 @@ function Table ()  {
        
        
        const myCases = ()=> {
-        let cases = [];
-        //--set cases and color cases--
-        for (let i = 0; i < 8; i++) {                              
-                for (let j = 0; j < 8; j++) {
-                    const row = i + 1;
-                    const col = 8 - j ;
-                    if ((row % 2) === 0 && (col % 2)!==0) {
-                            cases.push(<div key={`${row}${col}`} className= {`case black-case ${row}${col}`} >
-                                        {board[i][j]}</div>
-                    )}
-                    else if ((row % 2) !== 0 && (col % 2)===0) {
-                            cases.push(<div key={`${row}${col}`} className= {`case black-case ${row}${col}`} >
-                                       {board[i][j]}</div>
-                                            )
-                    }
-                    else {
-                        cases.push(<div key={`${row}${col}`} className= {`case white-case ${row}${col}`} >
-                                    {board[i][j]}</div>)
-                    }
-                }
-            };
-        return cases.reverse()
+                let cases = [];
+                //--set cases and color cases--
+                for (let i = 0; i < 8; i++) {                              
+                        for (let j = 0; j < 8; j++) {
+                            const row = i + 1;
+                            const col = 8 - j ;
+                            if ((row % 2) === 0 && (col % 2)!==0) {
+                                    cases.push(<div key={`${row}${col}`} className= {`case black-case ${row}${col} tomove`} >
+                                                {board[i][j]}</div>
+                            )}
+                            else if ((row % 2) !== 0 && (col % 2)===0) {
+                                    cases.push(<div key={`${row}${col}`} className= {`case black-case ${row}${col}`} >
+                                            {board[i][j]}</div>
+                                                    )
+                            }
+                            else {
+                                cases.push(<div key={`${row}${col}`} className= {`case white-case ${row}${col}`} >
+                                            {board[i][j]}</div>)
+                            }
+                        }
+                    };
+                return cases.reverse()
     }
 
     return (
