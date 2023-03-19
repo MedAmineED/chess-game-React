@@ -67,7 +67,6 @@ function Table ()  {
                                 //     upDateBoard[initPos.y + useNewPosWp[index].y][initPos.x]= piece;
                                 //     return upDateBoard
                                 // }) 
-                                console.log(allCases);
                     }else {
                                 const piece = board[initPos.y - useNewPosBp[index].y][initPos.x]
                                 newPos(index, color)
@@ -107,16 +106,19 @@ function Table ()  {
                     }
                     allCasesStates.push(lineCasesStates)
                 }
-                console.log(allCasesStates);
                 return allCasesStates
       }
       const [allCases, setCase] = useState(caseState());
 
       const clickToMove = (initPos, index, color)=> {
-            
+        
+        console.log("index" + index);
+        console.log(initPos);
+        console.log(allCases[initPos.y + useNewPosWp[index].y + 1][initPos.x].selected);
+            selectPath(initPos, index);
                 if (allCases[initPos.y + useNewPosWp[index].y + 1][initPos.x].selected === "tomove") {
+                    console.log(color);
                     const piece = board[initPos.y + useNewPosWp[index].y][initPos.x]
-                    selectPath(initPos, index);
                     newPos(index, color)
                     setBoard((br)=> {
                         const upDateBoard = [...br];
@@ -140,11 +142,8 @@ function Table ()  {
 
 
       const selectPath = (initPos, index)=> {
-        console.log(index);
-        console.log(useNewPosWp[index]);
         const firstStep = useNewPosWp[index].x + useNewPosWp[index].y;
         if(firstStep === 0){
-            console.log("t3adet");
             setCase((cs)=> {
                 const updaECases = [...cs];
                 updaECases.forEach((el)=> {
@@ -175,16 +174,16 @@ function Table ()  {
                             const row = i + 1;
                             const col = 8 - j ;
                             if ((row % 2) === 0 && (col % 2)!==0) {
-                                    cases.push(<div key={`${row}${col}`} onClick = {()=> clickToMove(useNewPosWp[])} className= {`case black-case ${row}${col} ${allCases[i][j].selected}`} >
+                                    cases.push(<div key={`${row}${col}`} onClick = {()=> clickToMove(pieces.whitePlayer[j].position, j, pieces.whitePlayer[j].color)} className= {`case black-case ${row}${col} ${allCases[i][j].selected}`} >
                                                 {board[i][j]}</div>
                             )}
                             else if ((row % 2) !== 0 && (col % 2)===0) {
-                                    cases.push(<div key={`${row}${col}`} onClick = {()=> clickToMove(useNewPosWp[])} className= {`case black-case ${row}${col} ${allCases[i][j].selected}`} >
+                                    cases.push(<div key={`${row}${col}`} onClick = {()=> clickToMove(pieces.whitePlayer[j].position, j, pieces.whitePlayer[j].color)} className= {`case black-case ${row}${col} ${allCases[i][j].selected}`} >
                                             {board[i][j]}</div>
                                                     )
                             }
                             else {
-                                cases.push(<div key={`${row}${col}`} onClick = {()=> clickToMove(useNewPosWp[])} className= {`case white-case ${row}${col} ${allCases[i][j].selected}`} >
+                                cases.push(<div key={`${row}${col}`} onClick = {()=> clickToMove(pieces.whitePlayer[j].position, j, pieces.whitePlayer[j].color)} className= {`case white-case ${row}${col} ${allCases[i][j].selected}`} >
                                             {board[i][j]}</div>)
                             }
                         }
