@@ -40,17 +40,33 @@ function Table ()  {
                                             {x: 0, y: 0}
     ])
 
+    const newPos = (index, color)=> {
+        if(color === "white") {
+            setNewPosWp((arr)=> {
+                const upDateNewPos = [...arr];
+                upDateNewPos[index].y = upDateNewPos[index].y + 1;
+                return upDateNewPos
+            })
+        }else {
+            setNewPosBp((arr)=> {
+                const upDateNewPos = [...arr];
+                upDateNewPos[index].y = upDateNewPos[index].y + 1;
+                return upDateNewPos
+            })
 
+        }
+    }
     const move = (initPos, index, color)=> {
                     if (color === "white") {
                                 const piece = board[initPos.y + useNewPosWp[index].y][initPos.x]
-                                newPos(index, color)
-                                setBoard((br)=> {
-                                    const upDateBoard = [...br];
-                                    upDateBoard[initPos.y + useNewPosWp[index].y - 1][initPos.x] = "";
-                                    upDateBoard[initPos.y + useNewPosWp[index].y][initPos.x]= piece;
-                                    return upDateBoard
-                                }) 
+                                selectToMove(initPos, index);
+                                // newPos(index, color)
+                                // setBoard((br)=> {
+                                //     const upDateBoard = [...br];
+                                //     upDateBoard[initPos.y + useNewPosWp[index].y - 1][initPos.x] = "";
+                                //     upDateBoard[initPos.y + useNewPosWp[index].y][initPos.x]= piece;
+                                //     return upDateBoard
+                                // }) 
                                 console.log(allCases);
                     }else {
                                 const piece = board[initPos.y - useNewPosBp[index].y][initPos.x]
@@ -75,7 +91,6 @@ function Table ()  {
                                 [<Rook pColor = {`black`} />, <Knight pColor = {`black`}/>, <Bishop pColor = {`black`}/>, <Queen pColor = {`black`}/>, <King pColor = {`black`}/>, <Bishop pColor = {`black`}/>, <Knight pColor = {`black`}/>, <Rook pColor = {`black`} />],
       ]);
 
-
       
 
       const caseState = ()=> {
@@ -96,28 +111,35 @@ function Table ()  {
                 return allCasesStates
       }
       const [allCases, setCase] = useState(caseState());
+      
+      const [useToMove, setToMove] = useState("tomove")
+
+
+      const selectToMove = (initPos, index)=> {
+        console.log(index);
+        console.log(useNewPosWp[index]);
+        const firstStep = useNewPosWp[index].x + useNewPosWp[index].y;
+        if(firstStep === 0){
+            console.log("t3adet");
+            setCase((cs)=> {
+                const updaECases = [...cs];
+                updaECases.forEach((el)=> {
+                    el.forEach((el1)=> {
+                        el1.selected = false;
+                    })
+                })
+                updaECases[initPos.y + useNewPosWp[index].y + 1][initPos.x].selected = "tomove";
+                updaECases[initPos.y + useNewPosWp[index].y + 2][initPos.x].selected = "tomove";
+                return updaECases
+            })
+        }
+      }
 
       
 
 
 
-       const newPos = (index, color)=> {
-        if(color === "white") {
-            setNewPosWp((arr)=> {
-                const upDateNewPos = [...arr];
-                upDateNewPos[index].y = upDateNewPos[index].y + 1;
-                return upDateNewPos
-            })
-        }else {
-            setNewPosBp((arr)=> {
-                const upDateNewPos = [...arr];
-                upDateNewPos[index].y = upDateNewPos[index].y + 1;
-                return upDateNewPos
-            })
-
-        }
-        
-       }
+       
        
        
        
@@ -129,16 +151,16 @@ function Table ()  {
                             const row = i + 1;
                             const col = 8 - j ;
                             if ((row % 2) === 0 && (col % 2)!==0) {
-                                    cases.push(<div key={`${row}${col}`} className= {`case black-case ${row}${col} tomove`} >
+                                    cases.push(<div key={`${row}${col}`} className= {`case black-case ${row}${col} ${allCases[i][j].selected}`} >
                                                 {board[i][j]}</div>
                             )}
                             else if ((row % 2) !== 0 && (col % 2)===0) {
-                                    cases.push(<div key={`${row}${col}`} className= {`case black-case ${row}${col}`} >
+                                    cases.push(<div key={`${row}${col}`} className= {`case black-case ${row}${col} ${allCases[i][j].selected}`} >
                                             {board[i][j]}</div>
                                                     )
                             }
                             else {
-                                cases.push(<div key={`${row}${col}`} className= {`case white-case ${row}${col}`} >
+                                cases.push(<div key={`${row}${col}`} className= {`case white-case ${row}${col} ${allCases[i][j].selected}`} >
                                             {board[i][j]}</div>)
                             }
                         }
