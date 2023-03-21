@@ -141,7 +141,6 @@ const knight = {
                             ]
 }
 
-
 const rook = {
             whitePlayer : [
                         {

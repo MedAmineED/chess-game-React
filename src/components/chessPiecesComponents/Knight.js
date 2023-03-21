@@ -1,5 +1,5 @@
 function Knight (props) {
-    if(props.pColor === "white"){
+    if(props.data.color === "white"){
         return (<div><img src="chessPiciesImg/Chess_nlt60.png" /></div>
     )}
     else {
