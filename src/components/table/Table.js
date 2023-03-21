@@ -40,7 +40,7 @@ function Table ()  {
         }else {
             setblackPawnPosition((arr)=> {
                 const upDateNewPos = [...arr];
-                upDateNewPos[index].y = casePos[index].y;
+                upDateNewPos[index].y = casePos.y;
                 return upDateNewPos
             })
 
@@ -87,12 +87,29 @@ function Table ()  {
                             })
                         })
                         updaECases[pawnPos.y  + 1][pawnPos.x].selected = "tomove";
-                        pawnPos.y === 1? updaECases[pawnPos.y  + 2][pawnPos.x].selected = "tomove": updaECases[pawnPos.y  + 2][pawnPos.x].selected = false 
+                        pawnPos.y === 1? updaECases[pawnPos.y  + 2][pawnPos.x].selected = "tomove": updaECases[pawnPos.y  + 2] !== undefined? updaECases[pawnPos.y  + 2][pawnPos.x].selected = false: console.log("end"); 
                         updaECases[pawnPos.y  + 1][pawnPos.x].index = index;
-                        updaECases[pawnPos.y  + 2][pawnPos.x].index = index;
+                        pawnPos.y === 1? updaECases[pawnPos.y  + 2][pawnPos.x].index = index: updaECases[pawnPos.y  + 2] === undefined? console.log("end"): console.log("end"); 
+                        updaECases[pawnPos.y  + 1][pawnPos.x].color= color;
+                        pawnPos.y === 1? updaECases[pawnPos.y  + 2][pawnPos.x].color = color: updaECases[pawnPos.y  + 2] === undefined? console.log("end"): console.log("end"); 
                         return updaECases
                     })
-
+        }else {
+            setCase((cs)=> {
+                const updaECases = [...cs];
+                updaECases.forEach((el)=> {
+                    el.forEach((el1)=> {
+                        el1.selected = false;
+                    })
+                })
+                updaECases[pawnPos.y  - 1][pawnPos.x].selected = "tomove";
+                pawnPos.y === 6? updaECases[pawnPos.y  - 2][pawnPos.x].selected = "tomove": updaECases[pawnPos.y  - 2] !== undefined? updaECases[pawnPos.y  - 2][pawnPos.x].selected = false: console.log("end"); 
+                updaECases[pawnPos.y  - 1][pawnPos.x].index = index;
+                pawnPos.y === 6? updaECases[pawnPos.y  - 2][pawnPos.x].index = index: updaECases[pawnPos.y  - 2] === undefined? console.log("end"): console.log("end"); 
+                updaECases[pawnPos.y  - 1][pawnPos.x].color= color;
+                pawnPos.y === 6? updaECases[pawnPos.y  - 2][pawnPos.x].color = color: updaECases[pawnPos.y  - 2] === undefined? console.log("end"): console.log("end"); 
+                return updaECases
+            })
         }
                     
 }
@@ -104,7 +121,7 @@ function Table ()  {
                                 ["", "", "", "", "", "", "", ""],
                                 ["", "", "", "", "", "", "", ""],
                                 ["", "", "", "", "", "", "", ""],
-                                [<Pawn position = {blackPawnPosition} data =  {pieces.blackPlayer[0]} selectPath = {selectPath} />, <Pawn position = {blackPawnPosition} data =  {pieces.blackPlayer[1]} selectPath = {selectPath} />, <Pawn position = {blackPawnPosition} data =  {pieces.blackPlayer[2]} selectPath = {selectPath} />, <Pawn position = {blackPawnPosition} data =  {pieces.blackPlayer[3]} selectPath = {selectPath} />, <Pawn position = {blackPawnPosition} data =  {pieces.blackPlayer[4]} selectPath = {selectPath} />, <Pawn position = {blackPawnPosition} data =  {pieces.blackPlayer[5]} selectPath = {selectPath}/>, <Pawn position = {blackPawnPosition} data =  {pieces.blackPlayer[6]} selectPath = {selectPath} />, <Pawn position = {blackPawnPosition} data =  {pieces.blackPlayer[7]} selectPath = {selectPath} />],
+                                [<Pawn position = {blackPawnPosition[0]} data =  {pieces.blackPlayer[0]} selectPath = {selectPath} />, <Pawn position = {blackPawnPosition[1]} data =  {pieces.blackPlayer[1]} selectPath = {selectPath} />, <Pawn position = {blackPawnPosition[2]} data =  {pieces.blackPlayer[2]} selectPath = {selectPath} />, <Pawn position = {blackPawnPosition[3]} data =  {pieces.blackPlayer[3]} selectPath = {selectPath} />, <Pawn position = {blackPawnPosition[4]} data =  {pieces.blackPlayer[4]} selectPath = {selectPath} />, <Pawn position = {blackPawnPosition[5]} data =  {pieces.blackPlayer[5]} selectPath = {selectPath}/>, <Pawn position = {blackPawnPosition[6]} data =  {pieces.blackPlayer[6]} selectPath = {selectPath} />, <Pawn position = {blackPawnPosition[7]} data =  {pieces.blackPlayer[7]} selectPath = {selectPath} />],
                                 [<Rook pColor = {`black`} />, <Knight pColor = {`black`}/>, <Bishop pColor = {`black`}/>, <Queen pColor = {`black`}/>, <King pColor = {`black`}/>, <Bishop pColor = {`black`}/>, <Knight pColor = {`black`}/>, <Rook pColor = {`black`} />],
       ]);
 
@@ -117,9 +134,10 @@ function Table ()  {
                     let lineCasesStates = []
                     for (let j = 0; j < 8; j++) {
                         if (board[i][j] !== "") {
-                            lineCasesStates.push({empty : false, selected : false, index : 0})
+                            i===1 || i ===0 ? lineCasesStates.push({empty : false, selected : false, index : 0, color : "white"}) :
+                            i===6 || i===7?lineCasesStates.push({empty : false, selected : false, index : 0, color : "black"}): console.log("");
                         }else {
-                            lineCasesStates.push({empty : true, selected : false, index : 0})
+                            lineCasesStates.push({empty : true, selected : false, index : 0, color : "no color"})
                         }
                     }
                     allCasesStates.push(lineCasesStates)
@@ -132,11 +150,34 @@ function Table ()  {
 
       //move pawns on click
       const clickToMove = async (index, color, casePos)=> {
-                if (allCases[casePos.y][casePos.x].selected === "tomove") {
+            console.log(color);
+                if (allCases[casePos.y][casePos.x].selected === "tomove" && color === "white") {
                     const piece = board[whitePawnPosition[index].y][whitePawnPosition[index].x]
                     await setBoard((br)=> {
                         const upDateBoard = [...br];
                         upDateBoard[whitePawnPosition[index].y][whitePawnPosition[index].x] = "";
+                        return upDateBoard
+                    }) 
+                    newPos(casePos, index, color)
+                    setBoard((br)=> {
+                        const upDateBoard = [...br];
+                        upDateBoard[casePos.y][casePos.x]= piece;
+                        return upDateBoard
+                    }) 
+                    setCase((cs)=> {
+                        const updaECases = [...cs];
+                        updaECases.forEach((el)=> {
+                            el.forEach((el1)=> {
+                                el1.selected = false;
+                            })
+                        })
+                        return updaECases
+                    })
+        }else if(allCases[casePos.y][casePos.x].selected === "tomove" && color === "black") {
+            const piece = board[blackPawnPosition[index].y][blackPawnPosition[index].x]
+                    await setBoard((br)=> {
+                        const upDateBoard = [...br];
+                        upDateBoard[blackPawnPosition[index].y][blackPawnPosition[index].x] = "";
                         return upDateBoard
                     }) 
                     newPos(casePos, index, color)
@@ -167,7 +208,7 @@ function Table ()  {
        
        
        
-       //show board
+       //show real board
        const myCases = ()=> {
                 let cases = [];
                 //--set cases and color cases--
@@ -176,16 +217,16 @@ function Table ()  {
                             const row = i + 1;
                             const col = 8 - j ;
                             if ((row % 2) === 0 && (col % 2)!==0) {
-                                    cases.push(<div key={`${row}${col}`} onClick = {()=> clickToMove(allCases[i][j].index, "white", {x : j, y : i})} className= {`case black-case ${row}${col} ${allCases[i][j].selected}`} >
+                                    cases.push(<div key={`${row}${col}`} onClick = {()=> clickToMove(allCases[i][j].index, allCases[i][j].color, {x : j, y : i})} className= {`case black-case ${row}${col} ${allCases[i][j].selected}`} >
                                                 {board[i][j]}</div>
                             )}
                             else if ((row % 2) !== 0 && (col % 2)===0) {
-                                    cases.push(<div key={`${row}${col}`} onClick = {()=> clickToMove(allCases[i][j].index, "white", {x : j, y : i})} className= {`case black-case ${row}${col} ${allCases[i][j].selected}`} >
+                                    cases.push(<div key={`${row}${col}`} onClick = {()=> clickToMove(allCases[i][j].index, allCases[i][j].color, {x : j, y : i})} className= {`case black-case ${row}${col} ${allCases[i][j].selected}`} >
                                             {board[i][j]}</div>
                                                     )
                             }
                             else {
-                                cases.push(<div key={`${row}${col}`} onClick = {()=> clickToMove(allCases[i][j].index, "white", {x : j, y : i})} className= {`case white-case ${row}${col} ${allCases[i][j].selected}`} >
+                                cases.push(<div key={`${row}${col}`} onClick = {()=> clickToMove(allCases[i][j].index, allCases[i][j].color, {x : j, y : i})} className= {`case white-case ${row}${col} ${allCases[i][j].selected}`} >
                                             {board[i][j]}</div>)
                             }
                         }
