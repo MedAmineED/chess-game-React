@@ -1,4 +1,4 @@
-let  pieces = {
+let  pawn = {
     whitePlayer :  [{
                         id : 0,
                         position : {x : 0,
@@ -113,6 +113,63 @@ let  pieces = {
     }]
 
 }
+const knight = {
+                whitePlayer : [
+                    {
+                        id : 0,
+                        position : {x:1, y:0},
+                        color : "white"
+                    },
+                    {
+                        id : 1,
+                        position : {x:6, y:0},
+                        color : "white"
+                    }
+                    ],
+                    blackPlayer : [
+                                {
+                                    id : 1,
+                                    position : {x:1 , y:7},
+                                    color : "black"
+                                },
+                                {
+                                    id : 1,
+                                    position : {x:6, y:7},
+                                    color : "black"
+                                }
+                        
+                            ]
+}
 
 
-export default pieces
+const rook = {
+            whitePlayer : [
+                        {
+                            id : 0,
+                            position : {x:0 , y:0},
+                            color : "white"
+                        },
+                        {
+                            id : 1,
+                            position : {x:7, y:0},
+                            color : "white"
+                        }
+                
+            ],
+            blackPlayer : [
+                        {
+                            id : 1,
+                            position : {x:0 , y:7},
+                            color : "black"
+                        },
+                        {
+                            id : 1,
+                            position : {x:7, y:7},
+                            color : "black"
+                        }
+                
+                    ]
+
+}
+
+export {pawn, rook, knight}

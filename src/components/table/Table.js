@@ -12,14 +12,14 @@ import Knight from '../chessPiecesComponents/Knight'
 import Rook from '../chessPiecesComponents/Rook'
 
 
-import pieces from '../../piecesData/piecesData';
+import { pawn, rook, knight } from '../../piecesData/piecesData';
 
 
 function Table ()  {
 
 
-    const initPiecesWPPosition = pieces.whitePlayer.map((pos)=>pos.position);
-    const initPiecesBPPosition = pieces.blackPlayer.map((pos)=>pos.position)
+    const initPiecesWPPosition = pawn.whitePlayer.map((pos)=>pos.position);
+    const initPiecesBPPosition = pawn.blackPlayer.map((pos)=>pos.position)
 
 
 
@@ -47,34 +47,6 @@ function Table ()  {
         }
     }
 
-
-    const move = (initPos, index, color)=> {
-        console.log("aaaaaa ");
-        console.log(whitePawnPosition[index]);
-        console.log("aaaaaa ");
-                    if (color === "white") {
-                        console.log("pawn " );
-                                // const piece = board[initPos.y + whitePawnPosition[index].y][initPos.x]
-                                // selectPath(index, initPos);
-                                // newPos(index, color)
-                                // setBoard((br)=> {
-                                //     const upDateBoard = [...br];
-                                //     upDateBoard[initPos.y + whitePawnPosition[index].y - 1][initPos.x] = "";
-                                //     upDateBoard[initPos.y + whitePawnPosition[index].y][initPos.x]= piece;
-                                //     return upDateBoard
-                                // }) 
-                    }else {
-                                const piece = board[initPos.y - blackPawnPosition[index].y][initPos.x]
-                                newPos(index, color)
-                                setBoard((br)=> {
-                                    const upDateBoard = [...br];
-                                    // console.log("bech tefre8 " + upDateBoard[initPos.y - blackPawnPosition[index].y + 1][initPos.x]);
-                                    upDateBoard[initPos.y - blackPawnPosition[index].y + 1][initPos.x] = "";
-                                    upDateBoard[initPos.y - blackPawnPosition[index].y][initPos.x]= piece;
-                                    return upDateBoard
-                                })
-                    }
-    }
 
     //select path function 
     const selectPath = (index, pawnPos, color)=> {
@@ -116,12 +88,12 @@ function Table ()  {
 
     const [board, setBoard] = useState([
                                 [<Rook pColor = {`white`} />, <Knight pColor = {`white`}/>, <Bishop pColor = {`white`}/>, <Queen pColor = {`white`}/>, <King pColor = {`white`}/>, <Bishop pColor = {`white`}/>, <Knight pColor = {`white`}/>, <Rook pColor = {`white`} />],
-                                [<Pawn position = {whitePawnPosition[0]}  selectPath = {selectPath} data =  {pieces.whitePlayer[0]} />, <Pawn position = {whitePawnPosition[1]}  selectPath = {selectPath} data =  {pieces.whitePlayer[1]} />, <Pawn position = {whitePawnPosition[2]} selectPath = {selectPath} data =  {pieces.whitePlayer[2]}  />, <Pawn position = {whitePawnPosition[3]} selectPath = {selectPath} data =  {pieces.whitePlayer[3]} />, <Pawn position = {whitePawnPosition[4]} selectPath = {selectPath} data =  {pieces.whitePlayer[4]} />, <Pawn position = {whitePawnPosition[5]} selectPath = {selectPath} data =  {pieces.whitePlayer[5]} />, <Pawn position = {whitePawnPosition[6]} selectPath = {selectPath} data =  {pieces.whitePlayer[6]} />, <Pawn position = {whitePawnPosition[7]}  selectPath = {selectPath} data =  {pieces.whitePlayer[7]} />],
+                                [<Pawn position = {whitePawnPosition[0]}  selectPath = {selectPath} data =  {pawn.whitePlayer[0]} />, <Pawn position = {whitePawnPosition[1]}  selectPath = {selectPath} data =  {pawn.whitePlayer[1]} />, <Pawn position = {whitePawnPosition[2]} selectPath = {selectPath} data =  {pawn.whitePlayer[2]}  />, <Pawn position = {whitePawnPosition[3]} selectPath = {selectPath} data =  {pawn.whitePlayer[3]} />, <Pawn position = {whitePawnPosition[4]} selectPath = {selectPath} data =  {pawn.whitePlayer[4]} />, <Pawn position = {whitePawnPosition[5]} selectPath = {selectPath} data =  {pawn.whitePlayer[5]} />, <Pawn position = {whitePawnPosition[6]} selectPath = {selectPath} data =  {pawn.whitePlayer[6]} />, <Pawn position = {whitePawnPosition[7]}  selectPath = {selectPath} data =  {pawn.whitePlayer[7]} />],
                                 ["", "", "", "", "", "", "", ""],
                                 ["", "", "", "", "", "", "", ""],
                                 ["", "", "", "", "", "", "", ""],
                                 ["", "", "", "", "", "", "", ""],
-                                [<Pawn position = {blackPawnPosition[0]} data =  {pieces.blackPlayer[0]} selectPath = {selectPath} />, <Pawn position = {blackPawnPosition[1]} data =  {pieces.blackPlayer[1]} selectPath = {selectPath} />, <Pawn position = {blackPawnPosition[2]} data =  {pieces.blackPlayer[2]} selectPath = {selectPath} />, <Pawn position = {blackPawnPosition[3]} data =  {pieces.blackPlayer[3]} selectPath = {selectPath} />, <Pawn position = {blackPawnPosition[4]} data =  {pieces.blackPlayer[4]} selectPath = {selectPath} />, <Pawn position = {blackPawnPosition[5]} data =  {pieces.blackPlayer[5]} selectPath = {selectPath}/>, <Pawn position = {blackPawnPosition[6]} data =  {pieces.blackPlayer[6]} selectPath = {selectPath} />, <Pawn position = {blackPawnPosition[7]} data =  {pieces.blackPlayer[7]} selectPath = {selectPath} />],
+                                [<Pawn position = {blackPawnPosition[0]} data =  {pawn.blackPlayer[0]} selectPath = {selectPath} />, <Pawn position = {blackPawnPosition[1]} data =  {pawn.blackPlayer[1]} selectPath = {selectPath} />, <Pawn position = {blackPawnPosition[2]} data =  {pawn.blackPlayer[2]} selectPath = {selectPath} />, <Pawn position = {blackPawnPosition[3]} data =  {pawn.blackPlayer[3]} selectPath = {selectPath} />, <Pawn position = {blackPawnPosition[4]} data =  {pawn.blackPlayer[4]} selectPath = {selectPath} />, <Pawn position = {blackPawnPosition[5]} data =  {pawn.blackPlayer[5]} selectPath = {selectPath}/>, <Pawn position = {blackPawnPosition[6]} data =  {pawn.blackPlayer[6]} selectPath = {selectPath} />, <Pawn position = {blackPawnPosition[7]} data =  {pawn.blackPlayer[7]} selectPath = {selectPath} />],
                                 [<Rook pColor = {`black`} />, <Knight pColor = {`black`}/>, <Bishop pColor = {`black`}/>, <Queen pColor = {`black`}/>, <King pColor = {`black`}/>, <Bishop pColor = {`black`}/>, <Knight pColor = {`black`}/>, <Rook pColor = {`black`} />],
       ]);
 
