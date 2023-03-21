@@ -87,7 +87,7 @@ function Table ()  {
                             })
                         })
                         updaECases[pawnPos.y  + 1][pawnPos.x].selected = "tomove";
-                        updaECases[pawnPos.y  + 2][pawnPos.x].selected = "tomove";
+                        pawnPos.y === 1? updaECases[pawnPos.y  + 2][pawnPos.x].selected = "tomove": updaECases[pawnPos.y  + 2][pawnPos.x].selected = false 
                         updaECases[pawnPos.y  + 1][pawnPos.x].index = index;
                         updaECases[pawnPos.y  + 2][pawnPos.x].index = index;
                         return updaECases
@@ -132,7 +132,6 @@ function Table ()  {
 
       //move pawns on click
       const clickToMove = async (index, color, casePos)=> {
-        console.log(index);
                 if (allCases[casePos.y][casePos.x].selected === "tomove") {
                     const piece = board[whitePawnPosition[index].y][whitePawnPosition[index].x]
                     await setBoard((br)=> {
