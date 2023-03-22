@@ -128,7 +128,7 @@ const knight = {
                     ],
                     blackPlayer : [
                                 {
-                                    id : 1,
+                                    id : 0,
                                     position : {x:1 , y:7},
                                     color : "black"
                                 },

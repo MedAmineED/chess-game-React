@@ -137,6 +137,7 @@ function Table ()  {
 
     class knightMethods {
         static selectPath = (index, knightPos, color)=> {
+            console.log("index aaaaaaa ", index);
             console.log("knight position ", knightPos);
             console.log(blackKnightPosition);
                                                 setCase((cs)=> {
