@@ -137,7 +137,8 @@ function Table ()  {
 
     class knightMethods {
         static selectPath = (index, knightPos, color)=> {
-                                    if(color === "white") {
+            console.log("knight position ", knightPos);
+            console.log(blackKnightPosition);
                                                 setCase((cs)=> {
                                                     const updateCases = [...cs];
                                                     updateCases.forEach((el)=> {
@@ -145,46 +146,72 @@ function Table ()  {
                                                             el1.selected = false;
                                                         })
                                                     })
-                                                    updateCases[knightPos.y + 2][knightPos.x + 1]!== undefined?updateCases[knightPos.y  + 2][knightPos.x + 1].selected = "tomove": console.log("no case");
-                                                    updateCases[knightPos.y + 2][knightPos.x + 1]!== undefined?updateCases[knightPos.y  + 2][knightPos.x + 1].index = index:console.log("");
-                                                    updateCases[knightPos.y + 2][knightPos.x + 1]!== undefined? updateCases[knightPos.y  + 2][knightPos.x + 1].color= color : console.log("");
-                                                    updateCases[knightPos.y + 2][knightPos.x + 1]!== undefined? updateCases[knightPos.y  + 2][knightPos.x + 1].pieceName= "knight" : console.log("");
+                                                    if(knightPos.y + 2 < 8 && knightPos.x + 1 < 8) {
+                                                            updateCases[knightPos.y  + 2][knightPos.x + 1].selected = "tomove" 
+                                                            updateCases[knightPos.y  + 2][knightPos.x + 1].index = index
+                                                            updateCases[knightPos.y  + 2][knightPos.x + 1].color= color 
+                                                            updateCases[knightPos.y  + 2][knightPos.x + 1].pieceName= "knight"
+                                                    }
 
-                                                    updateCases[knightPos.y + 2][knightPos.x - 1]!== undefined? updateCases[knightPos.y  + 2][knightPos.x - 1].selected = "tomove": console.log("end"); 
-                                                    updateCases[knightPos.y + 2][knightPos.x - 1]!== undefined? updateCases[knightPos.y  + 2][knightPos.x - 1].index = index:console.log("");
-                                                    updateCases[knightPos.y + 2][knightPos.x - 1]!== undefined? updateCases[knightPos.y  + 2][knightPos.x - 1].color= color : console.log("");
-                                                    updateCases[knightPos.y + 2][knightPos.x - 1]!== undefined? updateCases[knightPos.y  + 2][knightPos.x - 1].pieceName= "knight" : console.log("");
 
-                                                    updateCases[knightPos.y - 2][knightPos.x + 1]!== undefined? updateCases[knightPos.y  - 2][knightPos.x + 1].selected = "white" : console.log("no case");
-                                                    updateCases[knightPos.y - 2][knightPos.x + 1]!== undefined? updateCases[knightPos.y - 2][knightPos.x + 1].index = index:console.log(""); 
-                                                    updateCases[knightPos.y - 2][knightPos.x + 1]!== undefined? updateCases[knightPos.y  - 2][knightPos.x + 1].color= color : console.log("");
-                                                    updateCases[knightPos.y - 2][knightPos.x + 1]!== undefined? updateCases[knightPos.y  - 2][knightPos.x + 1].pieceName= "knight" : console.log("");
+                                                    if(knightPos.y + 2 < 8 && knightPos.x - 1 >= 0) {
+                                                            updateCases[knightPos.y  + 2][knightPos.x - 1].selected = "tomove"
+                                                            updateCases[knightPos.y  + 2][knightPos.x - 1].index = index
+                                                            updateCases[knightPos.y  + 2][knightPos.x - 1].color= color 
+                                                            updateCases[knightPos.y  + 2][knightPos.x - 1].pieceName= "knight"
+                                                    }
 
-                                                    updateCases[knightPos.y - 2][knightPos.x - 1]!== undefined? updateCases[knightPos.y  - 2][knightPos.x + 1].selected = "white" : console.log("no case");
-                                                    updateCases[knightPos.y - 2][knightPos.x - 1]!== undefined? updateCases[knightPos.y - 2][knightPos.x + 1].index = index:console.log(""); 
-                                                    updateCases[knightPos.y - 2][knightPos.x - 1]!== undefined? updateCases[knightPos.y  - 2][knightPos.x + 1].color= color : console.log("");
-                                                    updateCases[knightPos.y - 2][knightPos.x - 1]!== undefined? updateCases[knightPos.y  - 2][knightPos.x + 1].pieceName= "knight" : console.log("");
+
+                                                    if(knightPos.y - 2 >= 0&& knightPos.x + 1 < 8) {
+                                                            updateCases[knightPos.y - 2][knightPos.x + 1].selected = "tomove" 
+                                                            updateCases[knightPos.y - 2][knightPos.x + 1].index = index 
+                                                            updateCases[knightPos.y - 2][knightPos.x + 1].color= color 
+                                                            updateCases[knightPos.y - 2][knightPos.x + 1].pieceName= "knight" 
+                                                    }
+
+                                                    if(knightPos.y - 2 >=0 && knightPos.x - 1 >= 0){
+                                                            updateCases[knightPos.y - 2][knightPos.x - 1].selected = "tomove";
+                                                            updateCases[knightPos.y - 2][knightPos.x - 1].index = index 
+                                                            updateCases[knightPos.y - 2][knightPos.x - 1].color= color;
+                                                            updateCases[knightPos.y - 2][knightPos.x - 1].pieceName= "knight";
+                                                    }
+
+
+                                                    if(knightPos.y + 1 < 8 && knightPos.x + 2 < 8) {
+                                                            updateCases[knightPos.y  + 1][knightPos.x + 2].selected = "tomove" 
+                                                            updateCases[knightPos.y  + 1][knightPos.x + 2].index = index
+                                                            updateCases[knightPos.y  + 1][knightPos.x + 2].color= color 
+                                                            updateCases[knightPos.y  + 1][knightPos.x + 2].pieceName= "knight"
+                                                    }
+
+
+                                                    if(knightPos.y + 1 < 8 && knightPos.x - 2 >= 0) {
+                                                            updateCases[knightPos.y  + 1][knightPos.x - 2].selected = "tomove"
+                                                            updateCases[knightPos.y  + 1][knightPos.x - 2].index = index
+                                                            updateCases[knightPos.y  + 1][knightPos.x - 2].color= color 
+                                                            updateCases[knightPos.y  + 1][knightPos.x - 2].pieceName= "knight"
+                                                    }
+
+
+                                                    if(knightPos.y - 1 >= 0&& knightPos.x + 2 < 8) {
+                                                            updateCases[knightPos.y - 1][knightPos.x + 2].selected = "tomove" 
+                                                            updateCases[knightPos.y - 1][knightPos.x + 2].index = index 
+                                                            updateCases[knightPos.y - 1][knightPos.x + 2].color= color 
+                                                            updateCases[knightPos.y - 1][knightPos.x + 2].pieceName= "knight" 
+                                                    }
+
+                                                    if(knightPos.y - 1 >=0 && knightPos.x - 2 >= 0){
+                                                            updateCases[knightPos.y - 1][knightPos.x - 2].selected = "tomove";
+                                                            updateCases[knightPos.y - 1][knightPos.x - 2].index = index 
+                                                            updateCases[knightPos.y - 1][knightPos.x - 2].color= color;
+                                                            updateCases[knightPos.y - 1][knightPos.x - 2].pieceName= "knight";
+                                                    }
+
                                                     
                                                     
                                                     return updateCases
                                                 })
-                                    }else {
-                                        setCase((cs)=> {
-                                            const updateCases = [...cs];
-                                            updateCases.forEach((el)=> {
-                                                el.forEach((el1)=> {
-                                                    el1.selected = false;
-                                                })
-                                            })
-                                            updateCases[knightPos.y  - 1][knightPos.x].selected = "tomove";
-                                            knightPos.y === 6? updateCases[knightPos.y  - 2][knightPos.x].selected = "tomove": updateCases[knightPos.y  - 2] !== undefined? updateCases[knightPos.y  - 2][knightPos.x].selected = false: console.log("end"); 
-                                            updateCases[knightPos.y  - 1][knightPos.x].index = index;
-                                            knightPos.y === 6? updateCases[knightPos.y  - 2][knightPos.x].index = index: updateCases[knightPos.y  - 2] === undefined? console.log("end"): console.log("end"); 
-                                            updateCases[knightPos.y  - 1][knightPos.x].color= color;
-                                            knightPos.y === 6? updateCases[knightPos.y  - 2][knightPos.x].color = color: updateCases[knightPos.y  - 2] === undefined? console.log("end"): console.log("end"); 
-                                            return updateCases
-                                        })
-                                    }
+                                    
                                                 
                                 }
         //move pawns on click
@@ -198,7 +225,7 @@ function Table ()  {
                         return upDateBoard
                     }) 
                     newPos(casePos, index, setWhiteKnightPosition)
-                    setBoard((br)=> {
+                    await setBoard((br)=> {
                         const upDateBoard = [...br];
                         upDateBoard[casePos.y][casePos.x]= piece;
                         return upDateBoard
@@ -219,7 +246,7 @@ function Table ()  {
                                 upDateBoard[blackKnightPosition[index].y][blackKnightPosition[index].x] = "";
                                 return upDateBoard
                             }) 
-                            pawnMethods.newPos(casePos, index, setBlackKnightPosition)
+                            newPos(casePos, index, setBlackKnightPosition)
                             setBoard((br)=> {
                                 const upDateBoard = [...br];
                                 upDateBoard[casePos.y][casePos.x]= piece;
@@ -239,10 +266,15 @@ function Table ()  {
     }
 
     
+    const move = (index, color, casePos, pieceName)=> {
+                    if(pieceName === "Pawn")pawnMethods.clickToMove(index, color, casePos)
+                    if(pieceName === "knight")knightMethods.clickToMove(index, color, casePos)
+                }
     //update initial positon
     const newPos = (casePos, index, set)=> {
         set((arr)=> {
             const upDateNewPos = [...arr];
+            upDateNewPos[index].x = casePos.x
             upDateNewPos[index].y = casePos.y;
             return upDateNewPos
         })
@@ -250,14 +282,14 @@ function Table ()  {
 
 
     const [board, setBoard] = useState([
-                                [<Rook pColor = {`white`} />, <Knight position = {whiteKnightPosition[0]} data = {knight.whitePlayer[0]} selectPath = {knightMethods.selectPath}/>, <Bishop pColor = {`white`}/>, <Queen pColor = {`white`}/>, <King pColor = {`white`}/>, <Bishop pColor = {`white`}/>, <Knight position = {whiteKnightPosition[0]} data = {knight.whitePlayer[1]} selectPath = {knightMethods.selectPath}/>, <Rook pColor = {`white`} />],
+                                [<Rook pColor = {`white`} />, <Knight position = {whiteKnightPosition[0]} data = {knight.whitePlayer[0]} selectPath = {knightMethods.selectPath}/>, <Bishop pColor = {`white`}/>, <Queen pColor = {`white`}/>, <King pColor = {`white`}/>, <Bishop pColor = {`white`}/>, <Knight position = {whiteKnightPosition[1]} data = {knight.whitePlayer[1]} selectPath = {knightMethods.selectPath}/>, <Rook pColor = {`white`} />],
                                 [<Pawn position = {whitePawnPosition[0]}  selectPath = {pawnMethods.selectPath} data =  {pawn.whitePlayer[0]} />, <Pawn position = {whitePawnPosition[1]}  selectPath = {pawnMethods.selectPath} data =  {pawn.whitePlayer[1]} />, <Pawn position = {whitePawnPosition[2]} selectPath = {pawnMethods.selectPath} data =  {pawn.whitePlayer[2]}  />, <Pawn position = {whitePawnPosition[3]} selectPath = {pawnMethods.selectPath} data =  {pawn.whitePlayer[3]} />, <Pawn position = {whitePawnPosition[4]} selectPath = {pawnMethods.selectPath} data =  {pawn.whitePlayer[4]} />, <Pawn position = {whitePawnPosition[5]} selectPath = {pawnMethods.selectPath} data =  {pawn.whitePlayer[5]} />, <Pawn position = {whitePawnPosition[6]} selectPath = {pawnMethods.selectPath} data =  {pawn.whitePlayer[6]} />, <Pawn position = {whitePawnPosition[7]}  selectPath = {pawnMethods.selectPath} data =  {pawn.whitePlayer[7]} />],
                                 ["", "", "", "", "", "", "", ""],
                                 ["", "", "", "", "", "", "", ""],
                                 ["", "", "", "", "", "", "", ""],
                                 ["", "", "", "", "", "", "", ""],
                                 [<Pawn position = {blackPawnPosition[0]} data =  {pawn.blackPlayer[0]} selectPath = {pawnMethods.selectPath} />, <Pawn position = {blackPawnPosition[1]} data =  {pawn.blackPlayer[1]} selectPath = {pawnMethods.selectPath} />, <Pawn position = {blackPawnPosition[2]} data =  {pawn.blackPlayer[2]} selectPath = {pawnMethods.selectPath} />, <Pawn position = {blackPawnPosition[3]} data =  {pawn.blackPlayer[3]} selectPath = {pawnMethods.selectPath} />, <Pawn position = {blackPawnPosition[4]} data =  {pawn.blackPlayer[4]} selectPath = {pawnMethods.selectPath} />, <Pawn position = {blackPawnPosition[5]} data =  {pawn.blackPlayer[5]} selectPath = {pawnMethods.selectPath}/>, <Pawn position = {blackPawnPosition[6]} data =  {pawn.blackPlayer[6]} selectPath = {pawnMethods.selectPath} />, <Pawn position = {blackPawnPosition[7]} data =  {pawn.blackPlayer[7]} selectPath = {pawnMethods.selectPath} />],
-                                [<Rook pColor = {`black`} />, <Knight position = {blackKnightPosition[0]} data = {knight.blackPlayer[0]} selectPath = {knightMethods.selectPath}/>, <Bishop pColor = {`black`}/>, <Queen pColor = {`black`}/>, <King pColor = {`black`}/>, <Bishop pColor = {`black`}/>, <Knight position = {blackKnightPosition[0]} data = {knight.blackPlayer[1]} selectPath = {knightMethods.selectPath}/>, <Rook pColor = {`black`} />],
+                                [<Rook pColor = {`black`} />, <Knight position = {blackKnightPosition[0]} data = {knight.blackPlayer[0]} selectPath = {knightMethods.selectPath}/>, <Bishop pColor = {`black`}/>, <Queen pColor = {`black`}/>, <King pColor = {`black`}/>, <Bishop pColor = {`black`}/>, <Knight position = {blackKnightPosition[1]} data = {knight.blackPlayer[1]} selectPath = {knightMethods.selectPath}/>, <Rook pColor = {`black`} />],
       ]);
 
       
@@ -296,16 +328,16 @@ function Table ()  {
                             const row = i + 1;
                             const col = 8 - j ;
                             if ((row % 2) === 0 && (col % 2)!==0) {
-                                    cases.push(<div key={`${row}${col}`} onClick = {()=> pawnMethods.clickToMove(allCases[i][j].index, allCases[i][j].color, {x : j, y : i})} className= {`case black-case ${row}${col} ${allCases[i][j].selected}`} >
+                                    cases.push(<div key={`${row}${col}`} onClick = {()=> move(allCases[i][j].index, allCases[i][j].color, {x : j, y : i}, allCases[i][j].pieceName)} className= {`case black-case ${row}${col} ${allCases[i][j].selected}`} >
                                                 {board[i][j]}</div>
                             )}
                             else if ((row % 2) !== 0 && (col % 2)===0) {
-                                    cases.push(<div key={`${row}${col}`} onClick = {()=> pawnMethods.clickToMove(allCases[i][j].index, allCases[i][j].color, {x : j, y : i})} className= {`case black-case ${row}${col} ${allCases[i][j].selected}`} >
+                                    cases.push(<div key={`${row}${col}`} onClick = {()=> move(allCases[i][j].index, allCases[i][j].color, {x : j, y : i}, allCases[i][j].pieceName)} className= {`case black-case ${row}${col} ${allCases[i][j].selected}`} >
                                             {board[i][j]}</div>
                                                     )
                             }
                             else {
-                                cases.push(<div key={`${row}${col}`} onClick = {()=> pawnMethods.clickToMove(allCases[i][j].index, allCases[i][j].color, {x : j, y : i})} className= {`case white-case ${row}${col} ${allCases[i][j].selected}`} >
+                                cases.push(<div key={`${row}${col}`} onClick = {()=> move(allCases[i][j].index, allCases[i][j].color, {x : j, y : i}, allCases[i][j].pieceName)} className= {`case white-case ${row}${col} ${allCases[i][j].selected}`} >
                                             {board[i][j]}</div>)
                             }
                         }
