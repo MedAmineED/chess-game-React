@@ -157,7 +157,7 @@ const rook = {
             ],
             blackPlayer : [
                         {
-                            id : 1,
+                            id : 0,
                             position : {x:0 , y:7},
                             color : "black"
                         },
@@ -171,4 +171,35 @@ const rook = {
 
 }
 
-export {pawn, rook, knight}
+const bishop = {
+                whitePlayer : [
+                        {
+                            id : 0,
+                            position : {x:2 , y:0},
+                            color : "white"
+                        },
+                        {
+                            id : 1,
+                            position : {x:5, y:0},
+                            color : "white"
+                        }
+
+                    ],
+                blackPlayer : [
+                        {
+                            id : 0,
+                            position : {x:2 , y:7},
+                            color : "black"
+                        },
+                        {
+                            id : 1,
+                            position : {x:5, y:7},
+                            color : "black"
+                        }
+                    ]
+}
+
+
+
+
+export {pawn, rook, knight, bishop}

@@ -1,11 +1,14 @@
 function Rook (props) {
-    if(props.pColor === "white") {
+    const hanDleClickMove = ()=> {
+        props.selectPath(props.data.id, props.position, props.data.color)
+    }
+    if(props.data.color === "white") {
         return (
-        <div><img src="chessPiciesImg/Chess_rlt60.png" /></div>
+        <div onClick={hanDleClickMove}><img src="chessPiciesImg/Chess_rlt60.png" /></div>
     )
     }else {
         return (
-            <div><img src="chessPiciesImg/Chess_rdt60.png" /></div>
+            <div onClick={hanDleClickMove}><img src="chessPiciesImg/Chess_rdt60.png" /></div>
         )
     }
     
