@@ -199,7 +199,33 @@ const bishop = {
                     ]
 }
 
+const king =  {
+            whitePlayer : {
+                id : 0,
+                position : {x:4 , y:0},
+                color : "white"
+            },
+            blackPlayer : {
+                id : 1,
+                position : {x:4 , y:7},
+                color : "black"
+            }
+}
 
 
+const queen = {
+    whitePlayer : {
+        id : 0,
+        position : {x:3 , y:0},
+        color : "white"
+    },
+    blackPlayer : {
+        id : 1,
+        position : {x:3 , y:7},
+        color : "black"
+    }
 
-export {pawn, rook, knight, bishop}
+}
+
+
+export {pawn, rook, knight, bishop, king, queen}

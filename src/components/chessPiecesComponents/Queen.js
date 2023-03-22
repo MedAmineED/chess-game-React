@@ -1,9 +1,15 @@
 function Queen (props) {
 
-    if (props.pColor === 'white') {
-        return (<div><img src="chessPiciesImg/Chess_qlt60.png" /></div>)
+
+    const hanDleClickMove = ()=> {
+        console.log("t3adeet");
+        props.selectPath(props.data.id, props.position, props.data.color)
+    }
+
+    if (props.data.color === 'white') {
+        return (<div onClick={hanDleClickMove}><img src="chessPiciesImg/Chess_qlt60.png" /></div>)
     }else {
-        return (<div><img src="chessPiciesImg/Chess_qdt60.png" /></div>)
+        return (<div onClick={hanDleClickMove}><img src="chessPiciesImg/Chess_qdt60.png" /></div>)
     }
     
 
