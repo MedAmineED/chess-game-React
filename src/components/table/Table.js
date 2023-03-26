@@ -80,31 +80,31 @@ function Table ()  {
                                                 })
 
                                                 if(updaECases[pawnPos.y  + 1][pawnPos.x].empty){
-                                                    updaECases[pawnPos.y  + 1][pawnPos.x].selected = "tomove";
-                                                    updaECases[pawnPos.y  + 1][pawnPos.x].index = index;
-                                                    updaECases[pawnPos.y  + 1][pawnPos.x].pieceName = "pawn";
-                                                    updaECases[pawnPos.y  + 1][pawnPos.x].color= color;}
+                                                        updaECases[pawnPos.y  + 1][pawnPos.x].selected = "tomove";
+                                                        updaECases[pawnPos.y  + 1][pawnPos.x].index = index;
+                                                        updaECases[pawnPos.y  + 1][pawnPos.x].pieceName = "pawn";
+                                                        updaECases[pawnPos.y  + 1][pawnPos.x].color= color;}
                                                 
                                                 
-                                                    if(updaECases[pawnPos.y  + 2][pawnPos.x].empty){
+                                                if(pawnPos.y === 1 && updaECases[pawnPos.y  + 2][pawnPos.x].empty){
                                                         pawnPos.y === 1? updaECases[pawnPos.y  + 2][pawnPos.x].selected = "tomove": updaECases[pawnPos.y  + 2] !== undefined? updaECases[pawnPos.y  + 2][pawnPos.x].selected = false: console.log("end"); 
                                                         pawnPos.y === 1? updaECases[pawnPos.y  + 2][pawnPos.x].index = index: updaECases[pawnPos.y  + 2] === undefined? console.log("end"): console.log("end"); 
                                                         pawnPos.y === 1? updaECases[pawnPos.y  + 2][pawnPos.x].color = color: updaECases[pawnPos.y  + 2] === undefined? console.log("end"): console.log("end"); 
                                                         pawnPos.y === 1? updaECases[pawnPos.y  + 2][pawnPos.x].pieceName = "pawn": updaECases[pawnPos.y  + 2] === undefined? console.log("end"): console.log("end");} 
                                                 
                                                 
-                                                if(pawnPos.y + 1 < 8 && pawnPos.x + 1 < 8 && updaECases[pawnPos.y  + 1][pawnPos.x + 1].color === "black") {
-                                                    updaECases[pawnPos.y  + 1][pawnPos.x + 1].selected = "tomove";
-                                                    updaECases[pawnPos.y  + 1][pawnPos.x + 1].color = color;
-                                                    updaECases[pawnPos.y  + 1][pawnPos.x + 1].index = index;
-                                                    updaECases[pawnPos.y  + 1][pawnPos.x + 1].pieceName = "pawn";
+                                                if(pawnPos.y + 1 < 8 && pawnPos.x + 1 < 8 && updaECases[pawnPos.y  + 1][pawnPos.x + 1].eat === "black") {
+                                                        updaECases[pawnPos.y  + 1][pawnPos.x + 1].selected = "tomove";
+                                                        updaECases[pawnPos.y  + 1][pawnPos.x + 1].color = color;
+                                                        updaECases[pawnPos.y  + 1][pawnPos.x + 1].index = index;
+                                                        updaECases[pawnPos.y  + 1][pawnPos.x + 1].pieceName = "pawn";
                                                 }
                                                 
-                                                if(pawnPos.y + 1 < 8 && pawnPos.x - 1 >=0 && updaECases[pawnPos.y  + 1][pawnPos.x - 1].color === "black") {
-                                                    updaECases[pawnPos.y  + 1][pawnPos.x - 1].selected = "tomove";
-                                                    updaECases[pawnPos.y  + 1][pawnPos.x - 1].color = color;
-                                                    updaECases[pawnPos.y  + 1][pawnPos.x - 1].index = index;
-                                                    updaECases[pawnPos.y  + 1][pawnPos.x - 1].pieceName = "pawn";
+                                                if(pawnPos.y + 1 < 8 && pawnPos.x - 1 >=0 && updaECases[pawnPos.y  + 1][pawnPos.x - 1].eat === "black") {
+                                                        updaECases[pawnPos.y  + 1][pawnPos.x - 1].selected = "tomove";
+                                                        updaECases[pawnPos.y  + 1][pawnPos.x - 1].color = color;
+                                                        updaECases[pawnPos.y  + 1][pawnPos.x - 1].index = index;
+                                                        updaECases[pawnPos.y  + 1][pawnPos.x - 1].pieceName = "pawn";
                                                 }
                                                 return updaECases
                                             })
@@ -117,7 +117,7 @@ function Table ()  {
                                             })
                                         })
 
-                                        if(updaECases[pawnPos.y  - 2][pawnPos.x].empty){
+                                        if(pawnPos.y === 6 && updaECases[pawnPos.y  - 2][pawnPos.x].empty){
                                             pawnPos.y === 6? updaECases[pawnPos.y  - 2][pawnPos.x].selected = "tomove": updaECases[pawnPos.y  - 2] !== undefined? updaECases[pawnPos.y  - 2][pawnPos.x].selected = false: console.log("end"); 
                                             pawnPos.y === 6? updaECases[pawnPos.y  - 2][pawnPos.x].index = index: updaECases[pawnPos.y  - 2] === undefined? console.log("end"): console.log("end"); 
                                             pawnPos.y === 6? updaECases[pawnPos.y  - 2][pawnPos.x].color = color: updaECases[pawnPos.y  - 2] === undefined? console.log("end"): console.log("end"); 
@@ -131,14 +131,14 @@ function Table ()  {
                                             updaECases[pawnPos.y  - 1][pawnPos.x].color= color;
                                             updaECases[pawnPos.y  - 1][pawnPos.x].pieceName = "pawn";}
 
-                                        if(pawnPos.y - 1 >= 0 && pawnPos.x + 1 < 8 && updaECases[pawnPos.y  - 1][pawnPos.x + 1].color === "white") {
+                                        if(pawnPos.y - 1 >= 0 && pawnPos.x + 1 < 8 && updaECases[pawnPos.y  - 1][pawnPos.x + 1].eat === "white") {
                                                 updaECases[pawnPos.y  - 1][pawnPos.x + 1].selected = "tomove";
                                                 updaECases[pawnPos.y  - 1][pawnPos.x + 1].color = color;
                                                 updaECases[pawnPos.y  - 1][pawnPos.x + 1].index = index;
                                                 updaECases[pawnPos.y  - 1][pawnPos.x + 1].pieceName = "pawn";
                                             }
                                             
-                                        if(pawnPos.y - 1 >= 0 && pawnPos.x - 1 >=0 && updaECases[pawnPos.y  - 1][pawnPos.x - 1].color === "white") {
+                                        if(pawnPos.y - 1 >= 0 && pawnPos.x - 1 >=0 && updaECases[pawnPos.y  - 1][pawnPos.x - 1].eat === "white") {
                                                 updaECases[pawnPos.y  - 1][pawnPos.x - 1].selected = "tomove";
                                                 updaECases[pawnPos.y  - 1][pawnPos.x - 1].color = color;
                                                 updaECases[pawnPos.y  - 1][pawnPos.x - 1].index = index;
@@ -169,15 +169,19 @@ function Table ()  {
                                                     }
                                                 )
                                             })
-                                            updaECases[whitePawnPosition[index].y][whitePawnPosition[index].x].id = "";
+                                            updaECases[whitePawnPosition[index].y][whitePawnPosition[index].x].index = "";
+                                            updaECases[whitePawnPosition[index].y][whitePawnPosition[index].x].eat = "";
                                             updaECases[whitePawnPosition[index].y][whitePawnPosition[index].x].color= "";
                                             updaECases[whitePawnPosition[index].y][whitePawnPosition[index].x].empty=true;
 
                                             if(whitePawnPosition[index].y - 2 === 1){
-                                                updaECases[whitePawnPosition[index].y - 2][whitePawnPosition[index].x].id = "";
-                                                updaECases[whitePawnPosition[index].y - 2][whitePawnPosition[index].x].color= "";
-                                                updaECases[whitePawnPosition[index].y - 2][whitePawnPosition[index].x].empty=true;
+                                                updaECases[whitePawnPosition[index].y - 1][whitePawnPosition[index].x].index = "";
+                                                updaECases[whitePawnPosition[index].y - 1][whitePawnPosition[index].x].eat = "";
+                                                updaECases[whitePawnPosition[index].y - 1][whitePawnPosition[index].x].color= "";
+                                                updaECases[whitePawnPosition[index].y - 1][whitePawnPosition[index].x].empty=true;
                                             }
+
+                                            
                                             return updaECases
                                         })
                                         await newPos(casePos, index, setwhitePawnPosition)
@@ -187,11 +191,21 @@ function Table ()  {
                                             return upDateBoard
                                         }) 
                                         setCase((cs)=> {
-                                            const updaECases = [...cs];
-                                            updaECases[casePos.y][casePos.x].pieceName = "";
-                                            updaECases[casePos.y][casePos.x].color= color;
-                                            updaECases[casePos.y - 1][casePos.x].color= "";
-                                            updaECases[casePos.y][casePos.x].empty= false;
+                                                const updaECases = [...cs];
+                                                updaECases[casePos.y][casePos.x].pieceName = "";
+                                                updaECases[casePos.y][casePos.x].color= color;
+                                                updaECases[casePos.y][casePos.x].eat= color;
+                                                updaECases[casePos.y - 1][casePos.x].color= "";
+                                                updaECases[casePos.y][casePos.x].empty= false;
+                                                updaECases[casePos.y][casePos.x].index= index;
+
+
+                                            if(whitePawnPosition[index].y - 1 === 1 && updaECases[whitePawnPosition[index].y + 1][whitePawnPosition[index].x].empty === true){
+                                                updaECases[whitePawnPosition[index].y + 1][whitePawnPosition[index].x].index = "";
+                                                updaECases[whitePawnPosition[index].y + 1][whitePawnPosition[index].x].eat = "";
+                                                updaECases[whitePawnPosition[index].y + 1][whitePawnPosition[index].x].color= "";
+                                                updaECases[whitePawnPosition[index].y + 1][whitePawnPosition[index].x].empty=true;
+                                            }
                                             return updaECases
                                         })
                                         
@@ -210,15 +224,17 @@ function Table ()  {
                                                         el1.pieceName = "";
                                                     })
                                                     })
-                                                    updaECases[blackPawnPosition[index].y][blackPawnPosition[index].x].id = "";
+                                                    updaECases[blackPawnPosition[index].y][blackPawnPosition[index].x].index = "";
                                                     updaECases[blackPawnPosition[index].y][blackPawnPosition[index].x].color= "";
+                                                    updaECases[blackPawnPosition[index].y][blackPawnPosition[index].x].eat = "";;
                                                     updaECases[blackPawnPosition[index].y][blackPawnPosition[index].x].empty=true;
 
 
-                                                    if(whitePawnPosition[index].y + 2 === 1){
-                                                        updaECases[whitePawnPosition[index].y + 2][whitePawnPosition[index].x].id = "";
-                                                        updaECases[whitePawnPosition[index].y + 2][whitePawnPosition[index].x].color= "";
-                                                        updaECases[whitePawnPosition[index].y + 2][whitePawnPosition[index].x].empty=true;
+                                                    if(blackPawnPosition[index].y + 2 === 6){
+                                                        updaECases[blackPawnPosition[index].y + 2][blackPawnPosition[index].x].index = "";
+                                                        updaECases[blackPawnPosition[index].y + 2][blackPawnPosition[index].x].color= "";
+                                                        updaECases[blackPawnPosition[index].y + 2][blackPawnPosition[index].x].eat = "";
+                                                        updaECases[blackPawnPosition[index].y + 2][blackPawnPosition[index].x].empty=true;
                                                     }
 
                                                     return updaECases
@@ -234,7 +250,9 @@ function Table ()  {
                                                     updaECases[casePos.y][casePos.x].pieceName = "";
                                                     updaECases[casePos.y][casePos.x].color= color;
                                                     updaECases[casePos.y + 1][casePos.x].color= "";
+                                                    updaECases[casePos.y][casePos.x].eat= color;
                                                     updaECases[casePos.y][casePos.x].empty= false;
+                                                    updaECases[casePos.y][casePos.x].index= index;
                                                     return updaECases
                                                 })
                                     }
@@ -822,8 +840,8 @@ function Table ()  {
                     let lineCasesStates = []
                     for (let j = 0; j < 8; j++) {
                         if (board[i][j] !== "") {
-                            i===1 || i ===0 ? lineCasesStates.push({empty : false, selected : false, index : 0 , pieceName : "", color : "white"}) :
-                            i===6 || i===7?lineCasesStates.push({empty : false, selected : false, index : 0 , pieceName : "", color : "black"}): console.log("");
+                            i===1 || i ===0 ? lineCasesStates.push({empty : false, selected : false, index : 0 , pieceName : "", color : "white", eat : "white"}) :
+                            i===6 || i===7?lineCasesStates.push({empty : false, selected : false, index : 0 , pieceName : "", color : "black", eat : "black"}): console.log("");
                         }else {
                             lineCasesStates.push({empty : true, selected : false, index : 0 , pieceName : "", color : "no color"})
                         }
