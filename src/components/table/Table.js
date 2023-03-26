@@ -438,59 +438,79 @@ function Table ()  {
                                                                         updateCases[rookPos.y  + i][rookPos.x].color= color 
                                                                         updateCases[rookPos.y  + i][rookPos.x].pieceName= "rook"
                                                                     }
-
-                                                                    //chek player color and case to move in the top vertical path 
-                                                                    if(((rookPos.y  + i + 1) < 8 && playerTr % 2 === 0 && updateCases[rookPos.y  + i][rookPos.x].eat === "white") || ((rookPos.y  + i + 1) < 8 && playerTr % 2 !== 0 && updateCases[rookPos.y + i][rookPos.x].eat === "black")){
-                                                                    path1 = false
-                                                                    updateCases[rookPos.y  + i + 1][rookPos.x].selected = "" 
-                                                                    updateCases[rookPos.y  + i + 1][rookPos.x].index = ""
-                                                                    updateCases[rookPos.y  + i + 1][rookPos.x].color= "" 
-                                                                    updateCases[rookPos.y  + i + 1][rookPos.x].pieceName= ""                                          
-                                                                    }
                                                         }
                                                         if(rookPos.y - i >= 0 && path2) {
-                                                            if((rookPos.y  - i - 1) >=0 && playerTr % 2 !== 0 && updateCases[rookPos.y  - i - 1][rookPos.x].eat === "white") path2 = false;
-                                                            if((rookPos.y  - i - 1) >=0 && playerTr % 2 === 0 && updateCases[rookPos.y  - i - 1][rookPos.x].eat === "black") path2 = false;
-                                                                updateCases[rookPos.y  - i][rookPos.x].selected = "tomove"
-                                                                updateCases[rookPos.y  - i][rookPos.x].index = index
-                                                                updateCases[rookPos.y  - i][rookPos.x].color= color 
-                                                                updateCases[rookPos.y  - i][rookPos.x].pieceName= "rook"
-                                                            if(((rookPos.y  - i - 1) >=0 && playerTr % 2 === 0 && updateCases[rookPos.y - i][rookPos.x].eat === "white") || ((rookPos.y  - i - 1) >=0 && playerTr % 2 !== 0 && updateCases[rookPos.y - i][rookPos.x].eat === "black")){
-                                                                    path2 = false
-                                                                    updateCases[rookPos.y  - i - 1][rookPos.x].selected = "" 
-                                                                    updateCases[rookPos.y  - i - 1][rookPos.x].index = ""
-                                                                    updateCases[rookPos.y  - i - 1][rookPos.x].color= "" 
-                                                                    updateCases[rookPos.y  - i - 1][rookPos.x].pieceName= ""                                          
-                                                            }
+                                                                    if((rookPos.y  - i - 1) >=0 && playerTr % 2 !== 0 && updateCases[rookPos.y  - i - 1][rookPos.x].eat === "white") path2 = false;
+                                                                    if((rookPos.y  - i - 1) >=0 && playerTr % 2 === 0 && updateCases[rookPos.y  - i - 1][rookPos.x].eat === "black") path2 = false;
+                                                                        
+                                                                    if(updateCases[rookPos.y  - i][rookPos.x].empty){
+                                                                        updateCases[rookPos.y  - i][rookPos.x].selected = "tomove"
+                                                                        updateCases[rookPos.y  - i][rookPos.x].index = index
+                                                                        updateCases[rookPos.y  - i][rookPos.x].color= color 
+                                                                        updateCases[rookPos.y  - i][rookPos.x].pieceName= "rook"}
+                                                                    
+                                                                    
+                                                                    if((playerTr % 2 === 0 && updateCases[rookPos.y - i][rookPos.x].eat === "white") || (playerTr % 2 !== 0 && updateCases[rookPos.y - i][rookPos.x].eat === "black")){
+                                                                            path2 = false
+                                                                            updateCases[rookPos.y  - i][rookPos.x].selected = "tomove" 
+                                                                            updateCases[rookPos.y  - i][rookPos.x].index = index
+                                                                            updateCases[rookPos.y  - i][rookPos.x].color= color
+                                                                            updateCases[rookPos.y  - i][rookPos.x].pieceName= "rook"                                          
+                                                                    }
+                                                                    if((playerTr % 2 !== 0 && updateCases[rookPos.y - i][rookPos.x].eat === "white") || (playerTr % 2 === 0 && updateCases[rookPos.y - i][rookPos.x].eat === "black")){
+                                                                            path2 = false
+                                                                            updateCases[rookPos.y  - i][rookPos.x].selected = "" 
+                                                                            updateCases[rookPos.y  - i][rookPos.x].index = ""
+                                                                            updateCases[rookPos.y  - i][rookPos.x].color= "" 
+                                                                            updateCases[rookPos.y  - i][rookPos.x].pieceName= ""                                          
+                                                                    }
                                                         } 
                                                         if(rookPos.x + i < 8 && path3) {
-                                                            if((rookPos.x + i + 1) < 8 && playerTr % 2 !== 0 && updateCases[rookPos.y][rookPos.x + i + 1].eat === "white") path3 = false
-                                                            if((rookPos.x + i + 1) < 8 && playerTr % 2 === 0 && updateCases[rookPos.y][rookPos.x + i + 1].eat === "black") path3 = false
-                                                                updateCases[rookPos.y][rookPos.x + i].selected = "tomove" 
-                                                                updateCases[rookPos.y][rookPos.x + i].index = index 
-                                                                updateCases[rookPos.y][rookPos.x + i].color= color 
-                                                                updateCases[rookPos.y][rookPos.x + i].pieceName= "rook" 
-                                                            if(((rookPos.x + i + 1) < 8 && playerTr % 2 === 0 && updateCases[rookPos.y][rookPos.x + i].eat === "white") || ((rookPos.x + i + 1) < 8 && playerTr % 2 !== 0 && updateCases[rookPos.y][rookPos.x + i].eat === "black")){
-                                                                    path3 = false
-                                                                    updateCases[rookPos.y][rookPos.x + i + 1].selected = "" 
-                                                                    updateCases[rookPos.y][rookPos.x + i + 1].index = ""
-                                                                    updateCases[rookPos.y][rookPos.x + i + 1].color= "" 
-                                                                    updateCases[rookPos.y][rookPos.x + i + 1].pieceName= ""                                          
-                                                            }
+                                                                    if((rookPos.x + i + 1) < 8 && playerTr % 2 !== 0 && updateCases[rookPos.y][rookPos.x + i + 1].eat === "white") path3 = false
+                                                                    if((rookPos.x + i + 1) < 8 && playerTr % 2 === 0 && updateCases[rookPos.y][rookPos.x + i + 1].eat === "black") path3 = false
+
+                                                                    if(updateCases[rookPos.y][rookPos.x + i].empty){
+                                                                        updateCases[rookPos.y][rookPos.x + i].selected = "tomove" 
+                                                                        updateCases[rookPos.y][rookPos.x + i].index = index 
+                                                                        updateCases[rookPos.y][rookPos.x + i].color= color 
+                                                                        updateCases[rookPos.y][rookPos.x + i].pieceName= "rook" }
+
+                                                                    if((playerTr % 2 === 0 && updateCases[rookPos.y][rookPos.x + i].eat === "white") || (playerTr % 2 !== 0 && updateCases[rookPos.y][rookPos.x + i].eat === "black")){
+                                                                            path3 = false
+                                                                            updateCases[rookPos.y][rookPos.x + i].selected = "tomove" 
+                                                                            updateCases[rookPos.y][rookPos.x + i].index = index
+                                                                            updateCases[rookPos.y][rookPos.x + i].color= color 
+                                                                            updateCases[rookPos.y][rookPos.x + i].pieceName= "rook"                                          
+                                                                    }
+                                                                    if((playerTr % 2 !== 0 && updateCases[rookPos.y][rookPos.x + i].eat === "white") || (playerTr % 2 === 0 && updateCases[rookPos.y][rookPos.x + i].eat === "black")){
+                                                                            path3 = false
+                                                                            updateCases[rookPos.y][rookPos.x + i].selected = "" 
+                                                                            updateCases[rookPos.y][rookPos.x + i].index = ""
+                                                                            updateCases[rookPos.y][rookPos.x + i].color= "" 
+                                                                            updateCases[rookPos.y][rookPos.x + i].pieceName= ""                                          
+                                                                    }
                                                         }
                                                         if(rookPos.x - i >= 0 && path4){
                                                             if((rookPos.x - i - 1) >= 0 && playerTr % 2 !== 0 && updateCases[rookPos.y][rookPos.x - i - 1].eat === "white") path4 = false
                                                             if((rookPos.x - i - 1) >= 0 && playerTr % 2 === 0 && updateCases[rookPos.y][rookPos.x - i - 1].eat === "black") path4 = false
+                                                            if(updateCases[rookPos.y][rookPos.x - i].empty){
                                                                 updateCases[rookPos.y][rookPos.x - i].selected = "tomove";
                                                                 updateCases[rookPos.y][rookPos.x - i].index = index 
                                                                 updateCases[rookPos.y][rookPos.x - i].color= color;
-                                                                updateCases[rookPos.y][rookPos.x - i].pieceName= "rook";
-                                                            if(((rookPos.x - i - 1) >= 0 && playerTr % 2 === 0 && updateCases[rookPos.y][rookPos.x - i].eat === "white") || ((rookPos.x - i - 1) >= 0 && playerTr % 2 !== 0 && updateCases[rookPos.y][rookPos.x - i].eat === "black")){
+                                                                updateCases[rookPos.y][rookPos.x - i].pieceName= "rook";}
+                                                            if((playerTr % 2 === 0 && updateCases[rookPos.y][rookPos.x - i].eat === "white") || (playerTr % 2 !== 0 && updateCases[rookPos.y][rookPos.x - i].eat === "black")){
                                                                     path4 = false
-                                                                    updateCases[rookPos.y][rookPos.x - i - 1].selected = "" 
-                                                                    updateCases[rookPos.y][rookPos.x - i - 1].index = ""
-                                                                    updateCases[rookPos.y][rookPos.x - i - 1].color= "" 
-                                                                    updateCases[rookPos.y][rookPos.x - i - 1].pieceName= ""                                          
+                                                                    updateCases[rookPos.y][rookPos.x - i].selected = "tomove" 
+                                                                    updateCases[rookPos.y][rookPos.x - i].index = index
+                                                                    updateCases[rookPos.y][rookPos.x - i].color= color
+                                                                    updateCases[rookPos.y][rookPos.x - i].pieceName= "rook"                                          
+                                                            }
+                                                            if((playerTr % 2 !== 0 && updateCases[rookPos.y][rookPos.x - i].eat === "white") || (playerTr % 2 === 0 && updateCases[rookPos.y][rookPos.x - i].eat === "black")){
+                                                                    path4 = false
+                                                                    updateCases[rookPos.y][rookPos.x - i].selected = "" 
+                                                                    updateCases[rookPos.y][rookPos.x - i].index = ""
+                                                                    updateCases[rookPos.y][rookPos.x - i].color= "" 
+                                                                    updateCases[rookPos.y][rookPos.x - i].pieceName= "" 
                                                             }
                                                         }                                                        
                                             }
