@@ -771,65 +771,94 @@ function Table ()  {
     }
 
     class kingMethods {
-        static selectPath = (index, kingPos, color)=> {
+        static selectPath = (index, kingPos, color, playerTr)=> {
 
                 setCase((cs)=> {
-                    const updaECases = [...cs];
-                    updaECases.forEach((el)=> {
+                    const updateCases = [...cs];
+                    updateCases.forEach((el)=> {
                         el.forEach((el1)=> {
                             el1.selected = false;
                         })
                     })
                     if(kingPos.y + 1 < 8){
-                            updaECases[kingPos.y  + 1][kingPos.x].selected = "tomove";
-                            updaECases[kingPos.y  + 1][kingPos.x].index = index;
-                            updaECases[kingPos.y  + 1][kingPos.x].pieceName = "king";
-                            updaECases[kingPos.y  + 1][kingPos.x].color= color;
+                        if((updateCases[kingPos.y  + 1][kingPos.x].empty || ((playerTr % 2 === 0 && updateCases[kingPos.y  + 1][kingPos.x].eat === "white") 
+                        || (playerTr % 2 !== 0 && updateCases[kingPos.y  + 1][kingPos.x].eat === "black")))){
+                            updateCases[kingPos.y  + 1][kingPos.x].selected = "tomove";
+                            updateCases[kingPos.y  + 1][kingPos.x].index = index;
+                            updateCases[kingPos.y  + 1][kingPos.x].pieceName = "king";
+                            updateCases[kingPos.y  + 1][kingPos.x].color= color;
+                        }
                     }
                     if(kingPos.x + 1 < 8){
-                            updaECases[kingPos.y][kingPos.x + 1].selected = "tomove";
-                            updaECases[kingPos.y][kingPos.x + 1].index = index;
-                            updaECases[kingPos.y][kingPos.x + 1].pieceName = "king";
-                            updaECases[kingPos.y][kingPos.x + 1].color= color;
+                        if((updateCases[kingPos.y][kingPos.x + 1].empty||((playerTr % 2 === 0 && updateCases[kingPos.y][kingPos.x + 1].eat === "white") 
+                        || (playerTr % 2 !== 0 && updateCases[kingPos.y][kingPos.x + 1].eat === "black")))){
+                            updateCases[kingPos.y][kingPos.x + 1].selected = "tomove";
+                            updateCases[kingPos.y][kingPos.x + 1].index = index;
+                            updateCases[kingPos.y][kingPos.x + 1].pieceName = "king";
+                            updateCases[kingPos.y][kingPos.x + 1].color= color;
+                        }
                     }
                     if(kingPos.x - 1 >= 0){
-                            updaECases[kingPos.y][kingPos.x - 1].selected = "tomove";
-                            updaECases[kingPos.y][kingPos.x - 1].index = index;
-                            updaECases[kingPos.y][kingPos.x - 1].pieceName = "king";
-                            updaECases[kingPos.y][kingPos.x - 1].color= color;
+                        if((updateCases[kingPos.y][kingPos.x - 1].empty)||((playerTr % 2 === 0 && updateCases[kingPos.y][kingPos.x - 1].eat === "white") 
+                        || (playerTr % 2 !== 0 && updateCases[kingPos.y][kingPos.x - 1].eat === "black"))){
+                            updateCases[kingPos.y][kingPos.x - 1].selected = "tomove";
+                            updateCases[kingPos.y][kingPos.x - 1].index = index;
+                            updateCases[kingPos.y][kingPos.x - 1].pieceName = "king";
+                            updateCases[kingPos.y][kingPos.x - 1].color= color;
+                        }
                     }
                     if(kingPos.y - 1 >= 0) {
-                        updaECases[kingPos.y  - 1][kingPos.x].selected = "tomove"
-                        updaECases[kingPos.y  - 1][kingPos.x].index = index
-                        updaECases[kingPos.y  - 1][kingPos.x].color = color
-                        updaECases[kingPos.y  - 1][kingPos.x].pieceName = "king"
+                        if((updateCases[kingPos.y - 1][kingPos.x].empty)
+                            ||((playerTr % 2 === 0 && updateCases[kingPos.y - 1][kingPos.x].eat === "white") 
+                            || (playerTr % 2 !== 0 && updateCases[kingPos.y - 1][kingPos.x].eat === "black"))){
+                                updateCases[kingPos.y - 1][kingPos.x].selected = "tomove";
+                                updateCases[kingPos.y - 1][kingPos.x].index = index;
+                                updateCases[kingPos.y - 1][kingPos.x].pieceName = "king";
+                                updateCases[kingPos.y - 1][kingPos.x].color= color;
+                        }
                     }
                     if(kingPos.y + 1 < 8 && kingPos.x + 1 < 8) {
-                            updaECases[kingPos.y  + 1][kingPos.x + 1].selected = "tomove"
-                            updaECases[kingPos.y  + 1][kingPos.x + 1].index = index
-                            updaECases[kingPos.y  + 1][kingPos.x + 1].color = color
-                            updaECases[kingPos.y  + 1][kingPos.x + 1].pieceName = "king"
+                        if((updateCases[kingPos.y + 1][kingPos.x + 1].empty)
+                            ||((playerTr % 2 === 0 && updateCases[kingPos.y + 1][kingPos.x + 1].eat === "white") 
+                            || (playerTr % 2 !== 0 && updateCases[kingPos.y + 1][kingPos.x + 1].eat === "black"))){
+                                    updateCases[kingPos.y + 1][kingPos.x + 1].selected = "tomove";
+                                    updateCases[kingPos.y + 1][kingPos.x + 1].index = index;
+                                    updateCases[kingPos.y + 1][kingPos.x + 1].pieceName = "king";
+                                    updateCases[kingPos.y + 1][kingPos.x + 1].color= color;
+                        }
                     }
                     if(kingPos.y - 1 >= 0 && kingPos.x - 1 >= 0) {
-                            updaECases[kingPos.y  - 1][kingPos.x - 1].selected = "tomove"
-                            updaECases[kingPos.y  - 1][kingPos.x - 1].index = index
-                            updaECases[kingPos.y  - 1][kingPos.x - 1].color = color
-                            updaECases[kingPos.y  - 1][kingPos.x - 1].pieceName = "king"
+                        if((updateCases[kingPos.y - 1][kingPos.x - 1].empty)
+                            ||((playerTr % 2 === 0 && updateCases[kingPos.y - 1][kingPos.x - 1].eat === "white") 
+                            || (playerTr % 2 !== 0 && updateCases[kingPos.y - 1][kingPos.x - 1].eat === "black"))){
+                                    updateCases[kingPos.y - 1][kingPos.x - 1].selected = "tomove";
+                                    updateCases[kingPos.y - 1][kingPos.x - 1].index = index;
+                                    updateCases[kingPos.y - 1][kingPos.x - 1].pieceName = "king";
+                                    updateCases[kingPos.y - 1][kingPos.x - 1].color= color;
+                        }
                     }
                     if(kingPos.y + 1 < 8 && kingPos.x - 1 >= 0) {
-                            updaECases[kingPos.y  + 1][kingPos.x - 1].selected = "tomove"
-                            updaECases[kingPos.y  + 1][kingPos.x - 1].index = index
-                            updaECases[kingPos.y  + 1][kingPos.x - 1].color = color
-                            updaECases[kingPos.y  + 1][kingPos.x - 1].pieceName = "king"
+                        if((updateCases[kingPos.y + 1][kingPos.x - 1].empty)
+                           ||((playerTr % 2 === 0 && updateCases[kingPos.y + 1][kingPos.x - 1].eat === "white") 
+                           || (playerTr % 2 !== 0 && updateCases[kingPos.y + 1][kingPos.x - 1].eat === "black"))){
+                                    updateCases[kingPos.y + 1][kingPos.x - 1].selected = "tomove";
+                                    updateCases[kingPos.y + 1][kingPos.x - 1].index = index;
+                                    updateCases[kingPos.y + 1][kingPos.x - 1].pieceName = "king";
+                                    updateCases[kingPos.y + 1][kingPos.x - 1].color= color;
+                        }
                     }
                     if(kingPos.y - 1 >= 0 && kingPos.x + 1 < 8) {
-                            updaECases[kingPos.y  - 1][kingPos.x + 1].selected = "tomove"
-                            updaECases[kingPos.y  - 1][kingPos.x + 1].index = index
-                            updaECases[kingPos.y  - 1][kingPos.x + 1].color = color
-                            updaECases[kingPos.y  - 1][kingPos.x + 1].pieceName = "king"
+                        if((updateCases[kingPos.y - 1][kingPos.x + 1].empty)
+                            ||((playerTr % 2 === 0 && updateCases[kingPos.y - 1][kingPos.x + 1].eat === "white") 
+                            || (playerTr % 2 !== 0 && updateCases[kingPos.y - 1][kingPos.x + 1].eat === "black"))){
+                                    updateCases[kingPos.y - 1][kingPos.x + 1].selected = "tomove";
+                                    updateCases[kingPos.y - 1][kingPos.x + 1].index = index;
+                                    updateCases[kingPos.y - 1][kingPos.x + 1].pieceName = "king";
+                                    updateCases[kingPos.y - 1][kingPos.x + 1].color= color;
+                        }
                     }
                 
-                    return updaECases
+                    return updateCases
 
                 })
             
@@ -838,46 +867,84 @@ function Table ()  {
         }
 
         static clickToMove = async (index, color, casePos)=> {
-                await   setPlayerTurn((prTr)=> prTr + 1)
-                if (allCases[casePos.y][casePos.x].selected === "tomove" && color === "white") {
-                    const piece = board[whiteKingPosition.y][whiteKingPosition.x]
-                    await setBoard((br)=> {
-                        const upDateBoard = [...br];
-                        upDateBoard[whiteKingPosition.y][whiteKingPosition.x] = "";
-                        return upDateBoard
-                    }) 
-                    newPosKing(casePos, index, setWhiteKingPosition)
-                    setBoard((br)=> {
-                        const upDateBoard = [...br];
-                        upDateBoard[casePos.y][casePos.x]= piece;
-                        return upDateBoard
-                    }) 
-                }else if(allCases[casePos.y][casePos.x].selected === "tomove" && color === "black") {
-                    const piece = board[blackKingPosition.y][blackKingPosition.x]
-                            await setBoard((br)=> {
-                                const upDateBoard = [...br];
-                                upDateBoard[blackKingPosition.y][blackKingPosition.x] = "";
-                                return upDateBoard
-                            }) 
-                            newPosKing(casePos, index, setBlackKingPosition)
-                            setBoard((br)=> {
-                                const upDateBoard = [...br];
-                                upDateBoard[casePos.y][casePos.x]= piece;
-                                return upDateBoard
-                            }) 
-                }
-                setCase((cs)=> {
-                    const updaECases = [...cs];
-                    updaECases.forEach((el)=> {
-                        el.forEach((el1)=> {
-                            el1.selected = false;
-                            el1.pieceName = "";
-                            el1.id = "";
-                        })
-                    })
-                    return updaECases
-                })
-        }
+            if (allCases[casePos.y][casePos.x].selected === "tomove" && color === "white") {
+                                        await   setPlayerTurn((prTr)=> prTr + 1)
+                                                const piece = board[whiteKingPosition.y][whiteKingPosition.x]
+                                                await setBoard((br)=> {
+                                                            const upDateBoard = [...br];
+                                                            upDateBoard[whiteKingPosition.y][whiteKingPosition.x] = "";
+                                                            return upDateBoard
+                                                }) 
+                                                await setCase((cs)=> {
+                                                    const updaECases = [...cs];
+                                                    updaECases[whiteKingPosition.y][whiteKingPosition.x].empty = true
+                                                    updaECases[whiteKingPosition.y][whiteKingPosition.x].eat = ""
+                                                    updaECases.forEach((el)=> {
+                                                        el.forEach((el1)=> {
+                                                            el1.selected = false;
+                                                            el1.index = "";
+                                                            el1.color = "";
+                                                            el1.pieceName = "";
+                                                        })
+                                                    })
+
+                                                    return updaECases
+                                                })
+                                                await newPosKing(casePos, index, setWhiteKingPosition)
+                                                await setBoard((br)=> {
+                                                            const upDateBoard = [...br];
+                                                            upDateBoard[casePos.y][casePos.x]= piece;
+                                                            return upDateBoard
+                                                }) 
+                                                await setCase((cs)=> {
+                                                    const updaECases = [...cs];
+                                                    updaECases[casePos.y][casePos.x].eat = "white"
+                                                    updaECases[casePos.y][casePos.x].color = "white"
+                                                    updaECases[casePos.y][casePos.x].index = ""
+                                                    updaECases[casePos.y][casePos.x].empty = false;
+
+                                                    return updaECases
+                                                })
+                                    }else if(allCases[casePos.y][casePos.x].selected === "tomove" && color === "black") {
+                                        await   setPlayerTurn((prTr)=> prTr + 1)
+                                        const piece = board[blackKingPosition.y][blackKingPosition.x]
+                                                await setBoard((br)=> {
+                                                    const upDateBoard = [...br];
+                                                    upDateBoard[blackKingPosition.y][blackKingPosition.x] = "";
+                                                    return upDateBoard
+                                                }) 
+                                                await setCase((cs)=> {
+                                                    const updaECases = [...cs];
+                                                    updaECases[blackKingPosition.y][blackKingPosition.x].empty = true;
+                                                    updaECases[blackKingPosition.y][blackKingPosition.x].eat = true;
+                                                    updaECases.forEach((el)=> {
+                                                        el.forEach((el1)=> {
+                                                            el1.selected = false;
+                                                            el1.pieceName = "";
+                                                            el1.index = "";
+                                                            el1.color = "";
+                                                        })
+                                                    })
+
+                                                    return updaECases
+                                                })
+                                                await newPosKing(casePos, index, setBlackKingPosition)
+                                                await setBoard((br)=> {
+                                                    const upDateBoard = [...br];
+                                                    upDateBoard[casePos.y][casePos.x]= piece;
+                                                    return upDateBoard
+                                                }) 
+                                                await setCase((cs)=> {
+                                                    const updaECases = [...cs];
+                                                    updaECases[casePos.y][casePos.x].eat = "black"
+                                                    updaECases[casePos.y][casePos.x].color = "black"
+                                                    updaECases[casePos.y][casePos.x].index = ""
+                                                    updaECases[casePos.y][casePos.x].empty = false;
+
+                                                    return updaECases
+                                                })
+                                    }
+                            }
     }
 
     class queenMethods {
