@@ -425,7 +425,6 @@ function Table ()  {
                                                                     if((playerTr % 2 !== 0 && updateCases[rookPos.y + i][rookPos.x].eat === "white") || (playerTr % 2 === 0 && updateCases[rookPos.y + i][rookPos.x].eat === "black")){
                                                                         updateCases[rookPos.y  + i][rookPos.x].selected = "" 
                                                                         updateCases[rookPos.y  + i][rookPos.x].index = ""
-                                                                        updateCases[rookPos.y  + i][rookPos.x].color= color
                                                                         updateCases[rookPos.y  + i][rookPos.x].pieceName= ""   
                                                                         path1 = false   
                                                                     }
@@ -461,7 +460,6 @@ function Table ()  {
                                                                             path2 = false
                                                                             updateCases[rookPos.y  - i][rookPos.x].selected = "" 
                                                                             updateCases[rookPos.y  - i][rookPos.x].index = ""
-                                                                            updateCases[rookPos.y  - i][rookPos.x].color= "" 
                                                                             updateCases[rookPos.y  - i][rookPos.x].pieceName= ""                                          
                                                                     }
                                                         } 
@@ -486,7 +484,6 @@ function Table ()  {
                                                                             path3 = false
                                                                             updateCases[rookPos.y][rookPos.x + i].selected = "" 
                                                                             updateCases[rookPos.y][rookPos.x + i].index = ""
-                                                                            updateCases[rookPos.y][rookPos.x + i].color= "" 
                                                                             updateCases[rookPos.y][rookPos.x + i].pieceName= ""                                          
                                                                     }
                                                         }
@@ -509,7 +506,6 @@ function Table ()  {
                                                                     path4 = false
                                                                     updateCases[rookPos.y][rookPos.x - i].selected = "" 
                                                                     updateCases[rookPos.y][rookPos.x - i].index = ""
-                                                                    updateCases[rookPos.y][rookPos.x - i].color= "" 
                                                                     updateCases[rookPos.y][rookPos.x - i].pieceName= "" 
                                                             }
                                                         }                                                        
@@ -526,22 +522,39 @@ function Table ()  {
                                                             upDateBoard[whiteRookPosition[index].y][whiteRookPosition[index].x] = "";
                                                             return upDateBoard
                                                 }) 
-                                                setCase((cs)=> {
+                                                await setCase((cs)=> {
                                                     const updaECases = [...cs];
-                                                        updaECases[whiteRookPosition[index].y][whiteRookPosition[index].x].eat = ""
-                                                    
+                                                    updaECases[whiteRookPosition[index].y][whiteRookPosition[index].x].pieceName = "rook"
+                                                    updaECases[whiteRookPosition[index].y][whiteRookPosition[index].x].empty = true
+                                                    updaECases.forEach((el)=> {
+                                                        el.forEach((el1)=> {
+                                                            el1.selected = false;
+                                                            if(el1.color === "white" && el1.pieceName === "rook" && el1.empty) {
+                                                                el1.empty = true;
+                                                                el1.pieceName = "";
+                                                                el1.index = "";
+                                                                el1.color = "";
+                                                                el1.index = "";
+                                                                el1.eat = "";
+                                                            }
+                                                        })
+                                                    })
+
                                                     return updaECases
                                                 })
-                                                newPos(casePos, index, setWhiteRookPosition)
-                                                setBoard((br)=> {
+                                                await newPos(casePos, index, setWhiteRookPosition)
+                                                await setBoard((br)=> {
                                                             const upDateBoard = [...br];
                                                             upDateBoard[casePos.y][casePos.x]= piece;
                                                             return upDateBoard
                                                 }) 
-                                                setCase((cs)=> {
+                                                await setCase((cs)=> {
                                                     const updaECases = [...cs];
-                                                        updaECases[whiteRookPosition[index].y][whiteRookPosition[index].x].eat = color
-                                                    
+                                                    updaECases[whiteRookPosition[index].y][whiteRookPosition[index].x].eat = "white"
+                                                    updaECases[whiteRookPosition[index].y][whiteRookPosition[index].x].color = "white"
+                                                    updaECases[whiteRookPosition[index].y][whiteRookPosition[index].x].index = index
+                                                    updaECases[whiteRookPosition[index].y][whiteRookPosition[index].x].empty = false;
+
                                                     return updaECases
                                                 })
                                     }else if(allCases[casePos.y][casePos.x].selected === "tomove" && color === "black") {
@@ -551,10 +564,24 @@ function Table ()  {
                                                     upDateBoard[blackRookPosition[index].y][blackRookPosition[index].x] = "";
                                                     return upDateBoard
                                                 }) 
-                                                setCase((cs)=> {
+                                                await setCase((cs)=> {
                                                     const updaECases = [...cs];
-                                                        updaECases[blackRookPosition[index].y][blackRookPosition[index].x].eat = ""
-                                                    
+                                                    updaECases[blackRookPosition[index].y][blackRookPosition[index].x].pieceName = "rook"
+                                                    updaECases[blackRookPosition[index].y][blackRookPosition[index].x].empty = true
+                                                    updaECases.forEach((el)=> {
+                                                        el.forEach((el1)=> {
+                                                            el1.selected = false;
+                                                            if(el1.color === "black" && el1.pieceName === "rook" && el1.empty) {
+                                                                el1.empty = true;
+                                                                el1.pieceName = "";
+                                                                el1.index = "";
+                                                                el1.color = "";
+                                                                el1.index = "";
+                                                                el1.eat = "";
+                                                            }
+                                                        })
+                                                    })
+
                                                     return updaECases
                                                 })
                                                 newPos(casePos, index, setblackRookPosition)
@@ -563,24 +590,16 @@ function Table ()  {
                                                     upDateBoard[casePos.y][casePos.x]= piece;
                                                     return upDateBoard
                                                 }) 
-                                                setCase((cs)=> {
+                                                await setCase((cs)=> {
                                                     const updaECases = [...cs];
-                                                        updaECases[blackRookPosition[index].y][blackRookPosition[index].x].eat = color
-                                                    
+                                                    updaECases[blackRookPosition[index].y][blackRookPosition[index].x].eat = "black"
+                                                    updaECases[blackRookPosition[index].y][blackRookPosition[index].x].color = "black"
+                                                    updaECases[blackRookPosition[index].y][blackRookPosition[index].x].index = index
+                                                    updaECases[blackRookPosition[index].y][blackRookPosition[index].x].empty = false;
+
                                                     return updaECases
                                                 })
                                     }
-                                    setCase((cs)=> {
-                                        const updaECases = [...cs];
-                                        updaECases.forEach((el)=> {
-                                            el.forEach((el1)=> {
-                                                el1.selected = false;
-                                                el1.pieceName = "";
-                                                el1.index = "";
-                                            })
-                                        })
-                                        return updaECases
-                                    })
                             }
     }
 
