@@ -411,9 +411,6 @@ function Table ()  {
                                             for (let i = 1; i <= 8; i++) {
 
                                                         if(rookPos.y  + i < 8 && path1) {
-                                                                    //chek if the case [y + i + 1] is white or black and select
-                                                                    // if((rookPos.y  + i + 1) < 8 && playerTr % 2 !== 0 && updateCases[rookPos.y  + i + 1][rookPos.x].eat === "white") path1 = false;
-                                                                    // if((rookPos.y  + i + 1) < 8 && playerTr % 2 === 0 && updateCases[rookPos.y  + i + 1][rookPos.x].eat === "black") path1 = false;
 
 
                                                                     //chek player enemy and case to move in the top vertical path 
@@ -425,9 +422,6 @@ function Table ()  {
                                                                         path1 = false   
                                                                     }
                                                                     if((playerTr % 2 !== 0 && updateCases[rookPos.y + i][rookPos.x].eat === "white") || (playerTr % 2 === 0 && updateCases[rookPos.y + i][rookPos.x].eat === "black")){
-                                                                        // updateCases[rookPos.y  + i][rookPos.x].selected = "" 
-                                                                        // updateCases[rookPos.y  + i][rookPos.x].index = ""
-                                                                        // updateCases[rookPos.y  + i][rookPos.x].pieceName= ""   
                                                                         path1 = false   
                                                                     }
 
@@ -441,8 +435,6 @@ function Table ()  {
                                                                     }
                                                         }
                                                         if(rookPos.y - i >= 0 && path2) {
-                                                                    // if((rookPos.y  - i - 1) >=0 && playerTr % 2 !== 0 && updateCases[rookPos.y  - i - 1][rookPos.x].eat === "white") path2 = false;
-                                                                    // if((rookPos.y  - i - 1) >=0 && playerTr % 2 === 0 && updateCases[rookPos.y  - i - 1][rookPos.x].eat === "black") path2 = false;
                                                                         
                                                                     if(updateCases[rookPos.y  - i][rookPos.x].empty === true){
                                                                         updateCases[rookPos.y  - i][rookPos.x].selected = "tomove"
@@ -459,15 +451,10 @@ function Table ()  {
                                                                             updateCases[rookPos.y  - i][rookPos.x].pieceName= "rook"                                          
                                                                     }
                                                                     if((playerTr % 2 !== 0 && updateCases[rookPos.y - i][rookPos.x].eat === "white") || (playerTr % 2 === 0 && updateCases[rookPos.y - i][rookPos.x].eat === "black")){
-                                                                            path2 = false
-                                                                            // updateCases[rookPos.y  - i][rookPos.x].selected = "" 
-                                                                            // updateCases[rookPos.y  - i][rookPos.x].index = ""
-                                                                            // updateCases[rookPos.y  - i][rookPos.x].pieceName= ""                                          
+                                                                            path2 = false                                    
                                                                     }
                                                         } 
                                                         if(rookPos.x + i < 8 && path3) {
-                                                                    // if((rookPos.x + i + 1) < 8 && playerTr % 2 !== 0 && updateCases[rookPos.y][rookPos.x + i + 1].eat === "white") path3 = false
-                                                                    // if((rookPos.x + i + 1) < 8 && playerTr % 2 === 0 && updateCases[rookPos.y][rookPos.x + i + 1].eat === "black") path3 = false
 
                                                                     if(updateCases[rookPos.y][rookPos.x + i].empty === true){
                                                                         updateCases[rookPos.y][rookPos.x + i].selected = "tomove" 
@@ -483,15 +470,10 @@ function Table ()  {
                                                                             updateCases[rookPos.y][rookPos.x + i].pieceName= "rook"                                          
                                                                     }
                                                                     if((playerTr % 2 !== 0 && updateCases[rookPos.y][rookPos.x + i].eat === "white") || (playerTr % 2 === 0 && updateCases[rookPos.y][rookPos.x + i].eat === "black")){
-                                                                            path3 = false
-                                                                            // updateCases[rookPos.y][rookPos.x + i].selected = "" 
-                                                                            // updateCases[rookPos.y][rookPos.x + i].index = ""
-                                                                            // updateCases[rookPos.y][rookPos.x + i].pieceName= ""                                          
+                                                                            path3 = false                                          
                                                                     }
                                                         }
                                                         if(rookPos.x - i >= 0 && path4){
-                                                            // if((rookPos.x - i - 1) >= 0 && playerTr % 2 !== 0 && updateCases[rookPos.y][rookPos.x - i - 1].eat === "white") path4 = false
-                                                            // if((rookPos.x - i - 1) >= 0 && playerTr % 2 === 0 && updateCases[rookPos.y][rookPos.x - i - 1].eat === "black") path4 = false
                                                             if(updateCases[rookPos.y][rookPos.x - i].empty === true){
                                                                 updateCases[rookPos.y][rookPos.x - i].selected = "tomove";
                                                                 updateCases[rookPos.y][rookPos.x - i].index = index 
@@ -506,9 +488,6 @@ function Table ()  {
                                                             }
                                                             if((playerTr % 2 !== 0 && updateCases[rookPos.y][rookPos.x - i].eat === "white") || (playerTr % 2 === 0 && updateCases[rookPos.y][rookPos.x - i].eat === "black")){
                                                                     path4 = false
-                                                                    // updateCases[rookPos.y][rookPos.x - i].selected = "" 
-                                                                    // updateCases[rookPos.y][rookPos.x - i].index = ""
-                                                                    // updateCases[rookPos.y][rookPos.x - i].pieceName= "" 
                                                             }
                                                         }                                                        
                                             }
@@ -711,46 +690,84 @@ function Table ()  {
         }
 
         static clickToMove = async (index, color, casePos)=> {
-                await   setPlayerTurn((prTr)=> prTr + 1)
-                if (allCases[casePos.y][casePos.x].selected === "tomove" && color === "white") {
-                    const piece = board[whiteBishopPosition[index].y][whiteBishopPosition[index].x]
-                    await setBoard((br)=> {
-                        const upDateBoard = [...br];
-                        upDateBoard[whiteBishopPosition[index].y][whiteBishopPosition[index].x] = "";
-                        return upDateBoard
-                    }) 
-                    newPos(casePos, index, setWhiteBishopPosition)
-                    setBoard((br)=> {
-                        const upDateBoard = [...br];
-                        upDateBoard[casePos.y][casePos.x]= piece;
-                        return upDateBoard
-                    }) 
-                }else if(allCases[casePos.y][casePos.x].selected === "tomove" && color === "black") {
-                    const piece = board[blackBishopPosition[index].y][blackBishopPosition[index].x]
-                            await setBoard((br)=> {
-                                const upDateBoard = [...br];
-                                upDateBoard[blackBishopPosition[index].y][blackBishopPosition[index].x] = "";
-                                return upDateBoard
-                            }) 
-                            newPos(casePos, index, setBlackBishopPosition)
-                            setBoard((br)=> {
-                                const upDateBoard = [...br];
-                                upDateBoard[casePos.y][casePos.x]= piece;
-                                return upDateBoard
-                            }) 
-                }
-                setCase((cs)=> {
-                    const updaECases = [...cs];
-                    updaECases.forEach((el)=> {
-                        el.forEach((el1)=> {
-                            el1.selected = false;
-                            el1.pieceName = "";
-                            el1.id = "";
-                        })
-                    })
-                    return updaECases
-                })
-        }
+            if (allCases[casePos.y][casePos.x].selected === "tomove" && color === "white") {
+                                        await   setPlayerTurn((prTr)=> prTr + 1)
+                                                const piece = board[whiteBishopPosition[index].y][whiteBishopPosition[index].x]
+                                                await setBoard((br)=> {
+                                                            const upDateBoard = [...br];
+                                                            upDateBoard[whiteBishopPosition[index].y][whiteBishopPosition[index].x] = "";
+                                                            return upDateBoard
+                                                }) 
+                                                await setCase((cs)=> {
+                                                    const updaECases = [...cs];
+                                                    updaECases[whiteBishopPosition[index].y][whiteBishopPosition[index].x].empty = true
+                                                    updaECases[whiteBishopPosition[index].y][whiteBishopPosition[index].x].eat = ""
+                                                    updaECases.forEach((el)=> {
+                                                        el.forEach((el1)=> {
+                                                            el1.selected = false;
+                                                            el1.index = "";
+                                                            el1.color = "";
+                                                            el1.pieceName = "";
+                                                        })
+                                                    })
+
+                                                    return updaECases
+                                                })
+                                                await newPos(casePos, index, setWhiteBishopPosition)
+                                                await setBoard((br)=> {
+                                                            const upDateBoard = [...br];
+                                                            upDateBoard[casePos.y][casePos.x]= piece;
+                                                            return upDateBoard
+                                                }) 
+                                                await setCase((cs)=> {
+                                                    const updaECases = [...cs];
+                                                    updaECases[casePos.y][casePos.x].eat = "white"
+                                                    updaECases[casePos.y][casePos.x].color = "white"
+                                                    updaECases[casePos.y][casePos.x].index = ""
+                                                    updaECases[casePos.y][casePos.x].empty = false;
+
+                                                    return updaECases
+                                                })
+                                    }else if(allCases[casePos.y][casePos.x].selected === "tomove" && color === "black") {
+                                        await   setPlayerTurn((prTr)=> prTr + 1)
+                                        const piece = board[blackBishopPosition[index].y][blackBishopPosition[index].x]
+                                                await setBoard((br)=> {
+                                                    const upDateBoard = [...br];
+                                                    upDateBoard[blackBishopPosition[index].y][blackBishopPosition[index].x] = "";
+                                                    return upDateBoard
+                                                }) 
+                                                await setCase((cs)=> {
+                                                    const updaECases = [...cs];
+                                                    updaECases[blackBishopPosition[index].y][blackBishopPosition[index].x].empty = true;
+                                                    updaECases[blackBishopPosition[index].y][blackBishopPosition[index].x].eat = true;
+                                                    updaECases.forEach((el)=> {
+                                                        el.forEach((el1)=> {
+                                                            el1.selected = false;
+                                                            el1.pieceName = "";
+                                                            el1.index = "";
+                                                            el1.color = "";
+                                                        })
+                                                    })
+
+                                                    return updaECases
+                                                })
+                                                await newPos(casePos, index, setBlackBishopPosition)
+                                                await setBoard((br)=> {
+                                                    const upDateBoard = [...br];
+                                                    upDateBoard[casePos.y][casePos.x]= piece;
+                                                    return upDateBoard
+                                                }) 
+                                                await setCase((cs)=> {
+                                                    const updaECases = [...cs];
+                                                    updaECases[casePos.y][casePos.x].eat = "black"
+                                                    updaECases[casePos.y][casePos.x].color = "black"
+                                                    updaECases[casePos.y][casePos.x].index = ""
+                                                    updaECases[casePos.y][casePos.x].empty = false;
+
+                                                    return updaECases
+                                                })
+                                    }
+                            }
     }
 
     class kingMethods {
