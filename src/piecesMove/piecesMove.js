@@ -119,9 +119,9 @@ class RookMethods extends MovePiece {
                     setCase,  board, setBoard,newPos, whitePiece,
                     setWhitePiece, blackPiece,setBlackPiece, playerTurn) {
         
-     super(index, color, casePos, pieceName,allCases, 
-                setCase,  board, setBoard,newPos, whitePiece,
-                setWhitePiece, blackPiece,setBlackPiece, playerTurn)
+                super(index, color, casePos, pieceName,allCases, 
+                            setCase,  board, setBoard,newPos, whitePiece,
+                            setWhitePiece, blackPiece,setBlackPiece, playerTurn)
     }
 
     selectPath = async (index, rookPos, color, playerTr)=> {
@@ -232,4 +232,359 @@ class RookMethods extends MovePiece {
     
 }
 
-export { MovePiece, RookMethods}
+
+class KnightMethods extends MovePiece {
+    constructor (index, color, casePos, pieceName,allCases, 
+                    setCase,  board, setBoard,newPos, whitePiece,
+                    setWhitePiece, blackPiece,setBlackPiece, playerTurn) {
+        super (index, color, casePos, pieceName,allCases, 
+                    setCase,  board, setBoard,newPos, whitePiece,
+                    setWhitePiece, blackPiece,setBlackPiece, playerTurn)
+    }
+
+
+    selectPath = (index, knightPos, color, playerTr)=> {
+
+        this.setCase((cs)=> {
+            const updateCases = [...cs];
+            updateCases.forEach((el)=> {
+                el.forEach((el1)=> {
+                    el1.selected = false;
+                    el1.pieceName = ""
+                    el1.color= ""
+                })
+            })
+            if(knightPos.y + 2 < 8 && knightPos.x + 1 < 8) {
+                if((updateCases[knightPos.y  + 2][knightPos.x + 1].empty)
+                ||((playerTr % 2 === 0 && updateCases[knightPos.y  + 2][knightPos.x + 1].eat === "white") 
+                || (playerTr % 2 !== 0 && updateCases[knightPos.y  + 2][knightPos.x + 1].eat === "black"))){
+                    updateCases[knightPos.y  + 2][knightPos.x + 1].selected = "tomove" 
+                    updateCases[knightPos.y  + 2][knightPos.x + 1].index = index
+                    updateCases[knightPos.y  + 2][knightPos.x + 1].color= color 
+                    updateCases[knightPos.y  + 2][knightPos.x + 1].pieceName= "knight"
+                }
+            }
+
+
+            if(knightPos.y + 2 < 8 && knightPos.x - 1 >= 0) {
+                    if((updateCases[knightPos.y  + 2][knightPos.x - 1].empty)
+                        ||((playerTr % 2 === 0 && updateCases[knightPos.y  + 2][knightPos.x - 1].eat === "white") 
+                        || (playerTr % 2 !== 0 && updateCases[knightPos.y  + 2][knightPos.x - 1].eat === "black"))){
+                            updateCases[knightPos.y  + 2][knightPos.x - 1].selected = "tomove"
+                            updateCases[knightPos.y  + 2][knightPos.x - 1].index = index
+                            updateCases[knightPos.y  + 2][knightPos.x - 1].color= color 
+                            updateCases[knightPos.y  + 2][knightPos.x - 1].pieceName= "knight"}
+            }
+
+
+            if(knightPos.y - 2 >= 0&& knightPos.x + 1 < 8) {
+                    if((updateCases[knightPos.y  - 2][knightPos.x + 1].empty)
+                        ||((playerTr % 2 === 0 && updateCases[knightPos.y - 2][knightPos.x + 1].eat === "white") 
+                        || (playerTr % 2 !== 0 && updateCases[knightPos.y - 2][knightPos.x + 1].eat === "black"))){
+                            updateCases[knightPos.y - 2][knightPos.x + 1].selected = "tomove" 
+                            updateCases[knightPos.y - 2][knightPos.x + 1].index = index 
+                            updateCases[knightPos.y - 2][knightPos.x + 1].color= color 
+                            updateCases[knightPos.y - 2][knightPos.x + 1].pieceName= "knight" }
+            }
+
+            if(knightPos.y - 2 >=0 && knightPos.x - 1 >= 0){
+                    if((updateCases[knightPos.y  - 2][knightPos.x - 1].empty)
+                        ||((playerTr % 2 === 0 && updateCases[knightPos.y - 2][knightPos.x - 1].eat === "white") 
+                        || (playerTr % 2 !== 0 && updateCases[knightPos.y - 2][knightPos.x - 1].eat === "black"))){
+                            updateCases[knightPos.y - 2][knightPos.x - 1].selected = "tomove";
+                            updateCases[knightPos.y - 2][knightPos.x - 1].index = index 
+                            updateCases[knightPos.y - 2][knightPos.x - 1].color= color;
+                            updateCases[knightPos.y - 2][knightPos.x - 1].pieceName= "knight";}
+            }
+
+
+            if(knightPos.y + 1 < 8 && knightPos.x + 2 < 8){
+                    if((updateCases[knightPos.y  + 1][knightPos.x + 2].empty)
+                    ||((playerTr % 2 === 0 && updateCases[knightPos.y  + 1][knightPos.x + 2].eat === "white") 
+                    || (playerTr % 2 !== 0 && updateCases[knightPos.y  + 1][knightPos.x + 2].eat === "black"))){ 
+                        updateCases[knightPos.y  + 1][knightPos.x + 2].selected = "tomove" 
+                        updateCases[knightPos.y  + 1][knightPos.x + 2].index = index
+                        updateCases[knightPos.y  + 1][knightPos.x + 2].color= color 
+                        updateCases[knightPos.y  + 1][knightPos.x + 2].pieceName= "knight"}
+            }
+
+
+            if(knightPos.y + 1 < 8 && knightPos.x - 2 >= 0){
+                    if((updateCases[knightPos.y  + 1][knightPos.x - 2].empty)
+                    ||((playerTr % 2 === 0 && updateCases[knightPos.y  + 1][knightPos.x - 2].eat === "white") 
+                    || (playerTr % 2 !== 0 && updateCases[knightPos.y  + 1][knightPos.x - 2].eat === "black"))){ 
+                        updateCases[knightPos.y  + 1][knightPos.x - 2].selected = "tomove"
+                        updateCases[knightPos.y  + 1][knightPos.x - 2].index = index
+                        updateCases[knightPos.y  + 1][knightPos.x - 2].color= color 
+                        updateCases[knightPos.y  + 1][knightPos.x - 2].pieceName= "knight"}
+            }
+
+
+            if(knightPos.y - 1 >= 0 && knightPos.x + 2 < 8){
+                    if((updateCases[knightPos.y - 1][knightPos.x + 2].empty)
+                    ||((playerTr % 2 === 0 && updateCases[knightPos.y - 1][knightPos.x + 2].eat === "white") 
+                    || (playerTr % 2 !== 0 && updateCases[knightPos.y - 1][knightPos.x + 2].eat === "black"))){ 
+                        updateCases[knightPos.y - 1][knightPos.x + 2].selected = "tomove" 
+                        updateCases[knightPos.y - 1][knightPos.x + 2].index = index 
+                        updateCases[knightPos.y - 1][knightPos.x + 2].color= color 
+                        updateCases[knightPos.y - 1][knightPos.x + 2].pieceName= "knight" }
+            }
+
+            if(knightPos.y - 1 >=0 && knightPos.x - 2 >= 0){
+                if((updateCases[knightPos.y - 1][knightPos.x - 2].empty)
+                    ||((playerTr % 2 === 0 && updateCases[knightPos.y - 1][knightPos.x - 2].eat === "white") 
+                    || (playerTr % 2 !== 0 && updateCases[knightPos.y - 1][knightPos.x - 2].eat === "black"))){
+                        updateCases[knightPos.y - 1][knightPos.x - 2].selected = "tomove";
+                        updateCases[knightPos.y - 1][knightPos.x - 2].index = index 
+                        updateCases[knightPos.y - 1][knightPos.x - 2].color= color;
+                        updateCases[knightPos.y - 1][knightPos.x - 2].pieceName= "knight";}
+            }
+
+            
+            
+            return updateCases
+        })
+    
+        
+}
+}
+
+
+class BishopMethods extends MovePiece {
+    constructor (index, color, casePos, pieceName,allCases, 
+                setCase,  board, setBoard,newPos, whitePiece,
+                setWhitePiece, blackPiece,setBlackPiece, playerTurn) {
+
+                super(index, color, casePos, pieceName,allCases, 
+                    setCase,  board, setBoard,newPos, whitePiece,
+                    setWhitePiece, blackPiece,setBlackPiece, playerTurn)
+            }
+
+
+
+
+
+    selectPath = (index, bishopPos, color, playerTr)=> {
+        this.setCase((cs)=> {
+            const updateCases = [...cs];
+            updateCases.forEach((el)=> {
+                el.forEach((el1)=> {
+                    el1.selected = false;
+                    el1.pieceName = ""
+                    el1.color= ""
+                })
+            })
+            let path1 = true;
+            let path2 = true;
+            let path3 = true;
+            let path4 = true;
+
+            for (let i = 1; i <= 8; i++) {
+                        if(bishopPos.y  + i < 8 && bishopPos.x + i < 8 && path1) {
+                                    if(updateCases[bishopPos.y  + i][bishopPos.x + i].empty){
+                                            updateCases[bishopPos.y  + i][bishopPos.x + i].selected = "tomove" 
+                                            updateCases[bishopPos.y  + i][bishopPos.x + i].index = index
+                                            updateCases[bishopPos.y  + i][bishopPos.x + i].color= color 
+                                            updateCases[bishopPos.y  + i][bishopPos.x + i].pieceName= "bishop"
+                                    }
+                                    if((playerTr % 2 === 0 && updateCases[bishopPos.y + i][bishopPos.x + i].eat === "white") 
+                                        || (playerTr % 2 !== 0 && updateCases[bishopPos.y + i][bishopPos.x + i].eat === "black"))
+                                        {
+                                            path1 = false;
+                                            updateCases[bishopPos.y  + i][bishopPos.x + i].selected = "tomove" 
+                                            updateCases[bishopPos.y  + i][bishopPos.x + i].index = index
+                                            updateCases[bishopPos.y  + i][bishopPos.x + i].color= color 
+                                            updateCases[bishopPos.y  + i][bishopPos.x + i].pieceName= "bishop"
+                                        }
+                                    if((playerTr % 2 !== 0 && updateCases[bishopPos.y + i][bishopPos.x + i].eat === "white") 
+                                        || (playerTr % 2 === 0 && updateCases[bishopPos.y + i][bishopPos.x + i].eat === "black"))
+                                        {
+                                           path1 = false   
+                                        }
+                        }
+
+                        if(bishopPos.y - i >= 0 && bishopPos.x - i >= 0 && path2) {
+                                    if(updateCases[bishopPos.y  - i][bishopPos.x - i].empty){
+                                        updateCases[bishopPos.y - i][bishopPos.x - i].selected = "tomove";
+                                        updateCases[bishopPos.y - i][bishopPos.x - i].index = index;
+                                        updateCases[bishopPos.y - i][bishopPos.x - i].color= color;
+                                        updateCases[bishopPos.y - i][bishopPos.x - i].pieceName= "bishop";
+                                    }
+                                    if((playerTr % 2 === 0 && updateCases[bishopPos.y - i][bishopPos.x - i].eat === "white") 
+                                       || (playerTr % 2 !== 0 && updateCases[bishopPos.y - i][bishopPos.x - i].eat === "black"))
+                                       {
+                                            path2 = false
+                                            updateCases[bishopPos.y - i][bishopPos.x - i].selected = "tomove";
+                                            updateCases[bishopPos.y - i][bishopPos.x - i].index = index;
+                                            updateCases[bishopPos.y - i][bishopPos.x - i].color= color;
+                                            updateCases[bishopPos.y - i][bishopPos.x - i].pieceName= "bishop";
+                                        }
+                                    if((playerTr % 2 !== 0 && updateCases[bishopPos.y - i][bishopPos.x - i].eat === "white") 
+                                       || (playerTr % 2 === 0 && updateCases[bishopPos.y - i][bishopPos.x - i].eat === "black"))
+                                       {
+                                            path2 = false   
+                                       }
+                        } 
+
+
+                        if(bishopPos.y + i < 8 && bishopPos.x - i >= 0 && path3) {
+                                if(updateCases[bishopPos.y + i][bishopPos.x - i].empty){
+                                            updateCases[bishopPos.y + i][bishopPos.x - i].selected = "tomove" 
+                                            updateCases[bishopPos.y + i][bishopPos.x - i].index = index 
+                                            updateCases[bishopPos.y + i][bishopPos.x - i].color= color 
+                                            updateCases[bishopPos.y + i][bishopPos.x - i].pieceName= "bishop"
+                                }
+                                if((playerTr % 2 === 0 && updateCases[bishopPos.y + i][bishopPos.x - i].eat === "white")
+                                  || (playerTr % 2 !== 0 && updateCases[bishopPos.y + i][bishopPos.x - i].eat === "black"))
+                                  {
+                                        path3 = false
+                                        updateCases[bishopPos.y + i][bishopPos.x - i].selected = "tomove" 
+                                        updateCases[bishopPos.y + i][bishopPos.x - i].index = index 
+                                        updateCases[bishopPos.y + i][bishopPos.x - i].color= color 
+                                        updateCases[bishopPos.y + i][bishopPos.x - i].pieceName= "bishop"
+                                   }
+                                if((playerTr % 2 !== 0 && updateCases[bishopPos.y + i][bishopPos.x - i].eat === "white")
+                                  || (playerTr % 2 === 0 && updateCases[bishopPos.y + i][bishopPos.x - i].eat === "black"))
+                                  {
+                                    path3 = false   
+                                  }
+
+                        }
+                        if(bishopPos.y - i >= 0 && bishopPos.x + i < 8 && path4) {
+                            if(updateCases[bishopPos.y - i][bishopPos.x + i].empty){
+                                        updateCases[bishopPos.y - i][bishopPos.x + i].selected = "tomove" 
+                                        updateCases[bishopPos.y - i][bishopPos.x + i].index = index 
+                                        updateCases[bishopPos.y - i][bishopPos.x + i].color= color 
+                                        updateCases[bishopPos.y - i][bishopPos.x + i].pieceName= "bishop" 
+                            }
+                            if((playerTr % 2 === 0 && updateCases[bishopPos.y - i][bishopPos.x + i].eat === "white") 
+                                || (playerTr % 2 !== 0 && updateCases[bishopPos.y - i][bishopPos.x + i].eat === "black"))
+                                {
+                                    path4 = false
+                                    updateCases[bishopPos.y - i][bishopPos.x + i].selected = "tomove" 
+                                    updateCases[bishopPos.y - i][bishopPos.x + i].index = index 
+                                    updateCases[bishopPos.y - i][bishopPos.x + i].color= color 
+                                    updateCases[bishopPos.y - i][bishopPos.x + i].pieceName= "bishop"                                                     
+                                }
+                            if((playerTr % 2 !== 0 && updateCases[bishopPos.y - i][bishopPos.x + i].eat === "white") 
+                               || (playerTr % 2 === 0 && updateCases[bishopPos.y - i][bishopPos.x + i].eat === "black"))
+                                {
+                                    path4 = false   
+                                }
+                }
+            }
+            return updateCases
+        })
+    }
+}
+
+
+class KingMethods extends MovePiece {    
+    constructor (index, color, casePos, pieceName,allCases, 
+                            setCase,  board, setBoard,newPos, whitePiece,
+                            setWhitePiece, blackPiece,setBlackPiece, playerTurn) {
+
+                        super(index, color, casePos, pieceName,allCases, 
+                                    setCase,  board, setBoard,newPos, whitePiece,
+                                    setWhitePiece, blackPiece,setBlackPiece, playerTurn)
+    }
+
+    
+    
+    selectPath = (index, kingPos, color, playerTr)=> {
+
+        this.setCase((cs)=> {
+            const updateCases = [...cs];
+            updateCases.forEach((el)=> {
+                el.forEach((el1)=> {
+                    el1.selected = false;
+                })
+            })
+            if(kingPos.y + 1 < 8){
+                if((updateCases[kingPos.y  + 1][kingPos.x].empty || ((playerTr % 2 === 0 && updateCases[kingPos.y  + 1][kingPos.x].eat === "white") 
+                || (playerTr % 2 !== 0 && updateCases[kingPos.y  + 1][kingPos.x].eat === "black")))){
+                    updateCases[kingPos.y  + 1][kingPos.x].selected = "tomove";
+                    updateCases[kingPos.y  + 1][kingPos.x].index = index;
+                    updateCases[kingPos.y  + 1][kingPos.x].pieceName = "king";
+                    updateCases[kingPos.y  + 1][kingPos.x].color= color;
+                }
+            }
+            if(kingPos.x + 1 < 8){
+                if((updateCases[kingPos.y][kingPos.x + 1].empty||((playerTr % 2 === 0 && updateCases[kingPos.y][kingPos.x + 1].eat === "white") 
+                || (playerTr % 2 !== 0 && updateCases[kingPos.y][kingPos.x + 1].eat === "black")))){
+                    updateCases[kingPos.y][kingPos.x + 1].selected = "tomove";
+                    updateCases[kingPos.y][kingPos.x + 1].index = index;
+                    updateCases[kingPos.y][kingPos.x + 1].pieceName = "king";
+                    updateCases[kingPos.y][kingPos.x + 1].color= color;
+                }
+            }
+            if(kingPos.x - 1 >= 0){
+                if((updateCases[kingPos.y][kingPos.x - 1].empty)||((playerTr % 2 === 0 && updateCases[kingPos.y][kingPos.x - 1].eat === "white") 
+                || (playerTr % 2 !== 0 && updateCases[kingPos.y][kingPos.x - 1].eat === "black"))){
+                    updateCases[kingPos.y][kingPos.x - 1].selected = "tomove";
+                    updateCases[kingPos.y][kingPos.x - 1].index = index;
+                    updateCases[kingPos.y][kingPos.x - 1].pieceName = "king";
+                    updateCases[kingPos.y][kingPos.x - 1].color= color;
+                }
+            }
+            if(kingPos.y - 1 >= 0) {
+                if((updateCases[kingPos.y - 1][kingPos.x].empty)
+                    ||((playerTr % 2 === 0 && updateCases[kingPos.y - 1][kingPos.x].eat === "white") 
+                    || (playerTr % 2 !== 0 && updateCases[kingPos.y - 1][kingPos.x].eat === "black"))){
+                        updateCases[kingPos.y - 1][kingPos.x].selected = "tomove";
+                        updateCases[kingPos.y - 1][kingPos.x].index = index;
+                        updateCases[kingPos.y - 1][kingPos.x].pieceName = "king";
+                        updateCases[kingPos.y - 1][kingPos.x].color= color;
+                }
+            }
+            if(kingPos.y + 1 < 8 && kingPos.x + 1 < 8) {
+                if((updateCases[kingPos.y + 1][kingPos.x + 1].empty)
+                    ||((playerTr % 2 === 0 && updateCases[kingPos.y + 1][kingPos.x + 1].eat === "white") 
+                    || (playerTr % 2 !== 0 && updateCases[kingPos.y + 1][kingPos.x + 1].eat === "black"))){
+                            updateCases[kingPos.y + 1][kingPos.x + 1].selected = "tomove";
+                            updateCases[kingPos.y + 1][kingPos.x + 1].index = index;
+                            updateCases[kingPos.y + 1][kingPos.x + 1].pieceName = "king";
+                            updateCases[kingPos.y + 1][kingPos.x + 1].color= color;
+                }
+            }
+            if(kingPos.y - 1 >= 0 && kingPos.x - 1 >= 0) {
+                if((updateCases[kingPos.y - 1][kingPos.x - 1].empty)
+                    ||((playerTr % 2 === 0 && updateCases[kingPos.y - 1][kingPos.x - 1].eat === "white") 
+                    || (playerTr % 2 !== 0 && updateCases[kingPos.y - 1][kingPos.x - 1].eat === "black"))){
+                            updateCases[kingPos.y - 1][kingPos.x - 1].selected = "tomove";
+                            updateCases[kingPos.y - 1][kingPos.x - 1].index = index;
+                            updateCases[kingPos.y - 1][kingPos.x - 1].pieceName = "king";
+                            updateCases[kingPos.y - 1][kingPos.x - 1].color= color;
+                }
+            }
+            if(kingPos.y + 1 < 8 && kingPos.x - 1 >= 0) {
+                if((updateCases[kingPos.y + 1][kingPos.x - 1].empty)
+                   ||((playerTr % 2 === 0 && updateCases[kingPos.y + 1][kingPos.x - 1].eat === "white") 
+                   || (playerTr % 2 !== 0 && updateCases[kingPos.y + 1][kingPos.x - 1].eat === "black"))){
+                            updateCases[kingPos.y + 1][kingPos.x - 1].selected = "tomove";
+                            updateCases[kingPos.y + 1][kingPos.x - 1].index = index;
+                            updateCases[kingPos.y + 1][kingPos.x - 1].pieceName = "king";
+                            updateCases[kingPos.y + 1][kingPos.x - 1].color= color;
+                }
+            }
+            if(kingPos.y - 1 >= 0 && kingPos.x + 1 < 8) {
+                if((updateCases[kingPos.y - 1][kingPos.x + 1].empty)
+                    ||((playerTr % 2 === 0 && updateCases[kingPos.y - 1][kingPos.x + 1].eat === "white") 
+                    || (playerTr % 2 !== 0 && updateCases[kingPos.y - 1][kingPos.x + 1].eat === "black"))){
+                            updateCases[kingPos.y - 1][kingPos.x + 1].selected = "tomove";
+                            updateCases[kingPos.y - 1][kingPos.x + 1].index = index;
+                            updateCases[kingPos.y - 1][kingPos.x + 1].pieceName = "king";
+                            updateCases[kingPos.y - 1][kingPos.x + 1].color= color;
+                }
+            }
+        
+            return updateCases
+
+        })
+    
+
+    
+}
+
+}
+export { MovePiece, RookMethods, KnightMethods, BishopMethods, KingMethods }

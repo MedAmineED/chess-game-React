@@ -14,7 +14,7 @@ function King (props) {
     const hanDleClickMove = ()=> {
         if(playerTurn % 2 === 0 && props.data.color === "white") {return}
          if(playerTurn % 2 !== 0 && props.data.color === "black") {return}
-        props.selectPath(props.data.id, props.position, props.data.color, playerTurn)
+        props.selectPath(props.data.id, props.position, props.data.color, props.data.name, playerTurn)
     }
     if (props.data.color === 'white') {
         return <div onClick={hanDleClickMove}><img src="chessPiciesImg/Chess_klt60.png" /></div>
