@@ -153,123 +153,6 @@ function Table ()  {
                                 }
                                             
                             }
-        
-        //move pawns on click
-        static clickToMove = async (index, color, casePos)=> {
-            await   setPlayerTurn((prTr)=> prTr + 1)
-            if (allCases[casePos.y][casePos.x].selected === "tomove" && color === "white") {
-                                        const piece = board[whitePawnPosition[index].y][whitePawnPosition[index].x]
-                                        await setBoard((br)=> {
-                                            const upDateBoard = [...br];
-                                            upDateBoard[whitePawnPosition[index].y][whitePawnPosition[index].x] = "";
-                                            return upDateBoard
-                                        }) 
-                                        await setCase((cs)=> {
-                                            const updaECases = [...cs];
-                                            updaECases.map((el)=>{
-                                                el.map((el1)=> {
-                                                    el1.selected = ""
-                                                    el1.pieceName = "";
-                                                    }
-                                                )
-                                            })
-                                            updaECases[whitePawnPosition[index].y][whitePawnPosition[index].x].index = "";
-                                            updaECases[whitePawnPosition[index].y][whitePawnPosition[index].x].eat = "";
-                                            updaECases[whitePawnPosition[index].y][whitePawnPosition[index].x].color= "";
-                                            updaECases[whitePawnPosition[index].y][whitePawnPosition[index].x].empty=true;
-
-                                            if(whitePawnPosition[index].y - 2 === 1){
-                                                updaECases[whitePawnPosition[index].y - 1][whitePawnPosition[index].x].index = "";
-                                                updaECases[whitePawnPosition[index].y - 1][whitePawnPosition[index].x].eat = "";
-                                                updaECases[whitePawnPosition[index].y - 1][whitePawnPosition[index].x].color= "";
-                                                updaECases[whitePawnPosition[index].y - 1][whitePawnPosition[index].x].empty=true;
-                                            }
-
-                                            
-                                            return updaECases
-                                        })
-                                        await newPos(casePos, index, setwhitePawnPosition)
-                                        await setBoard((br)=> {
-                                            const upDateBoard = [...br];
-                                            upDateBoard[casePos.y][casePos.x]= piece;
-                                            return upDateBoard
-                                        }) 
-                                        setCase((cs)=> {
-                                                const updaECases = [...cs];
-                                                updaECases[casePos.y][casePos.x].pieceName = "";
-                                                updaECases[casePos.y][casePos.x].color= color;
-                                                updaECases[casePos.y][casePos.x].eat= color;
-                                                updaECases[casePos.y - 1][casePos.x].color= "";
-                                                updaECases[casePos.y][casePos.x].empty= false;
-                                                updaECases[casePos.y][casePos.x].index= index;
-
-
-                                            if(whitePawnPosition[index].y - 1 === 1 && updaECases[whitePawnPosition[index].y + 1][whitePawnPosition[index].x].empty === true){
-                                                updaECases[whitePawnPosition[index].y + 1][whitePawnPosition[index].x].index = "";
-                                                updaECases[whitePawnPosition[index].y + 1][whitePawnPosition[index].x].eat = "";
-                                                updaECases[whitePawnPosition[index].y + 1][whitePawnPosition[index].x].color= "";
-                                                updaECases[whitePawnPosition[index].y + 1][whitePawnPosition[index].x].empty=true;
-                                            }
-                                            return updaECases
-                                        })
-                                        
-                                    }else if(allCases[casePos.y][casePos.x].selected === "tomove" && color === "black") {
-                                        const piece = board[blackPawnPosition[index].y][blackPawnPosition[index].x]
-                                                await setBoard((br)=> {
-                                                    const upDateBoard = [...br];
-                                                    upDateBoard[blackPawnPosition[index].y][blackPawnPosition[index].x] = "";
-                                                    return upDateBoard
-                                                }) 
-                                                await setCase((cs)=> {
-                                                    const updaECases = [...cs];
-                                                    updaECases.map((el)=>{
-                                                        el.map((el1)=> {
-                                                        el1.selected = ""
-                                                        el1.pieceName = "";
-                                                    })
-                                                    })
-                                                    updaECases[blackPawnPosition[index].y][blackPawnPosition[index].x].index = "";
-                                                    updaECases[blackPawnPosition[index].y][blackPawnPosition[index].x].color= "";
-                                                    updaECases[blackPawnPosition[index].y][blackPawnPosition[index].x].eat = "";;
-                                                    updaECases[blackPawnPosition[index].y][blackPawnPosition[index].x].empty=true;
-
-
-                                                    if(blackPawnPosition[index].y + 2 === 6){
-                                                        updaECases[blackPawnPosition[index].y + 2][blackPawnPosition[index].x].index = "";
-                                                        updaECases[blackPawnPosition[index].y + 2][blackPawnPosition[index].x].color= "";
-                                                        updaECases[blackPawnPosition[index].y + 2][blackPawnPosition[index].x].eat = "";
-                                                        updaECases[blackPawnPosition[index].y + 2][blackPawnPosition[index].x].empty=true;
-                                                    }
-
-                                                    return updaECases
-                                                })
-                                                newPos(casePos, index, setblackPawnPosition)
-                                                setBoard((br)=> {
-                                                    const upDateBoard = [...br];
-                                                    upDateBoard[casePos.y][casePos.x]= piece;
-                                                    return upDateBoard
-                                                }) 
-                                                setCase((cs)=> {
-                                                    const updaECases = [...cs];
-                                                    updaECases[casePos.y][casePos.x].pieceName = "";
-                                                    updaECases[casePos.y][casePos.x].color= color;
-                                                    updaECases[casePos.y + 1][casePos.x].color= "";
-                                                    updaECases[casePos.y][casePos.x].eat= color;
-                                                    updaECases[casePos.y][casePos.x].empty= false;
-                                                    updaECases[casePos.y][casePos.x].index= index;
-
-                                                    if(blackPawnPosition[index].y + 1 === 6 && updaECases[blackPawnPosition[index].y - 1][blackPawnPosition[index].x].empty === true){
-                                                        updaECases[blackPawnPosition[index].y - 1][blackPawnPosition[index].x].index = "";
-                                                        updaECases[blackPawnPosition[index].y - 1][blackPawnPosition[index].x].eat = "";
-                                                        updaECases[blackPawnPosition[index].y - 1][blackPawnPosition[index].x].color= "";
-                                                        updaECases[blackPawnPosition[index].y - 1][blackPawnPosition[index].x].empty=true;
-                                                    }
-                                                    return updaECases
-                                                })
-                                    }
-                                    
-                                            
-            }
     }
 
     class knightMethods {
@@ -774,9 +657,25 @@ function Table ()  {
 
 
     const move = (index, color, casePos, pieceName)=> {
-                    if(pieceName === "pawn")pawnMethods.clickToMove(index, color, casePos)
+                    if(pieceName === "pawn"){
+                        const movePawn = new MovePiece(index, 
+                                                            color, 
+                                                            casePos, 
+                                                            pieceName, 
+                                                            allCases, 
+                                                            setCase, 
+                                                            board, 
+                                                            setBoard, 
+                                                            newPos, 
+                                                            whitePawnPosition, 
+                                                            setwhitePawnPosition, 
+                                                            blackPawnPosition, 
+                                                            setblackPawnPosition, 
+                                                            setPlayerTurn);
+                        movePawn.clickToMove()
+                    }
 
-                        if(pieceName === "knight"){
+                    if(pieceName === "knight"){
                                     const moveKnight = new MovePiece(index, 
                                                                         color, 
                                                                         casePos, 
