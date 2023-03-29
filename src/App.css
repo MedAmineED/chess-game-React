@@ -1,0 +1,20 @@
+body {
+    position: relative;
+    overflow: hidden;
+    
+}
+
+body::after {
+    content: "";
+    width: 110%;
+    height: 120%;
+    position: absolute;
+    background-image: url("../public/background/img13.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    filter: blur(8px);
+    top: -10%;
+    left: -5%;
+    z-index: -1;
+}
