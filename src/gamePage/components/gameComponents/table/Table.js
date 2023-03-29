@@ -12,8 +12,8 @@ import Knight from '../chessPiecesComponents/Knight'
 import Rook from '../chessPiecesComponents/Rook'
 
 
-import { pawn, rook, knight, bishop, king, queen } from '../../piecesData/piecesData';
-import { KnightMethods, RookMethods, BishopMethods, KingMethods, QueenMethods, PawnMethods } from '../../piecesMove/piecesMove';
+import { pawn, rook, knight, bishop, king, queen } from '../../../piecesData/piecesData';
+import { KnightMethods, RookMethods, BishopMethods, KingMethods, QueenMethods, PawnMethods } from '../../../piecesMove/piecesMove';
 
 
 
@@ -64,12 +64,6 @@ function Table ()  {
 
 
     const [playerTurn, setPlayerTurn] = useState(1)
-
-
-
-
-
-
     
     
     
@@ -91,11 +85,10 @@ function Table ()  {
             return upDateNewPos
         })
     }
-
-
-
-                //Real board
-                const [board, setBoard] = useState([
+    
+    
+    //Real board
+    const [board, setBoard] = useState([
                     [<Rook position = {whiteRookPosition[0]} data = {rook.whitePlayer[0]} selectPath = {path} />, <Knight position = {whiteKnightPosition[0]} data = {knight.whitePlayer[0]} selectPath = {path}/>, <Bishop position = {whiteBishopPosition[0]} data = {bishop.whitePlayer[0]} selectPath = {path}/>, <Queen position = {whiteQueenPosition} data = {queen.whitePlayer} selectPath = {path}/>, <King position = {whiteKingPosition} data =  {king.whitePlayer} selectPath = {path}/>, <Bishop position = {whiteBishopPosition[1]} data = {bishop.whitePlayer[1]} selectPath = {path}/>, <Knight position = {whiteKnightPosition[1]} data = {knight.whitePlayer[1]} selectPath = {path}/>, <Rook position = {whiteRookPosition[1]} data = {rook.whitePlayer[1]} selectPath = {path}/>],
                     [<Pawn  position = {whitePawnPosition[0]}  selectPath = {path} data =  {pawn.whitePlayer[0]} />, <Pawn  position = {whitePawnPosition[1]}  selectPath = {path} data =  {pawn.whitePlayer[1]} />, <Pawn  position = {whitePawnPosition[2]} selectPath = {path} data =  {pawn.whitePlayer[2]}  />, <Pawn  position = {whitePawnPosition[3]} selectPath = {path} data =  {pawn.whitePlayer[3]} />, <Pawn  position = {whitePawnPosition[4]} selectPath = {path} data =  {pawn.whitePlayer[4]} />, <Pawn  position = {whitePawnPosition[5]} selectPath = {path} data =  {pawn.whitePlayer[5]} />, <Pawn  position = {whitePawnPosition[6]} selectPath = {path} data =  {pawn.whitePlayer[6]} />, <Pawn  position = {whitePawnPosition[7]}  selectPath = {path} data =  {pawn.whitePlayer[7]} />],
                     ["", "", "", "", "", "", "", ""],
@@ -114,8 +107,8 @@ function Table ()  {
                     let lineCasesStates = []
                     for (let j = 0; j < 8; j++) {
                         if (board[i][j] !== "") {
-                            i===1 || i ===0 ? lineCasesStates.push({empty : false, selected : false, index : 0 , pieceName : "", color : "white", eat : "white"}) :
-                            i===6 || i===7?lineCasesStates.push({empty : false, selected : false, index : 0 , pieceName : "", color : "black", eat : "black"}): console.log("");
+                            if(i===1 || i ===0) lineCasesStates.push({empty : false, selected : false, index : 0 , pieceName : "", color : "white", eat : "white"}) 
+                            if(i===6 || i===7)lineCasesStates.push({empty : false, selected : false, index : 0 , pieceName : "", color : "black", eat : "black"});
                         }else {
                             lineCasesStates.push({empty : true, selected : false, index : 0 , pieceName : "", color : "no color"})
                         }

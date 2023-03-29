@@ -1,7 +1,6 @@
 
 
 function selectVerticalPath (index, piecePos, color, pieceName, playerTurn, updateCases) {
-    console.log(arguments);
     let path1 = true;
     let path2 = true;
 
@@ -114,7 +113,7 @@ function selectHorizontalPath (index, piecePos, color, pieceName, playerTurn, up
 
 
 
-function diagonalPath(index, piecePos, color, pieceName, playerTurn, updateCases) {
+function selectDiagonalPath(index, piecePos, color, pieceName, playerTurn, updateCases) {
     
     let path1 = true;
     let path2 = true;
@@ -217,4 +216,4 @@ function diagonalPath(index, piecePos, color, pieceName, playerTurn, updateCases
     }
 }
 
-export { selectVerticalPath, selectHorizontalPath, diagonalPath }
+export { selectVerticalPath, selectHorizontalPath, selectDiagonalPath }

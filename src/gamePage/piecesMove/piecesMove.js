@@ -1,5 +1,5 @@
 /* eslint-disable no-useless-constructor */
-import { diagonalPath, selectHorizontalPath, selectVerticalPath } from "./selectPathFunctions/selectPathFunctions";
+import { selectDiagonalPath, selectHorizontalPath, selectVerticalPath } from "./selectPathFunctions/selectPathFunctions";
 
 class MovePiece {
     constructor(index, color, casePos, pieceName,allCases, 
@@ -378,7 +378,7 @@ class BishopMethods extends MovePiece {
                             el1.color= ""
                         })
                     })
-            diagonalPath(index, bishopPos, color, pieceName, playerTr, updateCases)
+            selectDiagonalPath(index, bishopPos, color, pieceName, playerTr, updateCases)
             return updateCases
         })
     }
@@ -515,7 +515,7 @@ class QueenMethods extends MovePiece {
                     el1.color= ""
                 })
             })
-    diagonalPath(index, bishopPos, color, pieceName, playerTr, updateCases)
+    selectDiagonalPath(index, bishopPos, color, pieceName, playerTr, updateCases)
     selectHorizontalPath(index, bishopPos, color, pieceName, playerTr, updateCases)
     selectVerticalPath(index, bishopPos, color, pieceName, playerTr, updateCases)
     return updateCases

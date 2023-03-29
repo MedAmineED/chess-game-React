@@ -7,8 +7,6 @@ function Pawn (props) {
      const handelSelecPathOnClick = ()=> {
          if(playerTurn % 2 === 0 && props.data.color === "white") {return}
          if(playerTurn % 2 !== 0 && props.data.color === "black") {return}
-         
-        console.log("from pawn : " + playerTurn);
         props.selectPath(props.data.id, props.position,props.data.color, props.data.name);
     }
 
