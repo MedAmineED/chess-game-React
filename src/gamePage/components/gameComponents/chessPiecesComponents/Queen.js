@@ -1,6 +1,5 @@
 import { useContext } from "react";
-import { PlayTr } from "../table/Table";
-
+import { PlayTr } from "../../GameSpace";
 
 
 

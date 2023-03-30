@@ -29,7 +29,7 @@ class MovePiece {
                                     {y : this.whitePiece.y, x : this.whitePiece.x}:
                                     {y : this.whitePiece[this.index].y, x : this.whitePiece[this.index].x}
 
-                                    await  this.playerTurn((prTr)=> prTr + 1)
+                                    await  this.playerTurn()
                                             const piece = this.board[handleWhiteIndex.y][handleWhiteIndex.x]
                                             await this.setBoard((br)=> {
                                                         const upDateBoard = [...br];
@@ -71,7 +71,7 @@ class MovePiece {
                                                                     {y : this.blackPiece.y, x : this.blackPiece.x}:
                                                                     {y : this.blackPiece[this.index].y, x : this.blackPiece[this.index].x}
 
-                                    await   this.playerTurn((prTr)=> prTr + 1)
+                                    await   this.playerTurn()
                                     const piece = this.board[handleBlackIndex.y][handleBlackIndex.x]
                                             await this.setBoard((br)=> {
                                                 const upDateBoard = [...br];
@@ -497,8 +497,8 @@ class KingMethods extends MovePiece {
 
 class QueenMethods extends MovePiece {
     constructor (index, color, casePos, pieceName,allCases, 
-        setCase,  board, setBoard,newPos, whitePiece,
-        setWhitePiece, blackPiece,setBlackPiece, playerTurn) {
+                setCase,  board, setBoard,newPos, whitePiece,
+                setWhitePiece, blackPiece,setBlackPiece, playerTurn) {
 
         super(index, color, casePos, pieceName,allCases, 
             setCase,  board, setBoard,newPos, whitePiece,

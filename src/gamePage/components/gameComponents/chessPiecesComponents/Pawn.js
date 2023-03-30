@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
-import { PlayTr } from "../table/Table";
-
+import { PlayTr } from "../../GameSpace";
 function Pawn (props) {
      const playerTurn =  useContext(PlayTr)
     

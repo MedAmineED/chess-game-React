@@ -17,9 +17,9 @@ import { KnightMethods, RookMethods, BishopMethods, KingMethods, QueenMethods, P
 
 
 
-export const PlayTr = createContext(0)
 
-function Table ()  {
+
+function Table (props)  {
 
 
     const initPiecesWPPosition = pawn.whitePlayer.map((pos)=>pos.position);
@@ -63,7 +63,7 @@ function Table ()  {
     const [blackQueenPosition, setBlackQueenPosition] = useState(initPiecesBQPosition);
 
 
-    const [playerTurn, setPlayerTurn] = useState(1)
+    
     
     
     
@@ -121,32 +121,33 @@ function Table ()  {
       const [allCases, setCase] = useState(caseState());
       
       
+
       
         
 
       let newPawn = new PawnMethods("", "", "", "", allCases, setCase, board, setBoard, newPos, 
                                     whitePawnPosition, setwhitePawnPosition,blackPawnPosition,
-                                    setblackPawnPosition, setPlayerTurn)
+                                    setblackPawnPosition, props.playerTurn)
       
       let newRook = new RookMethods("", "", "", "", allCases, setCase, board, setBoard, newPos, 
                                     whiteRookPosition, setWhiteRookPosition,blackRookPosition,
-                                    setblackRookPosition, setPlayerTurn)
+                                    setblackRookPosition, props.playerTurn)
 
       let newKnight = new KnightMethods("", "", "", "", allCases, setCase, board, setBoard, newPos, 
                                     whiteKnightPosition, setWhiteKnightPosition,blackKnightPosition,
-                                    setBlackKnightPosition, setPlayerTurn)
+                                    setBlackKnightPosition, props.playerTurn)
 
        let newBishop = new BishopMethods("", "", "", "", allCases, setCase, board, setBoard, newPos, 
                                     whiteBishopPosition, setWhiteBishopPosition,blackBishopPosition,
-                                    setBlackBishopPosition, setPlayerTurn)
+                                    setBlackBishopPosition, props.playerTurn)
 
         let newKIng = new KingMethods("", "", "", "", allCases, setCase, board, setBoard, newPosKing, 
                                     whiteKingPosition, setWhiteKingPosition,blackKingPosition,
-                                    setBlackKingPosition, setPlayerTurn)
+                                    setBlackKingPosition, props.playerTurn)
                                     
         let newQueen = new QueenMethods("", "", "", "", allCases, setCase, board, setBoard, newPosKing, 
                                     whiteQueenPosition, setWhiteQueenPosition,blackQueenPosition,
-                                    setBlackQueenPosition, setPlayerTurn)
+                                    setBlackQueenPosition, props.playerTurn)
 
 
 
@@ -244,11 +245,9 @@ function Table ()  {
     return (
        
         <>
-            <div className='container'>
+            <div className='container-tab'>
               <div className='table'>
-               <PlayTr.Provider value={playerTurn}>
                     {myCases()}
-               </PlayTr.Provider>
                     
                 </div>
             </div>
