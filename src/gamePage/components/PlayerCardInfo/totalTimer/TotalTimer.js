@@ -2,13 +2,17 @@
 import React, { useContext, useEffect, useState } from "react";
 import { PlayTr } from "../../GameSpace";
 
+import "./TotalTimer.css"
+
 
 function TotalTimer (props) {
     const [timer, setTimer] = useState({
                                         hr : 0,
-                                        min : 5,
-                                        sec : 0
+                                        min : 1,
+                                        sec : 5
                                     })
+
+    const [timeOut, setNewTimeOut] = useState("")
 
 
 
@@ -16,7 +20,12 @@ function TotalTimer (props) {
     const playerTurn = useContext(PlayTr)
 
     useEffect(()=>{
+        
+        if(timer.hr === 0 && timer.min === 0 && timer.sec < 60){
+                timer.sec % 2 !== 0? setNewTimeOut("timeOut") : setNewTimeOut("")
+            }
         if((props.player === "P1" && playerTurn % 2 !==0) || (props.player === "P2" && playerTurn % 2 === 0)){
+            
                     if(timer.sec === -1 && timer.min > -1){
                         setTimer((tm)=>{
                             const newTimer = {...tm}
@@ -46,9 +55,9 @@ function TotalTimer (props) {
                     else {
                         clearInterval(myTimer)
                     }
-    }else {
-        clearInterval(myTimer)
-    }
+        }else {
+            clearInterval(myTimer)
+        }
 
     }, [timer, playerTurn])
 
@@ -59,8 +68,8 @@ function TotalTimer (props) {
     const padST = (num)=> {
         return num.toString().padStart(2, "0")};
 
-    return  (<div className="timer">
-                <h4>{padST(timer.hr)} : {padST(timer.min)} : {padST(timer.sec)}</h4>
+    return  (<div className= {`timer`}>
+                <h4 className= {timeOut}>{padST(timer.hr)} : {padST(timer.min)} : {padST(timer.sec)}</h4>
             </div>)
 }
 

@@ -1,0 +1,14 @@
+.timer {
+	color: #fff;
+	font-weight: 300;
+	text-align: center;
+	letter-spacing: 3px;
+    max-height: 60px;
+}
+.timer h4 {
+    transition: 0.2s linear;
+}
+.timeOut {
+    transform: scale(1.2);
+    color: red;
+}

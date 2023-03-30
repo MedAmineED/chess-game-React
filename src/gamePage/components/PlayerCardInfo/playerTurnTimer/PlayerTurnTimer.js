@@ -8,6 +8,12 @@ import './PlayerTurnTimer.css'
 
     const playerTurn = useContext(PlayTr)
     const [countDown, setCountDown] = useState(0)
+    const [selectPlayerTurn, setSelectPlayerTurn] = useState({
+                                                            selectLetter : "",
+                                                            selectPlayer : "",
+                                                            playerOpacity : ""
+                                                                
+                                                            })
 
 
 
@@ -16,7 +22,16 @@ import './PlayerTurnTimer.css'
     const countDownStyle = {top: `${countDown}%`}
 
     useEffect(()=> {
-        
+        if((props.player === "P1" && playerTurn % 2 !==0) || (props.player === "P2" && playerTurn % 2 === 0)){
+            setSelectPlayerTurn((sl)=> {
+                const updateClasses = {...sl}
+                updateClasses.selectLetter = "letter-selected"
+                updateClasses.selectPlayer = "pl-selected"
+                updateClasses.playerOpacity = "player-turn"
+                return updateClasses
+
+
+            })
             if(countDown < 100){
                 myCountDown = setInterval(()=> {
                     setCountDown((cd)=> {
@@ -24,12 +39,24 @@ import './PlayerTurnTimer.css'
                     })
                 },1000)
                 return ()=> clearInterval(myCountDown)}
+        }else {            
+            setSelectPlayerTurn((sl)=> {
+                const updateClasses = {...sl}
+                updateClasses.selectLetter = ""
+                updateClasses.selectPlayer = ""
+                updateClasses.playerOpacity = ""
+                return updateClasses
+
+        })
+            setCountDown(0)
+            clearInterval(myCountDown)
+        }
     }, [countDown, playerTurn])
     
     return (
-        <div className="player">
-        <div className="count-down" style = {countDownStyle}></div>
-              <div className="letter">
+        <div className= {`player ${selectPlayerTurn.selectPlayer}`}>
+        <div className= {`count-down ${selectPlayerTurn.playerOpacity}`} style = {countDownStyle}></div>
+              <div className= {`letter ${selectPlayerTurn.selectLetter}`}>
                 <h4>{props.player}</h4>
         </div>
                 
