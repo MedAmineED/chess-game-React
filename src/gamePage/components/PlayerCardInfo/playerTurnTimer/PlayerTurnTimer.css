@@ -27,9 +27,10 @@
 
 .count-down {
     position: absolute;
-    top: 0;
     left: 0;
      width: 100%;
      height: 100%;
      background-color: #a9651c;
+     opacity: 0.2;
+     transition: 0.5s linear;
 }

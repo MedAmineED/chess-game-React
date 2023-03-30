@@ -5,15 +5,14 @@ import { PlayTr } from "../../GameSpace";
 
 function TotalTimer (props) {
     const [timer, setTimer] = useState({
-                                        hr : 1,
-                                        min : 10,
+                                        hr : 0,
+                                        min : 5,
                                         sec : 0
                                     })
 
 
 
-            let myTimer =  0;
-
+    let myTimer =  0;
     const playerTurn = useContext(PlayTr)
 
     useEffect(()=>{
@@ -26,16 +25,23 @@ function TotalTimer (props) {
                             return newTimer;
                         })
                     }
+                    if(timer.min === -1 && timer.hr > 0){
+                        setTimer((tm)=>{
+                            const newTimer = {...tm}
+                                newTimer.min = 59;
+                                newTimer.hr -= 1
+                            return newTimer;
+                        })
+                    }
                     if(timer.hr > 0 || timer.min > 0 || timer.sec > 0){
-                        myTimer =  setInterval(()=> {
-                                                    setTimer((tm)=>{
-                                                        const newTimer = {...tm}
-                                                        newTimer.sec -= 1;
-                                                        return newTimer
-                                                    })
-                                                },1000)
-
-                                    return ()=> clearInterval(myTimer)
+                        myTimer = setInterval(()=> {
+                                        setTimer((tm)=>{
+                                            const newTimer = {...tm}
+                                                    newTimer.sec -= 1;
+                                            return newTimer
+                                        })
+                                   },1000)
+                        return ()=> clearInterval(myTimer)
                     }
                     else {
                         clearInterval(myTimer)
@@ -45,6 +51,9 @@ function TotalTimer (props) {
     }
 
     }, [timer, playerTurn])
+
+
+
 
 
     const padST = (num)=> {
