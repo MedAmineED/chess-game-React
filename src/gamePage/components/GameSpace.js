@@ -13,9 +13,9 @@ export const PlayerName = createContext("")
 
 export const Start = createContext(false)
 
-export const ToatalTime = createContext(10)
+export const ToatalTime = createContext({})
 
-export const TurnTime = createContext(15)
+export const TurnTime = createContext({})
 
 
 function GameSpace () {
@@ -30,7 +30,16 @@ function GameSpace () {
     const [start, setStart] = useState(false)
 
 
-    const [totalTime, setTotalTime] = useState(15)
+    const [totalTime, setTotalTime] = useState({
+                                                rangeValue : 0,
+                                                hours : 0,
+                                                minutes : 5
+                                            })
+    const [turnTime, setTurnTime] = useState({
+                                                rangeValue : 30,
+                                                seconds : 30,
+                                                minutes : 0
+                                            })
 
 
     const createPlayerName = (e , player) => {
@@ -39,16 +48,34 @@ function GameSpace () {
     }
 
 
-    const showToatalTime = (e) => {
-       setTotalTime(e.target.value)
-    }
+    const showTime = (e, num) => {
+        if(num === 1){
+             setTotalTime((pr)=>{
+                    const updateToatalTime = {...pr}
+                            updateToatalTime.hours = Math.trunc(e.target.value / 60)
+                            updateToatalTime.minutes = e.target.value % 60
+                            updateToatalTime.rangeValue = e.target.value
+                    return updateToatalTime;
+                        } )
+        }
+        if(num === 2){
+             setTurnTime((pr)=>{
+                    const updateTurnTime = {...pr}
+                            updateTurnTime.minutes = Math.trunc(e.target.value / 60)
+                            updateTurnTime.seconds = e.target.value % 60
+                            updateTurnTime.rangeValue = e.target.value
+                    return updateTurnTime;
+                        } )
+            }
+        }
+    
 
 
 
 
 
     const startGame = ()=> {
-        setStart(true)
+        if(firstPlayerName !== "" && secondPlayerName !== "")setStart(true)
     }
 
 
@@ -63,14 +90,20 @@ function GameSpace () {
           <Start.Provider value = {start}>
           <PlayerName.Provider value= {{firstPlayerName, secondPlayerName}} >
           <ToatalTime.Provider value={totalTime} >
+          <TurnTime.Provider value={turnTime}>
+
+
                 <StartModal startGame = {startGame} 
                             changeName = {createPlayerName} 
                             playersNames = {{firstPlayerName : firstPlayerName, secondPlayerName : secondPlayerName}} 
-                            changeTotalTime = {showToatalTime}
+                            changeTime = {showTime}
                             />
                 <PlayerCardInfo player = "P1" />
                 <Table playerTurn = {newTurn}/>
                 <PlayerCardInfo player = "P2" />
+
+
+          </TurnTime.Provider>
           </ToatalTime.Provider> 
           </PlayerName.Provider>
           </Start.Provider>

@@ -12,6 +12,7 @@ function TextInput (props) {
             </label>
             <input className="input-parameter"  
                     type="text" 
+                    required = "required"
                     id= {props.inputId} 
                     value={props.playerName} 
                     onChange={props.handleChange}></input>

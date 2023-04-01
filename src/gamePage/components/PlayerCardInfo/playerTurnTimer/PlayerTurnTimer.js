@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState, useContext} from "react";
-import { PlayTr, Start } from "../../GameSpace";
+import { PlayTr, Start, TurnTime } from "../../GameSpace";
 import './PlayerTurnTimer.css'
 
 
@@ -10,7 +10,7 @@ import './PlayerTurnTimer.css'
     
 
     const playerTurn = useContext(PlayTr)
-    const [countDown, setCountDown] = useState(0)
+    
     const [selectPlayerTurn, setSelectPlayerTurn] = useState({
                                                             selectLetter : "",
                                                             selectPlayer : "",
@@ -18,6 +18,9 @@ import './PlayerTurnTimer.css'
                                                                 
                                                             })
     const start = useContext(Start);
+    const turnTime = useContext(TurnTime);
+
+    const [countDown, setCountDown] = useState(0)
 
 
 
@@ -40,7 +43,7 @@ import './PlayerTurnTimer.css'
                     if(countDown < 100){
                         myCountDown = setInterval(()=> {
                             setCountDown((cd)=> {
-                                return cd += 100 / 30;
+                                return cd += 100 / turnTime.rangeValue;
                             })
                         },1000)
                         return ()=> clearInterval(myCountDown)}
@@ -57,7 +60,7 @@ import './PlayerTurnTimer.css'
                     clearInterval(myCountDown)
                 }
         }
-    }, [countDown, playerTurn, start])
+    }, [countDown, playerTurn, turnTime, start])
     
     return (
         <div className= {`player ${selectPlayerTurn.selectPlayer}`}>

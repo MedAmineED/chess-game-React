@@ -26,7 +26,8 @@ function TotalTimer (props) {
         setTimer((tm)=>{
             const newTimer = {...tm}
                 newTimer.sec = 0;
-                newTimer.min = totalTime
+                newTimer.min = totalTime.minutes
+                newTimer.hr = totalTime.hours
             return newTimer;
         })}
     }, [start])

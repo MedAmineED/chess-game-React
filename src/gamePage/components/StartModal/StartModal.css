@@ -1,12 +1,12 @@
 :root {
-    --colro1 : rgb(250, 142, 35);
+    --colro1 : rgb(124 67 30);
 }
 
 
 .start-modal {
     position: absolute;
     padding: 40px;
-    height: 350px;
+    height: 450px;
     width: 70%;
     left: 50%;
     top: 50%;
@@ -36,6 +36,70 @@ label {
     margin-left: 50%;
     transform: translateX(-50%);
 }
+
+/********** Range Input Styles **********/
+input[type="range"] {
+    -webkit-appearance: none;
+     appearance: none;
+     background: transparent;
+     cursor: pointer;
+     width: 15rem;
+ }
+ 
+ /* Removes default focus */
+ input[type="range"]:focus {
+   outline: none;
+ }
+
+
+ /* slider track */
+ input[type="range"]::-webkit-slider-runnable-track {
+    background-color: var(--colro1);
+    border: 2px solid white;
+    border-radius: 0.5rem;
+    height: 0.5rem;  
+ }
+  input[type="range"]::-moz-range-track {
+    background-color: var(--colro1);
+    border: 2px solid white;
+    border-radius: 0.5rem;
+    height: 0.5rem;
+ }
+ 
+ /* slider thumb */
+ input[type="range"]::-webkit-slider-thumb {
+   -webkit-appearance: none;
+    appearance: none;
+    margin-top: -12px;
+    background-color: white;
+    border: 2px solid var(--colro1);
+    height: 2rem;
+    width: 1rem;
+ }
+ 
+ input[type="range"]::-moz-range-thumb {
+    border: none; /*Removes extra border that FF applies*/
+    border-radius: 0; /*Removes default border-radius that FF applies*/
+ 
+    /*custom styles*/
+    background-color: #5cd5eb;
+    height: 2rem;
+    width: 1rem;
+ }
+ 
+ input[type="range"]:focus::-webkit-slider-thumb {   
+   border: 1px solid white;
+   outline: 3px solid white;
+   outline-offset: 0.125rem; 
+ }
+
+input[type="range"]:focus::-moz-range-thumb {
+   border: 1px solid white;
+   outline: 3px solid white;
+   outline-offset: 0.125rem; 
+ }
+
+ 
 
 
 button {
