@@ -1,7 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState, useContext} from "react";
-import { PlayTr } from "../../GameSpace";
+import { PlayTr, Start } from "../../GameSpace";
 import './PlayerTurnTimer.css'
+
+
+
 
  function PlayerTurnTimer (props) {
     
@@ -14,6 +17,7 @@ import './PlayerTurnTimer.css'
                                                             playerOpacity : ""
                                                                 
                                                             })
+    const start = useContext(Start);
 
 
 
@@ -22,36 +26,38 @@ import './PlayerTurnTimer.css'
     const countDownStyle = {top: `${countDown}%`}
 
     useEffect(()=> {
-        if((props.player === "P1" && playerTurn % 2 !==0) || (props.player === "P2" && playerTurn % 2 === 0)){
-            setSelectPlayerTurn((sl)=> {
-                const updateClasses = {...sl}
-                updateClasses.selectLetter = "letter-selected"
-                updateClasses.selectPlayer = "pl-selected"
-                updateClasses.playerOpacity = "player-turn"
-                return updateClasses
+        if(start){
+                if((props.player === "P1" && playerTurn % 2 !==0) || (props.player === "P2" && playerTurn % 2 === 0)){
+                    setSelectPlayerTurn((sl)=> {
+                        const updateClasses = {...sl}
+                        updateClasses.selectLetter = "letter-selected"
+                        updateClasses.selectPlayer = "pl-selected"
+                        updateClasses.playerOpacity = "player-turn"
+                        return updateClasses
 
 
-            })
-            if(countDown < 100){
-                myCountDown = setInterval(()=> {
-                    setCountDown((cd)=> {
-                        return cd += 100 / 30;
                     })
-                },1000)
-                return ()=> clearInterval(myCountDown)}
-        }else {            
-            setSelectPlayerTurn((sl)=> {
-                const updateClasses = {...sl}
-                updateClasses.selectLetter = ""
-                updateClasses.selectPlayer = ""
-                updateClasses.playerOpacity = ""
-                return updateClasses
+                    if(countDown < 100){
+                        myCountDown = setInterval(()=> {
+                            setCountDown((cd)=> {
+                                return cd += 100 / 30;
+                            })
+                        },1000)
+                        return ()=> clearInterval(myCountDown)}
+                }else {            
+                    setSelectPlayerTurn((sl)=> {
+                        const updateClasses = {...sl}
+                        updateClasses.selectLetter = ""
+                        updateClasses.selectPlayer = ""
+                        updateClasses.playerOpacity = ""
+                        return updateClasses
 
-        })
-            setCountDown(0)
-            clearInterval(myCountDown)
+                })
+                    setCountDown(0)
+                    clearInterval(myCountDown)
+                }
         }
-    }, [countDown, playerTurn])
+    }, [countDown, playerTurn, start])
     
     return (
         <div className= {`player ${selectPlayerTurn.selectPlayer}`}>

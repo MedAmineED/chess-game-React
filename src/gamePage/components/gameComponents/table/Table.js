@@ -14,6 +14,7 @@ import Rook from '../chessPiecesComponents/Rook'
 
 import { pawn, rook, knight, bishop, king, queen } from '../../../piecesData/piecesData';
 import { KnightMethods, RookMethods, BishopMethods, KingMethods, QueenMethods, PawnMethods } from '../../../piecesMove/piecesMove';
+import { Start } from '../../GameSpace';
 
 
 
@@ -63,8 +64,7 @@ function Table (props)  {
     const [blackQueenPosition, setBlackQueenPosition] = useState(initPiecesBQPosition);
 
 
-    
-    
+
     
     
     //update initial positon
@@ -152,6 +152,7 @@ function Table (props)  {
 
 
       const move = (index, color, casePos, pieceName)=> {
+
             if(pieceName === "pawn"){
                 newPawn.index = index
                 newPawn.color = color
@@ -203,13 +204,15 @@ function Table (props)  {
 
 
     //add all selectPath methods in one function named path
-    function path  (index, pos, color, pieceName, playerTr) {
-            if(pieceName === "pawn")newPawn.selectPath(index, pos, color, playerTr, pieceName)
-            if(pieceName === "knight")newKnight.selectPath(index, pos, color, playerTr, pieceName)
-            if(pieceName === "rook")newRook.selectPath(index, pos, color, playerTr, pieceName)
-            if(pieceName === "bishop")newBishop.selectPath(index, pos, color, playerTr, pieceName)
-            if(pieceName === "king")newKIng.selectPath(index, pos, color, playerTr, pieceName)
-            if(pieceName === "queen")newQueen.selectPath(index, pos, color, playerTr, pieceName)
+    function path  (index, pos, color, pieceName, playerTr, canPlay) {
+        if(canPlay){
+                if(pieceName === "pawn")newPawn.selectPath(index, pos, color, playerTr, pieceName)
+                if(pieceName === "knight")newKnight.selectPath(index, pos, color, playerTr, pieceName)
+                if(pieceName === "rook")newRook.selectPath(index, pos, color, playerTr, pieceName)
+                if(pieceName === "bishop")newBishop.selectPath(index, pos, color, playerTr, pieceName)
+                if(pieceName === "king")newKIng.selectPath(index, pos, color, playerTr, pieceName)
+                if(pieceName === "queen")newQueen.selectPath(index, pos, color, playerTr, pieceName)
+            }
         }
         
         
