@@ -21,6 +21,7 @@ import { dangerBishopZone } from '../../../winnerVerification/dangerCases/danger
 import { dangerQueenZone } from '../../../winnerVerification/dangerCases/dangerQueenCases';
 import { dangerKnightZone } from '../../../winnerVerification/dangerCases/dangerKnightCases';
 import { dangerPawnZone } from '../../../winnerVerification/dangerCases/dangerPawnCases';
+import { dangerKingZone } from '../../../winnerVerification/dangerCases/dangerKingCases';
 
 
 
@@ -284,6 +285,7 @@ function Table (props)  {
             dangerCases(dangerQueenZone, "queen")
             dangerCases(dangerKnightZone, "knight")
             dangerCases(dangerPawnZone, "pawn")
+            dangerCases(dangerKingZone, "king")
         }, [board])
         
         
