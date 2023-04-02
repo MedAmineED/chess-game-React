@@ -16,7 +16,11 @@ import Rook from '../chessPiecesComponents/Rook'
 import { pawn, rook, knight, bishop, king, queen } from '../../../piecesData/piecesData';
 import { KnightMethods, RookMethods, BishopMethods, KingMethods, QueenMethods, PawnMethods } from '../../../piecesMove/piecesMove';
 import { PlayTr, Start } from '../../GameSpace';
-import { dangerRookZone } from '../../../winnerVerification/dangerCases';
+import { dangerRookZone } from '../../../winnerVerification/dangerCases/dangerRookCases';
+import { dangerBishopZone } from '../../../winnerVerification/dangerCases/dangerBishopCases';
+import { dangerQueenZone } from '../../../winnerVerification/dangerCases/dangerQueenCases';
+import { dangerKnightZone } from '../../../winnerVerification/dangerCases/dangerKnightCases';
+import { dangerPawnZone } from '../../../winnerVerification/dangerCases/dangerPawnCases';
 
 
 
@@ -250,6 +254,21 @@ function Table (props)  {
 
 
 
+        const dangerCases = (dangerFunction, nameOfPiece)=> {
+            for(let y = 0; y < 8; y++) {
+                for(let x = 0; x < 8; x++) {
+                    if(board[y][x].props && board[y][x].props.data.name === nameOfPiece){
+                        setCase(()=> {
+                            const updateCases = [...allCases];
+                            console.log(updateCases);
+                            dangerFunction(y, x, board, allCases, updateCases)
+                            return updateCases;
+                        })
+                    }
+                }
+            }
+        }
+
         useEffect(()=> {
             setCase(()=> {
                 const updateCases = [...allCases]
@@ -260,19 +279,11 @@ function Table (props)  {
                     })
                 })
             })
-            for(let y = 0; y < 8; y++) {
-                for(let x = 0; x < 8; x++) {
-                    if(board[y][x].props && board[y][x].props.data.name === "rook"){
-                        console.log(board[y][x]);
-                        setCase(()=> {
-                            const updateCases = [...allCases];
-                            console.log(updateCases);
-                            dangerRookZone(y, x, board, allCases, updateCases)
-                            return updateCases;
-                        })
-                    }
-                }
-            }
+            dangerCases(dangerRookZone, "rook")
+            dangerCases(dangerBishopZone, "bishop")
+            dangerCases(dangerQueenZone, "queen")
+            dangerCases(dangerKnightZone, "knight")
+            dangerCases(dangerPawnZone, "pawn")
         }, [board])
         
         

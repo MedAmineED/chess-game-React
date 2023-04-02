@@ -262,25 +262,25 @@ class KnightMethods extends MovePiece {
                 })
             })
             if(knightPos.y + 2 < 8 && knightPos.x + 1 < 8) {
-                if((updateCases[knightPos.y  + 2][knightPos.x + 1].empty)
-                ||((playerTr % 2 === 0 && updateCases[knightPos.y  + 2][knightPos.x + 1].eat === "white") 
-                || (playerTr % 2 !== 0 && updateCases[knightPos.y  + 2][knightPos.x + 1].eat === "black"))){
-                    updateCases[knightPos.y  + 2][knightPos.x + 1].selected = "tomove" 
-                    updateCases[knightPos.y  + 2][knightPos.x + 1].index = index
-                    updateCases[knightPos.y  + 2][knightPos.x + 1].color= color 
-                    updateCases[knightPos.y  + 2][knightPos.x + 1].pieceName= "knight"
+                if((updateCases[knightPos.y + 2][knightPos.x + 1].empty)
+                ||((playerTr % 2 === 0 && updateCases[knightPos.y + 2][knightPos.x + 1].eat === "white") 
+                || (playerTr % 2 !== 0 && updateCases[knightPos.y + 2][knightPos.x + 1].eat === "black"))){
+                    updateCases[knightPos.y + 2][knightPos.x + 1].selected = "tomove" 
+                    updateCases[knightPos.y + 2][knightPos.x + 1].index = index
+                    updateCases[knightPos.y + 2][knightPos.x + 1].color= color 
+                    updateCases[knightPos.y + 2][knightPos.x + 1].pieceName= "knight"
                 }
             }
 
 
             if(knightPos.y + 2 < 8 && knightPos.x - 1 >= 0) {
-                    if((updateCases[knightPos.y  + 2][knightPos.x - 1].empty)
-                        ||((playerTr % 2 === 0 && updateCases[knightPos.y  + 2][knightPos.x - 1].eat === "white") 
-                        || (playerTr % 2 !== 0 && updateCases[knightPos.y  + 2][knightPos.x - 1].eat === "black"))){
-                            updateCases[knightPos.y  + 2][knightPos.x - 1].selected = "tomove"
-                            updateCases[knightPos.y  + 2][knightPos.x - 1].index = index
-                            updateCases[knightPos.y  + 2][knightPos.x - 1].color= color 
-                            updateCases[knightPos.y  + 2][knightPos.x - 1].pieceName= "knight"}
+                    if((updateCases[knightPos.y + 2][knightPos.x - 1].empty)
+                        ||((playerTr % 2 === 0 && updateCases[knightPos.y + 2][knightPos.x - 1].eat === "white") 
+                        || (playerTr % 2 !== 0 && updateCases[knightPos.y + 2][knightPos.x - 1].eat === "black"))){
+                            updateCases[knightPos.y + 2][knightPos.x - 1].selected = "tomove"
+                            updateCases[knightPos.y + 2][knightPos.x - 1].index = index
+                            updateCases[knightPos.y + 2][knightPos.x - 1].color= color 
+                            updateCases[knightPos.y + 2][knightPos.x - 1].pieceName= "knight"}
             }
 
 
@@ -351,9 +351,7 @@ class KnightMethods extends MovePiece {
             
             return updateCases
         })
-    
-        
-}
+    }
 }
 
 
