@@ -190,8 +190,7 @@ function Table (props)  {
 
 
       function move (index, color, casePos, pieceName) {
-
-            if(pieceName === "pawn"){
+        if(pieceName === "pawn"){
                 newPawn.index = index
                 newPawn.color = color
                 newPawn.casePos = casePos
