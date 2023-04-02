@@ -12,7 +12,6 @@ function Bishop (props) {
     const [canPlay, setCanPlay] = useState(false)
     
     useEffect(()=>{
-        console.log(start);
         setCanPlay(start)
     }, [start])
 
@@ -20,7 +19,6 @@ function Bishop (props) {
     const hanDleClickMove = ()=> {
         if(playerTurn % 2 === 0 && props.data.color === "white") {return}
          if(playerTurn % 2 !== 0 && props.data.color === "black") {return}
-         console.log(playerTurn);
         props.selectPath(props.data.id, props.position, props.data.color, props.data.name, playerTurn, canPlay)
     }
     if(props.data.color === "white"){

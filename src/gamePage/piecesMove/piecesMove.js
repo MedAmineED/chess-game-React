@@ -211,15 +211,6 @@ class PawnMethods extends MovePiece {
 
 
 class RookMethods extends MovePiece {
-    
-    constructor (index, color, casePos, pieceName,allCases, 
-                    setCase,  board, setBoard,newPos, whitePiece,
-                    setWhitePiece, blackPiece,setBlackPiece, playerTurn) {
-        
-                super(index, color, casePos, pieceName,allCases, 
-                            setCase,  board, setBoard,newPos, whitePiece,
-                            setWhitePiece, blackPiece,setBlackPiece, playerTurn)
-    }
 
     selectPath = async (index, rookPos, color, playerTr, pieceName)=> {
         await this.setCase((cs)=> {
@@ -241,13 +232,6 @@ class RookMethods extends MovePiece {
 
 
 class KnightMethods extends MovePiece {
-    constructor (index, color, casePos, pieceName,allCases, 
-                    setCase,  board, setBoard,newPos, whitePiece,
-                    setWhitePiece, blackPiece,setBlackPiece, playerTurn) {
-        super (index, color, casePos, pieceName,allCases, 
-                    setCase,  board, setBoard,newPos, whitePiece,
-                    setWhitePiece, blackPiece,setBlackPiece, playerTurn)
-    }
 
 
     selectPath = (index, knightPos, color, playerTr)=> {
@@ -356,14 +340,6 @@ class KnightMethods extends MovePiece {
 
 
 class BishopMethods extends MovePiece {
-    constructor (index, color, casePos, pieceName,allCases, 
-                setCase,  board, setBoard,newPos, whitePiece,
-                setWhitePiece, blackPiece,setBlackPiece, playerTurn) {
-
-                super(index, color, casePos, pieceName,allCases, 
-                    setCase,  board, setBoard,newPos, whitePiece,
-                    setWhitePiece, blackPiece,setBlackPiece, playerTurn)
-            }
             
             
     selectPath = (index, bishopPos, color, playerTr, pieceName)=> {
@@ -383,15 +359,7 @@ class BishopMethods extends MovePiece {
 }
 
 
-class KingMethods extends MovePiece {    
-    constructor (index, color, casePos, pieceName,allCases, 
-                            setCase,  board, setBoard,newPos, whitePiece,
-                            setWhitePiece, blackPiece,setBlackPiece, playerTurn) {
-
-                        super(index, color, casePos, pieceName,allCases, 
-                                    setCase,  board, setBoard,newPos, whitePiece,
-                                    setWhitePiece, blackPiece,setBlackPiece, playerTurn)
-    }
+class KingMethods extends MovePiece {
 
     
     
@@ -494,14 +462,6 @@ class KingMethods extends MovePiece {
 
 
 class QueenMethods extends MovePiece {
-    constructor (index, color, casePos, pieceName,allCases, 
-                setCase,  board, setBoard,newPos, whitePiece,
-                setWhitePiece, blackPiece,setBlackPiece, playerTurn) {
-
-        super(index, color, casePos, pieceName,allCases, 
-            setCase,  board, setBoard,newPos, whitePiece,
-            setWhitePiece, blackPiece,setBlackPiece, playerTurn)
-    }
 
     selectPath = (index, bishopPos, color, playerTr, pieceName)=> {
         this.setCase((cs)=> {

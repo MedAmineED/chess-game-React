@@ -12,7 +12,6 @@ function Knight (props) {
     const [canPlay, setCanPlay] = useState(false)
     
     useEffect(()=>{
-        console.log(start);
         setCanPlay(start)
     }, [start])
 

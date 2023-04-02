@@ -253,14 +253,13 @@ function Table (props)  {
         }
 
 
-
+        //set level of cases 
         const dangerCases = (dangerFunction, nameOfPiece)=> {
             for(let y = 0; y < 8; y++) {
                 for(let x = 0; x < 8; x++) {
                     if(board[y][x].props && board[y][x].props.data.name === nameOfPiece){
                         setCase(()=> {
                             const updateCases = [...allCases];
-                            console.log(updateCases);
                             dangerFunction(y, x, board, allCases, updateCases)
                             return updateCases;
                         })
