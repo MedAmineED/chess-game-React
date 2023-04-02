@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, createContext, useContext } from 'react';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 // import 'bootstrap/dist/js/bootstrap.min.js';
@@ -14,7 +15,8 @@ import Rook from '../chessPiecesComponents/Rook'
 
 import { pawn, rook, knight, bishop, king, queen } from '../../../piecesData/piecesData';
 import { KnightMethods, RookMethods, BishopMethods, KingMethods, QueenMethods, PawnMethods } from '../../../piecesMove/piecesMove';
-import { Start } from '../../GameSpace';
+import { PlayTr, Start } from '../../GameSpace';
+import { dangerRookZone } from '../../../winnerVerification/dangerCases';
 
 
 
@@ -65,6 +67,10 @@ function Table (props)  {
 
 
 
+    const playerTurn = useContext(PlayTr);
+
+
+
     
     
     //update initial positon
@@ -107,10 +113,37 @@ function Table (props)  {
                     let lineCasesStates = []
                     for (let j = 0; j < 8; j++) {
                         if (board[i][j] !== "") {
-                            if(i===1 || i ===0) lineCasesStates.push({empty : false, selected : false, index : 0 , pieceName : "", color : "white", eat : "white"}) 
-                            if(i===6 || i===7)lineCasesStates.push({empty : false, selected : false, index : 0 , pieceName : "", color : "black", eat : "black"});
+                            if(i===1 || i ===0) lineCasesStates.push({empty : false, 
+                                                                      selected : false, 
+                                                                      index : 0 , 
+                                                                      pieceName : "", 
+                                                                      color : "white", 
+                                                                      eat : "white",
+                                                                      danger: {
+                                                                                whiteDanger : 0,
+                                                                                blackDanger : 0
+                                                                                }}) 
+
+                            if(i===6 || i===7)lineCasesStates.push({empty : false, 
+                                                                    selected : false, 
+                                                                    index : 0 , 
+                                                                    pieceName : "", 
+                                                                    color : "black", 
+                                                                    eat : "black",
+                                                                    danger: {
+                                                                              whiteDanger : 0,
+                                                                              blackDanger : 0
+                                                                              }});
                         }else {
-                            lineCasesStates.push({empty : true, selected : false, index : 0 , pieceName : "", color : "no color"})
+                            lineCasesStates.push({empty : true, 
+                                                  selected : false, 
+                                                  index : 0 , 
+                                                  pieceName : "", 
+                                                  color : "no color",
+                                                  danger: {
+                                                            whiteDanger : 0,
+                                                            blackDanger : 0
+                                                            }})
                         }
 
                     }
@@ -151,7 +184,7 @@ function Table (props)  {
 
 
 
-      const move = (index, color, casePos, pieceName)=> {
+      function move (index, color, casePos, pieceName) {
 
             if(pieceName === "pawn"){
                 newPawn.index = index
@@ -214,6 +247,33 @@ function Table (props)  {
                 if(pieceName === "queen")newQueen.selectPath(index, pos, color, playerTr, pieceName)
             }
         }
+
+
+
+        useEffect(()=> {
+            setCase(()=> {
+                const updateCases = [...allCases]
+                updateCases.map((cs)=> {
+                    cs.map((cs1)=> {
+                        cs1.danger.whiteDanger = 0
+                        cs1.danger.blackDanger = 0
+                    })
+                })
+            })
+            for(let y = 0; y < 8; y++) {
+                for(let x = 0; x < 8; x++) {
+                    if(board[y][x].props && board[y][x].props.data.name === "rook"){
+                        console.log(board[y][x]);
+                        setCase(()=> {
+                            const updateCases = [...allCases];
+                            console.log(updateCases);
+                            dangerRookZone(y, x, board, allCases, updateCases)
+                            return updateCases;
+                        })
+                    }
+                }
+            }
+        }, [board])
         
         
         
