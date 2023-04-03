@@ -340,6 +340,14 @@ class KnightMethods extends MovePiece {
 
 
 class BishopMethods extends MovePiece {
+    constructor (index, color, casePos, pieceName,allCases, 
+                setCase,  board, setBoard,newPos, whitePiece,
+                setWhitePiece, blackPiece,setBlackPiece, playerTurn) {
+
+                super(index, color, casePos, pieceName,allCases, 
+                    setCase,  board, setBoard,newPos, whitePiece,
+                    setWhitePiece, blackPiece,setBlackPiece, playerTurn)
+            }
             
             
     selectPath = (index, bishopPos, color, playerTr, pieceName)=> {
@@ -359,7 +367,7 @@ class BishopMethods extends MovePiece {
 }
 
 
-class KingMethods extends MovePiece {
+class KingMethods extends MovePiece {    
 
     
     
@@ -373,17 +381,21 @@ class KingMethods extends MovePiece {
                 })
             })
             if(kingPos.y + 1 < 8){
-                if((updateCases[kingPos.y  + 1][kingPos.x].empty || ((playerTr % 2 === 0 && updateCases[kingPos.y  + 1][kingPos.x].eat === "white") 
-                || (playerTr % 2 !== 0 && updateCases[kingPos.y  + 1][kingPos.x].eat === "black")))){
-                    updateCases[kingPos.y  + 1][kingPos.x].selected = "tomove";
-                    updateCases[kingPos.y  + 1][kingPos.x].index = index;
-                    updateCases[kingPos.y  + 1][kingPos.x].pieceName = "king";
-                    updateCases[kingPos.y  + 1][kingPos.x].color= color;
+                if((updateCases[kingPos.y + 1][kingPos.x].empty && playerTr % 2 === 0 &&  updateCases[kingPos.y + 1][kingPos.x].danger.whiteDanger === 0) 
+                ||(updateCases[kingPos.y + 1][kingPos.x].empty && playerTr % 2 !== 0 &&  updateCases[kingPos.y + 1][kingPos.x].danger.blackDanger === 0) 
+                ||((playerTr % 2 === 0 && updateCases[kingPos.y + 1][kingPos.x].eat === "white" &&  updateCases[kingPos.y + 1][kingPos.x].danger.whiteDanger === 0) 
+                || (playerTr % 2 !== 0 && updateCases[kingPos.y + 1][kingPos.x].eat === "black" &&  updateCases[kingPos.y + 1][kingPos.x].danger.blackDanger === 0))){
+                    updateCases[kingPos.y + 1][kingPos.x].selected = "tomove";
+                    updateCases[kingPos.y + 1][kingPos.x].index = index;
+                    updateCases[kingPos.y + 1][kingPos.x].pieceName = "king";
+                    updateCases[kingPos.y + 1][kingPos.x].color= color;
                 }
             }
             if(kingPos.x + 1 < 8){
-                if((updateCases[kingPos.y][kingPos.x + 1].empty||((playerTr % 2 === 0 && updateCases[kingPos.y][kingPos.x + 1].eat === "white") 
-                || (playerTr % 2 !== 0 && updateCases[kingPos.y][kingPos.x + 1].eat === "black")))){
+                if((updateCases[kingPos.y][kingPos.x + 1].empty && playerTr % 2 === 0 &&  updateCases[kingPos.y][kingPos.x + 1].danger.whiteDanger === 0) 
+                ||(updateCases[kingPos.y][kingPos.x + 1].empty && playerTr % 2 !== 0 &&  updateCases[kingPos.y][kingPos.x + 1].danger.blackDanger === 0) 
+                ||((playerTr % 2 === 0 && updateCases[kingPos.y][kingPos.x + 1].eat === "white" &&  updateCases[kingPos.y][kingPos.x + 1].danger.whiteDanger === 0) 
+                || (playerTr % 2 !== 0 && updateCases[kingPos.y][kingPos.x + 1].eat === "black" &&  updateCases[kingPos.y][kingPos.x + 1].danger.blackDanger === 0))){
                     updateCases[kingPos.y][kingPos.x + 1].selected = "tomove";
                     updateCases[kingPos.y][kingPos.x + 1].index = index;
                     updateCases[kingPos.y][kingPos.x + 1].pieceName = "king";
@@ -391,8 +403,10 @@ class KingMethods extends MovePiece {
                 }
             }
             if(kingPos.x - 1 >= 0){
-                if((updateCases[kingPos.y][kingPos.x - 1].empty)||((playerTr % 2 === 0 && updateCases[kingPos.y][kingPos.x - 1].eat === "white") 
-                || (playerTr % 2 !== 0 && updateCases[kingPos.y][kingPos.x - 1].eat === "black"))){
+                if((updateCases[kingPos.y][kingPos.x - 1].empty && playerTr % 2 === 0 &&  updateCases[kingPos.y][kingPos.x - 1].danger.whiteDanger === 0) 
+                ||(updateCases[kingPos.y][kingPos.x - 1].empty && playerTr % 2 !== 0 &&  updateCases[kingPos.y][kingPos.x - 1].danger.blackDanger === 0) 
+                ||((playerTr % 2 === 0 && updateCases[kingPos.y][kingPos.x - 1].eat === "white" &&  updateCases[kingPos.y][kingPos.x - 1].danger.whiteDanger === 0) 
+                || (playerTr % 2 !== 0 && updateCases[kingPos.y][kingPos.x - 1].eat === "black" &&  updateCases[kingPos.y][kingPos.x - 1].danger.blackDanger === 0))){
                     updateCases[kingPos.y][kingPos.x - 1].selected = "tomove";
                     updateCases[kingPos.y][kingPos.x - 1].index = index;
                     updateCases[kingPos.y][kingPos.x - 1].pieceName = "king";
@@ -400,9 +414,10 @@ class KingMethods extends MovePiece {
                 }
             }
             if(kingPos.y - 1 >= 0) {
-                if((updateCases[kingPos.y - 1][kingPos.x].empty)
-                    ||((playerTr % 2 === 0 && updateCases[kingPos.y - 1][kingPos.x].eat === "white") 
-                    || (playerTr % 2 !== 0 && updateCases[kingPos.y - 1][kingPos.x].eat === "black"))){
+                if((updateCases[kingPos.y - 1][kingPos.x].empty && playerTr % 2 === 0 &&  updateCases[kingPos.y - 1][kingPos.x].danger.whiteDanger === 0) 
+                ||(updateCases[kingPos.y - 1][kingPos.x].empty && playerTr % 2 !== 0 &&  updateCases[kingPos.y - 1][kingPos.x].danger.blackDanger === 0) 
+                ||((playerTr % 2 === 0 && updateCases[kingPos.y - 1][kingPos.x].eat === "white" &&  updateCases[kingPos.y - 1][kingPos.x].danger.whiteDanger === 0) 
+                || (playerTr % 2 !== 0 && updateCases[kingPos.y - 1][kingPos.x].eat === "black" &&  updateCases[kingPos.y - 1][kingPos.x].danger.blackDanger === 0))){
                         updateCases[kingPos.y - 1][kingPos.x].selected = "tomove";
                         updateCases[kingPos.y - 1][kingPos.x].index = index;
                         updateCases[kingPos.y - 1][kingPos.x].pieceName = "king";
@@ -410,9 +425,10 @@ class KingMethods extends MovePiece {
                 }
             }
             if(kingPos.y + 1 < 8 && kingPos.x + 1 < 8) {
-                if((updateCases[kingPos.y + 1][kingPos.x + 1].empty)
-                    ||((playerTr % 2 === 0 && updateCases[kingPos.y + 1][kingPos.x + 1].eat === "white") 
-                    || (playerTr % 2 !== 0 && updateCases[kingPos.y + 1][kingPos.x + 1].eat === "black"))){
+                if((updateCases[kingPos.y + 1][kingPos.x + 1].empty && playerTr % 2 === 0 &&  updateCases[kingPos.y + 1][kingPos.x + 1].danger.whiteDanger === 0) 
+                ||(updateCases[kingPos.y + 1][kingPos.x + 1].empty && playerTr % 2 !== 0 &&  updateCases[kingPos.y + 1][kingPos.x + 1].danger.blackDanger === 0) 
+                ||((playerTr % 2 === 0 && updateCases[kingPos.y + 1][kingPos.x + 1].eat === "white" &&  updateCases[kingPos.y + 1][kingPos.x + 1].danger.whiteDanger === 0) 
+                || (playerTr % 2 !== 0 && updateCases[kingPos.y + 1][kingPos.x + 1].eat === "black" &&  updateCases[kingPos.y + 1][kingPos.x + 1].danger.blackDanger === 0))){
                             updateCases[kingPos.y + 1][kingPos.x + 1].selected = "tomove";
                             updateCases[kingPos.y + 1][kingPos.x + 1].index = index;
                             updateCases[kingPos.y + 1][kingPos.x + 1].pieceName = "king";
@@ -420,9 +436,10 @@ class KingMethods extends MovePiece {
                 }
             }
             if(kingPos.y - 1 >= 0 && kingPos.x - 1 >= 0) {
-                if((updateCases[kingPos.y - 1][kingPos.x - 1].empty)
-                    ||((playerTr % 2 === 0 && updateCases[kingPos.y - 1][kingPos.x - 1].eat === "white") 
-                    || (playerTr % 2 !== 0 && updateCases[kingPos.y - 1][kingPos.x - 1].eat === "black"))){
+                if((updateCases[kingPos.y - 1][kingPos.x - 1].empty && playerTr % 2 === 0 &&  updateCases[kingPos.y - 1][kingPos.x - 1].danger.whiteDanger === 0) 
+                ||(updateCases[kingPos.y - 1][kingPos.x - 1].empty && playerTr % 2 !== 0 &&  updateCases[kingPos.y - 1][kingPos.x - 1].danger.blackDanger === 0) 
+                ||((playerTr % 2 === 0 && updateCases[kingPos.y - 1][kingPos.x - 1].eat === "white" &&  updateCases[kingPos.y - 1][kingPos.x - 1].danger.whiteDanger === 0) 
+                || (playerTr % 2 !== 0 && updateCases[kingPos.y - 1][kingPos.x - 1].eat === "black" &&  updateCases[kingPos.y - 1][kingPos.x - 1].danger.blackDanger === 0))){
                             updateCases[kingPos.y - 1][kingPos.x - 1].selected = "tomove";
                             updateCases[kingPos.y - 1][kingPos.x - 1].index = index;
                             updateCases[kingPos.y - 1][kingPos.x - 1].pieceName = "king";
@@ -430,9 +447,10 @@ class KingMethods extends MovePiece {
                 }
             }
             if(kingPos.y + 1 < 8 && kingPos.x - 1 >= 0) {
-                if((updateCases[kingPos.y + 1][kingPos.x - 1].empty)
-                   ||((playerTr % 2 === 0 && updateCases[kingPos.y + 1][kingPos.x - 1].eat === "white") 
-                   || (playerTr % 2 !== 0 && updateCases[kingPos.y + 1][kingPos.x - 1].eat === "black"))){
+                if((updateCases[kingPos.y + 1][kingPos.x - 1].empty && playerTr % 2 === 0 &&  updateCases[kingPos.y + 1][kingPos.x - 1].danger.whiteDanger === 0) 
+                ||(updateCases[kingPos.y + 1][kingPos.x - 1].empty && playerTr % 2 !== 0 &&  updateCases[kingPos.y + 1][kingPos.x - 1].danger.blackDanger === 0) 
+                ||((playerTr % 2 === 0 && updateCases[kingPos.y + 1][kingPos.x - 1].eat === "white" &&  updateCases[kingPos.y + 1][kingPos.x - 1].danger.whiteDanger === 0) 
+                || (playerTr % 2 !== 0 && updateCases[kingPos.y + 1][kingPos.x - 1].eat === "black" &&  updateCases[kingPos.y + 1][kingPos.x - 1].danger.blackDanger === 0))){
                             updateCases[kingPos.y + 1][kingPos.x - 1].selected = "tomove";
                             updateCases[kingPos.y + 1][kingPos.x - 1].index = index;
                             updateCases[kingPos.y + 1][kingPos.x - 1].pieceName = "king";
@@ -440,9 +458,10 @@ class KingMethods extends MovePiece {
                 }
             }
             if(kingPos.y - 1 >= 0 && kingPos.x + 1 < 8) {
-                if((updateCases[kingPos.y - 1][kingPos.x + 1].empty)
-                    ||((playerTr % 2 === 0 && updateCases[kingPos.y - 1][kingPos.x + 1].eat === "white") 
-                    || (playerTr % 2 !== 0 && updateCases[kingPos.y - 1][kingPos.x + 1].eat === "black"))){
+                if((updateCases[kingPos.y - 1][kingPos.x + 1].empty && playerTr % 2 === 0 &&  updateCases[kingPos.y - 1][kingPos.x + 1].danger.whiteDanger === 0) 
+                ||(updateCases[kingPos.y - 1][kingPos.x + 1].empty && playerTr % 2 !== 0 &&  updateCases[kingPos.y - 1][kingPos.x + 1].danger.blackDanger === 0) 
+                ||((playerTr % 2 === 0 && updateCases[kingPos.y - 1][kingPos.x + 1].eat === "white" &&  updateCases[kingPos.y - 1][kingPos.x + 1].danger.whiteDanger === 0) 
+                || (playerTr % 2 !== 0 && updateCases[kingPos.y - 1][kingPos.x + 1].eat === "black" &&  updateCases[kingPos.y - 1][kingPos.x + 1].danger.blackDanger === 0))){
                             updateCases[kingPos.y - 1][kingPos.x + 1].selected = "tomove";
                             updateCases[kingPos.y - 1][kingPos.x + 1].index = index;
                             updateCases[kingPos.y - 1][kingPos.x + 1].pieceName = "king";
@@ -462,6 +481,14 @@ class KingMethods extends MovePiece {
 
 
 class QueenMethods extends MovePiece {
+    constructor (index, color, casePos, pieceName,allCases, 
+                setCase,  board, setBoard,newPos, whitePiece,
+                setWhitePiece, blackPiece,setBlackPiece, playerTurn) {
+
+        super(index, color, casePos, pieceName,allCases, 
+            setCase,  board, setBoard,newPos, whitePiece,
+            setWhitePiece, blackPiece,setBlackPiece, playerTurn)
+    }
 
     selectPath = (index, bishopPos, color, playerTr, pieceName)=> {
         this.setCase((cs)=> {
