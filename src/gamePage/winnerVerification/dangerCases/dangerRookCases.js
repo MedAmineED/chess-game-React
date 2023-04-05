@@ -1,4 +1,7 @@
-export function dangerRookZone(y, x, board, boardCase, updateCases) {
+import { Check } from "../../components/GameSpace";
+import { checkKing } from "../chekKing/checkKingFunction";
+
+export function dangerRookZone(y, x, board, boardCase, updateCases, Check, changeCheck) {
     verticalDangerZone(...arguments)
     horizontalDangerZone(...arguments)
 }
@@ -7,7 +10,7 @@ export function dangerRookZone(y, x, board, boardCase, updateCases) {
 
 
 
-export function verticalDangerZone (y, x, board, boardCase, updateCases) { 
+export  function verticalDangerZone (y, x, board, boardCase, updateCases, Check, changeCheck) { 
     
     
     let path1 = true;
@@ -19,32 +22,40 @@ export function verticalDangerZone (y, x, board, boardCase, updateCases) {
 
                 if(y + i < 8 && path1) {
                     //chek player enemy and case state to move in the top vertical path 
-                            if(boardCase[y + i][x].empty !== true && board[y + i][x].props.data.name !== "king"){
-                                board[y][x].props.data.color === "white"?
-                                             updateCases[y + i][x].danger.whiteDanger += 1 
-                                             : updateCases[y + i][x].danger.blackDanger += 1 
+                            if(updateCases[y + i][x].empty 
+                                || (board[y + i][x].props.data.name === "king" && board[y][x].props.data.color !== board[y + i][x].props.data.color)){
 
-                                    
-                                    path1 = false   
+                                    // checkKing(board[y][x], board[y + i][x], Check, changeCheck)
+                                    board[y][x].props.data.color === "white"?
+                                    updateCases[y + i][x].danger.whiteDanger += 1 
+                                    : updateCases[y + i][x].danger.blackDanger += 1 
                             }
                             //chek if empty 
-                            if(updateCases[y + i][x].empty === true || board[y + i][x].props.data.name === "king") {
+                            if((updateCases[y + i][x].empty !== true && board[y + i][x].props.data.name !== "king")
+                            ||(updateCases[y + i][x].empty !== true && board[y][x].props.data.color === board[y + i][x].props.data.color)) {
+
                                 board[y][x].props.data.color === "white"?
-                                         updateCases[y + i][x].danger.whiteDanger += 1 
-                                         : updateCases[y + i][x].danger.blackDanger += 1 
+                                updateCases[y + i][x].danger.whiteDanger += 1 
+                                : updateCases[y + i][x].danger.blackDanger += 1 
+
+                       
+                                path1 = false   
                                  
                             }
                 }
                 if(y - i >= 0 && path2) {
                                                                         
-                    if(updateCases[y - i][x].empty === true  || board[y - i][x].props.data.name === "king"){
+                    if(updateCases[y - i][x].empty 
+                        || (board[y - i][x].props.data.name === "king" && board[y][x].props.data.color !== board[y - i][x].props.data.color)){
+                            // checkKing(board[y][x], board[y - i][x], Check, changeCheck)
                         board[y][x].props.data.color === "white"?
                         updateCases[y - i][x].danger.whiteDanger += 1 
                         : updateCases[y - i][x].danger.blackDanger += 1 
                     }
                     
                     
-                    if(boardCase[y - i][x].empty !== true && board[y - i][x].props.data.name !== "king"){
+                    if((updateCases[y - i][x].empty !== true && board[y - i][x].props.data.name !== "king")
+                    ||(updateCases[y - i][x].empty !== true && board[y][x].props.data.color === board[y - i][x].props.data.color)){
                             path2 = false
                         board[y][x].props.data.color === "white"?
                         updateCases[y - i][x].danger.whiteDanger += 1 
@@ -56,7 +67,7 @@ export function verticalDangerZone (y, x, board, boardCase, updateCases) {
 
 }
 
-export function horizontalDangerZone (y, x, board, boardCase, updateCases) { 
+export function horizontalDangerZone (y, x, board, boardCase, updateCases, Check, changeCheck) { 
     
     
     let path1 = true;
@@ -68,35 +79,45 @@ export function horizontalDangerZone (y, x, board, boardCase, updateCases) {
 
                 if(x + i < 8 && path1) {
                     //chek player enemy and case state to move in the top vertical path 
-                            if(boardCase[y][x + i].empty !== true && board[y][x + i].props.data.name !== "king"){
-
+                            if(updateCases[y][x + i].empty 
+                                || (board[y][x + i].props.data.name === "king" && board[y][x].props.data.color !== board[y][x + i].props.data.color)){
+                                    // checkKing(board[y][x], board[y][x + i], Check, changeCheck)
                                     board[y][x].props.data.color === "white"?
-                                             updateCases[y][x + i].danger.whiteDanger += 1 
-                                             : updateCases[y][x + i].danger.blackDanger += 1 
-                                    
-                                    path1 = false   
+                                    updateCases[y][x + i].danger.whiteDanger += 1 
+                                    : updateCases[y][x + i].danger.blackDanger += 1
+
                             }
-                            if(updateCases[y][x + i].empty === true || board[y][x + i].props.data.name === "king") {
-                                board[y][x].props.data.color === "white"?
+                            if((updateCases[y][x + i].empty !== true && board[y][x + i].props.data.name !== "king")
+                            ||(updateCases[y][x + i].empty !== true && board[y][x].props.data.color === board[y][x + i].props.data.color)) {
+
+                                         
+                                         board[y][x].props.data.color === "white"?
                                          updateCases[y][x + i].danger.whiteDanger += 1 
                                          : updateCases[y][x + i].danger.blackDanger += 1 
+                                
+                                path1 = false   
                                  
                             }
                 }
                 if(x - i >= 0 && path2) {
                                                                         
-                    if(updateCases[y][x - i].empty === true || board[y][x - i].props.data.name === "king"){
-                        board[y][x].props.data.color === "white"?
-                        updateCases[y][x - i].danger.whiteDanger += 1 
-                        : updateCases[y][x - i].danger.blackDanger += 1 
+                    if(updateCases[y][x - i].empty 
+                        || (board[y][x - i].props.data.name === "king" && board[y][x].props.data.color !== board[y][x - i].props.data.color)){
+                            // checkKing(board[y][x], board[y][x - i], Check, changeCheck)
+                            board[y][x].props.data.color === "white"?
+                            updateCases[y][x - i].danger.whiteDanger += 1 
+                            : updateCases[y][x - i].danger.blackDanger += 1 
+
                     }
                     
                     
-                    if(updateCases[y][x - i].empty !== true && board[y][x - i].props.data.name !== "king"){
-                            path2 = false
-                            board[y][x].props.data.color === "white"?
-                            updateCases[y][x - i].danger.whiteDanger += 1 
-                            : updateCases[y][x - i].danger.blackDanger += 1                                        
+                    if((updateCases[y][x - i].empty !== true && board[y][x - i].props.data.name !== "king")
+                    ||(updateCases[y][x - i].empty !== true && board[y][x].props.data.color === board[y][x - i].props.data.color)){
+
+                        path2 = false
+                        board[y][x].props.data.color === "white"?
+                        updateCases[y][x - i].danger.whiteDanger += 1 
+                        : updateCases[y][x - i].danger.blackDanger += 1 
                                                                     
                     }
                 } 

@@ -4,6 +4,7 @@ import Table from "./gameComponents/table/Table";
 import "./GameSpace.css"
 import PlayerCardInfo from "./PlayerCardInfo/PlayerCardInfo";
 import StartModal from "./StartModal/StartModal";
+import CheckModal from "./chekModal/CheckModal";
 
 
 
@@ -16,6 +17,8 @@ export const Start = createContext(false)
 export const ToatalTime = createContext({})
 
 export const TurnTime = createContext({})
+
+export const Check = createContext()
 
 
 function GameSpace () {
@@ -30,6 +33,8 @@ function GameSpace () {
     const [start, setStart] = useState(false)
 
 
+
+
     const [totalTime, setTotalTime] = useState({
                                                 rangeValue : 0,
                                                 hours : 0,
@@ -40,6 +45,12 @@ function GameSpace () {
                                                 seconds : 30,
                                                 minutes : 0
                                             })
+
+    const [check, setCheck] = useState(false)
+    
+    const changeCheck = (check) => {
+        setCheck(check)
+    }
 
 
     const createPlayerName = (e , player) => {
@@ -91,6 +102,7 @@ function GameSpace () {
           <PlayerName.Provider value= {{firstPlayerName, secondPlayerName}} >
           <ToatalTime.Provider value={totalTime} >
           <TurnTime.Provider value={turnTime}>
+          <Check.Provider value ={check}>
 
 
                 <StartModal startGame = {startGame} 
@@ -98,11 +110,13 @@ function GameSpace () {
                             playersNames = {{firstPlayerName : firstPlayerName, secondPlayerName : secondPlayerName}} 
                             changeTime = {showTime}
                             />
+                <CheckModal check = {check} />
                 <PlayerCardInfo player = "P1" />
-                <Table playerTurn = {newTurn}/>
+                <Table playerTurn = {newTurn}  check = {check} changeCheck = {changeCheck}/>
                 <PlayerCardInfo player = "P2" />
 
-
+          
+          </Check.Provider>
           </TurnTime.Provider>
           </ToatalTime.Provider> 
           </PlayerName.Provider>

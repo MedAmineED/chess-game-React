@@ -1,9 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+
+
+
 import React, { useEffect, createContext, useContext } from 'react';
-// import 'bootstrap/dist/css/bootstrap.min.css';
-// import 'bootstrap/dist/js/bootstrap.min.js';
 import { useState } from 'react';
-// import Case from '../case/Case';
 import './table.css'
 import Pawn from '../chessPiecesComponents/Pawn'
 import King from '../chessPiecesComponents/King'
@@ -15,13 +15,14 @@ import Rook from '../chessPiecesComponents/Rook'
 
 import { pawn, rook, knight, bishop, king, queen } from '../../../piecesData/piecesData';
 import { KnightMethods, RookMethods, BishopMethods, KingMethods, QueenMethods, PawnMethods } from '../../../piecesMove/piecesMove';
-import { PlayTr, Start } from '../../GameSpace';
+import { Check, PlayTr, Start } from '../../GameSpace';
 import { dangerRookZone } from '../../../winnerVerification/dangerCases/dangerRookCases';
 import { dangerBishopZone } from '../../../winnerVerification/dangerCases/dangerBishopCases';
 import { dangerQueenZone } from '../../../winnerVerification/dangerCases/dangerQueenCases';
 import { dangerKnightZone } from '../../../winnerVerification/dangerCases/dangerKnightCases';
 import { dangerPawnZone } from '../../../winnerVerification/dangerCases/dangerPawnCases';
 import { dangerKingZone } from '../../../winnerVerification/dangerCases/dangerKingCases';
+import { checkEngineVerification, checkKing } from '../../../winnerVerification/chekKing/checkKingFunction';
 
 
 
@@ -70,12 +71,10 @@ function Table (props)  {
     const [whiteQueenPosition, setWhiteQueenPosition] = useState(initPiecesWQPosition);
     const [blackQueenPosition, setBlackQueenPosition] = useState(initPiecesBQPosition);
 
+    const[newCheck, setNewCheck] = useState(false)
 
 
     const playerTurn = useContext(PlayTr);
-
-
-
     
     
     //update initial positon
@@ -253,14 +252,15 @@ function Table (props)  {
         }
 
 
-        //set level of cases 
-        const dangerCases = (dangerFunction, nameOfPiece)=> {
+      
+        
+        const dangerCases = async (dangerFunction, nameOfPiece)=> {
             for(let y = 0; y < 8; y++) {
                 for(let x = 0; x < 8; x++) {
                     if(board[y][x].props && board[y][x].props.data.name === nameOfPiece){
-                        setCase(()=> {
+                        await setCase(()=> {
                             const updateCases = [...allCases];
-                            dangerFunction(y, x, board, allCases, updateCases)
+                             dangerFunction(y, x, board, allCases, updateCases, props.check)
                             return updateCases;
                         })
                     }
@@ -268,22 +268,30 @@ function Table (props)  {
             }
         }
 
+
+
         useEffect(()=> {
-            setCase(()=> {
-                const updateCases = [...allCases]
-                updateCases.map((cs)=> {
-                    cs.map((cs1)=> {
-                        cs1.danger.whiteDanger = 0
-                        cs1.danger.blackDanger = 0
+            console.log(props.check);
+            
+                    setCase(()=> {
+                        const updateCases = [...allCases]
+                        updateCases.map((cs)=> {
+                            cs.map((cs1)=> {
+                                cs1.danger.whiteDanger = 0
+                                cs1.danger.blackDanger = 0
+                            })
+                        })
                     })
-                })
-            })
-            dangerCases(dangerRookZone, "rook")
-            dangerCases(dangerBishopZone, "bishop")
-            dangerCases(dangerQueenZone, "queen")
-            dangerCases(dangerKnightZone, "knight")
-            dangerCases(dangerPawnZone, "pawn")
-            dangerCases(dangerKingZone, "king")
+                    dangerCases(dangerRookZone, "rook")
+                    dangerCases(dangerBishopZone, "bishop")
+                    dangerCases(dangerQueenZone, "queen")
+                    dangerCases(dangerKnightZone, "knight")
+                    dangerCases(dangerPawnZone, "pawn")
+                    dangerCases(dangerKingZone, "king")
+
+                    const cheCkEngine = setInterval(()=>checkEngineVerification(board, allCases, props),200)
+
+                    return ()=> clearInterval(cheCkEngine)
         }, [board])
         
         
