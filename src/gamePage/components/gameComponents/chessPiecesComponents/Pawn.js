@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState} from "react";
-import { PlayTr, Start} from "../../GameSpace";
+import { Check, PlayTr, Start} from "../../GameSpace";
 
 
 
@@ -9,6 +9,13 @@ function Pawn (props) {
  
  
      const [canPlay, setCanPlay] = useState(false)
+     const [blocked, setBlocked] = useState(false)
+     const check = useContext(Check)
+    
+
+     useEffect(()=> {
+         setBlocked(check)
+     }, [check])
      
      useEffect(()=>{
          setCanPlay(start)
@@ -17,7 +24,7 @@ function Pawn (props) {
      const handelSelecPathOnClick = ()=> {
          if(playerTurn % 2 === 0 && props.data.color === "white") {return}
          if(playerTurn % 2 !== 0 && props.data.color === "black") {return}
-        props.selectPath(props.data.id, props.position, props.data.color, props.data.name, playerTurn, canPlay);
+        props.selectPath(props.data.id, props.position, props.data.color, props.data.name, playerTurn, canPlay, blocked);
     }
 
 

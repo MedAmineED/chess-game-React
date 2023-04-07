@@ -117,7 +117,8 @@ class MovePiece {
 
 class PawnMethods extends MovePiece {
 
-    selectPath = async (index, pawnPos, color)=> {
+    selectPath = (index, pawnPos, color, blocked)=> {
+        console.log("from pawn selectPath class method", blocked);
         if(color === "white") {
                                 this.setCase((cs)=> {
                                     const updaECases = [...cs];
@@ -127,34 +128,81 @@ class PawnMethods extends MovePiece {
                                         })
                                     })
 
-                                    if(updaECases[pawnPos.y  + 1][pawnPos.x].empty){
+                                    if(!blocked){
+                                        if(updaECases[pawnPos.y  + 1][pawnPos.x].empty && pawnPos.y < 7){
                                             updaECases[pawnPos.y  + 1][pawnPos.x].selected = "tomove";
                                             updaECases[pawnPos.y  + 1][pawnPos.x].index = index;
                                             updaECases[pawnPos.y  + 1][pawnPos.x].pieceName = "pawn";
-                                            updaECases[pawnPos.y  + 1][pawnPos.x].color= color;}
+                                            updaECases[pawnPos.y  + 1][pawnPos.x].color= color;
+                                        }
                                     
                                     
-                                    if(pawnPos.y === 1 && updaECases[pawnPos.y  + 2][pawnPos.x].empty
-                                        &&updaECases[pawnPos.y + 1][pawnPos.x].empty){
-                                            pawnPos.y === 1? updaECases[pawnPos.y  + 2][pawnPos.x].selected = "tomove": updaECases[pawnPos.y  + 2] !== undefined? updaECases[pawnPos.y  + 2][pawnPos.x].selected = false: console.log("end"); 
-                                            pawnPos.y === 1? updaECases[pawnPos.y  + 2][pawnPos.x].index = index: updaECases[pawnPos.y  + 2] === undefined? console.log("end"): console.log("end"); 
-                                            pawnPos.y === 1? updaECases[pawnPos.y  + 2][pawnPos.x].color = color: updaECases[pawnPos.y  + 2] === undefined? console.log("end"): console.log("end"); 
-                                            pawnPos.y === 1? updaECases[pawnPos.y  + 2][pawnPos.x].pieceName = "pawn": updaECases[pawnPos.y  + 2] === undefined? console.log("end"): console.log("end");} 
-                                    
-                                    
-                                    if(pawnPos.y + 1 < 8 && pawnPos.x + 1 < 8 && updaECases[pawnPos.y  + 1][pawnPos.x + 1].eat === "black") {
-                                            updaECases[pawnPos.y  + 1][pawnPos.x + 1].selected = "tomove";
-                                            updaECases[pawnPos.y  + 1][pawnPos.x + 1].color = color;
-                                            updaECases[pawnPos.y  + 1][pawnPos.x + 1].index = index;
-                                            updaECases[pawnPos.y  + 1][pawnPos.x + 1].pieceName = "pawn";
+                                        if(pawnPos.y === 1 && updaECases[pawnPos.y  + 2][pawnPos.x].empty
+                                            && updaECases[pawnPos.y + 1][pawnPos.x].empty)
+                                            {
+                                                updaECases[pawnPos.y  + 2][pawnPos.x].selected = "tomove" 
+                                                updaECases[pawnPos.y  + 2][pawnPos.x].index = index
+                                                updaECases[pawnPos.y  + 2][pawnPos.x].color = color
+                                                updaECases[pawnPos.y  + 2][pawnPos.x].pieceName = "pawn"
+                                            }
+                                        
+                                        
+                                        if(pawnPos.y + 1 < 8 && pawnPos.x + 1 < 8 && updaECases[pawnPos.y  + 1][pawnPos.x + 1].eat === "black") {
+                                                updaECases[pawnPos.y  + 1][pawnPos.x + 1].selected = "tomove";
+                                                updaECases[pawnPos.y  + 1][pawnPos.x + 1].color = color;
+                                                updaECases[pawnPos.y  + 1][pawnPos.x + 1].index = index;
+                                                updaECases[pawnPos.y  + 1][pawnPos.x + 1].pieceName = "pawn";
+                                        }
+                                        
+                                        if(pawnPos.y + 1 < 8 && pawnPos.x - 1 >=0 && updaECases[pawnPos.y  + 1][pawnPos.x - 1].eat === "black") {
+                                                updaECases[pawnPos.y  + 1][pawnPos.x - 1].selected = "tomove";
+                                                updaECases[pawnPos.y  + 1][pawnPos.x - 1].color = color;
+                                                updaECases[pawnPos.y  + 1][pawnPos.x - 1].index = index;
+                                                updaECases[pawnPos.y  + 1][pawnPos.x - 1].pieceName = "pawn";
+                                        }
                                     }
-                                    
-                                    if(pawnPos.y + 1 < 8 && pawnPos.x - 1 >=0 && updaECases[pawnPos.y  + 1][pawnPos.x - 1].eat === "black") {
-                                            updaECases[pawnPos.y  + 1][pawnPos.x - 1].selected = "tomove";
-                                            updaECases[pawnPos.y  + 1][pawnPos.x - 1].color = color;
-                                            updaECases[pawnPos.y  + 1][pawnPos.x - 1].index = index;
-                                            updaECases[pawnPos.y  + 1][pawnPos.x - 1].pieceName = "pawn";
+                                    if(blocked){
+                                        if(pawnPos.y === 1 
+                                        && updaECases[pawnPos.y  + 1][pawnPos.x].empty
+                                        && updaECases[pawnPos.y  + 2][pawnPos.x].empty
+                                        && updaECases[pawnPos.y  + 2][pawnPos.x].checked)
+                                        {
+                                            updaECases[pawnPos.y  + 2][pawnPos.x].selected = "tomove" 
+                                            updaECases[pawnPos.y  + 2][pawnPos.x].index = index
+                                            updaECases[pawnPos.y  + 2][pawnPos.x].color = color
+                                            updaECases[pawnPos.y  + 2][pawnPos.x].pieceName = "pawn"
+
+                                        }
+                                        if(pawnPos.y < 7 
+                                        && updaECases[pawnPos.y  + 1][pawnPos.x].empty
+                                        && updaECases[pawnPos.y  + 1][pawnPos.x].checked)
+                                        {
+                                            updaECases[pawnPos.y  + 1][pawnPos.x].selected = "tomove" 
+                                            updaECases[pawnPos.y  + 1][pawnPos.x].index = index
+                                            updaECases[pawnPos.y  + 1][pawnPos.x].color = color
+                                            updaECases[pawnPos.y  + 1][pawnPos.x].pieceName = "pawn"
+
+                                        }
+                                        if(pawnPos.y + 1 < 7
+                                            && pawnPos.x + 1 < 7
+                                            && updaECases[pawnPos.y  + 1][pawnPos.x + 1].eat === "black"
+                                            && updaECases[pawnPos.y  + 1][pawnPos.x + 1].checked) {
+                                                updaECases[pawnPos.y  + 1][pawnPos.x + 1].selected = "tomove";
+                                                updaECases[pawnPos.y  + 1][pawnPos.x + 1].color = color;
+                                                updaECases[pawnPos.y  + 1][pawnPos.x + 1].index = index;
+                                                updaECases[pawnPos.y  + 1][pawnPos.x + 1].pieceName = "pawn";
+                                        }
+                                        if(pawnPos.y + 1 < 7 
+                                            && pawnPos.x - 1 > 0
+                                            && updaECases[pawnPos.y  + 1][pawnPos.x - 1].eat === "black"
+                                            && updaECases[pawnPos.y  + 1][pawnPos.x - 1].checked) {
+                                                updaECases[pawnPos.y  + 1][pawnPos.x - 1].selected = "tomove";
+                                                updaECases[pawnPos.y  + 1][pawnPos.x - 1].color = color;
+                                                updaECases[pawnPos.y  + 1][pawnPos.x - 1].index = index;
+                                                updaECases[pawnPos.y  + 1][pawnPos.x - 1].pieceName = "pawn";
+                                        }
                                     }
+
                                     return updaECases
                                 })
                     }else if(color === "black") {
@@ -165,17 +213,18 @@ class PawnMethods extends MovePiece {
                                     el1.selected = false;
                                 })
                             })
-
+                        if(!blocked){
                             if(pawnPos.y === 6 && updaECases[pawnPos.y  - 2][pawnPos.x].empty 
                                 &&updaECases[pawnPos.y  - 1][pawnPos.x].empty){
-                                pawnPos.y === 6? updaECases[pawnPos.y  - 2][pawnPos.x].selected = "tomove": updaECases[pawnPos.y  - 2] !== undefined? updaECases[pawnPos.y  - 2][pawnPos.x].selected = false: console.log("end"); 
-                                pawnPos.y === 6? updaECases[pawnPos.y  - 2][pawnPos.x].index = index: updaECases[pawnPos.y  - 2] === undefined? console.log("end"): console.log("end"); 
-                                pawnPos.y === 6? updaECases[pawnPos.y  - 2][pawnPos.x].color = color: updaECases[pawnPos.y  - 2] === undefined? console.log("end"): console.log("end"); 
-                                pawnPos.y === 6? updaECases[pawnPos.y  - 2][pawnPos.x].pieceName = "pawn": updaECases[pawnPos.y  - 2] === undefined? console.log("end"): console.log("end"); }
+                                 updaECases[pawnPos.y  - 2][pawnPos.x].selected = "tomove" 
+                                 updaECases[pawnPos.y  - 2][pawnPos.x].index = index
+                                 updaECases[pawnPos.y  - 2][pawnPos.x].color = color
+                                 updaECases[pawnPos.y  - 2][pawnPos.x].pieceName = "pawn"
+                                }
 
 
 
-                            if(updaECases[pawnPos.y  - 1][pawnPos.x].empty){
+                            if(updaECases[pawnPos.y  - 1][pawnPos.x].empty && pawnPos.y > 0){
                                 updaECases[pawnPos.y  - 1][pawnPos.x].selected = "tomove";
                                 updaECases[pawnPos.y  - 1][pawnPos.x].index = index;
                                 updaECases[pawnPos.y  - 1][pawnPos.x].color= color;
@@ -194,6 +243,49 @@ class PawnMethods extends MovePiece {
                                     updaECases[pawnPos.y  - 1][pawnPos.x - 1].index = index;
                                     updaECases[pawnPos.y  - 1][pawnPos.x - 1].pieceName = "pawn";
                                 }
+                            }
+                            if(blocked){
+                                if(pawnPos.y === 6
+                                && updaECases[pawnPos.y  - 1][pawnPos.x].empty
+                                && updaECases[pawnPos.y  - 2][pawnPos.x].empty
+                                && updaECases[pawnPos.y  - 2][pawnPos.x].checked)
+                                {
+                                    updaECases[pawnPos.y  - 2][pawnPos.x].selected = "tomove" 
+                                    updaECases[pawnPos.y  - 2][pawnPos.x].index = index
+                                    updaECases[pawnPos.y  - 2][pawnPos.x].color = color
+                                    updaECases[pawnPos.y  - 2][pawnPos.x].pieceName = "pawn"
+
+                                }
+                                if(pawnPos.y > 0 
+                                && updaECases[pawnPos.y  - 1][pawnPos.x].empty
+                                && updaECases[pawnPos.y  - 1][pawnPos.x].checked)
+                                {
+                                    updaECases[pawnPos.y  - 1][pawnPos.x].selected = "tomove" 
+                                    updaECases[pawnPos.y  - 1][pawnPos.x].index = index
+                                    updaECases[pawnPos.y  - 1][pawnPos.x].color = color
+                                    updaECases[pawnPos.y  - 1][pawnPos.x].pieceName = "pawn"
+
+                                }
+                                if(pawnPos.y - 1 > 0 
+                                    && pawnPos.x + 1 < 7 
+                                    && updaECases[pawnPos.y  - 1][pawnPos.x + 1].eat
+                                    && updaECases[pawnPos.y  - 1][pawnPos.x + 1].eat === "white"
+                                    &&updaECases[pawnPos.y  - 1][pawnPos.x + 1].checked) {
+                                        updaECases[pawnPos.y  - 1][pawnPos.x + 1].selected = "tomove";
+                                        updaECases[pawnPos.y  - 1][pawnPos.x + 1].color = color;
+                                        updaECases[pawnPos.y  - 1][pawnPos.x + 1].index = index;
+                                        updaECases[pawnPos.y  - 1][pawnPos.x + 1].pieceName = "pawn";
+                                }
+                                if(pawnPos.y - 1 > 0 
+                                    && pawnPos.x - 1 > 0
+                                    && updaECases[pawnPos.y  - 1][pawnPos.x - 1].eat === "white"
+                                    && updaECases[pawnPos.y  - 1][pawnPos.x - 1].checked) {
+                                        updaECases[pawnPos.y  - 1][pawnPos.x - 1].selected = "tomove";
+                                        updaECases[pawnPos.y  - 1][pawnPos.x - 1].color = color;
+                                        updaECases[pawnPos.y  - 1][pawnPos.x - 1].index = index;
+                                        updaECases[pawnPos.y  - 1][pawnPos.x - 1].pieceName = "pawn";
+                                }
+                            }
                             return updaECases
                         })
                     }
@@ -204,7 +296,7 @@ class PawnMethods extends MovePiece {
 
 class RookMethods extends MovePiece {
 
-    selectPath = async (index, rookPos, color, playerTr, pieceName, block)=> {
+    selectPath = async (index, rookPos, color, playerTr, pieceName, blocked)=> {
         await this.setCase((cs)=> {
             const updateCases = [...cs];
             updateCases.forEach((el)=> {
@@ -214,8 +306,8 @@ class RookMethods extends MovePiece {
                     el1.color= ""
                 })
             })
-                    selectVerticalPath(index, rookPos, color, pieceName, playerTr, updateCases, block)
-                    selectHorizontalPath(index, rookPos, color, pieceName, playerTr, updateCases, block)
+                    selectVerticalPath(index, rookPos, color, pieceName, playerTr, updateCases, blocked)
+                    selectHorizontalPath(index, rookPos, color, pieceName, playerTr, updateCases, blocked)
             return updateCases
         })
     }
@@ -226,7 +318,7 @@ class RookMethods extends MovePiece {
 class KnightMethods extends MovePiece {
 
 
-    selectPath = (index, knightPos, color, playerTr)=> {
+    selectPath = (index, knightPos, color, playerTr, blocked)=> {
 
         this.setCase((cs)=> {
             const updateCases = [...cs];
@@ -333,7 +425,7 @@ class KnightMethods extends MovePiece {
 
 class BishopMethods extends MovePiece {
             
-    selectPath = (index, bishopPos, color, playerTr, pieceName, block)=> {
+    selectPath = (index, bishopPos, color, playerTr, pieceName, blocked)=> {
                 this.setCase((cs)=> {
                     const updateCases = [...cs];
                     updateCases.forEach((el)=> {
@@ -343,7 +435,7 @@ class BishopMethods extends MovePiece {
                             el1.color= ""
                         })
                     })
-            selectDiagonalPath(index, bishopPos, color, pieceName, playerTr, updateCases, block)
+            selectDiagonalPath(index, bishopPos, color, pieceName, playerTr, updateCases, blocked)
             return updateCases
         })
     }
@@ -464,7 +556,7 @@ class KingMethods extends MovePiece {
 
 
 class QueenMethods extends MovePiece {
-    selectPath = (index, bishopPos, color, playerTr, pieceName, block)=> {
+    selectPath = (index, bishopPos, color, playerTr, pieceName, blocked)=> {
         this.setCase((cs)=> {
             const updateCases = [...cs];
             updateCases.forEach((el)=> {
@@ -474,9 +566,9 @@ class QueenMethods extends MovePiece {
                     el1.color= ""
                 })
             })
-    selectDiagonalPath(index, bishopPos, color, pieceName, playerTr, updateCases, block)
-    selectHorizontalPath(index, bishopPos, color, pieceName, playerTr, updateCases, block)
-    selectVerticalPath(index, bishopPos, color, pieceName, playerTr, updateCases, block)
+    selectDiagonalPath(index, bishopPos, color, pieceName, playerTr, updateCases, blocked)
+    selectHorizontalPath(index, bishopPos, color, pieceName, playerTr, updateCases, blocked)
+    selectVerticalPath(index, bishopPos, color, pieceName, playerTr, updateCases, blocked)
     return updateCases
 })
 }

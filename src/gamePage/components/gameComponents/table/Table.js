@@ -243,10 +243,8 @@ function Table (props)  {
 
     //add all selectPath methods in one function named path
     function path  (index, pos, color, pieceName, playerTr, canPlay, check) {
-        console.log(allCases);
-        console.log("global select fuction ", props.check);
         if(canPlay){
-                if(pieceName === "pawn")newPawn.selectPath(index, pos, color, playerTr, pieceName)
+                if(pieceName === "pawn")newPawn.selectPath(index, pos, color, check)
                 if(pieceName === "knight")newKnight.selectPath(index, pos, color, playerTr, pieceName)
                 if(pieceName === "rook")newRook.selectPath(index, pos, color, playerTr, pieceName, check)
                 if(pieceName === "bishop")newBishop.selectPath(index, pos, color, playerTr, pieceName, check)
