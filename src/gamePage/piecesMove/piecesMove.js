@@ -121,7 +121,6 @@ class MovePiece {
 class PawnMethods extends MovePiece {
 
     selectPath = (index, pawnPos, color, blocked)=> {
-        console.log("from pawn selectPath class method", blocked);
         if(color === "white") {
                                 this.setCase((cs)=> {
                                     const updaECases = [...cs];

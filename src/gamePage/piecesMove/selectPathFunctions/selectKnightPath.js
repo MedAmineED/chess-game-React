@@ -1,5 +1,4 @@
 export function selectKnightPath(knightPos, updateCases, index, color, playerTr, blocked) {
-    console.log("from selecpathKngiht ", blocked);
 
     if(!blocked){    
         if(knightPos.y + 2 < 8 && knightPos.x + 1 < 8) {
