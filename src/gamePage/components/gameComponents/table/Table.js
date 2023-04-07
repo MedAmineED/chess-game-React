@@ -310,17 +310,33 @@ function Table (props)  {
                             const row = i + 1;
                             const col = 8 - j ;
                             if ((row % 2) === 0 && (col % 2)!==0) {
-                                    cases.push(<div key={`${row}${col}`} onClick = {()=> move(allCases[i][j].index, allCases[i][j].color, {x : j, y : i}, allCases[i][j].pieceName)} className= {`case black-case ${row}${col} ${allCases[i][j].selected}`} >
-                                                {board[i][j]}</div>
-                            )}
+                                    cases.push(<div     key={`${row}${col}`} 
+                                                        onClick = {()=> move(allCases[i][j].index, 
+                                                                            allCases[i][j].color, 
+                                                                            {x : j, y : i}, 
+                                                                            allCases[i][j].pieceName)} 
+                                                        className= {`case black-case ${row}${col} ${allCases[i][j].selected}`} >
+                                                    {board[i][j]}
+                                                </div>
+                                                )}
                             else if ((row % 2) !== 0 && (col % 2)===0) {
-                                    cases.push(<div key={`${row}${col}`} onClick = {()=> move(allCases[i][j].index, allCases[i][j].color, {x : j, y : i}, allCases[i][j].pieceName)} className= {`case black-case ${row}${col} ${allCases[i][j].selected}`} >
-                                            {board[i][j]}</div>
+                                    cases.push(<div      key={`${row}${col}`} 
+                                                         onClick = {()=> move(allCases[i][j].index, 
+                                                                              allCases[i][j].color, {x : j, y : i}, 
+                                                                              allCases[i][j].pieceName)} 
+                                                          className= {`case black-case ${row}${col} ${allCases[i][j].selected}`} >
+                                                    {board[i][j]}
+                                               </div>
                                                     )
                             }
                             else {
-                                cases.push(<div key={`${row}${col}`} onClick = {()=> move(allCases[i][j].index, allCases[i][j].color, {x : j, y : i}, allCases[i][j].pieceName)} className= {`case white-case ${row}${col} ${allCases[i][j].selected}`} >
-                                            {board[i][j]}</div>)
+                                cases.push(<div          key={`${row}${col}`} 
+                                                         onClick = {()=> move(allCases[i][j].index, 
+                                                                              allCases[i][j].color, {x : j, y : i}, 
+                                                                              allCases[i][j].pieceName)} 
+                                                          className= {`case white-case ${row}${col} ${allCases[i][j].selected}`} >
+                                                {board[i][j]}
+                                            </div>)
                             }
                         }
                     };
