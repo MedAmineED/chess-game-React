@@ -245,7 +245,7 @@ function Table (props)  {
     function path  (index, pos, color, pieceName, playerTr, canPlay, check) {
         if(canPlay){
                 if(pieceName === "pawn")newPawn.selectPath(index, pos, color, check)
-                if(pieceName === "knight")newKnight.selectPath(index, pos, color, playerTr, pieceName)
+                if(pieceName === "knight")newKnight.selectPath(index, pos, color, playerTr, check)
                 if(pieceName === "rook")newRook.selectPath(index, pos, color, playerTr, pieceName, check)
                 if(pieceName === "bishop")newBishop.selectPath(index, pos, color, playerTr, pieceName, check)
                 if(pieceName === "king")newKIng.selectPath(index, pos, color, playerTr, pieceName)

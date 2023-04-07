@@ -332,7 +332,7 @@ class KnightMethods extends MovePiece {
                     el1.color= ""
                 })
             })
-            selectKnightPath(knightPos, updateCases, index, color, playerTr)
+            selectKnightPath(knightPos, updateCases, index, color, playerTr, blocked)
 
             
             
