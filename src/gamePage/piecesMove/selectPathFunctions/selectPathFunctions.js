@@ -36,6 +36,12 @@ function selectVerticalPath (index, piecePos, color, pieceName, playerTurn, upda
                                 updateCases[piecePos.y + i][piecePos.x].color= color
                                 updateCases[piecePos.y + i][piecePos.x].pieceName= pieceName 
                     }
+                    if(updateCases[piecePos.y + i][piecePos.x].checked === false && check && 
+                        (updateCases[piecePos.y + i][piecePos.x].eat === "white"
+                        || updateCases[piecePos.y + i][piecePos.x].eat === "black") 
+                        ) {
+                            path1 = false
+                        }
         }
                 
                 if(piecePos.y - i >= 0 && path2) {
@@ -68,6 +74,12 @@ function selectVerticalPath (index, piecePos, color, pieceName, playerTurn, upda
         
                     
                     } 
+                    if(updateCases[piecePos.y - i][piecePos.x].checked === false && check && 
+                        (updateCases[piecePos.y - i][piecePos.x].eat === "white"
+                        || updateCases[piecePos.y - i][piecePos.x].eat === "black") 
+                        ) {
+                            path2 = false
+                        }
             }
         }
 }
@@ -113,7 +125,13 @@ function selectHorizontalPath (index, piecePos, color, pieceName, playerTurn, up
                         updateCases[piecePos.y][piecePos.x + i].index = index
                         updateCases[piecePos.y][piecePos.x + i].color= color
                         updateCases[piecePos.y][piecePos.x + i].pieceName= pieceName   
-                    } 
+                    }
+                    if(updateCases[piecePos.y][piecePos.x + i].checked === false && check && 
+                        (updateCases[piecePos.y][piecePos.x + i].eat === "white"
+                        || updateCases[piecePos.y][piecePos.x + i].eat === "black") 
+                        ) {
+                            path1 = false
+                        }
         }
         if(piecePos.x - i >= 0 && path2){
             if(!check){
@@ -141,7 +159,12 @@ function selectHorizontalPath (index, piecePos, color, pieceName, playerTurn, up
             updateCases[piecePos.y][piecePos.x - i].pieceName= pieceName   
 
         
-        } 
+        }if(updateCases[piecePos.y][piecePos.x - i].checked === false && check && 
+            (updateCases[piecePos.y][piecePos.x - i].eat === "white"
+            || updateCases[piecePos.y][piecePos.x - i].eat === "black") 
+            ) {
+                path2 = false
+            }
         }  
 
     }
@@ -183,14 +206,19 @@ function selectDiagonalPath(index, piecePos, color, pieceName, playerTurn, updat
                                 }
                     }
                     if(updateCases[piecePos.y  + i][piecePos.x + i].checked === true){
-                     
                         updateCases[piecePos.y  + i][piecePos.x + i].selected = "tomove" 
                         updateCases[piecePos.y  + i][piecePos.x + i].index = index
                         updateCases[piecePos.y  + i][piecePos.x + i].color= color
                         updateCases[piecePos.y  + i][piecePos.x + i].pieceName= pieceName   
             
                     
-                    } 
+                    }
+                    if(updateCases[piecePos.y  + i][piecePos.x + i].checked === false && check && 
+                        (updateCases[piecePos.y  + i][piecePos.x + i].eat === "white"
+                        || updateCases[piecePos.y  + i][piecePos.x + i].eat === "black") 
+                        ) {
+                            path1 = false
+                        } 
                 }
                 if(piecePos.y - i >= 0 && piecePos.x - i >= 0 && path2) {
                     if(!check){
@@ -220,10 +248,14 @@ function selectDiagonalPath(index, piecePos, color, pieceName, playerTurn, updat
                         updateCases[piecePos.y - i][piecePos.x - i].selected = "tomove" 
                         updateCases[piecePos.y - i][piecePos.x - i].index = index
                         updateCases[piecePos.y - i][piecePos.x - i].color= color
-                        updateCases[piecePos.y - i][piecePos.x - i].pieceName= pieceName   
-            
-                    
-                    } 
+                        updateCases[piecePos.y - i][piecePos.x - i].pieceName= pieceName
+                    }
+                    if(updateCases[piecePos.y - i][piecePos.x - i].checked === false && check && 
+                        (updateCases[piecePos.y - i][piecePos.x - i].eat === "white"
+                        || updateCases[piecePos.y - i][piecePos.x - i].eat === "black") 
+                        ) {
+                            path2 = false
+                        } 
                     
                 } 
 
@@ -256,10 +288,14 @@ function selectDiagonalPath(index, piecePos, color, pieceName, playerTurn, updat
                         updateCases[piecePos.y + i][piecePos.x - i].selected = "tomove" 
                         updateCases[piecePos.y + i][piecePos.x - i].index = index
                         updateCases[piecePos.y + i][piecePos.x - i].color= color
-                        updateCases[piecePos.y + i][piecePos.x - i].pieceName= pieceName   
-            
-                    
-                    } 
+                        updateCases[piecePos.y + i][piecePos.x - i].pieceName= pieceName
+                    }
+                    if(updateCases[piecePos.y + i][piecePos.x - i].checked === false && check && 
+                        (updateCases[piecePos.y + i][piecePos.x - i].eat === "white"
+                        || updateCases[piecePos.y + i][piecePos.x - i].eat === "black") 
+                        ) {
+                            path3 = false
+                        }
 
                 }
                 if(piecePos.y - i >= 0 && piecePos.x + i < 8 && path4) {
@@ -290,10 +326,14 @@ function selectDiagonalPath(index, piecePos, color, pieceName, playerTurn, updat
                         updateCases[piecePos.y - i][piecePos.x + i].selected = "tomove" 
                         updateCases[piecePos.y - i][piecePos.x + i].index = index
                         updateCases[piecePos.y - i][piecePos.x + i].color= color
-                        updateCases[piecePos.y - i][piecePos.x + i].pieceName= pieceName   
-            
-                    
-                    } 
+                        updateCases[piecePos.y - i][piecePos.x + i].pieceName= pieceName
+                    }
+                    if(updateCases[piecePos.y - i][piecePos.x + i].checked === false && check && 
+                        (updateCases[piecePos.y - i][piecePos.x + i].eat === "white"
+                        || updateCases[piecePos.y - i][piecePos.x + i].eat === "black") 
+                        ) {
+                            path4 = false
+                        } 
         }
     }
 }

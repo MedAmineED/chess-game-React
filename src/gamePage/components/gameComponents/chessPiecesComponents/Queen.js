@@ -13,11 +13,11 @@ function Queen (props) {
     const check = useContext(Check)
 
     const [canPlay, setCanPlay] = useState(false)
-    const [block, setBlock] = useState(false)
+    const [blocked, setBlocked] = useState(false)
     
 
     useEffect(()=> {
-        setBlock(check)
+        setBlocked(check)
     }, [check])
 
 
@@ -29,7 +29,7 @@ function Queen (props) {
     const hanDleClickMove = ()=> {
         if(playerTurn % 2 === 0 && props.data.color === "white") {return}
          if(playerTurn % 2 !== 0 && props.data.color === "black") {return}
-        props.selectPath(props.data.id, props.position, props.data.color, props.data.name, playerTurn, canPlay, block)
+        props.selectPath(props.data.id, props.position, props.data.color, props.data.name, playerTurn, canPlay, blocked)
     }
 
     if (props.data.color === 'white') {
