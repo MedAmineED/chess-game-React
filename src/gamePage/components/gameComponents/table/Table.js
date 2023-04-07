@@ -2,7 +2,7 @@
 
 
 
-import React, { useEffect, createContext, useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useState } from 'react';
 import './table.css'
 import Pawn from '../chessPiecesComponents/Pawn'
@@ -15,14 +15,14 @@ import Rook from '../chessPiecesComponents/Rook'
 
 import { pawn, rook, knight, bishop, king, queen } from '../../../piecesData/piecesData';
 import { KnightMethods, RookMethods, BishopMethods, KingMethods, QueenMethods, PawnMethods } from '../../../piecesMove/piecesMove';
-import { Check, PlayTr, Start } from '../../GameSpace';
 import { dangerRookZone } from '../../../winnerVerification/dangerCases/dangerRookCases';
 import { dangerBishopZone } from '../../../winnerVerification/dangerCases/dangerBishopCases';
 import { dangerQueenZone } from '../../../winnerVerification/dangerCases/dangerQueenCases';
 import { dangerKnightZone } from '../../../winnerVerification/dangerCases/dangerKnightCases';
 import { dangerPawnZone } from '../../../winnerVerification/dangerCases/dangerPawnCases';
 import { dangerKingZone } from '../../../winnerVerification/dangerCases/dangerKingCases';
-import { checkEngineVerification, checkKing } from '../../../winnerVerification/chekKing/checkKingFunction';
+import { checkEngineVerification } from '../../../winnerVerification/chekKing/checkKingFunction';
+import { Check } from '../../GameSpace';
 
 
 
@@ -71,10 +71,9 @@ function Table (props)  {
     const [whiteQueenPosition, setWhiteQueenPosition] = useState(initPiecesWQPosition);
     const [blackQueenPosition, setBlackQueenPosition] = useState(initPiecesBQPosition);
 
-    const[newCheck, setNewCheck] = useState(false)
+    const check = useContext(Check)
 
-
-    const playerTurn = useContext(PlayTr);
+    const [isBlocket, setIsBlocket] = useState(false)
     
     
     //update initial positon
@@ -126,7 +125,8 @@ function Table (props)  {
                                                                       danger: {
                                                                                 whiteDanger : 0,
                                                                                 blackDanger : 0
-                                                                                }}) 
+                                                                                },
+                                                                       checked : false}) 
 
                             if(i===6 || i===7)lineCasesStates.push({empty : false, 
                                                                     selected : false, 
@@ -137,7 +137,8 @@ function Table (props)  {
                                                                     danger: {
                                                                               whiteDanger : 0,
                                                                               blackDanger : 0
-                                                                              }});
+                                                                              },
+                                                                    checked : false});
                         }else {
                             lineCasesStates.push({empty : true, 
                                                   selected : false, 
@@ -147,7 +148,8 @@ function Table (props)  {
                                                   danger: {
                                                             whiteDanger : 0,
                                                             blackDanger : 0
-                                                            }})
+                                                            },
+                                                    checked : false})
                         }
 
                     }
@@ -240,14 +242,16 @@ function Table (props)  {
 
 
     //add all selectPath methods in one function named path
-    function path  (index, pos, color, pieceName, playerTr, canPlay) {
+    function path  (index, pos, color, pieceName, playerTr, canPlay, check) {
+        console.log(allCases);
+        console.log("global select fuction ", props.check);
         if(canPlay){
                 if(pieceName === "pawn")newPawn.selectPath(index, pos, color, playerTr, pieceName)
                 if(pieceName === "knight")newKnight.selectPath(index, pos, color, playerTr, pieceName)
-                if(pieceName === "rook")newRook.selectPath(index, pos, color, playerTr, pieceName)
-                if(pieceName === "bishop")newBishop.selectPath(index, pos, color, playerTr, pieceName)
+                if(pieceName === "rook")newRook.selectPath(index, pos, color, playerTr, pieceName, check)
+                if(pieceName === "bishop")newBishop.selectPath(index, pos, color, playerTr, pieceName, check)
                 if(pieceName === "king")newKIng.selectPath(index, pos, color, playerTr, pieceName)
-                if(pieceName === "queen")newQueen.selectPath(index, pos, color, playerTr, pieceName)
+                if(pieceName === "queen")newQueen.selectPath(index, pos, color, playerTr, pieceName, check)
             }
         }
 
@@ -269,16 +273,17 @@ function Table (props)  {
         }
 
 
+        
 
         useEffect(()=> {
-            console.log(props.check);
-            
+            setIsBlocket(check)
                     setCase(()=> {
                         const updateCases = [...allCases]
                         updateCases.map((cs)=> {
                             cs.map((cs1)=> {
                                 cs1.danger.whiteDanger = 0
                                 cs1.danger.blackDanger = 0
+                                cs1.checked = false
                             })
                         })
                     })
@@ -292,7 +297,7 @@ function Table (props)  {
                     const cheCkEngine = setInterval(()=>checkEngineVerification(board, allCases, props),200)
 
                     return ()=> clearInterval(cheCkEngine)
-        }, [board])
+        }, [board, isBlocket])
         
         
         

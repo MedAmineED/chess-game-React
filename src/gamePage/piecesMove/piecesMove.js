@@ -4,7 +4,8 @@ import { selectDiagonalPath, selectHorizontalPath, selectVerticalPath } from "./
 class MovePiece {
     constructor(index, color, casePos, pieceName,allCases, 
                 setCase,  board, setBoard,newPos, whitePiece,
-                setWhitePiece, blackPiece,setBlackPiece, playerTurn) {
+                setWhitePiece, blackPiece,setBlackPiece, playerTurn,
+                check) {
         
     this.index  = index
     this.color  = color
@@ -20,6 +21,7 @@ class MovePiece {
     this.blackPiece = blackPiece
     this.setBlackPiece = setBlackPiece
     this.playerTurn = playerTurn
+    this.check = check
     }
 
     clickToMove = async ()=> {
@@ -114,14 +116,6 @@ class MovePiece {
 
 
 class PawnMethods extends MovePiece {
-    constructor (index, color, casePos, pieceName,allCases, 
-        setCase,  board, setBoard,newPos, whitePiece,
-        setWhitePiece, blackPiece,setBlackPiece, playerTurn) {
-
-    super(index, color, casePos, pieceName,allCases, 
-                setCase,  board, setBoard,newPos, whitePiece,
-                setWhitePiece, blackPiece,setBlackPiece, playerTurn)
-    }
 
     selectPath = async (index, pawnPos, color)=> {
         if(color === "white") {
@@ -205,14 +199,12 @@ class PawnMethods extends MovePiece {
                     }
                                 
                 }
-
-
 }
 
 
 class RookMethods extends MovePiece {
 
-    selectPath = async (index, rookPos, color, playerTr, pieceName)=> {
+    selectPath = async (index, rookPos, color, playerTr, pieceName, block)=> {
         await this.setCase((cs)=> {
             const updateCases = [...cs];
             updateCases.forEach((el)=> {
@@ -222,8 +214,8 @@ class RookMethods extends MovePiece {
                     el1.color= ""
                 })
             })
-                    selectVerticalPath(index, rookPos, color, pieceName, playerTr, updateCases)
-                    selectHorizontalPath(index, rookPos, color, pieceName, playerTr, updateCases)
+                    selectVerticalPath(index, rookPos, color, pieceName, playerTr, updateCases, block)
+                    selectHorizontalPath(index, rookPos, color, pieceName, playerTr, updateCases, block)
             return updateCases
         })
     }
@@ -340,17 +332,8 @@ class KnightMethods extends MovePiece {
 
 
 class BishopMethods extends MovePiece {
-    constructor (index, color, casePos, pieceName,allCases, 
-                setCase,  board, setBoard,newPos, whitePiece,
-                setWhitePiece, blackPiece,setBlackPiece, playerTurn) {
-
-                super(index, color, casePos, pieceName,allCases, 
-                    setCase,  board, setBoard,newPos, whitePiece,
-                    setWhitePiece, blackPiece,setBlackPiece, playerTurn)
-            }
             
-            
-    selectPath = (index, bishopPos, color, playerTr, pieceName)=> {
+    selectPath = (index, bishopPos, color, playerTr, pieceName, block)=> {
                 this.setCase((cs)=> {
                     const updateCases = [...cs];
                     updateCases.forEach((el)=> {
@@ -360,7 +343,7 @@ class BishopMethods extends MovePiece {
                             el1.color= ""
                         })
                     })
-            selectDiagonalPath(index, bishopPos, color, pieceName, playerTr, updateCases)
+            selectDiagonalPath(index, bishopPos, color, pieceName, playerTr, updateCases, block)
             return updateCases
         })
     }
@@ -481,16 +464,7 @@ class KingMethods extends MovePiece {
 
 
 class QueenMethods extends MovePiece {
-    constructor (index, color, casePos, pieceName,allCases, 
-                setCase,  board, setBoard,newPos, whitePiece,
-                setWhitePiece, blackPiece,setBlackPiece, playerTurn) {
-
-        super(index, color, casePos, pieceName,allCases, 
-            setCase,  board, setBoard,newPos, whitePiece,
-            setWhitePiece, blackPiece,setBlackPiece, playerTurn)
-    }
-
-    selectPath = (index, bishopPos, color, playerTr, pieceName)=> {
+    selectPath = (index, bishopPos, color, playerTr, pieceName, block)=> {
         this.setCase((cs)=> {
             const updateCases = [...cs];
             updateCases.forEach((el)=> {
@@ -500,9 +474,9 @@ class QueenMethods extends MovePiece {
                     el1.color= ""
                 })
             })
-    selectDiagonalPath(index, bishopPos, color, pieceName, playerTr, updateCases)
-    selectHorizontalPath(index, bishopPos, color, pieceName, playerTr, updateCases)
-    selectVerticalPath(index, bishopPos, color, pieceName, playerTr, updateCases)
+    selectDiagonalPath(index, bishopPos, color, pieceName, playerTr, updateCases, block)
+    selectHorizontalPath(index, bishopPos, color, pieceName, playerTr, updateCases, block)
+    selectVerticalPath(index, bishopPos, color, pieceName, playerTr, updateCases, block)
     return updateCases
 })
 }

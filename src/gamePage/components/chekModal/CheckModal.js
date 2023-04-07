@@ -2,7 +2,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import './CheckModal.css'
 
-import { Check, PlayTr } from "../GameSpace";
+import { Check } from "../GameSpace";
 
 function CheckModal (props) {
 
@@ -11,14 +11,13 @@ function CheckModal (props) {
     const [opacity, setOpacity] = useState(0)
 
     const check = useContext(Check)
-    const playerTurn = useContext(PlayTr)
 
     const style = {top : ` ${50 - top}%`,
                     display : display,
                     opacity : opacity}
 
     useEffect(()=> {
-        console.log("from modal ",check);
+        console.log("from modal ", check);
         if(check){
             setTimeout(()=>{
                 setDisplay("block")
@@ -35,7 +34,7 @@ function CheckModal (props) {
                             }, 100)
                         },1000)
                 },100)
-            },200)
+            },100)
         }
         
     }, [check])
