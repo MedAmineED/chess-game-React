@@ -156,7 +156,7 @@ export function selectKnightPath(knightPos, updateCases, index, color, playerTr,
                     updateCases[knightPos.y - 1][knightPos.x + 2].color= color 
                     updateCases[knightPos.y - 1][knightPos.x + 2].pieceName= "knight" }
         }
-
+  
         if(knightPos.y - 1 >=0 && knightPos.x - 2 >= 0){
             if(updateCases[knightPos.y - 1][knightPos.x - 2].checked){
 

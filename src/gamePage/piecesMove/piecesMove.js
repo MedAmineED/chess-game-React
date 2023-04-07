@@ -189,6 +189,7 @@ class PawnMethods extends MovePiece {
                                             && pawnPos.x + 1 < 7
                                             && updaECases[pawnPos.y  + 1][pawnPos.x + 1].eat === "black"
                                             && updaECases[pawnPos.y  + 1][pawnPos.x + 1].checked) {
+                                                
                                                 updaECases[pawnPos.y  + 1][pawnPos.x + 1].selected = "tomove";
                                                 updaECases[pawnPos.y  + 1][pawnPos.x + 1].color = color;
                                                 updaECases[pawnPos.y  + 1][pawnPos.x + 1].index = index;
@@ -198,6 +199,7 @@ class PawnMethods extends MovePiece {
                                             && pawnPos.x - 1 > 0
                                             && updaECases[pawnPos.y  + 1][pawnPos.x - 1].eat === "black"
                                             && updaECases[pawnPos.y  + 1][pawnPos.x - 1].checked) {
+
                                                 updaECases[pawnPos.y  + 1][pawnPos.x - 1].selected = "tomove";
                                                 updaECases[pawnPos.y  + 1][pawnPos.x - 1].color = color;
                                                 updaECases[pawnPos.y  + 1][pawnPos.x - 1].index = index;
