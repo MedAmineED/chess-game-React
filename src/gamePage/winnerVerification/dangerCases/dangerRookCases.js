@@ -29,6 +29,7 @@ export  function verticalDangerZone (y, x, board, updateCases) {
                                             //between the piece and the king under attack value true
                                             updateCases[k][x].checked = true
                                         }
+                                        updateCases[y][x].checked = true
                                     }
                                     board[y][x].props.data.color === "white"?
                                     updateCases[y + i][x].danger.whiteDanger += 1 
@@ -58,6 +59,7 @@ export  function verticalDangerZone (y, x, board, updateCases) {
                                 for(let k = y; k > y - i; k--){
                                     updateCases[k][x].checked = true
                                 }
+                                updateCases[y][x].checked = true
                             }
                         board[y][x].props.data.color === "white"?
                         updateCases[y - i][x].danger.whiteDanger += 1 
@@ -99,6 +101,7 @@ export function horizontalDangerZone (y, x, board, updateCases) {
                                         for(let k = x; k < x + i; k++){
                                             updateCases[y][k].checked = true
                                         }
+                                        updateCases[y][x].checked = true
                                     }
                                     board[y][x].props.data.color === "white"?
                                     updateCases[y][x + i].danger.whiteDanger += 1 
@@ -128,6 +131,7 @@ export function horizontalDangerZone (y, x, board, updateCases) {
                                 for(let k = x; k > x - i; k--){
                                     updateCases[y][k].checked = true
                                 }
+                                updateCases[y][x].checked = true
                             }
                             board[y][x].props.data.color === "white"?
                             updateCases[y][x - i].danger.whiteDanger += 1 

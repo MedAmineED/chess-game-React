@@ -59,15 +59,14 @@ export function selectHorizontalPath (index, piecePos, color, pieceName, playerT
                     path2 = false
             }
         }
-        if(updateCases[piecePos.y][piecePos.x - i].checked === true){
-                     
+        if(updateCases[piecePos.y][piecePos.x - i].checked === true ){
+            
             updateCases[piecePos.y][piecePos.x - i].selected = "tomove" 
             updateCases[piecePos.y][piecePos.x - i].index = index
             updateCases[piecePos.y][piecePos.x - i].color= color
             updateCases[piecePos.y][piecePos.x - i].pieceName= pieceName   
-
-        
-        }if(updateCases[piecePos.y][piecePos.x - i].checked === false && check && 
+        }
+        if(updateCases[piecePos.y][piecePos.x - i].checked === false && check && 
             (updateCases[piecePos.y][piecePos.x - i].eat === "white"
             || updateCases[piecePos.y][piecePos.x - i].eat === "black") 
             ) {
