@@ -23,6 +23,7 @@ import { dangerPawnZone } from '../../../winnerVerification/dangerCases/dangerPa
 import { dangerKingZone } from '../../../winnerVerification/dangerCases/dangerKingCases';
 import { checkEngineVerification } from '../../../winnerVerification/chekKing/checkKingFunction';
 import { Check } from '../../GameSpace';
+import { protectKingVerticalAndHorizotal } from '../../../winnerVerification/virtualCheckKing/protectKingEngine';
 
 
 
@@ -126,7 +127,8 @@ function Table (props)  {
                                                                                 whiteDanger : 0,
                                                                                 blackDanger : 0
                                                                                 },
-                                                                       checked : false}) 
+                                                                       checked : false,
+                                                                        protectKing : false}) 
 
                             if(i===6 || i===7)lineCasesStates.push({empty : false, 
                                                                     selected : false, 
@@ -138,7 +140,8 @@ function Table (props)  {
                                                                               whiteDanger : 0,
                                                                               blackDanger : 0
                                                                               },
-                                                                    checked : false});
+                                                                    checked : false,
+                                                                    protectKing : false});
                         }else {
                             lineCasesStates.push({empty : true, 
                                                   selected : false, 
@@ -149,7 +152,8 @@ function Table (props)  {
                                                             whiteDanger : 0,
                                                             blackDanger : 0
                                                             },
-                                                    checked : false})
+                                                    checked : false,
+                                                    protectKing : false})
                         }
 
                     }
@@ -271,6 +275,15 @@ function Table (props)  {
         }
 
 
+        const protectKingFunction = (updateCases)=> {
+            for(let y = 0; y < 8; y++){
+                for(let x = 0; x < 8; x++){
+                    protectKingVerticalAndHorizotal(y, x, board, updateCases)
+                }
+            }
+        }
+
+
         
 
         useEffect(()=> {
@@ -282,8 +295,11 @@ function Table (props)  {
                                 cs1.danger.whiteDanger = 0
                                 cs1.danger.blackDanger = 0
                                 cs1.checked = false
+                                cs1.protectKing = false
                             })
                         })
+                        protectKingFunction(updateCases)
+                        return updateCases
                     })
                     dangerCases(dangerRookZone, "rook")
                     dangerCases(dangerBishopZone, "bishop")
@@ -291,6 +307,8 @@ function Table (props)  {
                     dangerCases(dangerKnightZone, "knight")
                     dangerCases(dangerPawnZone, "pawn")
                     dangerCases(dangerKingZone, "king")
+
+                    
 
                     const cheCkEngine = setInterval(()=>checkEngineVerification(board, allCases, props),200)
 

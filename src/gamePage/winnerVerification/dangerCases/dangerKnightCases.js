@@ -69,7 +69,6 @@ export function dangerKnightZone (y, x, board, boardCase, updateCases) {
     }
 
         finindKing.forEach((cs)=>{
-            console.log(cs);
         if(cs.props 
             && cs.props.data.name === "king"
             && board[y][x].props.color !== cs.props.data.color){

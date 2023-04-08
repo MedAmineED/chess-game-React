@@ -23,7 +23,6 @@ export  function verticalDangerZone (y, x, board, updateCases) {
                                 || (board[y + i][x].props.data.name === "king" && board[y][x].props.data.color !== board[y + i][x].props.data.color)){
                                    
                                     if(board[y + i][x].props && board[y + i][x].props.data.name === "king"){
-                                        console.log("checked");
                                         for(let k = y; k < y + i; k++){
                                             //add to all checked keys of virtual board cases related
                                             //between the piece and the king under attack value true
