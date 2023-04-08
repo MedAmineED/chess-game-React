@@ -322,7 +322,7 @@ class RookMethods extends MovePiece {
 class KnightMethods extends MovePiece {
 
 
-    selectPath = (index, knightPos, color, playerTr, blocked)=> {
+    selectPath = (index, knightPos, color, playerTr, blocked, board)=> {
 
         this.setCase((cs)=> {
             const updateCases = [...cs];
@@ -333,7 +333,7 @@ class KnightMethods extends MovePiece {
                     el1.color= ""
                 })
             })
-            selectKnightPath(knightPos, updateCases, index, color, playerTr, blocked)
+            selectKnightPath(knightPos, updateCases, index, color, playerTr, blocked, board)
 
             
             

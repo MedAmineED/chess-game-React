@@ -23,7 +23,6 @@ import { dangerPawnZone } from '../../../winnerVerification/dangerCases/dangerPa
 import { dangerKingZone } from '../../../winnerVerification/dangerCases/dangerKingCases';
 import { checkEngineVerification } from '../../../winnerVerification/chekKing/checkKingFunction';
 import { Check } from '../../GameSpace';
-import { protectKingVerticalAndHorizotal } from '../../../winnerVerification/virtualCheckKing/protectKingEngine';
 
 
 
@@ -249,7 +248,7 @@ function Table (props)  {
     function path  (index, pos, color, pieceName, playerTr, canPlay, check) {
         if(canPlay){
                 if(pieceName === "pawn")newPawn.selectPath(index, pos, color, check)
-                if(pieceName === "knight")newKnight.selectPath(index, pos, color, playerTr, check)
+                if(pieceName === "knight")newKnight.selectPath(index, pos, color, playerTr, check, board)
                 if(pieceName === "rook")newRook.selectPath(index, pos, color, playerTr, pieceName, check)
                 if(pieceName === "bishop")newBishop.selectPath(index, pos, color, playerTr, pieceName, check)
                 if(pieceName === "king")newKIng.selectPath(index, pos, color, playerTr, pieceName)
@@ -275,13 +274,7 @@ function Table (props)  {
         }
 
 
-        const protectKingFunction = (updateCases)=> {
-            for(let y = 0; y < 8; y++){
-                for(let x = 0; x < 8; x++){
-                    protectKingVerticalAndHorizotal(y, x, board, updateCases)
-                }
-            }
-        }
+
 
 
         
@@ -298,7 +291,6 @@ function Table (props)  {
                                 cs1.protectKing = false
                             })
                         })
-                        protectKingFunction(updateCases)
                         return updateCases
                     })
                     dangerCases(dangerRookZone, "rook")

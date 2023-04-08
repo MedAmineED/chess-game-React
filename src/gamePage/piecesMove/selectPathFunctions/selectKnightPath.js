@@ -1,6 +1,36 @@
-export function selectKnightPath(knightPos, updateCases, index, color, playerTr, blocked) {
+import { protectKingVerticalAndHorizotal } from "../../winnerVerification/protectKing/protectKingEngine";
 
-    if(!blocked){    
+export function selectKnightPath(knightPos, updateCases, index, color, playerTr, blocked, board) {
+
+    let protect = false;
+    let y = knightPos.y
+    let x = knightPos.x
+
+    let direction = {
+        verticalDirection : true,
+        horizontalDirection : true,
+        firstDiagonalDirection : true,
+        secondDiagonalDirection : true
+    }
+
+    
+
+    protectKingVerticalAndHorizotal(y, x, board, updateCases, direction)
+
+    const keysDirecton = Object.keys(direction)
+
+    
+    keysDirecton.forEach((dr)=> {
+        console.log(direction[dr]);
+        if(direction[dr] === false){
+            console.log("mel direction");
+             protect = true
+            }
+    })
+
+
+
+    if(!blocked && !protect){    
         if(knightPos.y + 2 < 8 && knightPos.x + 1 < 8) {
             if((updateCases[knightPos.y + 2][knightPos.x + 1].empty)
             ||((playerTr % 2 === 0 && updateCases[knightPos.y + 2][knightPos.x + 1].eat === "white") 
