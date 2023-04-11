@@ -1,235 +1,224 @@
-let  pawn = {
-    whitePlayer :  [{   name : "pawn",
-                        id : 0,
-                        position : {x : 0,
-                                    y : 1},
-                        color : "white",
-                        firstStep : true
-                    },
-                    {   name : "pawn",
-                        id : 1,
-                        position : {x : 1,
-                                    y : 1},
-                        color : "white",
-                        firstStep : true
-                    },
-                    {   name : "pawn",
-                        id : 2,
-                        position : {x : 2,
-                                    y : 1},
-                        color : "white",
-                        firstStep : true
-                    },
-                    {   name : "pawn",
-                        id : 3,
-                        position : {x : 3,
-                                    y : 1},
-                        color : "white",
-                        firstStep : true
-                    },
-                    {   name : "pawn",
-                        id : 4,
-                        position : {x : 4,
-                                    y : 1},
-                        color : "white",
-                        firstStep : true
-                    },
-                    {   name : "pawn",
-                        id : 5,
-                        position : {x : 5,
-                                    y : 1},
-                        color : "white",
-                        firstStep : true
-                    },
-                     {   name : "pawn",
-                        id : 6,
-                        position : {x : 6,
-                                    y : 1},
-                        color : "white",
-                        firstStep : true
-                    },
-                     {   name : "pawn",
-                        id : 7,
-                        position : {x : 7,
-                                    y : 1},
-                        color : "white",
-                        firstStep : true
-    }],
-    blackPlayer :  [{   name : "pawn",
-                        id : 0,
-                        position : {x : 0,
-                                    y : 6},
-                        color : "black",
-                        firstStep : true
-                    },
-                     {   name : "pawn",
-                        id : 1,
-                        position : {x : 1,
-                                    y : 6},
-                        color : "black",
-                        firstStep : true
-                    },
-                     {   name : "pawn",
-                        id : 2,
-                        position : {x : 2,
-                                    y : 6},
-                        color : "black",
-                        firstStep : true
-                    },
-                     {   name : "pawn",
-                        id : 3,
-                        position : {x : 3,
-                                    y : 6},
-                        color : "black",
-                        firstStep : true
-                    },
-                     {   name : "pawn",
-                        id : 4,
-                        position : {x : 4,
-                                    y : 6},
-                        color : "black",
-                        firstStep : true
-                    },
-                     {   name : "pawn",
-                        id : 5,
-                        position : {x : 5,
-                                    y : 6},
-                        color : "black",
-                        firstStep : true
-                    },
-                     {   name : "pawn",
-                        id : 6,
-                        position : {x : 6,
-                                    y : 6},
-                        color : "black",
-                        firstStep : true
-                    },
-                     {   name : "pawn",
-                        id : 7,
-                        position : {x : 7,
-                                    y : 6},
-                        color : "black",
-                        firstStep : true
-    }]
+export const piecesData = [
+      [{
+        position:{ x: 0, y: 0}, 
+        pieceName: 'rook',
+        color : "white",
+        isSelected : false,
+        image : "chessPiciesImg/Chess_rlt60.png"
+       },
+      {
+        position:{ x: 1, y: 0}, 
+        pieceName: 'knight',
+        color : "white",
+        isSelected : false,
+        image : "chessPiciesImg/Chess_nlt60.png"
+      },
+        
+      {
+        position:{ x: 2, y: 0}, 
+        pieceName: 'bishop',
+        color : "white",
+        isSelected : false,
+        image : "chessPiciesImg/Chess_blt60.png"
+      },
+        
+      {
+        position:{ x: 3, y: 0}, 
+        pieceName: 'queen', 
+        color : "white",
+        isSelected : false,
+        image : "chessPiciesImg/Chess_qlt60.png"
+      },
+        
+      {
+        position:{ x: 4, y: 0}, 
+        pieceName: 'king', 
+        color : "white",
+        isSelected : false,
+        image : "chessPiciesImg/Chess_klt60.png"
+      },
+        
+      {
+        position:{ x: 5, y: 0}, 
+        pieceName: 'bishop', 
+        color : "white",
+        isSelected : false,
+        image : "chessPiciesImg/Chess_blt60.png"
+      },
+         
+      {
+        position:{ x: 6, y: 0}, 
+        pieceName: 'knight', 
+        color : "white",
+        isSelected : false,
+        image : "chessPiciesImg/Chess_nlt60.png"
+      },
+        
+      {
+        position:{ x: 7, y: 0}, 
+        pieceName: 'rook', 
+        color : "white",
+        isSelected : false,
+        image : "chessPiciesImg/Chess_rlt60.png" 
+      }],
+        
+      [{
+        position:{ x: 0, y: 1}, 
+        pieceName: 'pawn',
+        color : "white",
+        isSelected : false,
+        image : "chessPiciesImg/Chess_plt60.png"
+      },
+      {
+        position:{ x: 1, y: 1}, 
+        pieceName: 'pawn',
+        color : "white",
+        isSelected : false,
+        image : "chessPiciesImg/Chess_plt60.png"
+      },
+      {
+        position:{ x: 2, y: 1}, 
+        pieceName: 'pawn',
+        color : "white",
+        isSelected : false,
+        image : "chessPiciesImg/Chess_plt60.png"
+      },
+      {
+        position:{ x: 3, y: 1}, 
+        pieceName: 'pawn',
+        color : "white",
+        isSelected : false,
+        image : "chessPiciesImg/Chess_plt60.png"
+      },
+      {
+        position:{ x: 4, y: 1}, 
+        pieceName: 'pawn',
+        color : "white",
+        isSelected : false,
+        image : "chessPiciesImg/Chess_plt60.png"
+      },
+      {
+        position:{ x: 5, y: 1}, 
+        pieceName: 'pawn',
+        color : "white",
+        isSelected : false,
+        image : "chessPiciesImg/Chess_plt60.png"
+      },
+      {
+        position:{ x: 6, y: 1}, 
+        pieceName: 'pawn',
+        color : "white",
+        isSelected : false,
+        image : "chessPiciesImg/Chess_plt60.png"
+      },
+      {
+        position:{ x: 7, y: 1}, 
+        pieceName: 'pawn',
+        color : "white",
+        isSelected : false,
+        image : "chessPiciesImg/Chess_plt60.png"
+      }],
 
-}
-const knight = {
-                whitePlayer : [
-                    {   name : "knight",
-                        id : 0,
-                        position : {x:1, y:0},
-                        color : "white"
-                    },
-                    {   name : "knight",
-                        id : 1,
-                        position : {x:6, y:0},
-                        color : "white"
-                    }
-                    ],
-                    blackPlayer : [
-                                {   name : "knight",
-                                    id : 0,
-                                    position : {x:1 , y:7},
-                                    color : "black"
-                                },
-                                {   name : "knight",
-                                    id : 1,
-                                    position : {x:6, y:7},
-                                    color : "black"
-                                }
-                        
-                            ]
-}
+      [null, null, null, null,null, null, null, null],
+      [null, null, null, null,null, null, null, null],
+      [null, null, null, null,null, null, null, null],
+      [null, null, null, null,null, null, null, null],
 
-const rook = {
-            whitePlayer : [
-                        {   name : "rook",
-                            id : 0,
-                            position : {x:0 , y:0},
-                            color : "white"
-                        },
-                        {   name : "rook",
-                            id : 1,
-                            position : {x:7, y:0},
-                            color : "white"
-                        }
-                
-            ],
-            blackPlayer : [
-                        {   name : "rook",
-                            id : 0,
-                            position : {x:0 , y:7},
-                            color : "black"
-                        },
-                        {   name : "rook",
-                            id : 1,
-                            position : {x:7, y:7},
-                            color : "black"
-                        }
-                
-                    ]
-
-}
-
-const bishop = {
-                whitePlayer : [
-                        {   name : "bishop",
-                            id : 0,
-                            position : {x:2 , y:0},
-                            color : "white"
-                        },
-                        {   name : "bishop",
-                            id : 1,
-                            position : {x:5, y:0},
-                            color : "white"
-                        }
-
-                    ],
-                blackPlayer : [
-                        {   name : "bishop",
-                            id : 0,
-                            position : {x:2 , y:7},
-                            color : "black"
-                        },
-                        {   name : "bishop",
-                            id : 1,
-                            position : {x:5, y:7},
-                            color : "black"
-                        }
-                    ]
-}
-
-const king =  {
-            whitePlayer : {
-                name : "king",
-                id : 0,
-                position : {x:4 , y:0},
-                color : "white"
-            },
-            blackPlayer : {
-                name : "king",
-                id : 1,
-                position : {x:4 , y:7},
-                color : "black"
-            }
-}
-
-
-const queen = {
-    whitePlayer : {
-        name : "queen",
-        id : 0,
-        position : {x:3 , y:0},
-        color : "white"
-    },
-    blackPlayer : {
-        name : "queen",
-        id : 1,
-        position : {x:3 , y:7},
-        color : "black"
-    }
-
-}
-
-
-export {pawn, rook, knight, bishop, king, queen}
+      [{
+        position:{ x: 0, y: 6}, 
+        pieceName: 'pawn',
+        color : "black",
+        isSelected : false,
+        image : "chessPiciesImg/Chess_pdt60.png"  },
+      {
+        position:{ x: 1, y: 6}, 
+        pieceName: 'pawn',
+        color : "black",
+        isSelected : false,
+        image : "chessPiciesImg/Chess_pdt60.png"  },
+      {
+        position:{ x: 2, y: 6}, 
+        pieceName: 'pawn',
+        color : "black",
+        isSelected : false,
+        image : "chessPiciesImg/Chess_pdt60.png"  },
+      {
+        position:{ x: 3, y: 6}, 
+        pieceName: 'pawn',
+        color : "black",
+        isSelected : false,
+        image : "chessPiciesImg/Chess_pdt60.png"  },
+      {
+        position:{ x: 4, y: 6}, 
+        pieceName: 'pawn',
+        color : "black",
+        isSelected : false,
+        image : "chessPiciesImg/Chess_pdt60.png"  },
+      {
+        position:{ x: 5, y: 6}, 
+        pieceName: 'pawn',
+        color : "black",
+        isSelected : false,
+        image : "chessPiciesImg/Chess_pdt60.png"  },
+      {
+        position:{ x: 6, y: 6}, 
+        pieceName: 'pawn',
+        color : "black",
+        isSelected : false,
+        image : "chessPiciesImg/Chess_pdt60.png"  },
+      {
+        position:{ x: 7, y: 6}, 
+        pieceName: 'pawn',
+        color : "black",
+        isSelected : false,
+        image : "chessPiciesImg/Chess_pdt60.png"  },],
+      [{
+        position:{ x: 0, y: 7}, 
+        pieceName: 'rook', 
+        color : "black",
+        isSelected : false,
+        image :  "chessPiciesImg/Chess_rdt60.png"},
+      {
+        position:{ x: 1, y: 7}, 
+        pieceName: 'knight', 
+        color : "black",
+        isSelected : false,
+        image : "chessPiciesImg/Chess_ndt60.png"  },
+      {
+        position:{ x: 2, y: 7}, 
+        pieceName: 'bishop', 
+        color : "black",
+        isSelected : false,
+        image : "chessPiciesImg/Chess_bdt60.png"  },
+      {
+        position:{ x: 3, y: 7}, 
+        pieceName: 'queen', 
+        color : "black",
+        isSelected : false,
+        image : "chessPiciesImg/Chess_qdt60.png" },
+      {
+        position:{ x: 4, y: 7}, 
+        pieceName: 'king', 
+        color : "black",
+        isSelected : false,
+        image : "chessPiciesImg/Chess_kdt60.png" 
+      },
+      {
+        position:{ x: 5, y: 7}, 
+        pieceName: 'bishop', 
+        color : "black",
+        isSelected : false,
+        image : "chessPiciesImg/Chess_bdt60.png"  },
+      {
+        position:{ x: 6, y: 7}, 
+        pieceName: 'knight', 
+        color : "black",
+        isSelected : false,
+        image : "chessPiciesImg/Chess_ndt60.png"  },
+      {
+        position:{ x: 7, y: 7}, 
+        pieceName: 'rook', 
+        color : "black",
+        isSelected : false,
+        image :  "chessPiciesImg/Chess_rdt60.png"}]
+    ]

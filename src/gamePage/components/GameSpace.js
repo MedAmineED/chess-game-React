@@ -3,8 +3,6 @@ import Table from "./gameComponents/table/Table";
 
 import "./GameSpace.css"
 import PlayerCardInfo from "./PlayerCardInfo/PlayerCardInfo";
-import StartModal from "./StartModal/StartModal";
-import CheckModal from "./chekModal/CheckModal";
 
 
 
@@ -28,13 +26,7 @@ function GameSpace () {
 
     const [firstPlayerName, setFirstPlayesName] = useState("")
     const [secondPlayerName, setSecondPlayesName] = useState("")
-
-
-    const [start, setStart] = useState(false)
-
-
-
-
+    const [start, setStart] = useState(true)
     const [totalTime, setTotalTime] = useState({
                                                 rangeValue : 0,
                                                 hours : 0,
@@ -45,8 +37,10 @@ function GameSpace () {
                                                 seconds : 30,
                                                 minutes : 0
                                             })
-
     const [check, setCheck] = useState(false)
+
+
+    
     
     const changeCheck = (check) => {
         setCheck(check)
@@ -85,9 +79,7 @@ function GameSpace () {
 
 
 
-    const startGame = ()=> {
-        if(firstPlayerName !== "" && secondPlayerName !== "")setStart(true)
-    }
+    
 
 
 
@@ -104,13 +96,7 @@ function GameSpace () {
           <TurnTime.Provider value={turnTime}>
           <Check.Provider value ={check}>
 
-
-                <StartModal startGame = {startGame} 
-                            changeName = {createPlayerName} 
-                            playersNames = {{firstPlayerName : firstPlayerName, secondPlayerName : secondPlayerName}} 
-                            changeTime = {showTime}
-                            />
-                <CheckModal check = {check} />
+          
                 <PlayerCardInfo player = "P1" />
                 <Table playerTurn = {newTurn}  check = {check} changeCheck = {changeCheck}/>
                 <PlayerCardInfo player = "P2" />
