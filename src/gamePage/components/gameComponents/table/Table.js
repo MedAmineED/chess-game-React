@@ -92,44 +92,33 @@ function Table (props)  {
 
 
     //new real board
-    // let realBoardArr = []
-    // function realBoadr () {
+    // function realBoard () {
+    //     let realBoardArr = []
     //     for (let y = 0; y < 8; y++) {
     //         let rowArr = []
     //         for(let x = 0; x < 8; x++){
-    //             switch (true) {
-    //                 case ((y === 0 || y === 7) && (x === 0 || x === 7) ) :
-    //                     x === 0 && y === 0? rowArr.push(<Piece position = {whiteRookPosition[0]} 
+    //                     if(x === 0 && y === 0){ rowArr.push(<Piece position = {whiteRookPosition[0]} 
     //                                                           data = {rook.whitePlayer[0]} 
-    //                                                           selectPath = {path} />)
-    //                     : x === 7 && y === 0? rowArr.push(<Piece position = {whiteRookPosition[1]} 
+    //                                                           selectPath = {path} />)}
+    //                     else if(x === 7 && y === 0) {rowArr.push(<Piece position = {whiteRookPosition[1]} 
     //                                                             data = {rook.whitePlayer[1]} 
-    //                                                             selectPath = {path} />)
-    //                     : x === 0 && y === 7? rowArr.push(<Piece position = {blackRookPosition[0]} 
+    //                                                             selectPath = {path} />)}
+    //                     else if(x === 0 && y === 7){ rowArr.push(<Piece position = {blackRookPosition[0]} 
     //                                                             data = {rook.whitePlayer[0]} 
-    //                                                             selectPath = {path} />)
-    //                     : x === 0 && y === 7? rowArr.push(<Piece position = {blackRookPosition[0]} 
+    //                                                             selectPath = {path} />)}
+    //                     else if(x === 7 && y === 7){ rowArr.push(<Piece position = {blackRookPosition[0]} 
     //                                                             data = {rook.blackPlayer[0]} 
-    //                                                             selectPath = {path} />)
-    //                     : rowArr.push(<Piece position = {blackRookPosition[1]} 
-    //                                                             data = {rook.blackPlayer[1]} 
-    //                                                             selectPath = {path} />)
+    //                                                             selectPath = {path} />)}
+    //                     else {rowArr.push("")}
                         
-    //                     break;
-    //                 case y === 0 && (x === 1 || x === 6) :
-    //                     x === 1? rowArr.push(<Piece position = {whiteRookPosition[0]} data = {rook.whitePlayer[0]} selectPath = {path} />)
-    //                             : rowArr.push(<Piece position = {whiteRookPosition[0]} data = {rook.whitePlayer[1]} selectPath = {path} />)
-    //                     break;
                         
-                
-    //                 default:
-    //                     rowArr.push("")
-    //                     break;
+
     //             }
+    //             realBoardArr.push(rowArr)
     //         }
-    //         realBoardArr.push(rowArr)
+    //         return realBoardArr
     //     }
-    // }
+    
     
     
     //Real board
