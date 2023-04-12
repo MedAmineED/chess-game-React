@@ -1,26 +1,61 @@
 export function selectDiagonalPath(allPossibleMoves, allPiecesData, color, pieceName, position) {
+  selectBishopPath(...arguments, 1)
+  selectBishopPath(...arguments, 2)
+  selectBishopPath(...arguments, 3)
+  selectBishopPath(...arguments, 4)
+}
+
+
+
+function selectBishopPath (allPossibleMoves, allPiecesData, color, pieceName, position, path) {
     const { row, col } = position;
 
-    let path1 = true;
-    let path2 = true;
-    let path3 = true;
-    let path4 = true;
+    let possibleSelect = true;
 
         for(let step = 1; step < 8; step ++) {
-          const cellExixst =  row + step  >= 0 
-                                && row + step < 8 
-                                && col + step >= 0 
-                                && col + step < 8? 
-                                true : false;
+            const seLectCells = path === 1? {
+                                            newRow : row + step,
+                                            newCol : col + step
+                                            }
+                                : path === 2? {
+                                            newRow : row + step,
+                                            newCol : col - step
+                                            }
+                                : path === 3? {
+                                            newRow : row - step,
+                                            newCol : col + step
+                                            }
+                                : path === 4? {
+                                            newRow : row - step,
+                                            newCol : col - step
+                                            } 
+                                : false
 
-          const seLectCells = {
-                            newRow : row + step,
-                            newCol : col + step
-          }
-          if(cellExixst) {
-            allPossibleMoves.push({ row : seLectCells.newRow, col : seLectCells.newCol })
-          }
+
+            const { newRow, newCol } = seLectCells
+
+            const cellExist =  newRow >= 0 
+                                    && newRow < 8 
+                                    && newCol >= 0 
+                                    && newCol < 8? 
+                                    true : false;
+
+            const possibleToEat = cellExist && allPiecesData[newRow][newCol]? 
+                                    allPiecesData[newRow][newCol].color !== color 
+                                    : false
+
+
+
+            if(cellExist && allPiecesData[newRow][newCol] === null && possibleSelect) {
+                    allPossibleMoves.push({ row : newRow, col : newCol })
+            }
+            if(cellExist && possibleToEat && possibleSelect){
+                    allPossibleMoves.push({ row : newRow, col : newCol })
+                    possibleSelect = false
+            }
+            if( cellExist && allPiecesData[newRow][newCol] !== null && !possibleToEat){
+                    possibleSelect = false
+            }
         }
-    
-    
+
 }
