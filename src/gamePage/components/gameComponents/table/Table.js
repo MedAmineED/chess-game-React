@@ -56,7 +56,6 @@ function Table (props)  {
     
       // function to handle piece click events
       const handlePieceClick = (rowIndex, colIndex) => {
-
         initSelectedCases()
         const clickedPiece = allPiecesData[rowIndex][colIndex];
         if (clickedPiece) {
