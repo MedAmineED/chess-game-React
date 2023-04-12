@@ -38,9 +38,26 @@ function Table (props)  {
     const [allPiecesData, setAllPiecesData] = useState([...piecesData])
     const [selectedPiece, setSelectedPiece] = useState(null);
     const [possibleMoves, setPossibleMoves] = useState([]);
+
+
+    const initSelectedCases = ()=> {
+      setAllPiecesData(()=> {
+        const updateAllPiecesData = [...allPiecesData]
+        updateAllPiecesData.map((row)=>{
+              row.map((cell)=> {
+                if(cell) cell.isSelected = false
+              })
+        })
+        return updateAllPiecesData
+    })
+    }
+
+    
     
       // function to handle piece click events
       const handlePieceClick = (rowIndex, colIndex) => {
+
+        initSelectedCases()
         const clickedPiece = allPiecesData[rowIndex][colIndex];
         if (clickedPiece) {
 
@@ -53,15 +70,31 @@ function Table (props)  {
             selectPath(allPossibleMoves, allPiecesData, color, pieceName, { row: rowIndex, col: colIndex });
             return allPossibleMoves;
           })
+          setAllPiecesData(()=> {
+              const updateAllPiecesData = [...allPiecesData]
+              updateAllPiecesData[rowIndex][colIndex].isSelected = true
+              return updateAllPiecesData
+          })
         } else {
-          setSelectedPiece(null);
-          setPossibleMoves([]);
+            setSelectedPiece(null);
+            setPossibleMoves([]);
         }
       };
 
 
-      const movePieces = (rowIndex, colIndex, isPossibleMove) => {
-
+      const movePieces = (rowIndex, colIndex, isPossibleMove, pieceCanMove) => {
+                  if(isPossibleMove) {
+                    setAllPiecesData(() => {
+                      const updateAllPiecesData = [...allPiecesData];
+                      updateAllPiecesData[pieceCanMove.position.y][pieceCanMove.position.x] = null;
+                      updateAllPiecesData[rowIndex][colIndex] = pieceCanMove;
+                      updateAllPiecesData[rowIndex][colIndex].position = { y: rowIndex, x: colIndex };
+                      return updateAllPiecesData;
+                    })
+                    
+                  setSelectedPiece(null);
+                  setPossibleMoves([]);
+                  }
       }
     
       // render each cell in the cells array
@@ -69,10 +102,10 @@ function Table (props)  {
         return allPiecesData.map((row, rowIndex) =>
           row.map((cell, colIndex) => {
 
-
             const isWhite = (rowIndex + colIndex) % 2 === 0;
             const isSelected = selectedPiece && selectedPiece.row === rowIndex && selectedPiece.col === colIndex;
             const isPossibleMove = possibleMoves.some(move => move.row === rowIndex && move.col === colIndex);
+            const pieceCanMove = selectedPiece? allPiecesData[selectedPiece.row][selectedPiece.col] : null
             const piece = cell ? (
                                     <Piece
                                       key={`${rowIndex}-${colIndex}`}
@@ -86,8 +119,7 @@ function Table (props)  {
 
             return (
               <div key={`${rowIndex}-${colIndex}`} 
-              //bech nzid event click w wa7da mel les properiete bech tkoun isPossibleMove w ella na3mel case component
-              //w n3adilha click event bech tsir el move mta3 el piece 
+              onClick={()=> movePieces(rowIndex, colIndex, isPossibleMove, pieceCanMove)}
                     className={`${rowIndex}-${colIndex} 
                                 ${isWhite ? 'white-case' : 'black-case'} 
                                 ${isSelected ? 'selected' : ''} 

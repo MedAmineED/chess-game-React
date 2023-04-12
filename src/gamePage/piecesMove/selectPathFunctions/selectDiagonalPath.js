@@ -1,13 +1,13 @@
-export function selectDiagonalPath(allPossibleMoves, allPiecesData, color, pieceName, position) {
-  selectBishopPath(...arguments, 1)
-  selectBishopPath(...arguments, 2)
-  selectBishopPath(...arguments, 3)
-  selectBishopPath(...arguments, 4)
+export function selectBishopPath(allPossibleMoves, allPiecesData, color, pieceName, position) {
+  selectDiagonalPath(...arguments, 1)
+  selectDiagonalPath(...arguments, 2)
+  selectDiagonalPath(...arguments, 3)
+  selectDiagonalPath(...arguments, 4)
 }
 
 
 
-function selectBishopPath (allPossibleMoves, allPiecesData, color, pieceName, position, path) {
+function selectDiagonalPath (allPossibleMoves, allPiecesData, color, pieceName, position, path) {
     const { row, col } = position;
 
     let possibleSelect = true;
@@ -35,10 +35,10 @@ function selectBishopPath (allPossibleMoves, allPiecesData, color, pieceName, po
             const { newRow, newCol } = seLectCells
 
             const cellExist =  newRow >= 0 
-                                    && newRow < 8 
-                                    && newCol >= 0 
-                                    && newCol < 8? 
-                                    true : false;
+                               && newRow < 8 
+                               && newCol >= 0 
+                               && newCol < 8? 
+                               true : false;
 
             const possibleToEat = cellExist && allPiecesData[newRow][newCol]? 
                                     allPiecesData[newRow][newCol].color !== color 

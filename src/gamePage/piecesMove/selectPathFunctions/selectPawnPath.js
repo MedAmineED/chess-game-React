@@ -25,7 +25,7 @@ export function selectPawnPath(allPossibleMoves, allPiecesData, color, pieceName
 
 
     const rowExist = oneCase.row < 8 && oneCase.row >= 0
-    const colExist = eatMoveOne.col < 8 && eatMoveTow.col >= 0
+    
 
 
     if(isFirstStep && nextCase === null && afterNextCase === null) {
@@ -36,15 +36,16 @@ export function selectPawnPath(allPossibleMoves, allPiecesData, color, pieceName
     }
 
 
-
+    const eatOneExist = eatMoveOne.col < 8 && eatMoveOne.col >= 0
+    const eatTowExist = eatMoveTow.col < 8 && eatMoveTow.col >= 0
     const canEatOne =  possibleCaseToEatOne? color !== possibleCaseToEatOne.color : false
     const canEatTow =  possibleCaseToEatTow? color !== possibleCaseToEatTow.color : false
 
 
-    if(colExist && canEatOne){
+    if(eatOneExist && canEatOne){
         allPossibleMoves.push(eatMoveOne)
     }
-    if(colExist && canEatTow){
+    if(eatTowExist && canEatTow){
         allPossibleMoves.push(eatMoveTow)
     }
 

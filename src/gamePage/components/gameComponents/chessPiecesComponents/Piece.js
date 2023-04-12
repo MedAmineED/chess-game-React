@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 import { useContext, useEffect, useState } from "react";
 import { Check, PlayTr, Start } from "../../GameSpace";
+import './Piece.css'
 
 
 
@@ -24,7 +25,7 @@ function Piece (props) {
         setBlocked(check)
     }, [check])
 
-
+        
 
     useEffect(()=>{
         setCanPlay(start)
@@ -41,7 +42,7 @@ function Piece (props) {
     
     
     return (
-            <div onClick={hanDleClickMove}>
+            <div className="piece" onClick={hanDleClickMove}>
                     <img src=  {image} />
             </div>)
     
