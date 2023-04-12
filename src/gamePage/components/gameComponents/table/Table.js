@@ -11,7 +11,6 @@ import Piece from '../chessPiecesComponents/Piece'
 
 import { piecesData } from '../../../piecesData/piecesData';
 
-import { KnightMethods, RookMethods, BishopMethods, KingMethods, QueenMethods, PawnMethods } from '../../../piecesMove/piecesMove';
 import { dangerRookZone } from '../../../winnerVerification/dangerCases/dangerRookCases';
 import { dangerBishopZone } from '../../../winnerVerification/dangerCases/dangerBishopCases';
 import { dangerQueenZone } from '../../../winnerVerification/dangerCases/dangerQueenCases';
