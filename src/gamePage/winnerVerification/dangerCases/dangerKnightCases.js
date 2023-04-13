@@ -1,78 +1,28 @@
-export function dangerKnightZone (y, x, board, boardCase, updateCases) {
+export function dangerKnightCases(dangerCases, allPiecesData, color, position) {
+    const {row, col} = position;
+
+
+
+    const allJumps = [
+                        { newRow : row + 2, newCol : col + 1 },
+                        { newRow : row + 2, newCol : col - 1 },
+                        { newRow : row + 1, newCol : col + 2 },
+                        { newRow : row + 1, newCol : col - 2 },
+                        { newRow : row - 2, newCol : col + 1 },
+                        { newRow : row - 2, newCol : col - 1 },
+                        { newRow : row - 1, newCol : col + 2 },
+                        { newRow : row - 1, newCol : col - 2 }
+                    ]
+
     
-    let finindKing = []
+    allJumps.map((cl)=> {
+        const existCase = cl.newRow >= 0 && cl.newRow < 8 && cl.newCol >=0 && cl.newCol < 8;
+        const frindPiece = existCase  
+                           && (color === allPiecesData[cl.newRow][cl.newCol].color)
+        const empty = existCase 
+                      && allPiecesData[cl.newRow][cl.newCol] === null
 
-    if(y + 2 < 8 && x + 1 < 8) {
-        board[y][x].props.data.color === "white"?
-        updateCases[y + 2][x + 1].danger.whiteDanger += 1 
-        : updateCases[y + 2][x + 1].danger.blackDanger += 1 
-        finindKing.push(board[y + 2][x + 1])
-    }
-
-
-    if(y + 2 < 8 && x - 1 >= 0) {
-        board[y][x].props.data.color === "white"?
-        updateCases[y + 2][x - 1].danger.whiteDanger += 1 
-        : updateCases[y + 2][x - 1].danger.blackDanger += 1 
-        finindKing.push(board[y + 2][x - 1])
-    }
-
-
-    if(y - 2 >= 0&& x + 1 < 8) {
-        board[y][x].props.data.color === "white"?
-        updateCases[y - 2][x + 1].danger.whiteDanger += 1 
-        : updateCases[y - 2][x + 1].danger.blackDanger += 1 
-        finindKing.push(board[y - 2][x + 1])
-                
-    }
-
-    if(y - 2 >=0 && x - 1 >= 0){
-        board[y][x].props.data.color === "white"?
-        updateCases[y - 2][x - 1].danger.whiteDanger += 1 
-        : updateCases[y - 2][x - 1].danger.blackDanger += 1 
-        finindKing.push(board[y - 2][x - 1])
-    }
-
-
-    if(y + 1 < 8 && x + 2 < 8){ 
-        board[y][x].props.data.color === "white"?
-        updateCases[y  + 1][x + 2].danger.whiteDanger += 1 
-        : updateCases[y  + 1][x + 2].danger.blackDanger += 1 
-        finindKing.push(board[y + 1][x + 2])
-    }
-
-
-    if(y + 1 < 8 && x - 2 >= 0){
-        board[y][x].props.data.color === "white"?
-        updateCases[y  + 1][x - 2].danger.whiteDanger += 1 
-        : updateCases[y  + 1][x - 2].danger.blackDanger += 1
-        finindKing.push(board[y  + 1][x - 2])
-                    }
-
-
-    if(y - 1 >= 0 && x + 2 < 8){
-        
-        board[y][x].props.data.color === "white"?
-        updateCases[y  - 1][x + 2].danger.whiteDanger += 1 
-        : updateCases[y  - 1][x + 2].danger.blackDanger += 1
-        finindKing.push(board[y  - 1][x + 2])
-            
-    }
-
-    if(y - 1 >=0 && x - 2 >= 0){
-        
-        board[y][x].props.data.color === "white"?
-        updateCases[y - 1][x - 2].danger.whiteDanger += 1 
-        : updateCases[y - 1][x - 2].danger.blackDanger += 1
-        finindKing.push(board[y  - 1][x - 2])
-            
-    }
-
-        finindKing.forEach((cs)=>{
-        if(cs.props 
-            && cs.props.data.name === "king"
-            && board[y][x].props.color !== cs.props.data.color){
-                updateCases[y][x].checked = true
-            }
+        if(frindPiece || empty)dangerCases.push({row : cl.newRow, col : cl.newCol})
     })
+    
 }

@@ -1,12 +1,10 @@
-import { selectBishopPath } from "./selectDiagonalPath";
-import { selectKingPath } from "./selectKingPath";
-import { selectKnightPath } from "./selectKnightPath";
-import { selectPawnPath } from "./selectPawnPath";
-import { selectRookPath } from "./selectRookPath";
+import { selectBishopPath } from "./selectEachPiecePath/selectDiagonalPath";
+import { selectKingPath } from "./selectEachPiecePath/selectKingPath";
+import { selectKnightPath } from "./selectEachPiecePath/selectKnightPath";
+import { selectPawnPath } from "./selectEachPiecePath/selectPawnPath";
+import { selectRookPath } from "./selectEachPiecePath/selectRookPath";
 
 export function selectPath (allPossibleMoves, allPiecesData, color, pieceName, position, dangerCases) {
-
-            
 
             if(pieceName === "pawn")selectPawnPath(...arguments)
             if(pieceName === "rook" || pieceName === "queen")selectRookPath(...arguments)

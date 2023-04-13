@@ -19,7 +19,7 @@ import { dangerPawnZone } from '../../../winnerVerification/dangerCases/dangerPa
 import { dangerKingZone } from '../../../winnerVerification/dangerCases/dangerKingCases';
 import { checkEngineVerification } from '../../../winnerVerification/chekKing/checkKingFunction';
 import { Check } from '../../GameSpace';
-import { selectPath } from '../../../piecesMove/selectPathFunctions/selectPath';
+import { selectPath } from '../../../piecesPath/selectPath';
 import { dangerCasesEngine } from '../../../winnerVerification/dangerCases/dangerCasesEngine';
 
 import { PlayTr } from '../../GameSpace';

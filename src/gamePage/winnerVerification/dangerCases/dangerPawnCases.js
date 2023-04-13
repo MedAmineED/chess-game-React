@@ -26,15 +26,14 @@ export function dangerPawnCases(dangerCases, allPiecesData, color, position) {
     const inDangerTow =  possibleDangerTow? color === possibleDangerTow.color : false
 
 
+
     if(dangerOneExist && (inDangerOne || possibleDangerOne === null)){
-        const isExist =  dangerCases.includes(dangerCaseOne)
-        console.log(isExist);
-        if(!isExist)dangerCases.push({color:white? "white" : "black", position : dangerCaseOne})
+        dangerCases.push({color:white? "white" : "black", position : dangerCaseOne})
     }
     if(dangerTowExist && (inDangerTow || possibleDangerTow === null)){
-        const isExist =  dangerCases.includes(dangerCaseTow)
-        if(!isExist)dangerCases.push({color:white? "white" : "black", position : dangerCaseTow})
+        dangerCases.push({color:white? "white" : "black", position : dangerCaseTow})
     }
+    console.log(dangerCases);
 
 }
 
