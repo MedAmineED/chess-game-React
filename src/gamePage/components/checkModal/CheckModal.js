@@ -4,7 +4,7 @@ import './CheckModal.css'
 
 import { Check } from "../GameSpace";
 
-function CheckModal (props) {
+function CheckModal () {
 
     const [top, setTop] = useState(0)
     const [display, setDisplay] = useState("none")

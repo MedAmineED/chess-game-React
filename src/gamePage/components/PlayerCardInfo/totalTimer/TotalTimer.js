@@ -81,7 +81,8 @@ function TotalTimer (props) {
 
 
     const padST = (num)=> {
-        return num.toString().padStart(2, "0")};
+        return num.toString().padStart(2, "0")
+    };
 
     return  (<div className= {`timer`}>
                 <h4 className= {timeOut}>{padST(timer.hr)} : {padST(timer.min)} : {padST(timer.sec)}</h4>

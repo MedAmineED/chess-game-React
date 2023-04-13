@@ -1,21 +1,18 @@
 import React, { createContext, useState } from "react";
-import Table from "./gameComponents/table/Table";
-
 import "./GameSpace.css"
+import Table from "./gameComponents/table/Table";
 import PlayerCardInfo from "./PlayerCardInfo/PlayerCardInfo";
+import CheckModal from "./checkModal/CheckModal";
+import StartModal from "./StartModal/StartModal";
+
 
 
 
 export const PlayTr = createContext(0)
-
 export const PlayerName = createContext("")
-
 export const Start = createContext(false)
-
 export const ToatalTime = createContext({})
-
 export const TurnTime = createContext({})
-
 export const Check = createContext()
 
 
@@ -26,7 +23,7 @@ function GameSpace () {
 
     const [firstPlayerName, setFirstPlayesName] = useState("")
     const [secondPlayerName, setSecondPlayesName] = useState("")
-    const [start, setStart] = useState(true)
+    const [start, setStart] = useState(false)
     const [totalTime, setTotalTime] = useState({
                                                 rangeValue : 0,
                                                 hours : 0,
@@ -46,6 +43,9 @@ function GameSpace () {
         setCheck(check)
     }
 
+    const startGame = ()=> {
+        setStart(true)
+    }
 
     const createPlayerName = (e , player) => {
         if(player === 1)setFirstPlayesName(e.target.value)
@@ -61,7 +61,7 @@ function GameSpace () {
                             updateToatalTime.minutes = e.target.value % 60
                             updateToatalTime.rangeValue = e.target.value
                     return updateToatalTime;
-                        } )
+              } )
         }
         if(num === 2){
              setTurnTime((pr)=>{
@@ -70,7 +70,7 @@ function GameSpace () {
                             updateTurnTime.seconds = e.target.value % 60
                             updateTurnTime.rangeValue = e.target.value
                     return updateTurnTime;
-                        } )
+                        })
             }
         }
     
@@ -96,9 +96,16 @@ function GameSpace () {
           <TurnTime.Provider value={turnTime}>
           <Check.Provider value ={check}>
 
-          
+                <CheckModal />
+                <StartModal changeName = {createPlayerName}
+                            playersNames = {{ firstPlayerName, secondPlayerName }}
+                            startGame = {startGame} 
+                            changeTime = {showTime}
+                            />
                 <PlayerCardInfo player = "P1" />
-                <Table playerTurn = {newTurn}  check = {check} changeCheck = {changeCheck}/>
+                <Table playerTurn = {newTurn}  
+                        check = {check} 
+                        changeCheck = {changeCheck}/>
                 <PlayerCardInfo player = "P2" />
 
           

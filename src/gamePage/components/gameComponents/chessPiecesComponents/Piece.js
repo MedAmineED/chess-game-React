@@ -35,7 +35,7 @@ function Piece (props) {
         const row = props.data.position.y
         const col = props.data.position.x
         if(playerTurn % 2 === 0 && props.data.color === "white") {return}
-        //  if(playerTurn % 2 !== 0 && props.data.color === "black") {return}
+         if(playerTurn % 2 !== 0 && props.data.color === "black") {return}
         props.selectPath(row, col)
     }
         

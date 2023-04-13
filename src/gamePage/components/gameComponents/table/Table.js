@@ -92,6 +92,7 @@ function Table (props)  {
                     
                   setSelectedPiece(null);
                   setPossibleMoves([]);
+                  props.playerTurn()
                   }
       }
     
@@ -117,7 +118,7 @@ function Table (props)  {
 
             return (
               <div key={`${rowIndex}-${colIndex}`} 
-              onClick={()=> movePieces(rowIndex, colIndex, isPossibleMove, pieceCanMove)}
+                    onClick={()=> movePieces(rowIndex, colIndex, isPossibleMove, pieceCanMove)}
                     className={`${rowIndex}-${colIndex} 
                                 ${isWhite ? 'white-case' : 'black-case'} 
                                 ${isSelected ? 'selected' : ''} 

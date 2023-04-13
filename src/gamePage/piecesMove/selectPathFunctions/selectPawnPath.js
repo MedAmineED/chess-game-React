@@ -8,10 +8,10 @@ export function selectPawnPath(allPossibleMoves, allPiecesData, color, pieceName
     const towSteps = white? 2 : -2
 
 
-    const nextCase = allPiecesData[row + oneStep][col]
-    const afterNextCase = allPiecesData[row + towSteps][col]
-    const possibleCaseToEatOne = allPiecesData[row + oneStep][col + 1]
-    const possibleCaseToEatTow = allPiecesData[row + oneStep][col - 1]
+    const nextCase = row + oneStep < 8 && row + oneStep >= 0? allPiecesData[row + oneStep][col] : false
+    const afterNextCase = row + towSteps < 8 && row + towSteps >= 0? allPiecesData[row + towSteps][col] : false
+    const possibleCaseToEatOne =row + oneStep < 8 && row + oneStep >= 0? allPiecesData[row + oneStep][col + 1]: false
+    const possibleCaseToEatTow = row + oneStep < 8 && row + oneStep >= 0? allPiecesData[row + oneStep][col - 1] : false
     
     const isFirstStep = white? row === 1 : row === 6
 
@@ -25,10 +25,11 @@ export function selectPawnPath(allPossibleMoves, allPiecesData, color, pieceName
 
 
     const rowExist = oneCase.row < 8 && oneCase.row >= 0
+    const towRowExist = towCases.row < 8 && towCases.row >= 0
     
 
 
-    if(isFirstStep && nextCase === null && afterNextCase === null) {
+    if(towRowExist && isFirstStep && nextCase === null && afterNextCase === null) {
         allPossibleMoves.push(towCases)
     }
     if(nextCase === null && rowExist) {
