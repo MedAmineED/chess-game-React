@@ -41,16 +41,21 @@ function Table (props)  {
 
     const initSelectedCases = ()=> {
       setAllPiecesData(()=> {
-        const updateAllPiecesData = [...allPiecesData]
-        updateAllPiecesData.map((row)=>{
-              row.map((cell)=> {
-                if(cell) cell.isSelected = false
-              })
-        })
-        return updateAllPiecesData
-    })
+          const updateAllPiecesData = [...allPiecesData]
+          updateAllPiecesData.map((row)=>{
+                row.map((cell)=> {
+                  if(cell) cell.isSelected = false
+                })
+          })
+          return updateAllPiecesData
+      })
     }
 
+
+
+    useEffect(()=> {
+
+    }, [])
     
     
       // function to handle piece click events

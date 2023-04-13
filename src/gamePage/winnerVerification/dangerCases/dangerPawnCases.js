@@ -1,41 +1,36 @@
-export function dangerPawnZone(y, x, board, boardCase, updateCases){
-    if(board[y][x].props.data.color === "white"){
-        const finindKing = []
-            if(y + 1 < 8 && x + 1 < 8) {
-                updateCases[y + 1][x + 1].danger.whiteDanger += 1 
-                finindKing.push(board[y + 1][x + 1])
-            }
-            if(y + 1 < 8 && x - 1 >= 0){
-                updateCases[y + 1][x - 1].danger.whiteDanger += 1 
-                finindKing.push(board[y + 1][x - 1])
-            }
-            finindKing.forEach((cs)=>{
-                if(cs.props
-                    && cs.props.data.color === "black"
-                    && cs.props.data.name === "king") {
-                        updateCases[y][x].checked = true
-                    }
-            })
-    }
-    if(board[y][x].props.data.color === "black"){
-        const finindKing = []
-        if(y - 1 >= 0 && x + 1 < 8){
-            updateCases[y - 1][x + 1].danger.blackDanger += 1
-            finindKing.push(board[y - 1][x + 1])
-        }
-        if(y - 1 >= 0 && x - 1 >= 0){
-            updateCases[y - 1][x - 1].danger.blackDanger += 1
-            finindKing.push(board[y - 1][x - 1])
-        }
-        finindKing.forEach((cs)=>{
-            if(cs.props
-                && cs.props.data.color === "white"
-                && cs.props.data.name === "king") {
-                    updateCases[y][x].checked = true
-                }
-        })
-    }
+export function dangerPawnCases(dangerCases, allPiecesData, color, position) {
+    const {row, col} = position;
 
+
+    const white = color === "white"
+
+    const oneStep = white? 1 : -1
+
+
+    const possibleDangerOne =row + oneStep < 8 && row + oneStep >= 0? allPiecesData[row + oneStep][col + 1]: false
+    const possibleDangerTow = row + oneStep < 8 && row + oneStep >= 0? allPiecesData[row + oneStep][col - 1] : false
     
 
+    const allSteps = {
+                        dangerMoveOne : { row : row + oneStep, col : col + 1 },
+                        dangerMoveTow : { row : row + oneStep, col : col - 1 }
+                     }
+    const { dangerMoveOne, dangerMoveTow } = allSteps
+
+
+
+    const dangerOneExist = dangerMoveOne.col < 8 && dangerMoveOne.col >= 0
+    const dangerTowExist = dangerMoveTow.col < 8 && dangerMoveTow.col >= 0
+    const inDangerOne =  possibleDangerOne? color === possibleDangerOne.color : false
+    const inDangerTow =  possibleDangerTow? color === possibleDangerTow.color : false
+
+
+    if(dangerOneExist && inDangerOne){
+        dangerCases.push(dangerMoveOne)
+    }
+    if(dangerTowExist && inDangerTow){
+        dangerCases.push(dangerMoveTow)
+    }
+
 }
+
