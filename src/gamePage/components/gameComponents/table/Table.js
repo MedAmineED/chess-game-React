@@ -20,6 +20,9 @@ import { dangerKingZone } from '../../../winnerVerification/dangerCases/dangerKi
 import { checkEngineVerification } from '../../../winnerVerification/chekKing/checkKingFunction';
 import { Check } from '../../GameSpace';
 import { selectPath } from '../../../piecesMove/selectPathFunctions/selectPath';
+import { dangerCasesEngine } from '../../../winnerVerification/dangerCases/dangerCasesEngine';
+
+import { PlayTr } from '../../GameSpace';
 
 
 
@@ -30,6 +33,7 @@ function Table (props)  {
 
 
     const check = useContext(Check)
+    const playerTurn = useContext(PlayTr)
 
 
     
@@ -37,6 +41,7 @@ function Table (props)  {
     const [allPiecesData, setAllPiecesData] = useState([...piecesData])
     const [selectedPiece, setSelectedPiece] = useState(null);
     const [possibleMoves, setPossibleMoves] = useState([]);
+    const [dangerCases, setDangerCases] = useState([]);
 
 
     const initSelectedCases = ()=> {
@@ -53,11 +58,15 @@ function Table (props)  {
 
 
 
-    useEffect(()=> {
 
-    }, [])
+
+    useEffect(()=> {
+      dangerCasesEngine(setDangerCases, allPiecesData)
+    }, [playerTurn])
     
     
+
+
       // function to handle piece click events
       const handlePieceClick = (rowIndex, colIndex) => {
         initSelectedCases()
@@ -67,10 +76,15 @@ function Table (props)  {
             const color = clickedPiece.color
             const pieceName = clickedPiece.pieceName
 
-          setSelectedPiece(() => { return { row: rowIndex, col: colIndex }; });
+          setSelectedPiece({ row: rowIndex, col: colIndex });
           setPossibleMoves(() => {
             const allPossibleMoves = [];
-            selectPath(allPossibleMoves, allPiecesData, color, pieceName, { row: rowIndex, col: colIndex });
+            selectPath(allPossibleMoves, 
+                       allPiecesData, 
+                       color, 
+                       pieceName, 
+                       { row: rowIndex, col: colIndex },
+                        dangerCases);
             return allPossibleMoves;
           })
           setAllPiecesData(()=> {
@@ -83,6 +97,8 @@ function Table (props)  {
             setPossibleMoves([]);
         }
       };
+
+
 
 
       const movePieces = (rowIndex, colIndex, isPossibleMove, pieceCanMove) => {

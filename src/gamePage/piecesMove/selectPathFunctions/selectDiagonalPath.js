@@ -7,7 +7,7 @@ export function selectBishopPath(allPossibleMoves, allPiecesData, color, pieceNa
 
 
 
-function selectDiagonalPath (allPossibleMoves, allPiecesData, color, pieceName, position, path) {
+function selectDiagonalPath (allPossibleMoves, allPiecesData, color, pieceName, position, dangerCases, path) {
     const { row, col } = position;
 
     let possibleSelect = true;

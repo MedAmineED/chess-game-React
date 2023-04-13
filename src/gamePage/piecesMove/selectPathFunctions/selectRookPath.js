@@ -1,11 +1,11 @@
-export function selectRookPath (allPossibleMoves, allPiecesData, color, pieceName, position) {
+export function selectRookPath (allPossibleMoves, allPiecesData, color, pieceName, position, dangerCases) {
     horizontalAndVerticalPath(...arguments, 1)
     horizontalAndVerticalPath(...arguments, 2)
     horizontalAndVerticalPath(...arguments, 3)
     horizontalAndVerticalPath(...arguments, 4)
 }
 
-function horizontalAndVerticalPath (allPossibleMoves, allPiecesData, color, pieceName, position, path) {
+function horizontalAndVerticalPath (allPossibleMoves, allPiecesData, color, pieceName, position, dangerCases, path) {
     
     
     const { row, col } = position;

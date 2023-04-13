@@ -2,6 +2,7 @@ export function dangerPawnCases(dangerCases, allPiecesData, color, position) {
     const {row, col} = position;
 
 
+    console.log(color);
     const white = color === "white"
 
     const oneStep = white? 1 : -1
@@ -12,24 +13,27 @@ export function dangerPawnCases(dangerCases, allPiecesData, color, position) {
     
 
     const allSteps = {
-                        dangerMoveOne : { row : row + oneStep, col : col + 1 },
-                        dangerMoveTow : { row : row + oneStep, col : col - 1 }
+                        dangerCaseOne : { row : row + oneStep, col : col + 1 },
+                        dangerCaseTow : { row : row + oneStep, col : col - 1 }
                      }
-    const { dangerMoveOne, dangerMoveTow } = allSteps
+    const { dangerCaseOne, dangerCaseTow } = allSteps
 
 
 
-    const dangerOneExist = dangerMoveOne.col < 8 && dangerMoveOne.col >= 0
-    const dangerTowExist = dangerMoveTow.col < 8 && dangerMoveTow.col >= 0
+    const dangerOneExist = dangerCaseOne.col < 8 && dangerCaseOne.col >= 0
+    const dangerTowExist = dangerCaseTow.col < 8 && dangerCaseTow.col >= 0
     const inDangerOne =  possibleDangerOne? color === possibleDangerOne.color : false
     const inDangerTow =  possibleDangerTow? color === possibleDangerTow.color : false
 
 
-    if(dangerOneExist && inDangerOne){
-        dangerCases.push(dangerMoveOne)
+    if(dangerOneExist && (inDangerOne || possibleDangerOne === null)){
+        const isExist =  dangerCases.includes(dangerCaseOne)
+        console.log(isExist);
+        if(!isExist)dangerCases.push({color:white? "white" : "black", position : dangerCaseOne})
     }
-    if(dangerTowExist && inDangerTow){
-        dangerCases.push(dangerMoveTow)
+    if(dangerTowExist && (inDangerTow || possibleDangerTow === null)){
+        const isExist =  dangerCases.includes(dangerCaseTow)
+        if(!isExist)dangerCases.push({color:white? "white" : "black", position : dangerCaseTow})
     }
 
 }

@@ -4,7 +4,7 @@ import { selectKnightPath } from "./selectKnightPath";
 import { selectPawnPath } from "./selectPawnPath";
 import { selectRookPath } from "./selectRookPath";
 
-export function selectPath (allPossibleMoves, allPiecesData, color, pieceName, position) {
+export function selectPath (allPossibleMoves, allPiecesData, color, pieceName, position, dangerCases) {
 
             
 
