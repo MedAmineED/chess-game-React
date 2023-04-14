@@ -1,3 +1,4 @@
+import { dangerBishopCases } from "./dangerBishopCases";
 import { dangerKnightCases } from "./dangerKnightCases";
 import { dangerPawnCases } from "./dangerPawnCases";
 
@@ -24,4 +25,5 @@ export const dangerCasesEngine = (setDangerCases, allPiecesData)=> {
 function dangerCasesFunction (dangerCases, allPiecesData, color, position, pieceName) {
     if(pieceName === "pawn")dangerPawnCases(...arguments)
     if(pieceName === "knight")dangerKnightCases(...arguments)
+    if(pieceName === "bishop" || pieceName === "queen")dangerBishopCases(...arguments)
 }

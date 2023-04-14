@@ -1,8 +1,6 @@
 export function dangerPawnCases(dangerCases, allPiecesData, color, position) {
     const {row, col} = position;
 
-
-    console.log(color);
     const white = color === "white"
 
     const oneStep = white? 1 : -1
@@ -33,7 +31,6 @@ export function dangerPawnCases(dangerCases, allPiecesData, color, position) {
     if(dangerTowExist && (inDangerTow || possibleDangerTow === null)){
         dangerCases.push({color:white? "white" : "black", position : dangerCaseTow})
     }
-    console.log(dangerCases);
 
 }
 

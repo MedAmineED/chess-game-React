@@ -1,133 +1,68 @@
 import { checkKing } from "../chekKing/checkKingFunction";
 
-export function dangerBishopZone(y, x, board, updateCases) {
-    diagonalDangerZone(...arguments)
-}
+export function dangerBishopCases(dangerCases, allPiecesData, color, position) {
+    diagonalPath(...arguments, 1)
+    diagonalPath(...arguments, 2)
+    diagonalPath(...arguments, 3)
+    diagonalPath(...arguments, 4)
+  }
+  
+  
+  
+  function diagonalPath (dangerCases, allPiecesData, color, position, path) {
+      const { row, col } = position;
+  
+      let getCell = true;
+      const white = color === "white"? true : false
+  
+          for(let step = 1; step < 8; step ++) {
 
-
-
-export function diagonalDangerZone(y, x, board, updateCases){
-    
-    let path1 = true;
-    let path2 = true;
-    let path3 = true;
-    let path4 = true;
-
-    for (let i = 1; i <= 8; i++) {
-                if(y + i < 8 && x + i < 8 && path1) {
-                            if(updateCases[y + i][x + i].empty 
-                                || (board[y + i][x + i].props.data.name === "king" && board[y][x].props.data.color !== board[y + i][x + i].props.data.color)){
-                                    
-                                   
-                                    if(board[y + i][x + i].props && board[y + i][x + i].props.data.name === "king"){
-                                            console.log("diagonal cheked ");
-                                            for(let k = 0; k < i; k++){
-                                                        //add to all checked keys of virtual board cases related
-                                                        //between the piece and the king under attack value true
-                                                        updateCases[y + k][x + k].checked = true
-                                                }
-                                        
-                                    }
-                                    board[y][x].props.data.color === "white"?
-                                            updateCases[y + i][x + i].danger.whiteDanger += 1 
-                                            : updateCases[y + i][x + i].danger.blackDanger += 1 
-                                        
-                                                                }
-
-
-                            if((updateCases[y + i][x + i].empty !== true && board[y + i][x + i].props.data.name !== "king")
-                                ||(updateCases[y + i][x + i].empty !== true && board[y][x].props.data.color === board[y + i][x + i].props.data.color))
-                                {
-                                    board[y][x].props.data.color === "white"?
-                                            updateCases[y + i][x + i].danger.whiteDanger += 1 
-                                            : updateCases[y + i][x + i].danger.blackDanger += 1
-                                    path1 = false;
-                                    }
-                }
-
-                if(y - i >= 0 && x - i >= 0 && path2) {
-                            if(updateCases[y - i][x - i].empty 
-                                || (board[y - i][x - i].props.data.name === "king" && board[y][x].props.data.color !== board[y - i][x - i].props.data.color)){
-                                    
-                                   
-                                    if(board[y - i][x - i].props && board[y - i][x - i].props.data.name === "king"){
-                                        for(let k = 0; k < i; k++){
-                                                    //add to all checked keys of virtual board cases related
-                                                    //between the piece and the king under attack value true
-                                                    updateCases[y - k][x - k].checked = true
-                                        }
-                                    }
-
-                                board[y][x].props.data.color === "white"?
-                                        updateCases[y - i][x - i].danger.whiteDanger += 1 
-                                        : updateCases[y - i][x - i].danger.blackDanger += 1
-                               
-                            }
-                            if((updateCases[y - i][x - i].empty !== true && board[y - i][x - i].props.data.name !== "king")
-                                ||(updateCases[y - i][x - i].empty !== true && board[y][x].props.data.color === board[y - i][x - i].props.data.color))
-                               {
-                                board[y][x].props.data.color === "white"?
-                                        updateCases[y - i][x - i].danger.whiteDanger += 1 
-                                        : updateCases[y - i][x - i].danger.blackDanger += 1
-                                    path2 = false
-
-                                   
-                                }
-                } 
-
-
-                if(y + i < 8 && x - i >= 0 && path3) {
-                        if(updateCases[y + i][x - i].empty 
-                            || (board[y + i][x - i].props.data.name === "king" && board[y][x].props.data.color !== board[y + i][x - i].props.data.color)){
-                                    
-                                   
-                                if(board[y + i][x - i].props && board[y + i][x - i].props.data.name === "king"){
-                                    for(let k = 0; k < i; k++){
-                                                //add to all checked keys of virtual board cases related
-                                                //between the piece and the king under attack value true
-                                                updateCases[y + k][x - k].checked = true
-                                    }
-                                }
-                            board[y][x].props.data.color === "white"?
-                                    updateCases[y + i][x - i].danger.whiteDanger += 1 
-                                    : updateCases[y + i][x - i].danger.blackDanger += 1
-                                
-                                                           }
-                        if((updateCases[y + i][x - i].empty !== true && board[y + i][x - i].props.data.name !== "king")
-                            ||(updateCases[y + i][x - i].empty !== true && board[y][x].props.data.color === board[y + i][x - i].props.data.color)){
-                            board[y][x].props.data.color === "white"?
-                                    updateCases[y + i][x - i].danger.whiteDanger += 1 
-                                    : updateCases[y + i][x - i].danger.blackDanger += 1
-                                path3 = false
-                            
-                                                          }
-
-                }
-                if(y - i >= 0 && x + i < 8 && path4) {
-                    if(updateCases[y - i][x + i].empty 
-                        || (board[y - i][x + i].props.data.name === "king" && board[y][x].props.data.color !== board[y - i][x + i].props.data.color)){
-                                    
-                                   
-                            if(board[y - i][x + i].props && board[y - i][x + i].props.data.name === "king"){
-                                for(let k = 0; k < i; k++){
-                                            //add to all checked keys of virtual board cases related
-                                            //between the piece and the king under attack value true
-                                            updateCases[y - k][x + k].checked = true
-                                }
-                            }
-                        board[y][x].props.data.color === "white"?
-                                updateCases[y - i][x + i].danger.whiteDanger += 1 
-                                : updateCases[y - i][x + i].danger.blackDanger += 1
-                     }
-                    if((updateCases[y - i][x + i].empty !== true && board[y - i][x + i].props.data.name !== "king")
-                    ||(updateCases[y - i][x + i].empty !== true && board[y][x].props.data.color === board[y - i][x + i].props.data.color)){
-                            board[y][x].props.data.color === "white"?
-                                    updateCases[y - i][x + i].danger.whiteDanger += 1 
-                                    : updateCases[y - i][x + i].danger.blackDanger += 1
-                            path4 = false
-                        
-                                                                            
-                        }
-        }
-    }
-}
+              const seLectCells = path === 1? {
+                                              newRow : row + step,
+                                              newCol : col + step
+                                              }
+                                  : path === 2? {
+                                              newRow : row + step,
+                                              newCol : col - step
+                                              }
+                                  : path === 3? {
+                                              newRow : row - step,
+                                              newCol : col + step
+                                              }
+                                  : path === 4? {
+                                              newRow : row - step,
+                                              newCol : col - step
+                                              } 
+                                  : false
+  
+  
+              const { newRow, newCol } = seLectCells
+  
+              const cellExist =  newRow >= 0 
+                                 && newRow < 8 
+                                 && newCol >= 0 
+                                 && newCol < 8
+  
+              const hasFriendPiece = cellExist && allPiecesData[newRow][newCol]? 
+                                      allPiecesData[newRow][newCol].color === color 
+                                      : false
+              const empty = cellExist && allPiecesData[newRow][newCol] === null
+  
+  
+  
+              if(empty && getCell) {
+                      console.log("pushed empty");
+                      dangerCases.push({color:white? "white" : "black", position :{ row : newRow, col : newCol }})
+              }
+              if(hasFriendPiece && getCell){
+                console.log("pushed has frn p");
+                      dangerCases.push({color:white? "white" : "black", position :{ row : newRow, col : newCol }})
+                      getCell = false
+              }
+              if(!empty && !hasFriendPiece){
+                console.log("not");
+                      getCell = false
+              }
+          }
+  
+  }
