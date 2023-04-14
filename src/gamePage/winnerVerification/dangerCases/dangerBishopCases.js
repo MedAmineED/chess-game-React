@@ -1,6 +1,6 @@
 import { checkKing } from "../chekKing/checkKingFunction";
 
-export function dangerBishopCases(dangerCases, allPiecesData, color, position) {
+export function dangerBishopCases(dangerCases, allPiecesData, color, position, pieceName) {
     diagonalPath(...arguments, 1)
     diagonalPath(...arguments, 2)
     diagonalPath(...arguments, 3)
@@ -9,7 +9,7 @@ export function dangerBishopCases(dangerCases, allPiecesData, color, position) {
   
   
   
-  function diagonalPath (dangerCases, allPiecesData, color, position, path) {
+  function diagonalPath (dangerCases, allPiecesData, color, position, pieceName, path) {
       const { row, col } = position;
   
       let getCell = true;
@@ -41,26 +41,27 @@ export function dangerBishopCases(dangerCases, allPiecesData, color, position) {
               const cellExist =  newRow >= 0 
                                  && newRow < 8 
                                  && newCol >= 0 
-                                 && newCol < 8
+                                 && newCol < 8? 
+                                 true : false;
   
-              const hasFriendPiece = cellExist && allPiecesData[newRow][newCol]? 
-                                      allPiecesData[newRow][newCol].color === color 
-                                      : false
+              const hasFriendPiece = cellExist && allPiecesData[newRow][newCol] && allPiecesData[newRow][newCol].color === color 
               const empty = cellExist && allPiecesData[newRow][newCol] === null
+              const isEnemyKing = cellExist 
+                                  && allPiecesData[newRow][newCol] 
+                                  && allPiecesData[newRow][newCol].pieceName === "king"
+                                  && allPiecesData[newRow][newCol].color !== color
+
   
   
   
-              if(empty && getCell) {
-                      console.log("pushed empty");
+              if((empty || isEnemyKing) && getCell) {
                       dangerCases.push({color:white? "white" : "black", position :{ row : newRow, col : newCol }})
               }
-              if(hasFriendPiece && getCell){
-                console.log("pushed has frn p");
+              if(hasFriendPiece && getCell && !isEnemyKing){
                       dangerCases.push({color:white? "white" : "black", position :{ row : newRow, col : newCol }})
                       getCell = false
               }
-              if(!empty && !hasFriendPiece){
-                console.log("not");
+              if(!empty && !hasFriendPiece && !isEnemyKing && getCell){
                       getCell = false
               }
           }
