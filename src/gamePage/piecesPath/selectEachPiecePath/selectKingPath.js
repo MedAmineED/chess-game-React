@@ -1,8 +1,6 @@
 export function selectKingPath(allPossibleMoves, allPiecesData, color, pieceName, position, dangerCases) {
     const {row, col} = position;
 
-    console.log(dangerCases);
-
 
 
     const allSteps = [

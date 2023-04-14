@@ -41,8 +41,7 @@ export function dangerBishopCases(dangerCases, allPiecesData, color, position, p
               const cellExist =  newRow >= 0 
                                  && newRow < 8 
                                  && newCol >= 0 
-                                 && newCol < 8? 
-                                 true : false;
+                                 && newCol < 8
   
               const hasFriendPiece = cellExist && allPiecesData[newRow][newCol] && allPiecesData[newRow][newCol].color === color 
               const empty = cellExist && allPiecesData[newRow][newCol] === null

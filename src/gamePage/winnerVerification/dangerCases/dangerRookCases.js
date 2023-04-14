@@ -1,154 +1,71 @@
-
-
-export function dangerRookZone(y, x, board, updateCases) {
-    verticalDangerZone(...arguments)
-    horizontalDangerZone(...arguments)
+export function dangerRookCases (dangerCases, allPiecesData, color, position, pieceName) {
+    horizontalAndVerticalPath(...arguments, 1)
+    horizontalAndVerticalPath(...arguments, 2)
+    horizontalAndVerticalPath(...arguments, 3)
+    horizontalAndVerticalPath(...arguments, 4)
 }
 
-
-
-
-
-export  function verticalDangerZone (y, x, board, updateCases) { 
+function horizontalAndVerticalPath (dangerCases, allPiecesData, color, position, pieceName, path) {
     
     
-    let path1 = true;
-    let path2 = true;
+    const { row, col } = position;
 
-    for (let i = 1; i <= 8; i++) {
-        
-        if(y + i < 8 && path1) {
-                    //chek player enemy and case state to move in the top vertical path 
-                            if(updateCases[y + i][x].empty 
-                                || (board[y + i][x].props.data.name === "king" && board[y][x].props.data.color !== board[y + i][x].props.data.color)){
-                                   
-                                    if(board[y + i][x].props && board[y + i][x].props.data.name === "king"){
-                                        for(let k = y; k < y + i; k++){
-                                            //add to all checked keys of virtual board cases related
-                                            //between the piece and the king under attack value true
-                                            updateCases[k][x].checked = true
-                                        }
-                                        updateCases[y][x].checked = true
-                                    }
-                                    board[y][x].props.data.color === "white"?
-                                    updateCases[y + i][x].danger.whiteDanger += 1 
-                                    : updateCases[y + i][x].danger.blackDanger += 1 
-                            }
-                            //chek if empty 
-                            if((updateCases[y + i][x].empty !== true && board[y + i][x].props.data.name !== "king")
-                            ||(updateCases[y + i][x].empty !== true && board[y][x].props.data.color === board[y + i][x].props.data.color)) {
+    let getCell = true;
+    const white = color === "white"? true : false
 
-                                board[y][x].props.data.color === "white"?
-                                updateCases[y + i][x].danger.whiteDanger += 1 
-                                : updateCases[y + i][x].danger.blackDanger += 1 
-
-                       
-                                path1 = false   
-                                 
-                            }
-                }
-                if(y - i >= 0 && path2) {
-                                                                        
-                    if(updateCases[y - i][x].empty 
-                        || (board[y - i][x].props.data.name === "king" && board[y][x].props.data.color !== board[y - i][x].props.data.color)){
-                            
-                            if(board[y - i][x].props && board[y - i][x].props.data.name === "king"){
-                                //add to all checked keys of virtual board cases related
-                                //between the piece and the king under attack value true
-                                for(let k = y; k > y - i; k--){
-                                    updateCases[k][x].checked = true
-                                }
-                                updateCases[y][x].checked = true
-                            }
-                        board[y][x].props.data.color === "white"?
-                        updateCases[y - i][x].danger.whiteDanger += 1 
-                        : updateCases[y - i][x].danger.blackDanger += 1 
-                    }
-                    
-                    
-                    if((updateCases[y - i][x].empty !== true && board[y - i][x].props.data.name !== "king")
-                    ||(updateCases[y - i][x].empty !== true && board[y][x].props.data.color === board[y - i][x].props.data.color)){
-                            path2 = false
-                        board[y][x].props.data.color === "white"?
-                        updateCases[y - i][x].danger.whiteDanger += 1 
-                        : updateCases[y - i][x].danger.blackDanger += 1                                       
-                                                                    
-                    }
-                } 
-        }
-
-}
-
-export function horizontalDangerZone (y, x, board, updateCases) { 
-    
-    
-    let path1 = true;
-    let path2 = true;
-
-    for (let i = 1; i <= 8; i++) {
+        for(let step = 1; step < 8; step ++) {
+            const seLectCells = path === 1? {
+                                            newRow : row + step,
+                                            newCol : col
+                                            }
+                                : path === 2? {
+                                            newRow : row - step,
+                                            newCol : col
+                                            }
+                                : path === 3? {
+                                            newRow : row,
+                                            newCol : col + step
+                                            }
+                                : path === 4? {
+                                            newRow : row,
+                                            newCol : col - step
+                                            } 
+                                : false
 
 
+            const { newRow, newCol } = seLectCells
 
-                if(x + i < 8 && path1) {
-                    //chek player enemy and case state to move in the top vertical path 
-                            if(updateCases[y][x + i].empty 
-                                || (board[y][x + i].props.data.name === "king" && board[y][x].props.data.color !== board[y][x + i].props.data.color)){
-                                    
-                                    if(board[y][x + i].props && board[y][x + i].props.data.name === "king"){
-                                        //add to all checked keys of virtual board cases related
-                                        //between the piece and the king under attack value true
-                                        for(let k = x; k < x + i; k++){
-                                            updateCases[y][k].checked = true
-                                        }
-                                        updateCases[y][x].checked = true
-                                    }
-                                    board[y][x].props.data.color === "white"?
-                                    updateCases[y][x + i].danger.whiteDanger += 1 
-                                    : updateCases[y][x + i].danger.blackDanger += 1
+            const cellExist =  newRow >= 0 
+                               && newRow < 8 
+                               && newCol >= 0 
+                               && newCol < 8
 
-                            }
-                            if((updateCases[y][x + i].empty !== true && board[y][x + i].props.data.name !== "king")
-                            ||(updateCases[y][x + i].empty !== true && board[y][x].props.data.color === board[y][x + i].props.data.color)) {
-
-                                         
-                                         board[y][x].props.data.color === "white"?
-                                         updateCases[y][x + i].danger.whiteDanger += 1 
-                                         : updateCases[y][x + i].danger.blackDanger += 1 
+            const hasFriendPiece = cellExist && allPiecesData[newRow][newCol]? 
+                                    allPiecesData[newRow][newCol].color === color 
+                                    : false
+            const isEnemyKing = cellExist 
+                                && allPiecesData[newRow][newCol] 
+                                && allPiecesData[newRow][newCol].pieceName === "king"
+                                && allPiecesData[newRow][newCol].color !== color
                                 
-                                path1 = false   
-                                 
-                            }
-                }
-                if(x - i >= 0 && path2) {
-                                                                        
-                    if(updateCases[y][x - i].empty 
-                        || (board[y][x - i].props.data.name === "king" && board[y][x].props.data.color !== board[y][x - i].props.data.color)){
+            const empty = cellExist && allPiecesData[newRow][newCol] === null
 
-                            if(board[y][x - i].props && board[y][x - i].props.data.name === "king"){
-                                //add to all checked keys of virtual board cases related
-                                //between the piece and the king under attack value true
-                                for(let k = x; k > x - i; k--){
-                                    updateCases[y][k].checked = true
-                                }
-                                updateCases[y][x].checked = true
-                            }
-                            board[y][x].props.data.color === "white"?
-                            updateCases[y][x - i].danger.whiteDanger += 1 
-                            : updateCases[y][x - i].danger.blackDanger += 1 
 
-                    }
-                    
-                    
-                    if((updateCases[y][x - i].empty !== true && board[y][x - i].props.data.name !== "king")
-                    ||(updateCases[y][x - i].empty !== true && board[y][x].props.data.color === board[y][x - i].props.data.color)){
 
-                        path2 = false
-                        board[y][x].props.data.color === "white"?
-                        updateCases[y][x - i].danger.whiteDanger += 1 
-                        : updateCases[y][x - i].danger.blackDanger += 1 
-                                                                    
-                    }
-                } 
+            if((empty || isEnemyKing) && getCell) {
+                dangerCases.push({color:white? "white" : "black", position :{ row : newRow, col : newCol }})
+            }
+            if(hasFriendPiece && getCell && !isEnemyKing){
+                    dangerCases.push({color:white? "white" : "black", position :{ row : newRow, col : newCol }})
+                    getCell = false
+            }
+            if(!empty && !hasFriendPiece && !isEnemyKing && getCell){
+                    getCell = false
+            }
         }
-
 }
+
+
+
+
+
