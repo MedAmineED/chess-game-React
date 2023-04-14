@@ -13,7 +13,6 @@ import { piecesData } from '../../../piecesData/piecesData';
 
 import { dangerRookZone } from '../../../winnerVerification/dangerCases/dangerRookCases';
 import { dangerBishopZone } from '../../../winnerVerification/dangerCases/dangerBishopCases';
-import { dangerQueenZone } from '../../../winnerVerification/dangerCases/dangerQueenCases';
 import { dangerKnightZone } from '../../../winnerVerification/dangerCases/dangerKnightCases';
 import { dangerPawnZone } from '../../../winnerVerification/dangerCases/dangerPawnCases';
 import { dangerKingZone } from '../../../winnerVerification/dangerCases/dangerKingCases';
@@ -61,8 +60,14 @@ function Table (props)  {
 
 
     useEffect(()=> {
-      dangerCasesEngine(setDangerCases, allPiecesData)
-    }, [playerTurn])
+        dangerCasesEngine(setDangerCases, allPiecesData)
+        props.changeCheck(false)
+        checkEngineVerification(allPiecesData, dangerCases, props.changeCheck)
+    }, [playerTurn, isBlocket])
+
+    useEffect(()=> {
+      
+    }, [])
     
     
 
@@ -110,7 +115,8 @@ function Table (props)  {
                       updateAllPiecesData[rowIndex][colIndex].position = { y: rowIndex, x: colIndex };
                       return updateAllPiecesData;
                     })
-                    
+                  
+                  console.log(check);
                   setSelectedPiece(null);
                   setPossibleMoves([]);
                   props.playerTurn()
