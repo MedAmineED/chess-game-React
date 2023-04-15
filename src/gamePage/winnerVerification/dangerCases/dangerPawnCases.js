@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 export function dangerPawnCases(dangerCases, allPiecesData, color, position) {
     const {row, col} = position;
 
@@ -6,31 +7,33 @@ export function dangerPawnCases(dangerCases, allPiecesData, color, position) {
     const oneStep = white? 1 : -1
 
 
-    const possibleDangerOne =row + oneStep < 8 && row + oneStep >= 0? allPiecesData[row + oneStep][col + 1]: false
-    const possibleDangerTow = row + oneStep < 8 && row + oneStep >= 0? allPiecesData[row + oneStep][col - 1] : false
     
 
-    const allSteps = {
-                        dangerCaseOne : { row : row + oneStep, col : col + 1 },
-                        dangerCaseTow : { row : row + oneStep, col : col - 1 }
-                     }
-    const { dangerCaseOne, dangerCaseTow } = allSteps
+    const allPossibleDanger = [
+                       { newRow : row + oneStep, newCol : col + 1 },
+                       { newRow : row + oneStep, newCol : col - 1 }
+                        ]
 
 
 
-    const dangerOneExist = dangerCaseOne.col < 8 && dangerCaseOne.col >= 0
-    const dangerTowExist = dangerCaseTow.col < 8 && dangerCaseTow.col >= 0
-    const inDangerOne =  possibleDangerOne? color === possibleDangerOne.color : false
-    const inDangerTow =  possibleDangerTow? color === possibleDangerTow.color : false
+    allPossibleDanger.map((dng)=> {
+        const existCase = dng.newRow >= 0 && dng.newRow < 8 && dng.newCol >=0 && dng.newCol < 8;
+        const hasPiece = existCase && allPiecesData[dng.newRow][dng.newCol]? true : false
+        const friendPiece = hasPiece
+                           && (color === allPiecesData[dng.newRow][dng.newCol].color)
+        const empty = existCase 
+                      && allPiecesData[dng.newRow][dng.newCol] === null
+        const enemyKing = hasPiece && allPiecesData[dng.newRow][dng.newCol].pieceName === "king" && color !== allPiecesData[dng.newRow][dng.newCol].color
+
+        if(friendPiece || empty || enemyKing)dangerCases.push({color:white? "white" : "black", position : {row : dng.newRow, col : dng.newCol}})
+
+    })
+
+    
+    
+     
 
 
-
-    if(dangerOneExist && (inDangerOne || possibleDangerOne === null)){
-        dangerCases.push({color:white? "white" : "black", position : dangerCaseOne})
-    }
-    if(dangerTowExist && (inDangerTow || possibleDangerTow === null)){
-        dangerCases.push({color:white? "white" : "black", position : dangerCaseTow})
-    }
-
+    console.log(dangerCases);
 }
 
