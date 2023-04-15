@@ -1,4 +1,4 @@
-export function selectBishopPath(allPossibleMoves, allPiecesData, color, pieceName, position) {
+export function selectBishopPath(allPossibleMoves, allPiecesData, color, pieceName, position, check) {
   selectDiagonalPath(...arguments, 1)
   selectDiagonalPath(...arguments, 2)
   selectDiagonalPath(...arguments, 3)
@@ -7,7 +7,7 @@ export function selectBishopPath(allPossibleMoves, allPiecesData, color, pieceNa
 
 
 
-function selectDiagonalPath (allPossibleMoves, allPiecesData, color, pieceName, position, dangerCases, path) {
+function selectDiagonalPath (allPossibleMoves, allPiecesData, color, pieceName, position, dangerCases, check, path) {
     const { row, col } = position;
 
     let possibleSelect = true;

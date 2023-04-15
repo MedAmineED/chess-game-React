@@ -80,7 +80,8 @@ function Table (props)  {
                        color, 
                        pieceName, 
                        { row: rowIndex, col: colIndex },
-                        dangerCases);
+                        dangerCases,
+                        check);
             return allPossibleMoves;
           })
           setAllPiecesData(()=> {

@@ -17,7 +17,6 @@ function Piece (props) {
     const [canPlay, setCanPlay] = useState(false)
     const [blocked, setBlocked] = useState(false)
 
-    const pieceName = props.data.pieceName
     const image = props.data.image
     
 
@@ -34,8 +33,8 @@ function Piece (props) {
     const hanDleClickMove = ()=> {
         const row = props.data.position.y
         const col = props.data.position.x
-        if(playerTurn % 2 === 0 && props.data.color === "white") {return}
-         if(playerTurn % 2 !== 0 && props.data.color === "black") {return}
+        if((playerTurn % 2 === 0 && props.data.color === "white") || !canPlay) {return}
+        if(playerTurn % 2 !== 0 && props.data.color === "black") {return}
         props.selectPath(row, col)
     }
         
