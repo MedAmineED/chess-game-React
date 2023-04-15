@@ -1,4 +1,4 @@
-export function selectPawnPath(allPossibleMoves, allPiecesData, color, pieceName, position) {
+export function selectPawnPath(allPossibleMoves, allPiecesData, color, pieceName, position, check) {
     const {row, col} = position;
 
 
@@ -28,27 +28,27 @@ export function selectPawnPath(allPossibleMoves, allPiecesData, color, pieceName
     const towRowExist = towCases.row < 8 && towCases.row >= 0
     
 
+    if(!check){
+            if(towRowExist && isFirstStep && nextCase === null && afterNextCase === null) {
+                allPossibleMoves.push(towCases)
+            }
+            if(nextCase === null && rowExist) {
+                allPossibleMoves.push(oneCase)
+            }
 
-    if(towRowExist && isFirstStep && nextCase === null && afterNextCase === null) {
-        allPossibleMoves.push(towCases)
+
+            const eatOneExist = eatMoveOne.col < 8 && eatMoveOne.col >= 0
+            const eatTowExist = eatMoveTow.col < 8 && eatMoveTow.col >= 0
+            const canEatOne =  possibleCaseToEatOne? color !== possibleCaseToEatOne.color : false
+            const canEatTow =  possibleCaseToEatTow? color !== possibleCaseToEatTow.color : false
+
+
+            if(eatOneExist && canEatOne){
+                allPossibleMoves.push(eatMoveOne)
+            }
+            if(eatTowExist && canEatTow){
+                allPossibleMoves.push(eatMoveTow)
+            }
     }
-    if(nextCase === null && rowExist) {
-        allPossibleMoves.push(oneCase)
-    }
-
-
-    const eatOneExist = eatMoveOne.col < 8 && eatMoveOne.col >= 0
-    const eatTowExist = eatMoveTow.col < 8 && eatMoveTow.col >= 0
-    const canEatOne =  possibleCaseToEatOne? color !== possibleCaseToEatOne.color : false
-    const canEatTow =  possibleCaseToEatTow? color !== possibleCaseToEatTow.color : false
-
-
-    if(eatOneExist && canEatOne){
-        allPossibleMoves.push(eatMoveOne)
-    }
-    if(eatTowExist && canEatTow){
-        allPossibleMoves.push(eatMoveTow)
-    }
-
 }
 

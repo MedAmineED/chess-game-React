@@ -46,16 +46,19 @@ function selectDiagonalPath (allPossibleMoves, allPiecesData, color, pieceName, 
 
 
 
-            if(cellExist && allPiecesData[newRow][newCol] === null && possibleSelect) {
+            if(!check){
+                if(cellExist && allPiecesData[newRow][newCol] === null && possibleSelect) {
                     allPossibleMoves.push({ row : newRow, col : newCol })
+                }
+                if(cellExist && possibleToEat && possibleSelect){
+                        allPossibleMoves.push({ row : newRow, col : newCol })
+                        possibleSelect = false
+                }
+                if( cellExist && allPiecesData[newRow][newCol] !== null && !possibleToEat){
+                        possibleSelect = false
+                }
             }
-            if(cellExist && possibleToEat && possibleSelect){
-                    allPossibleMoves.push({ row : newRow, col : newCol })
-                    possibleSelect = false
-            }
-            if( cellExist && allPiecesData[newRow][newCol] !== null && !possibleToEat){
-                    possibleSelect = false
-            }
+            
         }
 
 }
