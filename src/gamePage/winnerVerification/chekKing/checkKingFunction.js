@@ -4,6 +4,8 @@
 
 export const checkEngineVerification = (allPiecesData, dangerCases, chekMode)=> {
     
+
+    let kingInCheck = false
     allPiecesData.map((row, rowIndex)=> {
         row.map((cell, colIndex)=> {
             if(cell){
@@ -13,10 +15,10 @@ export const checkEngineVerification = (allPiecesData, dangerCases, chekMode)=> 
                                                                 && danger.position.col === colIndex)
                 const isKing = cell.pieceName === "king"
                 if(caseInDanger && isKing) {
-                    console.log("check");
-                    chekMode(true)
+                    kingInCheck = true
                 }
             }
         })
     })
+    kingInCheck? chekMode(true) : chekMode(false)
 }

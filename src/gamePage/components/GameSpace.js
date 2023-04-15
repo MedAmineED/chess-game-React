@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import "./GameSpace.css"
 import Table from "./gameComponents/table/Table";
 import PlayerCardInfo from "./PlayerCardInfo/PlayerCardInfo";
@@ -34,7 +34,7 @@ function GameSpace () {
                                                 seconds : 30,
                                                 minutes : 0
                                             })
-    const [check, setCheck] = useState(false)
+    const [check, setCheck] = useState(false);
 
 
     
@@ -76,6 +76,9 @@ function GameSpace () {
     
 
 
+        useEffect(()=> {
+            console.log("check changed", check);
+        }, [check])
 
 
 
@@ -94,18 +97,23 @@ function GameSpace () {
           <PlayerName.Provider value= {{firstPlayerName, secondPlayerName}} >
           <ToatalTime.Provider value={totalTime} >
           <TurnTime.Provider value={turnTime}>
-          <Check.Provider value ={check}>
+          <Check.Provider 
+          value ={check}>
 
-                <CheckModal />
+                <CheckModal 
+                // isCheck = {} 
+
+                />
                 <StartModal changeName = {createPlayerName}
                             playersNames = {{ firstPlayerName, secondPlayerName }}
                             startGame = {startGame} 
                             changeTime = {showTime}
                             />
                 <PlayerCardInfo player = "P1" />
-                <Table playerTurn = {newTurn}  
-                        check = {check} 
-                        changeCheck = {changeCheck}/>
+                <Table playerTurn = {newTurn}
+                        changeCheck = {changeCheck}
+                        isCheck = {check}
+                        />
                 <PlayerCardInfo player = "P2" />
 
           

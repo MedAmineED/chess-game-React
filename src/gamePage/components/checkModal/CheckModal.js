@@ -4,11 +4,12 @@ import './CheckModal.css'
 
 import { Check } from "../GameSpace";
 
-function CheckModal () {
+function CheckModal (props) {
 
     const [top, setTop] = useState(0)
     const [display, setDisplay] = useState("none")
     const [opacity, setOpacity] = useState(0)
+    const [showCheckModal, sethowCheckModal] = useState(false)
 
     const check = useContext(Check)
 
@@ -17,6 +18,7 @@ function CheckModal () {
                     opacity : opacity}
 
     useEffect(()=> {
+        console.log("from modal", check);
         if(check){
             setTimeout(()=>{
                 setDisplay("block")

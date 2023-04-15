@@ -10,12 +10,6 @@ import Piece from '../chessPiecesComponents/Piece'
 
 
 import { piecesData } from '../../../piecesData/piecesData';
-
-import { dangerRookZone } from '../../../winnerVerification/dangerCases/dangerRookCases';
-import { dangerBishopZone } from '../../../winnerVerification/dangerCases/dangerBishopCases';
-import { dangerKnightZone } from '../../../winnerVerification/dangerCases/dangerKnightCases';
-import { dangerPawnZone } from '../../../winnerVerification/dangerCases/dangerPawnCases';
-import { dangerKingZone } from '../../../winnerVerification/dangerCases/dangerKingCases';
 import { checkEngineVerification } from '../../../winnerVerification/chekKing/checkKingFunction';
 import { Check } from '../../GameSpace';
 import { selectPath } from '../../../piecesPath/selectPath';
@@ -36,7 +30,7 @@ function Table (props)  {
 
 
     
-    const [isBlocket, setIsBlocket] = useState(false)
+    const [isCheck, setIsCheck] = useState(false)
     const [allPiecesData, setAllPiecesData] = useState([...piecesData])
     const [selectedPiece, setSelectedPiece] = useState(null);
     const [possibleMoves, setPossibleMoves] = useState([]);
@@ -59,17 +53,14 @@ function Table (props)  {
 
 
 
-    useEffect(()=> {
-        dangerCasesEngine(setDangerCases, allPiecesData)
-        props.changeCheck(false)
-        checkEngineVerification(allPiecesData, dangerCases, props.changeCheck)
-    }, [playerTurn, isBlocket])
 
     useEffect(()=> {
-      
-    }, [])
+        dangerCasesEngine(setDangerCases, allPiecesData) 
+    }, [playerTurn])
     
-    
+    useEffect(()=> {
+      checkEngineVerification(allPiecesData, dangerCases, props.changeCheck)
+    }, [dangerCases])
 
 
       // function to handle piece click events
@@ -115,8 +106,6 @@ function Table (props)  {
                       updateAllPiecesData[rowIndex][colIndex].position = { y: rowIndex, x: colIndex };
                       return updateAllPiecesData;
                     })
-                  
-                  console.log(check);
                   setSelectedPiece(null);
                   setPossibleMoves([]);
                   props.playerTurn()
