@@ -6,7 +6,7 @@ export function selectRookPath (params) {
 }
 
 function horizontalAndVerticalPath (params, path) {
-        const {allPossibleMoves, allPiecesData, color, position, check} = params
+        const {allPossibleMoves, allPiecesData, color, position, check, connectedWithKing} = params
     
     
     const { row, col } = position;
@@ -59,6 +59,19 @@ function horizontalAndVerticalPath (params, path) {
                         possibleSelect = false
                 }
            }
+          if(check) {
+                const stopAttack = connectedWithKing.some(stop => stop.row === newRow && stop.col === newCol)
+                if(cellExist && allPiecesData[newRow][newCol] === null && possibleSelect && stopAttack) {
+                        allPossibleMoves.push({ row : newRow, col : newCol })
+                }
+                if(cellExist && possibleToEat && possibleSelect && stopAttack){
+                        allPossibleMoves.push({ row : newRow, col : newCol })
+                        possibleSelect = false
+                }
+                if( cellExist && allPiecesData[newRow][newCol] !== null && !possibleToEat){
+                        possibleSelect = false
+                }
+          }
         }
 }
 

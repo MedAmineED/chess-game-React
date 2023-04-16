@@ -1,7 +1,7 @@
 /* eslint-disable array-callback-return */
 
 export function selectKnightPath(params) {
-    const {allPossibleMoves, allPiecesData, color, position, check, connectedCells} = params
+    const { allPossibleMoves, allPiecesData, color, position, check, connectedWithKing } = params
     const {row, col} = position;
 
 
@@ -18,16 +18,19 @@ export function selectKnightPath(params) {
                     ]
 
     
-    allJumps.map((cl)=> {
-        const existCase = cl.newRow >= 0 && cl.newRow < 8 && cl.newCol >=0 && cl.newCol < 8;
+    allJumps.map((pos)=> {
+        const existCase = pos.newRow >= 0 && pos.newRow < 8 && pos.newCol >=0 && pos.newCol < 8;
         const possibleToEat = existCase 
-                              && allPiecesData[cl.newRow][cl.newCol] 
-                              && color !== allPiecesData[cl.newRow][cl.newCol].color
-        const empty = existCase && allPiecesData[cl.newRow][cl.newCol] === null
+                              && allPiecesData[pos.newRow][pos.newCol] 
+                              && color !== allPiecesData[pos.newRow][pos.newCol].color
+        const empty = existCase && allPiecesData[pos.newRow][pos.newCol] === null
         if(!check){
-            if(possibleToEat || empty)allPossibleMoves.push({row : cl.newRow, col : cl.newCol})
+            if(possibleToEat || empty)allPossibleMoves.push({row : pos.newRow, col : pos.newCol})
         }
-
+        if(check) {
+            const stopAttack = connectedWithKing.some(stop => stop.row === pos.newRow && stop.col === pos.newCol)
+            if(stopAttack && (possibleToEat || empty))allPossibleMoves.push({row : pos.newRow, col : pos.newCol})
+        }
     })
     
 }
