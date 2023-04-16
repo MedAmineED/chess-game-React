@@ -66,7 +66,6 @@ function Table (props)  {
     
     useEffect(()=> {
       checkEngineVerification(allPiecesData, dangerCases, props.changeCheck)
-      
     }, [dangerCases])
 
 
