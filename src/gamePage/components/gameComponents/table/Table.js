@@ -89,8 +89,9 @@ function Table (props)  {
                        color, 
                        pieceName, 
                        { row: rowIndex, col: colIndex },
-                        dangerCases,
-                        check);
+                       dangerCases,
+                       check,
+                        pathConnectedWithKing);
 
             return allPossibleMoves;
           })

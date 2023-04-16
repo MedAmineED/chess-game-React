@@ -1,5 +1,5 @@
 export function selectPawnPath(params) {
-    const {allPossibleMoves, allPiecesData, color, position, check, connectedCells} = params
+    const {allPossibleMoves, allPiecesData, color, position, check, connectedWithKing } = params
     const {row, col} = position;
 
 
@@ -47,8 +47,9 @@ export function selectPawnPath(params) {
             }
     }
     if(check) {
-        const stopAttackOne = connectedCells.some(stop => stop.row === eatMoveOne.row && stop.col === eatMoveOne.col)
-        const stopAttackTow = connectedCells.some(stop => stop.row === eatMoveTow.row && stop.col === eatMoveTow.col)
+        console.log(connectedWithKing);
+        const stopAttackOne = connectedWithKing.some(stop => stop.row === eatMoveOne.row && stop.col === eatMoveOne.col)
+        const stopAttackTow = connectedWithKing.some(stop => stop.row === eatMoveTow.row && stop.col === eatMoveTow.col)
         if(stopAttackOne) {
             allPossibleMoves.push(eatMoveOne)
         }
