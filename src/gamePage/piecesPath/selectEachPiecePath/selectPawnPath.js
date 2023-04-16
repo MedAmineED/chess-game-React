@@ -1,5 +1,5 @@
 export function selectPawnPath(params) {
-    const {allPossibleMoves, allPiecesData, color, position, check} = params
+    const {allPossibleMoves, allPiecesData, color, position, check, connectedCells} = params
     const {row, col} = position;
 
 
@@ -27,6 +27,11 @@ export function selectPawnPath(params) {
 
     const rowExist = oneCase.row < 8 && oneCase.row >= 0
     const towRowExist = towCases.row < 8 && towCases.row >= 0
+    const eatOneExist = eatMoveOne.col < 8 && eatMoveOne.col >= 0
+    const eatTowExist = eatMoveTow.col < 8 && eatMoveTow.col >= 0
+    const canEatOne =  possibleCaseToEatOne? color !== possibleCaseToEatOne.color : false
+    const canEatTow =  possibleCaseToEatTow? color !== possibleCaseToEatTow.color : false
+
     if(!check){
             if(towRowExist && isFirstStep && nextCase === null && afterNextCase === null) {
                 allPossibleMoves.push(towCases)
@@ -34,20 +39,22 @@ export function selectPawnPath(params) {
             if(nextCase === null && rowExist) {
                 allPossibleMoves.push(oneCase)
             }
-
-
-            const eatOneExist = eatMoveOne.col < 8 && eatMoveOne.col >= 0
-            const eatTowExist = eatMoveTow.col < 8 && eatMoveTow.col >= 0
-            const canEatOne =  possibleCaseToEatOne? color !== possibleCaseToEatOne.color : false
-            const canEatTow =  possibleCaseToEatTow? color !== possibleCaseToEatTow.color : false
-
-
             if(eatOneExist && canEatOne){
                 allPossibleMoves.push(eatMoveOne)
             }
             if(eatTowExist && canEatTow){
                 allPossibleMoves.push(eatMoveTow)
             }
+    }
+    if(check) {
+        const stopAttackOne = connectedCells.some(stop => stop.row === eatMoveOne.row && stop.col === eatMoveOne.col)
+        const stopAttackTow = connectedCells.some(stop => stop.row === eatMoveTow.row && stop.col === eatMoveTow.col)
+        if(stopAttackOne) {
+            allPossibleMoves.push(eatMoveOne)
+        }
+        if(stopAttackTow) {
+            allPossibleMoves.push(eatMoveTow)
+        }
     }
 }
 

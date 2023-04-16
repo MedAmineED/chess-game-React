@@ -26,7 +26,7 @@ export const dangerCasesEngine = (setDangerCases, allPiecesData, arrConnectedWit
 }
 
 
-function dangerCasesFunction (dangerCases, allPiecesData, color, position, pieceName) {
+function dangerCasesFunction (dangerCases, allPiecesData, color, position, pieceName, arrConnectedWithKing) {
     if(pieceName === "pawn")dangerPawnCases(...arguments)
     if(pieceName === "knight")dangerKnightCases(...arguments)
     if(pieceName === "bishop" || pieceName === "queen")dangerBishopCases(...arguments)

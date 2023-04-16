@@ -1,7 +1,7 @@
 /* eslint-disable array-callback-return */
 
 export function selectKnightPath(params) {
-    const {allPossibleMoves, allPiecesData, color, position, check} = params
+    const {allPossibleMoves, allPiecesData, color, position, check, connectedCells} = params
     const {row, col} = position;
 
 

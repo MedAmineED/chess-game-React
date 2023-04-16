@@ -1,5 +1,5 @@
 /* eslint-disable array-callback-return */
-export function dangerPawnCases(dangerCases, allPiecesData, color, position) {
+export function dangerPawnCases(dangerCases, allPiecesData, color, position, pieceName, connectedWithKing) {
     const {row, col} = position;
 
     const white = color === "white"
@@ -25,7 +25,12 @@ export function dangerPawnCases(dangerCases, allPiecesData, color, position) {
                       && allPiecesData[dng.newRow][dng.newCol] === null
         const enemyKing = hasPiece && allPiecesData[dng.newRow][dng.newCol].pieceName === "king" && color !== allPiecesData[dng.newRow][dng.newCol].color
 
-        if(friendPiece || empty || enemyKing)dangerCases.push({color:white? "white" : "black", position : {row : dng.newRow, col : dng.newCol}})
+        if(friendPiece || empty || enemyKing){
+            dangerCases.push({color:white? "white" : "black", position : {row : dng.newRow, col : dng.newCol}})
+            if(enemyKing){
+                connectedWithKing.push({row : row, col : col}, { row : dng.newRow, col : dng.newCol })
+            }
+        }
 
     })
 }

@@ -1,4 +1,4 @@
-export function dangerKnightCases(dangerCases, allPiecesData, color, position) {
+export function dangerKnightCases(dangerCases, allPiecesData, color, position, pieceName, connectedWithKing) {
     const {row, col} = position;
 
     const white = color === "white"? true : false
@@ -26,7 +26,12 @@ export function dangerKnightCases(dangerCases, allPiecesData, color, position) {
                       && allPiecesData[cl.newRow][cl.newCol] === null
         const enemyKing = hasPiece && allPiecesData[cl.newRow][cl.newCol].pieceName === "king" && color !== allPiecesData[cl.newRow][cl.newCol].color
 
-        if(friendPiece || empty || enemyKing)dangerCases.push({color:white? "white" : "black", position : {row : cl.newRow, col : cl.newCol}})
+        if(friendPiece || empty || enemyKing){
+            dangerCases.push({color:white? "white" : "black", position : {row : cl.newRow, col : cl.newCol}})
+            if(enemyKing){
+                connectedWithKing.push({row : row, col : col}, { row : cl.newRow, col : cl.newCol })
+            }
+        }
     })
     
 }
