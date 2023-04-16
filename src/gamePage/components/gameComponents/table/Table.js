@@ -62,7 +62,6 @@ function Table (props)  {
           newConnect =  [...arrConnectedWithKing]
           return  newConnect
         })
-        console.log(pathConnectedWithKing);
     }, [playerTurn, allPiecesData])
     
     useEffect(()=> {
