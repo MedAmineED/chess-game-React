@@ -1,4 +1,5 @@
-export function selectPawnPath(allPossibleMoves, allPiecesData, color, pieceName, position, check) {
+export function selectPawnPath(params) {
+    const {allPossibleMoves, allPiecesData, color, position, check} = params
     const {row, col} = position;
 
 
@@ -26,8 +27,6 @@ export function selectPawnPath(allPossibleMoves, allPiecesData, color, pieceName
 
     const rowExist = oneCase.row < 8 && oneCase.row >= 0
     const towRowExist = towCases.row < 8 && towCases.row >= 0
-    
-
     if(!check){
             if(towRowExist && isFirstStep && nextCase === null && afterNextCase === null) {
                 allPossibleMoves.push(towCases)

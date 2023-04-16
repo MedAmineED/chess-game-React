@@ -1,10 +1,11 @@
+/* eslint-disable array-callback-return */
 import { dangerBishopCases } from "./dangerBishopCases";
 import { dangerKingCases } from "./dangerKingCases";
 import { dangerKnightCases } from "./dangerKnightCases";
 import { dangerPawnCases } from "./dangerPawnCases";
 import { dangerRookCases } from "./dangerRookCases";
 
-export const dangerCasesEngine = (setDangerCases, allPiecesData)=> {
+export const dangerCasesEngine = (setDangerCases, allPiecesData, arrConnectedWithKing)=> {
       
     setDangerCases(()=> {
           const updateDangerCases = []
@@ -16,7 +17,8 @@ export const dangerCasesEngine = (setDangerCases, allPiecesData)=> {
                                           allPiecesData, 
                                           color, 
                                           {row : rowIndex, col : colIndex}, 
-                                          cell.pieceName)
+                                          cell.pieceName,
+                                          arrConnectedWithKing)
               })
           })
           return updateDangerCases

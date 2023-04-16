@@ -18,7 +18,6 @@ function CheckModal (props) {
                     opacity : opacity}
 
     useEffect(()=> {
-        console.log("from modal", check);
         if(check){
             setTimeout(()=>{
                 setDisplay("block")

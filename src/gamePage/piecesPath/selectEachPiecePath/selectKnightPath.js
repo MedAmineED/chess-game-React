@@ -1,7 +1,7 @@
 /* eslint-disable array-callback-return */
-import { protectKingVerticalAndHorizotal } from "../../winnerVerification/protectKing/protectKingEngine";
 
-export function selectKnightPath(allPossibleMoves, allPiecesData, color, pieceName, position, path) {
+export function selectKnightPath(params) {
+    const {allPossibleMoves, allPiecesData, color, position, check} = params
     const {row, col} = position;
 
 
@@ -24,8 +24,10 @@ export function selectKnightPath(allPossibleMoves, allPiecesData, color, pieceNa
                               && allPiecesData[cl.newRow][cl.newCol] 
                               && color !== allPiecesData[cl.newRow][cl.newCol].color
         const empty = existCase && allPiecesData[cl.newRow][cl.newCol] === null
+        if(!check){
+            if(possibleToEat || empty)allPossibleMoves.push({row : cl.newRow, col : cl.newCol})
+        }
 
-        if(possibleToEat || empty)allPossibleMoves.push({row : cl.newRow, col : cl.newCol})
     })
     
 }

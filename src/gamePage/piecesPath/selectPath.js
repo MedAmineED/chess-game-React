@@ -4,11 +4,13 @@ import { selectKnightPath } from "./selectEachPiecePath/selectKnightPath";
 import { selectPawnPath } from "./selectEachPiecePath/selectPawnPath";
 import { selectRookPath } from "./selectEachPiecePath/selectRookPath";
 
-export function selectPath (allPossibleMoves, allPiecesData, color, pieceName, position, dangerCases,check) {
+export function selectPath (allPossibleMoves, allPiecesData, color, pieceName, position, dangerCases, check) {
 
-            if(pieceName === "pawn")selectPawnPath(...arguments)
-            if(pieceName === "rook" || pieceName === "queen")selectRookPath(...arguments)
-            if(pieceName === "bishop" || pieceName === "queen")selectBishopPath(...arguments)
-            if(pieceName === "knight")selectKnightPath(...arguments)
+    const parameters = {allPossibleMoves, allPiecesData, color, position, check}
+
+            if(pieceName === "pawn")selectPawnPath(parameters)
+            if(pieceName === "rook" || pieceName === "queen")selectRookPath(parameters)
+            if(pieceName === "bishop" || pieceName === "queen")selectBishopPath(parameters)
+            if(pieceName === "knight")selectKnightPath(parameters)
             if(pieceName === "king")selectKingPath(...arguments)
 }

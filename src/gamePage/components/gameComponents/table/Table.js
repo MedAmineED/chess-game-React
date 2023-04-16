@@ -30,12 +30,13 @@ function Table (props)  {
 
 
     
-    const [isCheck, setIsCheck] = useState(false)
     const [allPiecesData, setAllPiecesData] = useState([...piecesData])
     const [selectedPiece, setSelectedPiece] = useState(null);
     const [possibleMoves, setPossibleMoves] = useState([]);
     const [dangerCases, setDangerCases] = useState([]);
+    const [pathConnectedWithKing, setPathConnectedWithKing] = useState([]);
 
+    let arrConnectedWithKing = []
 
     const initSelectedCases = ()=> {
       setAllPiecesData(()=> {
@@ -55,11 +56,18 @@ function Table (props)  {
 
 
     useEffect(()=> {
-        dangerCasesEngine(setDangerCases, allPiecesData) 
-    }, [playerTurn])
+        dangerCasesEngine(setDangerCases, allPiecesData, arrConnectedWithKing) 
+        setPathConnectedWithKing(()=>{
+          let newConnect =  []
+          newConnect =  [...arrConnectedWithKing]
+          return  newConnect
+        })
+        console.log(pathConnectedWithKing);
+    }, [playerTurn, allPiecesData])
     
     useEffect(()=> {
       checkEngineVerification(allPiecesData, dangerCases, props.changeCheck)
+      
     }, [dangerCases])
 
 
@@ -75,6 +83,7 @@ function Table (props)  {
           setSelectedPiece({ row: rowIndex, col: colIndex });
           setPossibleMoves(() => {
             const allPossibleMoves = [];
+            
             selectPath(allPossibleMoves, 
                        allPiecesData, 
                        color, 
@@ -82,6 +91,7 @@ function Table (props)  {
                        { row: rowIndex, col: colIndex },
                         dangerCases,
                         check);
+
             return allPossibleMoves;
           })
           setAllPiecesData(()=> {

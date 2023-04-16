@@ -28,12 +28,5 @@ export function dangerPawnCases(dangerCases, allPiecesData, color, position) {
         if(friendPiece || empty || enemyKing)dangerCases.push({color:white? "white" : "black", position : {row : dng.newRow, col : dng.newCol}})
 
     })
-
-    
-    
-     
-
-
-    console.log(dangerCases);
 }
 

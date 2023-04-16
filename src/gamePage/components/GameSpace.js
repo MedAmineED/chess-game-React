@@ -77,7 +77,7 @@ function GameSpace () {
 
 
         useEffect(()=> {
-            console.log("check changed", check);
+            // console.log("check changed", check);
         }, [check])
 
 
@@ -97,8 +97,7 @@ function GameSpace () {
           <PlayerName.Provider value= {{firstPlayerName, secondPlayerName}} >
           <ToatalTime.Provider value={totalTime} >
           <TurnTime.Provider value={turnTime}>
-          <Check.Provider 
-          value ={check}>
+          <Check.Provider value ={check}>
 
                 <CheckModal 
                 // isCheck = {} 

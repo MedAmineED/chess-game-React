@@ -1,13 +1,15 @@
-export function selectBishopPath(allPossibleMoves, allPiecesData, color, pieceName, position, check) {
-  selectDiagonalPath(...arguments, 1)
-  selectDiagonalPath(...arguments, 2)
-  selectDiagonalPath(...arguments, 3)
-  selectDiagonalPath(...arguments, 4)
+export function selectBishopPath(params) {
+const {allPossibleMoves, allPiecesData, color, position, check} = params
+  selectDiagonalPath(params, 1)
+  selectDiagonalPath(params, 2)
+  selectDiagonalPath(params, 3)
+  selectDiagonalPath(params, 4)
 }
 
 
 
-function selectDiagonalPath (allPossibleMoves, allPiecesData, color, pieceName, position, dangerCases, check, path) {
+function selectDiagonalPath (params, path) {
+    const {allPossibleMoves, allPiecesData, color, position, check} = params
     const { row, col } = position;
 
     let possibleSelect = true;
@@ -44,7 +46,7 @@ function selectDiagonalPath (allPossibleMoves, allPiecesData, color, pieceName, 
                                     allPiecesData[newRow][newCol].color !== color 
                                     : false
 
-
+        console.log(check);
 
             if(!check){
                 if(cellExist && allPiecesData[newRow][newCol] === null && possibleSelect) {
@@ -58,7 +60,7 @@ function selectDiagonalPath (allPossibleMoves, allPiecesData, color, pieceName, 
                         possibleSelect = false
                 }
             }
-            
+
         }
 
 }

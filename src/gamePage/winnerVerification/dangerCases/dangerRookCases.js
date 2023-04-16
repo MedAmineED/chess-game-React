@@ -1,16 +1,15 @@
-export function dangerRookCases (dangerCases, allPiecesData, color, position, pieceName) {
+export function dangerRookCases (dangerCases, allPiecesData, color, position, pieceName, connectedWithKing) {
     horizontalAndVerticalPath(...arguments, 1)
     horizontalAndVerticalPath(...arguments, 2)
     horizontalAndVerticalPath(...arguments, 3)
     horizontalAndVerticalPath(...arguments, 4)
 }
 
-function horizontalAndVerticalPath (dangerCases, allPiecesData, color, position, pieceName, path) {
+function horizontalAndVerticalPath (dangerCases, allPiecesData, color, position, pieceName, connectedWithKing, path, getCell = true) {
     
     
     const { row, col } = position;
 
-    let getCell = true;
     const white = color === "white"? true : false
 
         for(let step = 1; step < 8; step ++) {
@@ -53,10 +52,42 @@ function horizontalAndVerticalPath (dangerCases, allPiecesData, color, position,
 
 
             if((empty || isEnemyKing) && getCell) {
-                dangerCases.push({color:white? "white" : "black", position :{ row : newRow, col : newCol }})
+                dangerCases.push({
+                                    color:white? "white" : "black", 
+                                    position : {
+                                                 row : newRow,
+                                                 col : newCol 
+                                                }
+                                            })
+                if(isEnemyKing !== null){
+                    if(path === 1){
+                        for(let i = row; i < newRow; i++ ){
+                            connectedWithKing.push({ row : i, col : newCol })
+                        }
+                    }
+                    if(path === 2){
+                        for(let i = row; i > newRow; i-- ){
+                            connectedWithKing.push({ row : i, col : newCol })
+                        }
+                    }
+                    if(path === 3){
+                        for(let i = col; i < newCol; i++ ){
+                            connectedWithKing.push({ row : newRow, col : i })
+                        }
+                    }
+                    if(path === 4){
+                        for(let i = col; i > newCol; i--){
+                            connectedWithKing.push({ row : newRow, col : i })
+                        }
+                    }
+                }
             }
             if(hasFriendPiece && getCell && !isEnemyKing){
-                    dangerCases.push({color:white? "white" : "black", position :{ row : newRow, col : newCol }})
+                    dangerCases.push({color:white? "white" : "black", 
+                                        position :{ 
+                                                    row : newRow, 
+                                                    col : newCol 
+                                                   }})
                     getCell = false
             }
             if(!empty && !hasFriendPiece && !isEnemyKing && getCell){

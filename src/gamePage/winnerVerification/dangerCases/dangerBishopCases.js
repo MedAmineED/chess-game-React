@@ -1,6 +1,6 @@
 import { checkKing } from "../chekKing/checkKingFunction";
 
-export function dangerBishopCases(dangerCases, allPiecesData, color, position, pieceName) {
+export function dangerBishopCases(dangerCases, allPiecesData, color, position, pieceName, connectedWithKing) {
     diagonalPath(...arguments, 1)
     diagonalPath(...arguments, 2)
     diagonalPath(...arguments, 3)
@@ -9,7 +9,7 @@ export function dangerBishopCases(dangerCases, allPiecesData, color, position, p
   
   
   
-  function diagonalPath (dangerCases, allPiecesData, color, position, pieceName, path) {
+  function diagonalPath (dangerCases, allPiecesData, color, position, pieceName, connectedWithKing, path) {
       const { row, col } = position;
   
       let getCell = true;
@@ -55,6 +55,38 @@ export function dangerBishopCases(dangerCases, allPiecesData, color, position, p
   
               if((empty || isEnemyKing) && getCell) {
                       dangerCases.push({color:white? "white" : "black", position :{ row : newRow, col : newCol }})
+                      if(isEnemyKing !== null){
+                        let y = row
+                        let x = col
+                        if(path === 1){
+                            while (y < newRow && x < newCol){
+                                connectedWithKing.push({ row : y, col : x })
+                                y++
+                                x++
+                            }
+                        }
+                        if(path === 2){
+                                while (y < newRow && x > newCol){
+                                    connectedWithKing.push({ row : y, col : x })
+                                    y++
+                                    x--
+                                }
+                        }
+                        if(path === 3){
+                                while (y > newRow && x < newCol){
+                                    connectedWithKing.push({ row : y, col : x })
+                                    y--
+                                    x++
+                                }
+                        }
+                        if(path === 4){
+                                while (y > newRow && x > newCol){
+                                    connectedWithKing.push({ row : y, col : x })
+                                    y--
+                                    x--
+                                }
+                        }
+                    }
               }
               if(hasFriendPiece && getCell && !isEnemyKing){
                       dangerCases.push({color:white? "white" : "black", position :{ row : newRow, col : newCol }})
