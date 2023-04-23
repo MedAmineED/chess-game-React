@@ -10,10 +10,10 @@ export function selectPawnPath(params) {
     const towSteps = white? 2 : -2
 
 
-    const nextCase = row + oneStep < 8 && row + oneStep >= 0? allPiecesData[row + oneStep][col] : false
-    const afterNextCase = row + towSteps < 8 && row + towSteps >= 0? allPiecesData[row + towSteps][col] : false
-    const possibleCaseToEatOne =row + oneStep < 8 && row + oneStep >= 0? allPiecesData[row + oneStep][col + 1]: false
-    const possibleCaseToEatTow = row + oneStep < 8 && row + oneStep >= 0? allPiecesData[row + oneStep][col - 1] : false
+    // const nextCase = row + oneStep < 8 && row + oneStep >= 0? allPiecesData[row + oneStep][col] : false
+    // const afterNextCase = row + towSteps < 8 && row + towSteps >= 0? allPiecesData[row + towSteps][col] : false
+    // const possibleCaseToEatOne =row + oneStep < 8 && row + oneStep >= 0? allPiecesData[row + oneStep][col + 1]: false
+    // const possibleCaseToEatTow = row + oneStep < 8 && row + oneStep >= 0? allPiecesData[row + oneStep][col - 1] : false
     
     const isFirstStep = white? row === 1 : row === 6
 

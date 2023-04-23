@@ -16,7 +16,6 @@ export  function protectKingVertical (y, x, board, updateCases, direction) {
     for (let i = 1; i <= 8; i++) {
         
         if(y + i < 8 && path1) {
-            console.log(board[y + i][x]);
                             if(board[y + i][x].props) {
                                 
                                 if(board[y][x].props.data.color !== board[y + i][x].props.data.color
