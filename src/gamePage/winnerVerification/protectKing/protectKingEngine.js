@@ -166,6 +166,7 @@ export function protectKingHorizontal (y, x, board, updateCases) {
                                     if(x + back < 8 && !isKing){
                                         
                                         protectedPath = [...protectedPath, updateCases[y][x + back]]
+                                        
                                         if(board[y][x + back].props 
                                             && board[y][x + back].props.data.name === "king" 
                                             && board[y][x].props.data.color === board[y][x + back].props.data.color

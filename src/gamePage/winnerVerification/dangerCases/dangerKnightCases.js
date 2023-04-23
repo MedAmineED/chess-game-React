@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 export function dangerKnightCases(dangerCases, allPiecesData, color, position, pieceName, connectedWithKing) {
     const {row, col} = position;
 
