@@ -35,7 +35,7 @@ function Piece (props) {
             setProtect(false)
         }
 
-    }, [playerTurn])
+    }, [props.inProtect])
         
 
     useEffect(()=>{
