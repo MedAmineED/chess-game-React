@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/alt-text */
 import { useContext, useEffect, useState } from "react";
 import { Check, PlayTr, Start } from "../../GameSpace";
@@ -16,6 +17,7 @@ function Piece (props) {
     const playerTurn = useContext(PlayTr)
     const start = useContext(Start);
 
+    const check = useContext(Check)
 
     const [canPlay, setCanPlay] = useState(false)
     const [protect, setProtect] = useState(false)
@@ -33,7 +35,7 @@ function Piece (props) {
             setProtect(false)
         }
 
-    })
+    }, [playerTurn])
         
 
     useEffect(()=>{
@@ -43,7 +45,6 @@ function Piece (props) {
     const hanDleClickMove = ()=> {
         if((playerTurn % 2 === 0 && props.data.color === "white") || !canPlay) {return}
         if(playerTurn % 2 !== 0 && props.data.color === "black") {return}
-        if(protect){return}
         props.selectPath(row, col)
     }
         
