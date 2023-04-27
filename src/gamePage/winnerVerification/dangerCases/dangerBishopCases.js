@@ -1,4 +1,3 @@
-import { checkKing } from "../chekKing/checkKingFunction";
 
 export function dangerBishopCases(dangerCases, allPiecesData, color, position, pieceName, connectedWithKing) {
     diagonalPath(...arguments, 1)
