@@ -16,7 +16,6 @@ function Piece (props) {
     const playerTurn = useContext(PlayTr)
     const start = useContext(Start);
 
-    const check = useContext(Check)
 
     const [canPlay, setCanPlay] = useState(false)
     const [protect, setProtect] = useState(false)
