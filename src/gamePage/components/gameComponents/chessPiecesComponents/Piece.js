@@ -45,6 +45,7 @@ function Piece (props) {
     const hanDleClickMove = ()=> {
         if((playerTurn % 2 === 0 && props.data.color === "white") || !canPlay) {return}
         if(playerTurn % 2 !== 0 && props.data.color === "black") {return}
+        if(protect){return}
         props.selectPath(row, col)
     }
         
