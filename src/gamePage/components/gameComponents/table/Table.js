@@ -1,12 +1,9 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable react-hooks/exhaustive-deps */
-
-
-
 import React, { useContext, useEffect } from 'react';
 import { useState } from 'react';
-import './table.css'
-import Piece from '../chessPiecesComponents/Piece'
+import './table.css';
+import Piece from '../chessPiecesComponents/Piece';
 
 
 import { piecesData } from '../../../piecesData/piecesData';
@@ -16,6 +13,7 @@ import { selectPath } from '../../../piecesPath/selectPath';
 import { dangerCasesEngine } from '../../../winnerVerification/dangerCases/dangerCasesEngine';
 
 import { PlayTr } from '../../GameSpace';
+import { pieceProtectKing } from '../../../winnerVerification/protectKing/protectKingEngine';
 
 
 
@@ -35,6 +33,7 @@ function Table (props)  {
     const [possibleMoves, setPossibleMoves] = useState([]);
     const [dangerCases, setDangerCases] = useState([]);
     const [pathConnectedWithKing, setPathConnectedWithKing] = useState([]);
+    const [inProtect, setInProtect]= useState([])
 
     let arrConnectedWithKing = []
 
@@ -62,6 +61,8 @@ function Table (props)  {
           newConnect =  [...arrConnectedWithKing]
           return  newConnect
         })
+        pieceProtectKing (allPiecesData, setInProtect)
+        console.log("state arr in table",inProtect)
     }, [playerTurn, allPiecesData])
     
     useEffect(()=> {
@@ -137,6 +138,7 @@ function Table (props)  {
                                       data = {piecesData[rowIndex][colIndex]}
                                       isSelected={isSelected}
                                       selectPath = {handlePieceClick}
+                                      inProtect = {inProtect}
                                     />
                                   ) : null;
 

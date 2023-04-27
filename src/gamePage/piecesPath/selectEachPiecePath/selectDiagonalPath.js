@@ -45,8 +45,6 @@ function selectDiagonalPath (params, path) {
                                     allPiecesData[newRow][newCol].color !== color 
                                     : false
 
-        console.log(check);
-
             if(!check){
                 if(cellExist && allPiecesData[newRow][newCol] === null && possibleSelect) {
                     allPossibleMoves.push({ row : newRow, col : newCol })

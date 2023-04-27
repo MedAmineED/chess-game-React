@@ -1,201 +1,122 @@
-
-
-export function protectKingVerticalAndHorizotal(y, x, board, updateCases, direction) {
-    protectKingVertical(...arguments)
+/* eslint-disable array-callback-return */
+export function pieceProtectKing (allPiecesData, setInProtect) {
+    setInProtect(()=>{
+        const protectPcArr = []
+        allPiecesData.map((row, rowIndex)=> {
+                        row.map((piece, colIndex)=>{
+                            const empty = piece !== null
+                            const position ={ row : rowIndex, col : colIndex }
+                            if(empty) {
+                                const isRook = piece.pieceName === "rook" || piece.pieceName === "queen"
+                                const isBishop = piece.pieceName === "bishop" || piece.pieceName === "queen"
+                                
+                                if(isRook) {
+                                    rookTarget(position ,
+                                                allPiecesData, piece, protectPcArr, 1)
+                                    rookTarget(position ,
+                                                allPiecesData, piece, protectPcArr, 2)
+                                    rookTarget(position ,
+                                                allPiecesData, piece, protectPcArr, 3)
+                                    rookTarget(position ,
+                                                allPiecesData, piece, protectPcArr, 4)
+                                }
+                                if(isBishop) {
+                                    bishopTarget(position ,
+                                                allPiecesData, piece, protectPcArr, 1)
+                                    bishopTarget(position ,
+                                                allPiecesData, piece, protectPcArr, 2)
+                                    bishopTarget(position ,
+                                                allPiecesData, piece, protectPcArr, 3)
+                                    bishopTarget(position ,
+                                                allPiecesData, piece, protectPcArr, 4)
+                                }
+                            }
+                        })
+            
+        })
+     return protectPcArr
+    })
 }
 
 
-
-
-
-export  function protectKingVertical (y, x, board, updateCases, direction) { 
-    
-    
-    let path1 = true;
-    let path2 = true;
-    for (let i = 1; i <= 8; i++) {
-        
-        if(y + i < 8 && path1) {
-                            if(board[y + i][x].props) {
-                                
-                                if(board[y][x].props.data.color !== board[y + i][x].props.data.color
-                                    && board[y + i][x].props.data.name !== "pawn"
-                                    && board[y + i][x].props.data.name !== "kngit"){
-                                        
-                                    for(let back = 0; back < 8; back++) {
-                                        if(y - back >= 0) {
-                                            if(board[y - back][x].props 
-                                                && board[y - back][x].props.data.color === board[y][x].props.data.color
-                                                && board[y - back][x].props.data.name === "king"){
-                                                    direction.verticalDirection = true;
-                                                    direction.horizontalDirection = false;
-                                                    direction.firstDiagonalDirection = false
-                                                    direction.secondDiagonalDirection = false
-
-                                                    path1 = false
-                                                } else {
-                                                    path1 = false
-                                                }
-                                        }
+function rookTarget ({ row, col }, allPiecesData, piece, protectPcArr, path) {
+ 
+    let allTargetArr = []
+    for(let i = 1; i < 8; i++) {
+        const taregetPath = path === 1? {
+                                    newRow : row + i,
+                                    newCol : col
                                     }
-                                }else {
-                                    path1 = false
-                                }
-                            }
-                                
-                }
-                if(y - i >= 0 && path2) {
-                    if(board[y - i][x].props) {
-                        if(board[y][x].props.data.color !== board[y - i][x].props.data.color
-                            && board[y - i][x].props.data.name !== "pawn"
-                            && board[y - i][x].props.data.name !== "kngit"){
-
-                            for(let back = 0; back < 8; back++) {
-                                if(y + back < 8) {
-                                    if(board[y + back][x].props 
-                                        && board[y + back][x].props.data.color === board[y][x].props.data.color
-                                        && board[y + back][x].props.data.name === "king"){
-                                            direction.verticalDirection = true;
-                                            direction.horizontalDirection = false;
-                                            direction.firstDiagonalDirection = false
-                                            direction.secondDiagonalDirection = false
-
-                                            path2 = false
-                                        } else {
-                                            path2 = false
-                                        }
-                                }
-                            }
-                        }else {
-                            path2 = false
-                        }
-                    }
-                } 
-        }
-
-}
-
-export function protectKingHorizontal (y, x, board, updateCases) { 
-    
-    
-    let path1 = true;
-    let path2 = true;
-    let protectedPath = []
-    
-
-    for (let i = 1; i <= 8; i++) {
-
-
-
-                if(x + i < 8 && path1) {
-                    
-                    if(board[y][x].props &&
-                        ((updateCases[y][x + i].danger.blackDanger > 0 
-                          && board[y][x].props.data.color === "white")
-                            ||
-                            (updateCases[y][x + i].danger.whiteDanger > 0
-                               && board[y][x].props.data.color === "black"))
-                          )
-                        {
-
-                                let isKing = false 
-                                if(!board[y][x + i].props
-                                    ||
-                                    (board[y][x + i].props.data.name !== "knight"
-                                    && board[y][x + i].props.data.name !== "pawn"))
-                                    {
-                                        protectedPath = [...protectedPath, updateCases[y][x + i]]
+                            : path === 2? {
+                                    newRow : row - i,
+                                    newCol : col
                                     }
-
-
-                                for(let back = 0; back < 8; back++){
-                                    if(x - back >= 0 && !isKing){
-                                        
-                                        protectedPath = [...protectedPath, updateCases[y][x - back]]
-                                        if(board[y][x - back].props 
-                                            && board[y][x - back].props.data.name === "king" 
-                                            && board[y][x].props.data.color === board[y][x - back].props.data.color
-                                            && path2)
-                                        {
-                                                isKing = true
-                                        }
-
-
-                                        if(isKing)
-                                        {
-                                            protectedPath.forEach((cs)=> {
-                                                cs.protectKing = true
-                                            })
-                                        }
-
+                            : path === 3? {
+                                    newRow : row,
+                                    newCol : col + i
                                     }
-                                }
-                                
-                    }
-                    if(board[y][x].props &&
-                        ((updateCases[y][x + i].danger.blackDanger === 0 
-                        && board[y][x].props.data.color === "white")
-                            ||
-                        (updateCases[y][x + i].danger.whiteDanger === 0
-                               && board[y][x].props.data.color === "black"))){
-                                path2 = false
-                    }
-                }
-                if(x - i >= 0 && path2) {
-                    
-                    if(
-                        ((updateCases[y][x - i].danger.blackDanger > 0 
-                          && board[y][x].props.data.color === "white")
-                            ||
-                          (updateCases[y][x - i].danger.whiteDanger > 0
-                               && board[y][x].props.data.color === "black"))
-                          )
-                        {
+                            : path === 4? {
+                                    newRow : row,
+                                    newCol : col - i
+                                    } 
+                            : false
+            const { newRow, newCol } = taregetPath
 
-                                let isKing = false 
-                                if(!board[y][x - i].props
-                                    ||
-                                    (board[y][x - i].props.data.name !== "knight"
-                                    && board[y][x - i].props.data.name !== "pawn"))
-                                    {
-                                        protectedPath = [...protectedPath, updateCases[y][x - i]]
-                                    }
-
-
-                                for(let back = 0; back < 8; back++){
-                                    if(x + back < 8 && !isKing){
-                                        
-                                        protectedPath = [...protectedPath, updateCases[y][x + back]]
-                                        
-                                        if(board[y][x + back].props 
-                                            && board[y][x + back].props.data.name === "king" 
-                                            && board[y][x].props.data.color === board[y][x + back].props.data.color
-                                            && path2)
-                                        {
-                                                isKing = true
-                                        }
-
-
-                                        if(isKing)
-                                        {
-                                            protectedPath.forEach((cs)=> {
-                                                cs.protectKing = true
-                                            })
-                                        }
-
-                                    }
-                                }
-                                
-                    }
-                    if(board[y][x].props &&
-                        ((updateCases[y][x - i].danger.blackDanger === 0 
-                        && board[y][x].props.data.color === "white")
-                            ||
-                        (updateCases[y][x - i].danger.whiteDanger === 0
-                               && board[y][x].props.data.color === "black"))){
-                                path2 = false
-                    }
-                }
+            const cellExist =  newRow >= 0 
+                               && newRow < 8 
+                               && newCol >= 0 
+                               && newCol < 8? 
+                               true : false;
+            const empty = cellExist && allPiecesData[newRow][newCol] === null
+            if(cellExist && !empty)allTargetArr.push(allPiecesData[newRow][newCol])
     }
+    detectIfPieceProtectKing(allTargetArr, piece.color, protectPcArr)
+}
 
+
+
+function bishopTarget ({ row, col }, allPiecesData, piece, protectPcArr, path) {
+
+    let allTargetArr = []
+    for(let i = 1; i < 8; i++) {
+        const taregetPath = path === 1? {
+                                        newRow : row + i,
+                                        newCol : col + i
+                                        }
+                            : path === 2? {
+                                        newRow : row + i,
+                                        newCol : col - i
+                                        }
+                            : path === 3? {
+                                        newRow : row - i,
+                                        newCol : col + i
+                                        }
+                            : path === 4? {
+                                        newRow : row - i,
+                                        newCol : col - i
+                                        } 
+                            : false
+            const { newRow, newCol } = taregetPath
+
+            const cellExist =  newRow >= 0 
+                               && newRow < 8 
+                               && newCol >= 0 
+                               && newCol < 8? 
+                               true : false;
+            const empty = cellExist && allPiecesData[newRow][newCol] === null
+            if(cellExist && !empty)allTargetArr.push(allPiecesData[newRow][newCol])
+    }
+    detectIfPieceProtectKing(allTargetArr, piece.color, protectPcArr)
+}
+
+
+
+function detectIfPieceProtectKing (targetArr, color, protectPcArr) {
+    const existArrPieces = targetArr.length > 1
+    if(existArrPieces) console.log(targetArr[1].pieceName, targetArr[1].color, color)
+    if(existArrPieces && targetArr[0].color !== color && targetArr[1].pieceName === "king" && targetArr[1].color !== color) {
+        console.log(targetArr[1])
+        protectPcArr.push({ row : targetArr[0].position.y, col : targetArr[0].position.x })
+
+    }
 }

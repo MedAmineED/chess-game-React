@@ -9,21 +9,32 @@ import './Piece.css'
 
 function Piece (props) {
 
+
+    const row = props.data.position.y
+    const col = props.data.position.x
+
     const playerTurn = useContext(PlayTr)
     const start = useContext(Start);
 
     const check = useContext(Check)
 
     const [canPlay, setCanPlay] = useState(false)
-    const [blocked, setBlocked] = useState(false)
+    const [protect, setProtect] = useState(false)
+    
 
     const image = props.data.image
     
 
-    useEffect(()=> {
-        setBlocked(check)
-    }, [check])
+    useEffect(()=>{
+        const isInProtect  =  props.inProtect.some((pos)=> pos.row === row && pos.col === col)
+        if(isInProtect){
+            setProtect(true)
+        }
+        else {
+            setProtect(false)
+        }
 
+    })
         
 
     useEffect(()=>{
@@ -31,8 +42,6 @@ function Piece (props) {
     }, [start])
 
     const hanDleClickMove = ()=> {
-        const row = props.data.position.y
-        const col = props.data.position.x
         if((playerTurn % 2 === 0 && props.data.color === "white") || !canPlay) {return}
         if(playerTurn % 2 !== 0 && props.data.color === "black") {return}
         props.selectPath(row, col)
