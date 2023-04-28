@@ -139,6 +139,7 @@ function Table (props)  {
                                       isSelected={isSelected}
                                       selectPath = {handlePieceClick}
                                       inProtect = {inProtect}
+                                      allPiecesData = { allPiecesData }
                                     />
                                   ) : null;
 

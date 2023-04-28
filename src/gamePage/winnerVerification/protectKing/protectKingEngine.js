@@ -70,7 +70,7 @@ function rookTarget ({ row, col }, allPiecesData, piece, protectPcArr, path) {
             const empty = cellExist && allPiecesData[newRow][newCol] === null
             if(cellExist && !empty)allTargetArr.push(allPiecesData[newRow][newCol])
     }
-    detectIfPieceProtectKing(allTargetArr, piece.color, protectPcArr)
+    detectIfPieceProtectKing(allTargetArr, piece.color, protectPcArr, row, col)
 }
 
 
@@ -106,17 +106,25 @@ function bishopTarget ({ row, col }, allPiecesData, piece, protectPcArr, path) {
             const empty = cellExist && allPiecesData[newRow][newCol] === null
             if(cellExist && !empty)allTargetArr.push(allPiecesData[newRow][newCol])
     }
-    detectIfPieceProtectKing(allTargetArr, piece.color, protectPcArr)
+    detectIfPieceProtectKing(allTargetArr, piece.color, protectPcArr, row, col)
 }
 
 
 
-function detectIfPieceProtectKing (targetArr, color, protectPcArr) {
+function detectIfPieceProtectKing (targetArr, color, protectPcArr, attRow, attCol) {
     const existArrPieces = targetArr.length > 1
     if(existArrPieces) console.log(targetArr[1].pieceName, targetArr[1].color, color)
     if(existArrPieces && targetArr[0].color !== color && targetArr[1].pieceName === "king" && targetArr[1].color !== color) {
         console.log(targetArr[1])
-        protectPcArr.push({ row : targetArr[0].position.y, col : targetArr[0].position.x })
+        protectPcArr.push({attaker : {
+                                        row :  attRow,
+                                        col :  attCol     
+                                    },
+                            protector : {
+                                        row : targetArr[0].position.y, 
+                                        col : targetArr[0].position.x 
+                                    }
+                            })
 
     }
 }

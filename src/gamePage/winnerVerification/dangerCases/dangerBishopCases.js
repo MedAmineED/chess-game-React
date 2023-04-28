@@ -97,3 +97,7 @@ export function dangerBishopCases(dangerCases, allPiecesData, color, position, p
           }
   
   }
+
+
+
+  
