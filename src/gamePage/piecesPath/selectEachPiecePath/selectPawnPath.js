@@ -1,6 +1,15 @@
 /* eslint-disable array-callback-return */
 export function selectPawnPath(params) {
-    const {allPossibleMoves, allPiecesData, color, position, check, connectedWithKing } = params
+    
+    const {allPossibleMoves, 
+            allPiecesData, 
+            color, 
+            position, 
+            check, 
+            connectedWithKing, 
+            pathCanMove,
+            protect }       = params
+
     const {row, col} = position;
 
 
@@ -28,7 +37,7 @@ export function selectPawnPath(params) {
         const empty = existCase 
                       && allPiecesData[pos.row][pos.col] === null
         
-        if(!check){
+        if(!check && !protect){
                 if(isFirstStep && empty && col === pos.col) {
                     allPossibleMoves.push(pos)
                 }
@@ -52,6 +61,18 @@ export function selectPawnPath(params) {
                     allPossibleMoves.push(pos)
                 }
             }
+        if(!check && protect) {
+            const isInProtectMode = pathCanMove.some((select)=> select.row === pos.row && select.col === pos.col)
+            if(isFirstStep && empty && col === pos.col && isInProtectMode) {
+                allPossibleMoves.push(pos)
+            }
+            if(empty && existCase && !isFirstStep && col === pos.col && pos.row !== row + towSteps && isInProtectMode) {
+                allPossibleMoves.push(pos)
+            }
+            if(possibleToEat && col !== pos.col && isInProtectMode){
+                allPossibleMoves.push(pos)
+            }
+        }
 
 
     })

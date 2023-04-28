@@ -62,7 +62,6 @@ function Table (props)  {
           return  newConnect
         })
         pieceProtectKing (allPiecesData, setInProtect)
-        console.log("state arr in table",inProtect)
     }, [playerTurn, allPiecesData])
     
     useEffect(()=> {
@@ -71,7 +70,7 @@ function Table (props)  {
 
 
       // function to handle piece click events
-      const handlePieceClick = (rowIndex, colIndex) => {
+      const handlePieceClick = (rowIndex, colIndex, pathCanMove, protect) => {
         initSelectedCases()
         const clickedPiece = allPiecesData[rowIndex][colIndex];
         if (clickedPiece) {
@@ -90,7 +89,9 @@ function Table (props)  {
                        { row: rowIndex, col: colIndex },
                        dangerCases,
                        check,
-                        pathConnectedWithKing);
+                       pathConnectedWithKing,
+                       pathCanMove,
+                       protect);
 
             return allPossibleMoves;
           })

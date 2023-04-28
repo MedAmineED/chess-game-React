@@ -44,17 +44,25 @@ function Piece (props) {
         }
     })
     const getCellsCanMoveInProtect = ()=> {
+        
         if(protect){
-            return getProtectPath(col, row, protect.attacker.col, protect.attacker.row )
+            let attackerPiece = {...inProtect.filter((pc)=> {
+                return pc.protector.col === col && pc.protector.row === row
+            })[0]}
+            console.log(attackerPiece, "attackerPice")
+            return getProtectPath(col, row, attackerPiece.attacker.col, attackerPiece.attacker.row )
         }
     }
-    const pathCanMove = getCellsCanMoveInProtect();
+    
 
     const hanDleClickMove = ()=> {
+        const pathCanMove = getCellsCanMoveInProtect();
+        console.log(pathCanMove, "pcn")
+        console.log(protect)
         if((playerTurn % 2 === 0 && props.data.color === "white") || !canPlay) {return}
         if(playerTurn % 2 !== 0 && props.data.color === "black") {return}
         if(protect){return}
-        props.selectPath(row, col, pathCanMove)
+        props.selectPath(row, col, pathCanMove, protect)
     }
         
     

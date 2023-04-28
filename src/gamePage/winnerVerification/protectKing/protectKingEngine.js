@@ -113,10 +113,9 @@ function bishopTarget ({ row, col }, allPiecesData, piece, protectPcArr, path) {
 
 function detectIfPieceProtectKing (targetArr, color, protectPcArr, attRow, attCol) {
     const existArrPieces = targetArr.length > 1
-    if(existArrPieces) console.log(targetArr[1].pieceName, targetArr[1].color, color)
     if(existArrPieces && targetArr[0].color !== color && targetArr[1].pieceName === "king" && targetArr[1].color !== color) {
-        console.log(targetArr[1])
-        protectPcArr.push({attaker : {
+    
+        protectPcArr.push({attacker : {
                                         row :  attRow,
                                         col :  attCol     
                                     },
