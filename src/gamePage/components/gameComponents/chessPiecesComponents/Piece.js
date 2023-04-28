@@ -54,7 +54,7 @@ function Piece (props) {
         if((playerTurn % 2 === 0 && props.data.color === "white") || !canPlay) {return}
         if(playerTurn % 2 !== 0 && props.data.color === "black") {return}
         if(protect){return}
-        props.selectPath(row, col)
+        props.selectPath(row, col, pathCanMove)
     }
         
     
@@ -76,7 +76,7 @@ function getProtectPath(protectorX, protectorY, attackerX, attackerY) {
     for (let i = 1; i < Math.max(Math.abs(dx), Math.abs(dy)); i++) {
       const x = dx !== 0 ? protectorX + Math.round(i * Math.sign(dx)) : (slope > 0 ? protectorX : attackerX);
       const y = protectorY + Math.round(i * slope * Math.sign(dy));
-      path.push([x, y]);
+      path.push({row : y, col: x});
     }
   
     return path;
