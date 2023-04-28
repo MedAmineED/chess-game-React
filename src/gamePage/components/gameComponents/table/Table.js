@@ -81,6 +81,7 @@ function Table (props)  {
           setSelectedPiece({ row: rowIndex, col: colIndex });
           setPossibleMoves(() => {
             const allPossibleMoves = [];
+            console.log("heigth level",protect)
             
             selectPath(allPossibleMoves, 
                        allPiecesData, 

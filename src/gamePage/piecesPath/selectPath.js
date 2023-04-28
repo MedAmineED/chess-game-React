@@ -13,7 +13,7 @@ export function selectPath (allPossibleMoves,
                             check, 
                             connectedWithKing,
                             pathCanMove,
-                            inProtect) {
+                            protect) {
 
     const parameters = { allPossibleMoves, 
                         allPiecesData, 
@@ -22,7 +22,7 @@ export function selectPath (allPossibleMoves,
                         check, 
                         connectedWithKing,
                         pathCanMove,
-                        inProtect } 
+                        protect } 
     
     if(pieceName === "pawn")selectPawnPath(parameters)
     if(pieceName === "rook" || pieceName === "queen")selectRookPath(parameters)
