@@ -6,7 +6,7 @@ export function selectRookPath (params) {
 }
 
 function horizontalAndVerticalPath (params, path) {
-        const {allPossibleMoves, allPiecesData, color, position, check, connectedWithKing} = params
+        const {allPossibleMoves, allPiecesData, color, position, check, connectedWithKing, protect, pathCanMove} = params
     
     
     const { row, col } = position;
@@ -48,14 +48,14 @@ function horizontalAndVerticalPath (params, path) {
 
 
            if(!check){ 
-                if(cellExist && allPiecesData[newRow][newCol] === null && possibleSelect) {
+                if(cellExist && allPiecesData[newRow][newCol] === null && possibleSelect && !protect) {
                         allPossibleMoves.push({ row : newRow, col : newCol })
                 }
-                if(cellExist && possibleToEat && possibleSelect){
+                if(cellExist && possibleToEat && possibleSelect && !protect){
                         allPossibleMoves.push({ row : newRow, col : newCol })
                         possibleSelect = false
                 }
-                if( cellExist && allPiecesData[newRow][newCol] !== null && !possibleToEat){
+                if( cellExist && allPiecesData[newRow][newCol] !== null && !possibleToEat && !protect){
                         possibleSelect = false
                 }
            }
@@ -72,6 +72,19 @@ function horizontalAndVerticalPath (params, path) {
                         possibleSelect = false
                 }
           }
+          if(!check && protect){
+                const isInProtectMode = pathCanMove.some((select)=> select.row === newRow && select.col === newCol)
+                if(cellExist && allPiecesData[newRow][newCol] === null && possibleSelect && isInProtectMode) {
+                    allPossibleMoves.push({ row : newRow, col : newCol })
+                }
+                if(cellExist && possibleToEat && possibleSelect && isInProtectMode){
+                        allPossibleMoves.push({ row : newRow, col : newCol })
+                        possibleSelect = false
+                }
+                if( cellExist && allPiecesData[newRow][newCol] !== null && !possibleToEat && isInProtectMode){
+                        possibleSelect = false
+                }
+            }
         }
 }
 

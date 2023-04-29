@@ -8,7 +8,15 @@ export function selectBishopPath(params) {
 
 
 function selectDiagonalPath (params, path) {
-    const {allPossibleMoves, allPiecesData, color, position, check, connectedWithKing} = params
+    const {allPossibleMoves, 
+            allPiecesData, 
+            color, 
+            position, 
+            check, 
+            connectedWithKing,  
+            pathCanMove,
+            protect } = params
+
     const { row, col } = position;
 
     let possibleSelect = true;
@@ -67,6 +75,19 @@ function selectDiagonalPath (params, path) {
                         possibleSelect = false
                 }
                 if( cellExist && allPiecesData[newRow][newCol] !== null && !possibleToEat){
+                        possibleSelect = false
+                }
+            }
+            if(!check && protect){
+                const isInProtectMode = pathCanMove.some((select)=> select.row === newRow && select.col === newCol)
+                if(cellExist && allPiecesData[newRow][newCol] === null && possibleSelect && isInProtectMode) {
+                    allPossibleMoves.push({ row : newRow, col : newCol })
+                }
+                if(cellExist && possibleToEat && possibleSelect && isInProtectMode){
+                        allPossibleMoves.push({ row : newRow, col : newCol })
+                        possibleSelect = false
+                }
+                if( cellExist && allPiecesData[newRow][newCol] !== null && !possibleToEat && isInProtectMode){
                         possibleSelect = false
                 }
             }

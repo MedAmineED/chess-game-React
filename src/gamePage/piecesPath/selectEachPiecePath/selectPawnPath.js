@@ -12,7 +12,7 @@ export function selectPawnPath(params) {
 
     const {row, col} = position;
 
-    console.log("protect from deep fn pawn", protect)
+    console.log("protect from deep fn pawn", pathCanMove)
     const white = color === "white"
 
     const oneStep = white? 1 : -1
@@ -63,6 +63,13 @@ export function selectPawnPath(params) {
             }
         if(!check && protect) {
             const isInProtectMode = pathCanMove.some((select)=> select.row === pos.row && select.col === pos.col)
+            console.log({
+                column : {
+                    arr : pathCanMove,
+                    colp : pos.col,
+                    rowp : pos.row
+                }
+            })
             if(isFirstStep && empty && col === pos.col && isInProtectMode) {
                 allPossibleMoves.push(pos)
             }

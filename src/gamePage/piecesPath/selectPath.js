@@ -23,6 +23,7 @@ export function selectPath (allPossibleMoves,
                         connectedWithKing,
                         pathCanMove,
                         protect } 
+    console.log(pathCanMove)
     
     if(pieceName === "pawn")selectPawnPath(parameters)
     if(pieceName === "rook" || pieceName === "queen")selectRookPath(parameters)
