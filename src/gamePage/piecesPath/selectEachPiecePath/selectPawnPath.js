@@ -12,7 +12,6 @@ export function selectPawnPath(params) {
 
     const {row, col} = position;
 
-    console.log("protect from deep fn pawn", pathCanMove)
     const white = color === "white"
 
     const oneStep = white? 1 : -1

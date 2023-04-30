@@ -47,15 +47,15 @@ function horizontalAndVerticalPath (params, path) {
 
 
 
-           if(!check){ 
-                if(cellExist && allPiecesData[newRow][newCol] === null && possibleSelect && !protect) {
+           if(!check && !protect){ 
+                if(cellExist && allPiecesData[newRow][newCol] === null && possibleSelect) {
                         allPossibleMoves.push({ row : newRow, col : newCol })
                 }
-                if(cellExist && possibleToEat && possibleSelect && !protect){
+                if(cellExist && possibleToEat && possibleSelect){
                         allPossibleMoves.push({ row : newRow, col : newCol })
                         possibleSelect = false
                 }
-                if( cellExist && allPiecesData[newRow][newCol] !== null && !possibleToEat && !protect){
+                if( cellExist && allPiecesData[newRow][newCol] !== null && !possibleToEat){
                         possibleSelect = false
                 }
            }
@@ -73,7 +73,15 @@ function horizontalAndVerticalPath (params, path) {
                 }
           }
           if(!check && protect){
-                const isInProtectMode = pathCanMove.some((select)=> select.row === newRow && select.col === newCol)
+                const isInProtectMode = pathCanMove.some((select)=> (select.row === newRow 
+                                                                    && select.col === newCol))
+                console.log({
+                        column : {
+                            arr : pathCanMove,
+                            colp : newCol,
+                            rowp : newRow
+                        }
+                    })
                 if(cellExist && allPiecesData[newRow][newCol] === null && possibleSelect && isInProtectMode) {
                     allPossibleMoves.push({ row : newRow, col : newCol })
                 }

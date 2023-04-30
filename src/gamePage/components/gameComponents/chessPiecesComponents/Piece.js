@@ -58,11 +58,8 @@ function Piece (props) {
     const hanDleClickMove = ()=> {
         const pathCanMove = []
         getCellsCanMoveInProtect(pathCanMove);
-        console.log(pathCanMove, "pcn")
-        console.log(protect)
         if((playerTurn % 2 === 0 && props.data.color === "white") || !canPlay) {return}
         if(playerTurn % 2 !== 0 && props.data.color === "black") {return}
-        console.log(pathCanMove)
         props.selectPath(row, col, pathCanMove, protect)
     }
         
@@ -85,15 +82,22 @@ function Piece (props) {
 function getProtectPath(protectorX, protectorY, attackerX, attackerY, pathCanMove) {
     const dx = attackerX - protectorX;
     const dy = attackerY - protectorY;
-    const slope = dx !== 0 ? dy / dx : (dy > 0 ? Infinity : -Infinity);
+    const distance = Math.sqrt(dx * dx + dy * dy);
+    const stepSizeX = dx / distance;
+    const stepSizeY = dy / distance;
   
-    for (let i = 1; i < Math.max(Math.abs(dx), Math.abs(dy)); i++) {
-      const x = dx !== 0 ? protectorX + Math.round(i * Math.sign(dx)) : (slope > 0 ? protectorX : attackerX);
-      const y = protectorY + Math.round(i * slope * Math.sign(dy));
-      pathCanMove.push({row : y, col: x});
+    for (let i = 1; i < distance; i++) {
+      const x = protectorX + Math.round(i * stepSizeX);
+      const y = protectorY + Math.round(i * stepSizeY);
+      pathCanMove.push({ row: y, col: x });
+      
+      if (x === attackerX && y === attackerY) {
+        break;
+      }
     }
-    pathCanMove.push(({row : attackerY, col : attackerX}))
+    pathCanMove.push({ row: attackerY, col: attackerX });
   }
+  
 
 
 export default Piece
