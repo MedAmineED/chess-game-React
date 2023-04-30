@@ -53,7 +53,7 @@ function selectDiagonalPath (params, path) {
                                     allPiecesData[newRow][newCol].color !== color 
                                     : false
 
-            if(!check){
+            if(!check && !protect){
                 if(cellExist && allPiecesData[newRow][newCol] === null && possibleSelect) {
                     allPossibleMoves.push({ row : newRow, col : newCol })
                 }
@@ -81,9 +81,11 @@ function selectDiagonalPath (params, path) {
             if(!check && protect){
                 const isInProtectMode = pathCanMove.some((select)=> select.row === newRow && select.col === newCol)
                 if(cellExist && allPiecesData[newRow][newCol] === null && possibleSelect && isInProtectMode) {
+                    
                     allPossibleMoves.push({ row : newRow, col : newCol })
                 }
                 if(cellExist && possibleToEat && possibleSelect && isInProtectMode){
+                    
                         allPossibleMoves.push({ row : newRow, col : newCol })
                         possibleSelect = false
                 }
