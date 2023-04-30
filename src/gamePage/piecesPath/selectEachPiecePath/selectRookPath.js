@@ -75,14 +75,15 @@ function horizontalAndVerticalPath (params, path) {
           if(!check && protect){
                 const isInProtectMode = pathCanMove.some((select)=> (select.row === newRow 
                                                                     && select.col === newCol))
-                console.log({
+                
+                if(cellExist && allPiecesData[newRow][newCol] === null && possibleSelect && isInProtectMode) {
+                        console.log({
                         column : {
                             arr : pathCanMove,
                             colp : newCol,
                             rowp : newRow
                         }
                     })
-                if(cellExist && allPiecesData[newRow][newCol] === null && possibleSelect && isInProtectMode) {
                     allPossibleMoves.push({ row : newRow, col : newCol })
                 }
                 if(cellExist && possibleToEat && possibleSelect && isInProtectMode){

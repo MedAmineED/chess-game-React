@@ -122,7 +122,11 @@ function detectIfPieceProtectKing (targetArr, color, protectPcArr, attRow, attCo
                             protector : {
                                         row : targetArr[0].position.y, 
                                         col : targetArr[0].position.x 
-                                    }
+                                    },
+                            king : {
+                                row : targetArr[1].position.y,
+                                col : targetArr[1].position.x
+                            }
                             })
 
     }
