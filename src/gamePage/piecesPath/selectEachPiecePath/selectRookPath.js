@@ -59,7 +59,7 @@ function horizontalAndVerticalPath (params, path) {
                         possibleSelect = false
                 }
            }
-          if(check) {
+          if(check && !protect) {
                 const stopAttack = connectedWithKing.some(stop => stop.row === newRow && stop.col === newCol)
                 if(cellExist && allPiecesData[newRow][newCol] === null && possibleSelect && stopAttack) {
                         allPossibleMoves.push({ row : newRow, col : newCol })

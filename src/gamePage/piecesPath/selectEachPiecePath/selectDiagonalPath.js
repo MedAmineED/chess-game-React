@@ -85,7 +85,6 @@ function selectDiagonalPath (params, path) {
                     allPossibleMoves.push({ row : newRow, col : newCol })
                 }
                 if(cellExist && possibleToEat && possibleSelect && isInProtectMode){
-                    
                         allPossibleMoves.push({ row : newRow, col : newCol })
                         possibleSelect = false
                 }

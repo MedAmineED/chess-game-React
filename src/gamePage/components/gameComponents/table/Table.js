@@ -5,7 +5,6 @@ import { useState } from 'react';
 import './table.css';
 import Piece from '../chessPiecesComponents/Piece';
 
-
 import { piecesData } from '../../../piecesData/piecesData';
 import { checkEngineVerification } from '../../../winnerVerification/chekKing/checkKingFunction';
 import { Check } from '../../GameSpace';

@@ -35,12 +35,13 @@ export function selectPawnPath(params) {
                            && (color !== allPiecesData[pos.row][pos.col].color)
         const empty = existCase 
                       && allPiecesData[pos.row][pos.col] === null
+        const secondEmpty = allPiecesData[row + oneStep][pos.col] === null
         
         if(!check && !protect){
-                if(isFirstStep && empty && col === pos.col) {
-                    allPossibleMoves.push(pos)
+                if(isFirstStep && empty && col === pos.col && secondEmpty) {
+                    allPossibleMoves.push({ row : row + towSteps, col : col })
                 }
-                if(empty && existCase && !isFirstStep && col === pos.col && pos.row !== row + towSteps) {
+                if(empty && existCase && col === pos.col && pos.row !== row + towSteps) {
                     allPossibleMoves.push(pos)
                 }
                 if(possibleToEat && col !== pos.col){
@@ -62,13 +63,6 @@ export function selectPawnPath(params) {
             }
         if(!check && protect) {
             const isInProtectMode = pathCanMove.some((select)=> select.row === pos.row && select.col === pos.col)
-            console.log({
-                column : {
-                    arr : pathCanMove,
-                    colp : pos.col,
-                    rowp : pos.row
-                }
-            })
             if(isFirstStep && empty && col === pos.col && isInProtectMode) {
                 allPossibleMoves.push(pos)
             }
