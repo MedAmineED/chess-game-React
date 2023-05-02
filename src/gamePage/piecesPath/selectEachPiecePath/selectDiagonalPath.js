@@ -4,9 +4,6 @@ export function selectBishopPath(params) {
   selectDiagonalPath(params, 3)
   selectDiagonalPath(params, 4)
 }
-
-
-
 function selectDiagonalPath (params, path) {
     const {allPossibleMoves, 
             allPiecesData, 
