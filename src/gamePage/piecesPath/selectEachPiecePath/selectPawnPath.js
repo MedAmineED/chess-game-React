@@ -30,12 +30,15 @@ export function selectPawnPath(params) {
 
     allSteps.map((pos)=> {
         const existCase = pos.row >= 0 && pos.row < 8 && pos.col >=0 && pos.col < 8;
-        const hasPiece = existCase && allPiecesData[pos.row][pos.col]? true : false
+        const hasPiece = existCase 
+                        && allPiecesData[pos.row][pos.col]? true : false
         const possibleToEat = hasPiece
                            && (color !== allPiecesData[pos.row][pos.col].color)
         const empty = existCase 
                       && allPiecesData[pos.row][pos.col] === null
-        const secondEmpty = allPiecesData[row + oneStep][pos.col] === null
+                      
+        const secondEmpty = allPiecesData[row + oneStep][pos.col] === null 
+                            && allPiecesData[row + towSteps][pos.col] === null
         
         if(!check && !protect){
                 if(isFirstStep && empty && col === pos.col && secondEmpty) {

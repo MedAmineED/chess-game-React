@@ -50,7 +50,13 @@ function Piece (props) {
                                         return pc.protector.col === col && pc.protector.row === row
                                     })[0]
                                 }
-            getProtectPath(attackerPiece.king.col, attackerPiece.king.row ,col, row, attackerPiece.attacker.col, attackerPiece.attacker.row, pathCanMove )
+            getProtectPath(attackerPiece.king.col, 
+                            attackerPiece.king.row, 
+                            col, 
+                            row, 
+                            attackerPiece.attacker.col, 
+                            attackerPiece.attacker.row, 
+                            pathCanMove )
         }
     }
     
@@ -80,23 +86,25 @@ function Piece (props) {
 
 
 function getProtectPath(kingX, kingY, protectorX, protectorY, attackerX, attackerY, pathCanMove) {
-    const dx = attackerX - kingX;
-    const dy = attackerY - kingY;
-    const distance = Math.sqrt(dx * dx + dy * dy);
-    const stepSizeX = dx / distance;
-    const stepSizeY = dy / distance;
-  
-    for (let i = 1; i < distance; i++) {
-      const x = kingX + Math.round(i * stepSizeX);
-      const y = kingY + Math.round(i * stepSizeY);
-      if(x !== protectorX || y !== protectorY){
-          pathCanMove.push({ row: y, col: x });
-        }
-      if (x === attackerX && y === attackerY) {
-        break;
-      }
-    }
-    pathCanMove.push({ row: attackerY, col: attackerX });
+            const dx = attackerX - kingX;
+            const dy = attackerY - kingY;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            const stepSizeX = dx / distance;
+            const stepSizeY = dy / distance;
+        
+            for (let i = 1; i < distance; i++) {
+                console.log(stepSizeX)
+                console.log(stepSizeY)
+                    const x = kingX + Math.round(i * stepSizeX);
+                    const y = kingY + Math.round(i * stepSizeY);
+                    if(x !== protectorX || y !== protectorY){
+                        pathCanMove.push({ row: y, col: x });
+                        }
+                    if (x === attackerX && y === attackerY) {
+                        break;
+                    }
+            }
+            pathCanMove.push({ row: attackerY, col: attackerX });
   }
   
 
